@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+/**
+ * 自動生成 index.html
+ * 用法：node generate-index.js
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const pagesDir = __dirname;
+const files = fs.readdirSync(pagesDir)
+  .filter(f => f.endsWith('.html') && f !== 'index.html')
+  .sort();
+
+const now = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+
+const html = `<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -95,26 +111,34 @@
     <div class="container">
         <h1>🦞 OpenClaw Pages</h1>
         <p class="subtitle">
-            目前共有 <span class="count">1</span> 個頁面
+            目前共有 <span class="count">${files.length}</span> 個頁面
         </p>
         
-        
+        ${files.length > 0 ? `
         <ul class="page-list">
-            
+            ${files.map(file => `
             <li class="page-item">
-                <a href="openclaw-cases.html" class="page-link">
+                <a href="${file}" class="page-link">
                     <span class="icon">📄</span>
-                    <span class="page-name">openclaw-cases.html</span>
+                    <span class="page-name">${file}</span>
                 </a>
             </li>
-            
+            `).join('')}
         </ul>
-        
+        ` : `
+        <div class="empty">
+            目前還沒有頁面，請新增 HTML 檔案後重新生成。
+        </div>
+        `}
         
         <div class="footer">
-            最後更新：2026/2/5 下午4:44:48<br>
+            最後更新：${now}<br>
             自動生成 by CarloX 🦞
         </div>
     </div>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(pagesDir, 'index.html'), html, 'utf8');
+console.log('✅ index.html 已生成！');
+console.log(`📄 找到 ${files.length} 個頁面：`, files);
