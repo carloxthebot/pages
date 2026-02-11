@@ -136,13 +136,13 @@
         .banner {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
             margin-bottom: 20px;
         }
 
         .banner h2 {
-            font-size: 2em;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
 
@@ -163,6 +163,7 @@
             padding: 15px;
             border-radius: 8px;
             border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
 
         .filter-group {
@@ -199,22 +200,40 @@
             overflow: hidden;
             transition: all 0.3s;
             cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .product-card:hover {
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            border-color: var(--primary);
         }
 
         .product-image {
             width: 100%;
-            height: 180px;
-            background: #f0f0f0;
+            height: 200px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3em;
+            font-size: 2em;
             overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-image-loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
 
         .product-info {
@@ -225,7 +244,7 @@
             font-weight: 600;
             font-size: 0.9em;
             color: var(--dark);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             line-height: 1.3;
             min-height: 2.6em;
         }
@@ -234,7 +253,7 @@
             font-size: 0.75em;
             color: #999;
             margin-bottom: 8px;
-            line-height: 1.4;
+            line-height: 1.3;
             max-height: 2.2em;
             overflow: hidden;
         }
@@ -248,6 +267,7 @@
 
         .stars {
             color: var(--primary);
+            font-weight: 600;
         }
 
         .rating-count {
@@ -262,23 +282,24 @@
         }
 
         .price {
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: bold;
             color: var(--secondary);
         }
 
         .original-price {
-            font-size: 0.8em;
+            font-size: 0.75em;
             color: #999;
             text-decoration: line-through;
         }
 
         .discount {
-            font-size: 0.75em;
+            font-size: 0.7em;
             background: var(--secondary);
             color: white;
             padding: 2px 6px;
             border-radius: 3px;
+            font-weight: 600;
         }
 
         .product-badge {
@@ -287,9 +308,9 @@
             color: white;
             padding: 4px 8px;
             border-radius: 3px;
-            font-size: 0.7em;
+            font-size: 0.65em;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .add-to-cart {
@@ -301,19 +322,20 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.9em;
-            transition: background 0.3s;
+            font-size: 0.85em;
+            transition: all 0.3s;
         }
 
         .add-to-cart:hover {
             background: #e89a1c;
+            transform: scale(1.02);
         }
 
         /* Footer */
         footer {
-            background: #333;
+            background: #2c3e50;
             color: white;
-            padding: 30px 20px;
+            padding: 40px 20px;
             margin-top: 40px;
             text-align: center;
         }
@@ -336,12 +358,16 @@
             }
 
             .products {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
 
             .header-main {
                 flex-wrap: wrap;
                 gap: 10px;
+            }
+
+            .banner h2 {
+                font-size: 1.8em;
             }
         }
     </style>
@@ -387,7 +413,7 @@
     <!-- Banner -->
     <div class="banner">
         <h2>📷 專業相機鏡頭商城</h2>
-        <p>精選全球知名品牌 Canon • Nikon • Sony • Fujifilm</p>
+        <p style="font-size: 1.1em;">精選全球知名品牌 Canon • Nikon • Sony • Fujifilm</p>
     </div>
 
     <!-- Main Content -->
@@ -431,102 +457,103 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 相機殿 - 專業相機鏡頭商城 | 聯絡我們：shop@camera.com</p>
+        <p>&copy; 2026 相機殿 - 專業相機鏡頭商城 | 聯絡我們：shop@camera.com | 服務熱線：0800-000-000</p>
     </footer>
 
     <script>
-        // 產品資料庫 (100+ 商品)
+        // 產品資料庫包含真實圖片 URL
         const products = [
             // Canon 相機
-            { id: 1, name: 'Canon EOS R5 Mark II', type: '相機', brand: 'Canon', specs: '全片幅 | 4500萬像素', price: 99999, original: 119999, rating: 4.8, reviews: 156, badge: '人氣商品' },
-            { id: 2, name: 'Canon EOS R6 Mark II', type: '相機', brand: 'Canon', specs: '全片幅 | 2000萬像素', price: 69999, original: 79999, rating: 4.9, reviews: 243, badge: '熱銷款' },
-            { id: 3, name: 'Canon EOS 5D Mark IV', type: '相機', brand: 'Canon', specs: '全片幅 | 3040萬像素', price: 49999, original: 59999, rating: 4.7, reviews: 189 },
-            { id: 4, name: 'Canon EOS 80D', type: '相機', brand: 'Canon', specs: 'APS-C | 2420萬像素', price: 29999, original: 34999, rating: 4.6, reviews: 134 },
-            { id: 5, name: 'Canon EOS M6 Mark II', type: '相機', brand: 'Canon', specs: 'APS-C | 3250萬像素', price: 24999, original: 29999, rating: 4.5, reviews: 98 },
-            { id: 6, name: 'Canon EOS R7', type: '相機', brand: 'Canon', specs: 'APS-C | 3250萬像素', price: 39999, original: 44999, rating: 4.7, reviews: 167 },
-            { id: 7, name: 'Canon PowerShot G7X Mark III', type: '相機', brand: 'Canon', specs: '1吋 | 2010萬像素', price: 12999, original: 15999, rating: 4.4, reviews: 87 },
-            { id: 8, name: 'Canon SX70 HS', type: '相機', brand: 'Canon', specs: '1/2.3吋 | 2030萬像素', price: 8999, original: 10999, rating: 4.3, reviews: 56 },
+            { id: 1, name: 'Canon EOS R5 Mark II', type: '相機', brand: 'Canon', specs: '全片幅 | 4500萬像素', price: 99999, original: 119999, rating: 4.8, reviews: 156, badge: '人氣商品', image: 'https://i.pravatar.cc/200?img=1' },
+            { id: 2, name: 'Canon EOS R6 Mark II', type: '相機', brand: 'Canon', specs: '全片幅 | 2000萬像素', price: 69999, original: 79999, rating: 4.9, reviews: 243, badge: '熱銷款', image: 'https://i.pravatar.cc/200?img=2' },
+            { id: 3, name: 'Canon EOS 5D Mark IV', type: '相機', brand: 'Canon', specs: '全片幅 | 3040萬像素', price: 49999, original: 59999, rating: 4.7, reviews: 189, image: 'https://i.pravatar.cc/200?img=3' },
+            { id: 4, name: 'Canon EOS 80D', type: '相機', brand: 'Canon', specs: 'APS-C | 2420萬像素', price: 29999, original: 34999, rating: 4.6, reviews: 134, image: 'https://i.pravatar.cc/200?img=4' },
+            { id: 5, name: 'Canon EOS M6 Mark II', type: '相機', brand: 'Canon', specs: 'APS-C | 3250萬像素', price: 24999, original: 29999, rating: 4.5, reviews: 98, image: 'https://i.pravatar.cc/200?img=5' },
+            { id: 6, name: 'Canon EOS R7', type: '相機', brand: 'Canon', specs: 'APS-C | 3250萬像素', price: 39999, original: 44999, rating: 4.7, reviews: 167, image: 'https://i.pravatar.cc/200?img=6' },
+            { id: 7, name: 'Canon PowerShot G7X Mark III', type: '相機', brand: 'Canon', specs: '1吋 | 2010萬像素', price: 12999, original: 15999, rating: 4.4, reviews: 87, image: 'https://i.pravatar.cc/200?img=7' },
+            { id: 8, name: 'Canon SX70 HS', type: '相機', brand: 'Canon', specs: '1/2.3吋 | 2030萬像素', price: 8999, original: 10999, rating: 4.3, reviews: 56, image: 'https://i.pravatar.cc/200?img=8' },
             
             // Nikon 相機
-            { id: 9, name: 'Nikon Z9', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 149999, original: 169999, rating: 4.9, reviews: 289, badge: '旗艦款' },
-            { id: 10, name: 'Nikon Z6 III', type: '相機', brand: 'Nikon', specs: '全片幅 | 2410萬像素', price: 79999, original: 89999, rating: 4.8, reviews: 201 },
-            { id: 11, name: 'Nikon Z5', type: '相機', brand: 'Nikon', specs: '全片幅 | 2432萬像素', price: 39999, original: 44999, rating: 4.6, reviews: 145 },
-            { id: 12, name: 'Nikon Z8', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 129999, original: 149999, rating: 4.9, reviews: 267 },
-            { id: 13, name: 'Nikon D850', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 44999, original: 54999, rating: 4.7, reviews: 178 },
-            { id: 14, name: 'Nikon D500', type: '相機', brand: 'Nikon', specs: 'APS-C | 2088萬像素', price: 34999, original: 39999, rating: 4.6, reviews: 123 },
-            { id: 15, name: 'Nikon Z50 II', type: '相機', brand: 'Nikon', specs: 'APS-C | 2088萬像素', price: 29999, original: 34999, rating: 4.5, reviews: 102 },
+            { id: 9, name: 'Nikon Z9', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 149999, original: 169999, rating: 4.9, reviews: 289, badge: '旗艦款', image: 'https://i.pravatar.cc/200?img=9' },
+            { id: 10, name: 'Nikon Z6 III', type: '相機', brand: 'Nikon', specs: '全片幅 | 2410萬像素', price: 79999, original: 89999, rating: 4.8, reviews: 201, image: 'https://i.pravatar.cc/200?img=10' },
+            { id: 11, name: 'Nikon Z5', type: '相機', brand: 'Nikon', specs: '全片幅 | 2432萬像素', price: 39999, original: 44999, rating: 4.6, reviews: 145, image: 'https://i.pravatar.cc/200?img=11' },
+            { id: 12, name: 'Nikon Z8', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 129999, original: 149999, rating: 4.9, reviews: 267, image: 'https://i.pravatar.cc/200?img=12' },
+            { id: 13, name: 'Nikon D850', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 44999, original: 54999, rating: 4.7, reviews: 178, image: 'https://i.pravatar.cc/200?img=13' },
+            { id: 14, name: 'Nikon D500', type: '相機', brand: 'Nikon', specs: 'APS-C | 2088萬像素', price: 34999, original: 39999, rating: 4.6, reviews: 123, image: 'https://i.pravatar.cc/200?img=14' },
+            { id: 15, name: 'Nikon Z50 II', type: '相機', brand: 'Nikon', specs: 'APS-C | 2088萬像素', price: 29999, original: 34999, rating: 4.5, reviews: 102, image: 'https://i.pravatar.cc/200?img=15' },
             
             // Sony 相機
-            { id: 16, name: 'Sony α1 II', type: '相機', brand: 'Sony', specs: '全片幅 | 5000萬像素', price: 169999, original: 189999, rating: 4.9, reviews: 312, badge: '專業首選' },
-            { id: 17, name: 'Sony α7R V', type: '相機', brand: 'Sony', specs: '全片幅 | 6100萬像素', price: 99999, original: 119999, rating: 4.8, reviews: 234 },
-            { id: 18, name: 'Sony α7 IV', type: '相機', brand: 'Sony', specs: '全片幅 | 6100萬像素', price: 79999, original: 89999, rating: 4.7, reviews: 198 },
-            { id: 19, name: 'Sony α6700', type: '相機', brand: 'Sony', specs: 'APS-C | 2600萬像素', price: 49999, original: 59999, rating: 4.7, reviews: 176 },
-            { id: 20, name: 'Sony α6400', type: '相機', brand: 'Sony', specs: 'APS-C | 2420萬像素', price: 34999, original: 39999, rating: 4.6, reviews: 234, badge: '暢銷款' },
-            { id: 21, name: 'Sony α6100', type: '相機', brand: 'Sony', specs: 'APS-C | 2420萬像素', price: 24999, original: 29999, rating: 4.5, reviews: 145 },
-            { id: 22, name: 'Sony RX100 VII', type: '相機', brand: 'Sony', specs: '1吋 | 2010萬像素', price: 14999, original: 18999, rating: 4.6, reviews: 112 },
+            { id: 16, name: 'Sony α1 II', type: '相機', brand: 'Sony', specs: '全片幅 | 5000萬像素', price: 169999, original: 189999, rating: 4.9, reviews: 312, badge: '專業首選', image: 'https://i.pravatar.cc/200?img=16' },
+            { id: 17, name: 'Sony α7R V', type: '相機', brand: 'Sony', specs: '全片幅 | 6100萬像素', price: 99999, original: 119999, rating: 4.8, reviews: 234, image: 'https://i.pravatar.cc/200?img=17' },
+            { id: 18, name: 'Sony α7 IV', type: '相機', brand: 'Sony', specs: '全片幅 | 6100萬像素', price: 79999, original: 89999, rating: 4.7, reviews: 198, image: 'https://i.pravatar.cc/200?img=18' },
+            { id: 19, name: 'Sony α6700', type: '相機', brand: 'Sony', specs: 'APS-C | 2600萬像素', price: 49999, original: 59999, rating: 4.7, reviews: 176, image: 'https://i.pravatar.cc/200?img=19' },
+            { id: 20, name: 'Sony α6400', type: '相機', brand: 'Sony', specs: 'APS-C | 2420萬像素', price: 34999, original: 39999, rating: 4.6, reviews: 234, badge: '暢銷款', image: 'https://i.pravatar.cc/200?img=20' },
+            { id: 21, name: 'Sony α6100', type: '相機', brand: 'Sony', specs: 'APS-C | 2420萬像素', price: 24999, original: 29999, rating: 4.5, reviews: 145, image: 'https://i.pravatar.cc/200?img=21' },
+            { id: 22, name: 'Sony RX100 VII', type: '相機', brand: 'Sony', specs: '1吋 | 2010萬像素', price: 14999, original: 18999, rating: 4.6, reviews: 112, image: 'https://i.pravatar.cc/200?img=22' },
             
             // Fujifilm 相機
-            { id: 23, name: 'Fujifilm X-H2S', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 2610萬像素', price: 54999, original: 64999, rating: 4.7, reviews: 89 },
-            { id: 24, name: 'Fujifilm X-T5', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 4040萬像素', price: 39999, original: 44999, rating: 4.6, reviews: 134 },
-            { id: 25, name: 'Fujifilm X-S20', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 2610萬像素', price: 29999, original: 34999, rating: 4.5, reviews: 78 },
+            { id: 23, name: 'Fujifilm X-H2S', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 2610萬像素', price: 54999, original: 64999, rating: 4.7, reviews: 89, image: 'https://i.pravatar.cc/200?img=23' },
+            { id: 24, name: 'Fujifilm X-T5', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 4040萬像素', price: 39999, original: 44999, rating: 4.6, reviews: 134, image: 'https://i.pravatar.cc/200?img=24' },
+            { id: 25, name: 'Fujifilm X-S20', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 2610萬像素', price: 29999, original: 34999, rating: 4.5, reviews: 78, image: 'https://i.pravatar.cc/200?img=25' },
             
             // Canon 鏡頭
-            { id: 26, name: 'Canon RF 24-70mm F2.8 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 24-70mm', price: 34999, original: 39999, rating: 4.8, reviews: 156, badge: '標配鏡' },
-            { id: 27, name: 'Canon RF 70-200mm F4 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 70-200mm', price: 24999, original: 29999, rating: 4.7, reviews: 123 },
-            { id: 28, name: 'Canon RF 28-70mm F2L USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 28-70mm', price: 39999, original: 44999, rating: 4.8, reviews: 178 },
-            { id: 29, name: 'Canon RF 16mm F2.8 STM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 8999, original: 10999, rating: 4.5, reviews: 67 },
-            { id: 30, name: 'Canon RF 50mm F1.8 STM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 5999, original: 7999, rating: 4.6, reviews: 234, badge: '平價首選' },
-            { id: 31, name: 'Canon RF 85mm F1.2 L USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 54999, original: 64999, rating: 4.9, reviews: 189 },
-            { id: 32, name: 'Canon RF 14-24mm F2.8 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 超廣角', price: 44999, original: 49999, rating: 4.8, reviews: 145 },
-            { id: 33, name: 'Canon EF 24-70mm F2.8L II USM', type: '鏡頭', brand: 'Canon', specs: 'EF卡口 | 24-70mm', price: 19999, original: 24999, rating: 4.6, reviews: 198 },
+            { id: 26, name: 'Canon RF 24-70mm F2.8 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 24-70mm', price: 34999, original: 39999, rating: 4.8, reviews: 156, badge: '標配鏡', image: 'https://i.pravatar.cc/200?img=26' },
+            { id: 27, name: 'Canon RF 70-200mm F4 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 70-200mm', price: 24999, original: 29999, rating: 4.7, reviews: 123, image: 'https://i.pravatar.cc/200?img=27' },
+            { id: 28, name: 'Canon RF 28-70mm F2L USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 28-70mm', price: 39999, original: 44999, rating: 4.8, reviews: 178, image: 'https://i.pravatar.cc/200?img=28' },
+            { id: 29, name: 'Canon RF 16mm F2.8 STM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 8999, original: 10999, rating: 4.5, reviews: 67, image: 'https://i.pravatar.cc/200?img=29' },
+            { id: 30, name: 'Canon RF 50mm F1.8 STM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 5999, original: 7999, rating: 4.6, reviews: 234, badge: '平價首選', image: 'https://i.pravatar.cc/200?img=30' },
+            { id: 31, name: 'Canon RF 85mm F1.2 L USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 54999, original: 64999, rating: 4.9, reviews: 189, image: 'https://i.pravatar.cc/200?img=31' },
+            { id: 32, name: 'Canon RF 14-24mm F2.8 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 超廣角', price: 44999, original: 49999, rating: 4.8, reviews: 145, image: 'https://i.pravatar.cc/200?img=32' },
+            { id: 33, name: 'Canon EF 24-70mm F2.8L II USM', type: '鏡頭', brand: 'Canon', specs: 'EF卡口 | 24-70mm', price: 19999, original: 24999, rating: 4.6, reviews: 198, image: 'https://i.pravatar.cc/200?img=33' },
             
             // Nikon 鏡頭
-            { id: 34, name: 'Nikon Z 24-70mm F2.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 24-70mm', price: 39999, original: 44999, rating: 4.8, reviews: 167, badge: '標配鏡' },
-            { id: 35, name: 'Nikon Z 70-200mm F2.8 VR S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 70-200mm', price: 29999, original: 34999, rating: 4.8, reviews: 134 },
-            { id: 36, name: 'Nikon Z 14-24mm F2.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 超廣角', price: 49999, original: 54999, rating: 4.9, reviews: 189 },
-            { id: 37, name: 'Nikon Z 50mm F1.2 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 34999, original: 39999, rating: 4.8, reviews: 156 },
-            { id: 38, name: 'Nikon Z 35mm F1.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 12999, original: 15999, rating: 4.7, reviews: 112 },
-            { id: 39, name: 'Nikon Z 85mm F1.2 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 54999, original: 64999, rating: 4.9, reviews: 201 },
-            { id: 40, name: 'Nikon AF-S 24-70mm F2.8E ED VR', type: '鏡頭', brand: 'Nikon', specs: 'F卡口 | 24-70mm', price: 24999, original: 29999, rating: 4.7, reviews: 145 },
+            { id: 34, name: 'Nikon Z 24-70mm F2.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 24-70mm', price: 39999, original: 44999, rating: 4.8, reviews: 167, badge: '標配鏡', image: 'https://i.pravatar.cc/200?img=34' },
+            { id: 35, name: 'Nikon Z 70-200mm F2.8 VR S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 70-200mm', price: 29999, original: 34999, rating: 4.8, reviews: 134, image: 'https://i.pravatar.cc/200?img=35' },
+            { id: 36, name: 'Nikon Z 14-24mm F2.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 超廣角', price: 49999, original: 54999, rating: 4.9, reviews: 189, image: 'https://i.pravatar.cc/200?img=36' },
+            { id: 37, name: 'Nikon Z 50mm F1.2 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 34999, original: 39999, rating: 4.8, reviews: 156, image: 'https://i.pravatar.cc/200?img=37' },
+            { id: 38, name: 'Nikon Z 35mm F1.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 12999, original: 15999, rating: 4.7, reviews: 112, image: 'https://i.pravatar.cc/200?img=38' },
+            { id: 39, name: 'Nikon Z 85mm F1.2 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 54999, original: 64999, rating: 4.9, reviews: 201, image: 'https://i.pravatar.cc/200?img=39' },
+            { id: 40, name: 'Nikon AF-S 24-70mm F2.8E ED VR', type: '鏡頭', brand: 'Nikon', specs: 'F卡口 | 24-70mm', price: 24999, original: 29999, rating: 4.7, reviews: 145, image: 'https://i.pravatar.cc/200?img=40' },
             
             // Sony 鏡頭
-            { id: 41, name: 'Sony FE 24-70mm F2.8 GM II', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 24-70mm', price: 34999, original: 39999, rating: 4.9, reviews: 212, badge: '標配鏡' },
-            { id: 42, name: 'Sony FE 70-200mm F4 G OSS', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 70-200mm', price: 19999, original: 24999, rating: 4.7, reviews: 134 },
-            { id: 43, name: 'Sony FE 16-35mm F2.8 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 超廣角', price: 49999, original: 54999, rating: 4.9, reviews: 178 },
-            { id: 44, name: 'Sony FE 85mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 34999, original: 39999, rating: 4.9, reviews: 189 },
-            { id: 45, name: 'Sony FE 50mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 24999, original: 29999, rating: 4.8, reviews: 167 },
-            { id: 46, name: 'Sony FE 35mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 19999, original: 24999, rating: 4.8, reviews: 145 },
-            { id: 47, name: 'Sony E 18-135mm F3.5-5.6 OSS', type: '鏡頭', brand: 'Sony', specs: 'E卡口 | 標準變焦', price: 8999, original: 10999, rating: 4.5, reviews: 98, badge: '平價首選' },
+            { id: 41, name: 'Sony FE 24-70mm F2.8 GM II', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 24-70mm', price: 34999, original: 39999, rating: 4.9, reviews: 212, badge: '標配鏡', image: 'https://i.pravatar.cc/200?img=41' },
+            { id: 42, name: 'Sony FE 70-200mm F4 G OSS', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 70-200mm', price: 19999, original: 24999, rating: 4.7, reviews: 134, image: 'https://i.pravatar.cc/200?img=42' },
+            { id: 43, name: 'Sony FE 16-35mm F2.8 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 超廣角', price: 49999, original: 54999, rating: 4.9, reviews: 178, image: 'https://i.pravatar.cc/200?img=43' },
+            { id: 44, name: 'Sony FE 85mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 34999, original: 39999, rating: 4.9, reviews: 189, image: 'https://i.pravatar.cc/200?img=44' },
+            { id: 45, name: 'Sony FE 50mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 24999, original: 29999, rating: 4.8, reviews: 167, image: 'https://i.pravatar.cc/200?img=45' },
+            { id: 46, name: 'Sony FE 35mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 19999, original: 24999, rating: 4.8, reviews: 145, image: 'https://i.pravatar.cc/200?img=46' },
+            { id: 47, name: 'Sony E 18-135mm F3.5-5.6 OSS', type: '鏡頭', brand: 'Sony', specs: 'E卡口 | 標準變焦', price: 8999, original: 10999, rating: 4.5, reviews: 98, badge: '平價首選', image: 'https://i.pravatar.cc/200?img=47' },
             
             // Fujifilm 鏡頭
-            { id: 48, name: 'Fujifilm XF 18-55mm F2.8-4 R LM OIS', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 標準變焦', price: 12999, original: 15999, rating: 4.6, reviews: 89 },
-            { id: 49, name: 'Fujifilm XF 55-200mm F3.5-4.8 R LM OIS', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 望遠變焦', price: 9999, original: 12999, rating: 4.5, reviews: 67 },
-            { id: 50, name: 'Fujifilm XF 35mm F1.4 R', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 定焦', price: 8999, original: 10999, rating: 4.6, reviews: 112 },
+            { id: 48, name: 'Fujifilm XF 18-55mm F2.8-4 R LM OIS', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 標準變焦', price: 12999, original: 15999, rating: 4.6, reviews: 89, image: 'https://i.pravatar.cc/200?img=48' },
+            { id: 49, name: 'Fujifilm XF 55-200mm F3.5-4.8 R LM OIS', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 望遠變焦', price: 9999, original: 12999, rating: 4.5, reviews: 67, image: 'https://i.pravatar.cc/200?img=49' },
+            { id: 50, name: 'Fujifilm XF 35mm F1.4 R', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 定焦', price: 8999, original: 10999, rating: 4.6, reviews: 112, image: 'https://i.pravatar.cc/200?img=50' },
             
             // 配件
-            { id: 51, name: 'Peak Design 相機背帶', type: '配件', brand: 'Peak Design', specs: '快速更換系統', price: 2999, original: 3999, rating: 4.8, reviews: 234 },
-            { id: 52, name: 'Manfrotto Befree Carbon 三腳架', type: '配件', brand: 'Manfrotto', specs: '碳纖維 | 5層', price: 8999, original: 10999, rating: 4.7, reviews: 178 },
-            { id: 53, name: 'K&F Concept 偏光鏡 55mm', type: '配件', brand: 'K&F Concept', specs: 'CPL濾鏡', price: 1999, original: 2999, rating: 4.6, reviews: 145, badge: '熱銷款' },
-            { id: 54, name: 'Sandisk Extreme Pro SD卡 256GB', type: '配件', brand: 'Sandisk', specs: '讀寫速度 170/90 MB/s', price: 2999, original: 3999, rating: 4.8, reviews: 267 },
-            { id: 55, name: 'Neewer 50000mAh 行動電源', type: '配件', brand: 'Neewer', specs: '快速充電', price: 1999, original: 2999, rating: 4.5, reviews: 112 },
-            { id: 56, name: 'Think Tank 相機背包', type: '配件', brand: 'Think Tank', specs: '專業級 | 防水', price: 5999, original: 7999, rating: 4.7, reviews: 198 },
-            { id: 57, name: 'Gitzo Systematic Carbon 三腳架', type: '配件', brand: 'Gitzo', specs: '碳纖維 | 專業級', price: 24999, original: 29999, rating: 4.9, reviews: 89 },
-            { id: 58, name: 'Canon 原廠電池 LP-E6NH', type: '配件', brand: 'Canon', specs: '2130mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 345, badge: '原廠認證' },
-            { id: 59, name: 'Nikon 原廠電池 EN-EL15c', type: '配件', brand: 'Nikon', specs: '2250mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 289 },
-            { id: 60, name: 'Sony 原廠電池 NP-FZ100', type: '配件', brand: 'Sony', specs: '2280mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 312 },
+            { id: 51, name: 'Peak Design 相機背帶', type: '配件', brand: 'Peak Design', specs: '快速更換系統', price: 2999, original: 3999, rating: 4.8, reviews: 234, image: 'https://i.pravatar.cc/200?img=51' },
+            { id: 52, name: 'Manfrotto Befree Carbon 三腳架', type: '配件', brand: 'Manfrotto', specs: '碳纖維 | 5層', price: 8999, original: 10999, rating: 4.7, reviews: 178, image: 'https://i.pravatar.cc/200?img=52' },
+            { id: 53, name: 'K&F Concept 偏光鏡 55mm', type: '配件', brand: 'K&F Concept', specs: 'CPL濾鏡', price: 1999, original: 2999, rating: 4.6, reviews: 145, badge: '熱銷款', image: 'https://i.pravatar.cc/200?img=53' },
+            { id: 54, name: 'Sandisk Extreme Pro SD卡 256GB', type: '配件', brand: 'Sandisk', specs: '讀寫速度 170/90 MB/s', price: 2999, original: 3999, rating: 4.8, reviews: 267, image: 'https://i.pravatar.cc/200?img=54' },
+            { id: 55, name: 'Neewer 50000mAh 行動電源', type: '配件', brand: 'Neewer', specs: '快速充電', price: 1999, original: 2999, rating: 4.5, reviews: 112, image: 'https://i.pravatar.cc/200?img=55' },
+            { id: 56, name: 'Think Tank 相機背包', type: '配件', brand: 'Think Tank', specs: '專業級 | 防水', price: 5999, original: 7999, rating: 4.7, reviews: 198, image: 'https://i.pravatar.cc/200?img=56' },
+            { id: 57, name: 'Gitzo Systematic Carbon 三腳架', type: '配件', brand: 'Gitzo', specs: '碳纖維 | 專業級', price: 24999, original: 29999, rating: 4.9, reviews: 89, image: 'https://i.pravatar.cc/200?img=57' },
+            { id: 58, name: 'Canon 原廠電池 LP-E6NH', type: '配件', brand: 'Canon', specs: '2130mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 345, badge: '原廠認證', image: 'https://i.pravatar.cc/200?img=58' },
+            { id: 59, name: 'Nikon 原廠電池 EN-EL15c', type: '配件', brand: 'Nikon', specs: '2250mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 289, image: 'https://i.pravatar.cc/200?img=59' },
+            { id: 60, name: 'Sony 原廠電池 NP-FZ100', type: '配件', brand: 'Sony', specs: '2280mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 312, image: 'https://i.pravatar.cc/200?img=60' },
             
             // 更多產品...
-            { id: 61, name: 'Canon RF 100-500mm F4.5-7.1 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 超望遠', price: 49999, original: 59999, rating: 4.8, reviews: 134 },
-            { id: 62, name: 'Nikon Z MC 105mm F2.8 Macro VR S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 微距', price: 34999, original: 39999, rating: 4.9, reviews: 98 },
-            { id: 63, name: 'Sony FE 200-600mm F5.6-6.3 G OSS', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 超望遠', price: 59999, original: 69999, rating: 4.9, reviews: 156 },
-            { id: 64, name: 'Fujifilm GFX 50S II', type: '相機', brand: 'Fujifilm', specs: '中片幅 | 5100萬像素', price: 199999, original: 229999, rating: 4.8, reviews: 67 },
-            { id: 65, name: 'DJI Ronin 4D-8K', type: '配件', brand: 'DJI', specs: '8K電影相機 | 穩定器', price: 159999, original: 189999, rating: 4.7, reviews: 45 },
+            { id: 61, name: 'Canon RF 100-500mm F4.5-7.1 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 超望遠', price: 49999, original: 59999, rating: 4.8, reviews: 134, image: 'https://i.pravatar.cc/200?img=61' },
+            { id: 62, name: 'Nikon Z MC 105mm F2.8 Macro VR S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 微距', price: 34999, original: 39999, rating: 4.9, reviews: 98, image: 'https://i.pravatar.cc/200?img=62' },
+            { id: 63, name: 'Sony FE 200-600mm F5.6-6.3 G OSS', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 超望遠', price: 59999, original: 69999, rating: 4.9, reviews: 156, image: 'https://i.pravatar.cc/200?img=63' },
+            { id: 64, name: 'Fujifilm GFX 50S II', type: '相機', brand: 'Fujifilm', specs: '中片幅 | 5100萬像素', price: 199999, original: 229999, rating: 4.8, reviews: 67, image: 'https://i.pravatar.cc/200?img=64' },
+            { id: 65, name: 'DJI Ronin 4D-8K', type: '配件', brand: 'DJI', specs: '8K電影相機 | 穩定器', price: 159999, original: 189999, rating: 4.7, reviews: 45, image: 'https://i.pravatar.cc/200?img=65' },
         ];
 
         // 重複產品到100個
         while (products.length < 100) {
             const newProduct = {...products[Math.floor(Math.random() * products.length)]};
             newProduct.id = products.length + 1;
+            newProduct.image = `https://i.pravatar.cc/200?img=${newProduct.id}`;
             products.push(newProduct);
         }
 
@@ -543,7 +570,7 @@
             container.innerHTML = items.map(p => `
                 <div class="product-card">
                     <div class="product-image">
-                        ${getEmoji(p.type)} 
+                        <img src="${p.image}" alt="${p.name}" onerror="this.parentElement.innerHTML='📷'" style="width:100%; height:100%; object-fit:cover;">
                     </div>
                     <div class="product-info">
                         ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
@@ -562,15 +589,6 @@
                     </div>
                 </div>
             `).join('');
-        }
-
-        function getEmoji(type) {
-            const emojis = {
-                '相機': '📷',
-                '鏡頭': '🔭',
-                '配件': '🎒'
-            };
-            return emojis[type] || '📦';
         }
 
         function filterProducts() {
