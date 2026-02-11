@@ -24,6 +24,35 @@
             margin: 0 auto;
         }
 
+        .user-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .user-selector input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .user-selector button {
+            padding: 10px 20px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .user-selector button:hover {
+            transform: scale(1.05);
+        }
+
         header {
             text-align: center;
             color: white;
@@ -32,6 +61,12 @@
 
         header h1 {
             font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header .user-name {
+            font-size: 1.3em;
+            opacity: 0.9;
             margin-bottom: 10px;
         }
 
@@ -211,8 +246,14 @@
 </head>
 <body>
     <div class="container">
+        <div class="user-selector">
+            <input type="text" id="userInput" placeholder="輸入使用者名稱" value="Carlos">
+            <button onclick="switchUser()">切換使用者</button>
+        </div>
+
         <header>
             <h1>💪 運動追蹤</h1>
+            <div class="user-name" id="currentUser">Carlos 的運動紀錄</div>
             <p>記錄每日運動，堅持健身目標</p>
         </header>
 
@@ -284,21 +325,45 @@
     </div>
 
     <script>
-        // 初始化資料
-        let exercises = [
-            { date: '2026-02-11', type: '跑步', duration: 40 },
-            { date: '2026-02-11', type: '重訓', duration: 20 }
-        ];
+        let currentUser = 'Carlos';
 
-        // 從 localStorage 載入
-        const saved = localStorage.getItem('exercises');
-        if (saved) {
-            exercises = JSON.parse(saved);
-        } else {
-            localStorage.setItem('exercises', JSON.stringify(exercises));
+        function getStorageKey() {
+            return `exercises_${currentUser}`;
         }
 
+        // 初始化資料
+        function loadExercises() {
+            const saved = localStorage.getItem(getStorageKey());
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            
+            // 初始資料只在 Carlos 首次使用時設定
+            if (currentUser === 'Carlos') {
+                return [
+                    { date: '2026-02-11', type: '跑步', duration: 40 },
+                    { date: '2026-02-11', type: '重訓', duration: 20 }
+                ];
+            }
+            return [];
+        }
+
+        let exercises = loadExercises();
         let weeklySumChart, typeChart;
+
+        function switchUser() {
+            const newUser = document.getElementById('userInput').value.trim();
+            if (!newUser) {
+                alert('請输入使用者名稱');
+                return;
+            }
+            
+            currentUser = newUser;
+            exercises = loadExercises();
+            document.getElementById('currentUser').textContent = `${currentUser} 的運動紀錄`;
+            updateCharts();
+            renderLog();
+        }
 
         function addExercise() {
             const date = document.getElementById('exerciseDate').value;
@@ -311,7 +376,7 @@
             }
 
             exercises.push({ date, type, duration });
-            localStorage.setItem('exercises', JSON.stringify(exercises));
+            localStorage.setItem(getStorageKey(), JSON.stringify(exercises));
             
             document.getElementById('exerciseDuration').value = '';
             updateCharts();
@@ -320,7 +385,7 @@
 
         function deleteExercise(index) {
             exercises.splice(index, 1);
-            localStorage.setItem('exercises', JSON.stringify(exercises));
+            localStorage.setItem(getStorageKey(), JSON.stringify(exercises));
             updateCharts();
             renderLog();
         }
@@ -449,6 +514,7 @@
         }
 
         // 初始化
+        document.getElementById('currentUser').textContent = `${currentUser} 的運動紀錄`;
         renderLog();
         updateCharts();
     </script>
