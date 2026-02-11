@@ -251,13 +251,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-        }
-
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: white;
+            font-size: 3em;
         }
 
         .loading-image {
@@ -494,29 +488,6 @@
     </footer>
 
     <script>
-        // 高品質相機圖片 - 來自免費授權圖庫
-        const cameraImages = [
-            // 高品質相機圖片
-            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606933248051-5ce88adc6ecf?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606933248051-5ce88adc6ecf?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606933248051-5ce88adc6ecf?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606933248051-5ce88adc6ecf?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
-        ];
-
         // 產品資料庫
         const products = [
             // Canon 相機
@@ -607,10 +578,6 @@
 
         let filteredProducts = [...products];
 
-        function getImageForProduct(index) {
-            return cameraImages[Math.floor(Math.random() * cameraImages.length)];
-        }
-
         function renderProducts(items) {
             const container = document.getElementById('productContainer');
             
@@ -622,7 +589,7 @@
             container.innerHTML = items.map((p, idx) => `
                 <div class="product-card">
                     <div class="product-image-wrapper">
-                        <img src="${getImageForProduct(idx)}" alt="${p.name}" class="product-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2224%22 fill=%22%23999%22%3E📷%3C/text%3E%3C/svg%3E'">
+                        📷
                     </div>
                     <div class="product-info">
                         ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
