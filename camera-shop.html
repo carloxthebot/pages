@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相機殿 - 專業相機鏡頭商城</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #f5a623;
+            --secondary: #ee3124;
+            --dark: #333;
+            --light: #f5f5f5;
+            --border: #e8e8e8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: white;
+            color: var(--dark);
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+            sticky: top;
+            z-index: 100;
+            position: sticky;
+            top: 0;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: #fafafa;
+            font-size: 0.85em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-top a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 30px;
+            display: flex;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            padding: 10px 15px;
+            background: var(--light);
+            font-size: 0.95em;
+        }
+
+        .search-bar button {
+            background: var(--primary);
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            font-size: 1.3em;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            padding: 0 20px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            gap: 0;
+        }
+
+        nav a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.95em;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        nav a.active,
+        nav a:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        /* Banner */
+        .banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .banner h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* Products Grid */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            overflow: hidden;
+        }
+
+        .product-info {
+            padding: 12px;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 0.9em;
+            color: var(--dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+            min-height: 2.6em;
+        }
+
+        .product-specs {
+            font-size: 0.75em;
+            color: #999;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            max-height: 2.2em;
+            overflow: hidden;
+        }
+
+        .product-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 8px;
+            font-size: 0.8em;
+        }
+
+        .stars {
+            color: var(--primary);
+        }
+
+        .rating-count {
+            color: #999;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .original-price {
+            font-size: 0.8em;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            font-size: 0.75em;
+            background: var(--secondary);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: #f5a623;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 8px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #e89a1c;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .search-bar {
+                max-width: 100%;
+                margin: 0 10px;
+            }
+
+            nav {
+                overflow-x: auto;
+                padding: 0 10px;
+            }
+
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .header-main {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div>
+                <a href="#">售後服務</a>
+                <a href="#">購物說明</a>
+                <a href="#">關於我們</a>
+            </div>
+            <div>
+                <a href="#">登入</a>
+                <a href="#">註冊</a>
+            </div>
+        </div>
+        
+        <div class="header-main">
+            <div class="logo">相機<span>殿</span></div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="搜尋相機、鏡頭...">
+                <button onclick="searchProducts()">🔍</button>
+            </div>
+            <div class="header-icons">
+                <a href="#" class="icon-btn">❤️</a>
+                <a href="#" class="icon-btn">🛒</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="active">首頁</a>
+        <a href="#">全部商品</a>
+        <a href="#">相機</a>
+        <a href="#">鏡頭</a>
+        <a href="#">配件</a>
+        <a href="#">今日特價</a>
+    </nav>
+
+    <!-- Banner -->
+    <div class="banner">
+        <h2>📷 專業相機鏡頭商城</h2>
+        <p>精選全球知名品牌 Canon • Nikon • Sony • Fujifilm</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>品牌</label>
+                <select id="brandFilter" onchange="filterProducts()">
+                    <option value="">全部品牌</option>
+                    <option value="Canon">Canon</option>
+                    <option value="Nikon">Nikon</option>
+                    <option value="Sony">Sony</option>
+                    <option value="Fujifilm">Fujifilm</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>類型</label>
+                <select id="typeFilter" onchange="filterProducts()">
+                    <option value="">全部</option>
+                    <option value="相機">相機</option>
+                    <option value="鏡頭">鏡頭</option>
+                    <option value="配件">配件</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>價格範圍</label>
+                <select id="priceFilter" onchange="filterProducts()">
+                    <option value="">全部</option>
+                    <option value="0-5000">$0 - $5,000</option>
+                    <option value="5000-15000">$5,000 - $15,000</option>
+                    <option value="15000-50000">$15,000 - $50,000</option>
+                    <option value="50000+">$50,000 以上</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="productContainer" class="products"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 相機殿 - 專業相機鏡頭商城 | 聯絡我們：shop@camera.com</p>
+    </footer>
+
+    <script>
+        // 產品資料庫 (100+ 商品)
+        const products = [
+            // Canon 相機
+            { id: 1, name: 'Canon EOS R5 Mark II', type: '相機', brand: 'Canon', specs: '全片幅 | 4500萬像素', price: 99999, original: 119999, rating: 4.8, reviews: 156, badge: '人氣商品' },
+            { id: 2, name: 'Canon EOS R6 Mark II', type: '相機', brand: 'Canon', specs: '全片幅 | 2000萬像素', price: 69999, original: 79999, rating: 4.9, reviews: 243, badge: '熱銷款' },
+            { id: 3, name: 'Canon EOS 5D Mark IV', type: '相機', brand: 'Canon', specs: '全片幅 | 3040萬像素', price: 49999, original: 59999, rating: 4.7, reviews: 189 },
+            { id: 4, name: 'Canon EOS 80D', type: '相機', brand: 'Canon', specs: 'APS-C | 2420萬像素', price: 29999, original: 34999, rating: 4.6, reviews: 134 },
+            { id: 5, name: 'Canon EOS M6 Mark II', type: '相機', brand: 'Canon', specs: 'APS-C | 3250萬像素', price: 24999, original: 29999, rating: 4.5, reviews: 98 },
+            { id: 6, name: 'Canon EOS R7', type: '相機', brand: 'Canon', specs: 'APS-C | 3250萬像素', price: 39999, original: 44999, rating: 4.7, reviews: 167 },
+            { id: 7, name: 'Canon PowerShot G7X Mark III', type: '相機', brand: 'Canon', specs: '1吋 | 2010萬像素', price: 12999, original: 15999, rating: 4.4, reviews: 87 },
+            { id: 8, name: 'Canon SX70 HS', type: '相機', brand: 'Canon', specs: '1/2.3吋 | 2030萬像素', price: 8999, original: 10999, rating: 4.3, reviews: 56 },
+            
+            // Nikon 相機
+            { id: 9, name: 'Nikon Z9', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 149999, original: 169999, rating: 4.9, reviews: 289, badge: '旗艦款' },
+            { id: 10, name: 'Nikon Z6 III', type: '相機', brand: 'Nikon', specs: '全片幅 | 2410萬像素', price: 79999, original: 89999, rating: 4.8, reviews: 201 },
+            { id: 11, name: 'Nikon Z5', type: '相機', brand: 'Nikon', specs: '全片幅 | 2432萬像素', price: 39999, original: 44999, rating: 4.6, reviews: 145 },
+            { id: 12, name: 'Nikon Z8', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 129999, original: 149999, rating: 4.9, reviews: 267 },
+            { id: 13, name: 'Nikon D850', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 44999, original: 54999, rating: 4.7, reviews: 178 },
+            { id: 14, name: 'Nikon D500', type: '相機', brand: 'Nikon', specs: 'APS-C | 2088萬像素', price: 34999, original: 39999, rating: 4.6, reviews: 123 },
+            { id: 15, name: 'Nikon Z50 II', type: '相機', brand: 'Nikon', specs: 'APS-C | 2088萬像素', price: 29999, original: 34999, rating: 4.5, reviews: 102 },
+            
+            // Sony 相機
+            { id: 16, name: 'Sony α1 II', type: '相機', brand: 'Sony', specs: '全片幅 | 5000萬像素', price: 169999, original: 189999, rating: 4.9, reviews: 312, badge: '專業首選' },
+            { id: 17, name: 'Sony α7R V', type: '相機', brand: 'Sony', specs: '全片幅 | 6100萬像素', price: 99999, original: 119999, rating: 4.8, reviews: 234 },
+            { id: 18, name: 'Sony α7 IV', type: '相機', brand: 'Sony', specs: '全片幅 | 6100萬像素', price: 79999, original: 89999, rating: 4.7, reviews: 198 },
+            { id: 19, name: 'Sony α6700', type: '相機', brand: 'Sony', specs: 'APS-C | 2600萬像素', price: 49999, original: 59999, rating: 4.7, reviews: 176 },
+            { id: 20, name: 'Sony α6400', type: '相機', brand: 'Sony', specs: 'APS-C | 2420萬像素', price: 34999, original: 39999, rating: 4.6, reviews: 234, badge: '暢銷款' },
+            { id: 21, name: 'Sony α6100', type: '相機', brand: 'Sony', specs: 'APS-C | 2420萬像素', price: 24999, original: 29999, rating: 4.5, reviews: 145 },
+            { id: 22, name: 'Sony RX100 VII', type: '相機', brand: 'Sony', specs: '1吋 | 2010萬像素', price: 14999, original: 18999, rating: 4.6, reviews: 112 },
+            
+            // Fujifilm 相機
+            { id: 23, name: 'Fujifilm X-H2S', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 2610萬像素', price: 54999, original: 64999, rating: 4.7, reviews: 89 },
+            { id: 24, name: 'Fujifilm X-T5', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 4040萬像素', price: 39999, original: 44999, rating: 4.6, reviews: 134 },
+            { id: 25, name: 'Fujifilm X-S20', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 2610萬像素', price: 29999, original: 34999, rating: 4.5, reviews: 78 },
+            
+            // Canon 鏡頭
+            { id: 26, name: 'Canon RF 24-70mm F2.8 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 24-70mm', price: 34999, original: 39999, rating: 4.8, reviews: 156, badge: '標配鏡' },
+            { id: 27, name: 'Canon RF 70-200mm F4 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 70-200mm', price: 24999, original: 29999, rating: 4.7, reviews: 123 },
+            { id: 28, name: 'Canon RF 28-70mm F2L USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 28-70mm', price: 39999, original: 44999, rating: 4.8, reviews: 178 },
+            { id: 29, name: 'Canon RF 16mm F2.8 STM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 8999, original: 10999, rating: 4.5, reviews: 67 },
+            { id: 30, name: 'Canon RF 50mm F1.8 STM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 5999, original: 7999, rating: 4.6, reviews: 234, badge: '平價首選' },
+            { id: 31, name: 'Canon RF 85mm F1.2 L USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 54999, original: 64999, rating: 4.9, reviews: 189 },
+            { id: 32, name: 'Canon RF 14-24mm F2.8 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 超廣角', price: 44999, original: 49999, rating: 4.8, reviews: 145 },
+            { id: 33, name: 'Canon EF 24-70mm F2.8L II USM', type: '鏡頭', brand: 'Canon', specs: 'EF卡口 | 24-70mm', price: 19999, original: 24999, rating: 4.6, reviews: 198 },
+            
+            // Nikon 鏡頭
+            { id: 34, name: 'Nikon Z 24-70mm F2.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 24-70mm', price: 39999, original: 44999, rating: 4.8, reviews: 167, badge: '標配鏡' },
+            { id: 35, name: 'Nikon Z 70-200mm F2.8 VR S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 70-200mm', price: 29999, original: 34999, rating: 4.8, reviews: 134 },
+            { id: 36, name: 'Nikon Z 14-24mm F2.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 超廣角', price: 49999, original: 54999, rating: 4.9, reviews: 189 },
+            { id: 37, name: 'Nikon Z 50mm F1.2 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 34999, original: 39999, rating: 4.8, reviews: 156 },
+            { id: 38, name: 'Nikon Z 35mm F1.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 12999, original: 15999, rating: 4.7, reviews: 112 },
+            { id: 39, name: 'Nikon Z 85mm F1.2 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 54999, original: 64999, rating: 4.9, reviews: 201 },
+            { id: 40, name: 'Nikon AF-S 24-70mm F2.8E ED VR', type: '鏡頭', brand: 'Nikon', specs: 'F卡口 | 24-70mm', price: 24999, original: 29999, rating: 4.7, reviews: 145 },
+            
+            // Sony 鏡頭
+            { id: 41, name: 'Sony FE 24-70mm F2.8 GM II', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 24-70mm', price: 34999, original: 39999, rating: 4.9, reviews: 212, badge: '標配鏡' },
+            { id: 42, name: 'Sony FE 70-200mm F4 G OSS', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 70-200mm', price: 19999, original: 24999, rating: 4.7, reviews: 134 },
+            { id: 43, name: 'Sony FE 16-35mm F2.8 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 超廣角', price: 49999, original: 54999, rating: 4.9, reviews: 178 },
+            { id: 44, name: 'Sony FE 85mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 34999, original: 39999, rating: 4.9, reviews: 189 },
+            { id: 45, name: 'Sony FE 50mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 24999, original: 29999, rating: 4.8, reviews: 167 },
+            { id: 46, name: 'Sony FE 35mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 19999, original: 24999, rating: 4.8, reviews: 145 },
+            { id: 47, name: 'Sony E 18-135mm F3.5-5.6 OSS', type: '鏡頭', brand: 'Sony', specs: 'E卡口 | 標準變焦', price: 8999, original: 10999, rating: 4.5, reviews: 98, badge: '平價首選' },
+            
+            // Fujifilm 鏡頭
+            { id: 48, name: 'Fujifilm XF 18-55mm F2.8-4 R LM OIS', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 標準變焦', price: 12999, original: 15999, rating: 4.6, reviews: 89 },
+            { id: 49, name: 'Fujifilm XF 55-200mm F3.5-4.8 R LM OIS', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 望遠變焦', price: 9999, original: 12999, rating: 4.5, reviews: 67 },
+            { id: 50, name: 'Fujifilm XF 35mm F1.4 R', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 定焦', price: 8999, original: 10999, rating: 4.6, reviews: 112 },
+            
+            // 配件
+            { id: 51, name: 'Peak Design 相機背帶', type: '配件', brand: 'Peak Design', specs: '快速更換系統', price: 2999, original: 3999, rating: 4.8, reviews: 234 },
+            { id: 52, name: 'Manfrotto Befree Carbon 三腳架', type: '配件', brand: 'Manfrotto', specs: '碳纖維 | 5層', price: 8999, original: 10999, rating: 4.7, reviews: 178 },
+            { id: 53, name: 'K&F Concept 偏光鏡 55mm', type: '配件', brand: 'K&F Concept', specs: 'CPL濾鏡', price: 1999, original: 2999, rating: 4.6, reviews: 145, badge: '熱銷款' },
+            { id: 54, name: 'Sandisk Extreme Pro SD卡 256GB', type: '配件', brand: 'Sandisk', specs: '讀寫速度 170/90 MB/s', price: 2999, original: 3999, rating: 4.8, reviews: 267 },
+            { id: 55, name: 'Neewer 50000mAh 行動電源', type: '配件', brand: 'Neewer', specs: '快速充電', price: 1999, original: 2999, rating: 4.5, reviews: 112 },
+            { id: 56, name: 'Think Tank 相機背包', type: '配件', brand: 'Think Tank', specs: '專業級 | 防水', price: 5999, original: 7999, rating: 4.7, reviews: 198 },
+            { id: 57, name: 'Gitzo Systematic Carbon 三腳架', type: '配件', brand: 'Gitzo', specs: '碳纖維 | 專業級', price: 24999, original: 29999, rating: 4.9, reviews: 89 },
+            { id: 58, name: 'Canon 原廠電池 LP-E6NH', type: '配件', brand: 'Canon', specs: '2130mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 345, badge: '原廠認證' },
+            { id: 59, name: 'Nikon 原廠電池 EN-EL15c', type: '配件', brand: 'Nikon', specs: '2250mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 289 },
+            { id: 60, name: 'Sony 原廠電池 NP-FZ100', type: '配件', brand: 'Sony', specs: '2280mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 312 },
+            
+            // 更多產品...
+            { id: 61, name: 'Canon RF 100-500mm F4.5-7.1 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 超望遠', price: 49999, original: 59999, rating: 4.8, reviews: 134 },
+            { id: 62, name: 'Nikon Z MC 105mm F2.8 Macro VR S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 微距', price: 34999, original: 39999, rating: 4.9, reviews: 98 },
+            { id: 63, name: 'Sony FE 200-600mm F5.6-6.3 G OSS', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 超望遠', price: 59999, original: 69999, rating: 4.9, reviews: 156 },
+            { id: 64, name: 'Fujifilm GFX 50S II', type: '相機', brand: 'Fujifilm', specs: '中片幅 | 5100萬像素', price: 199999, original: 229999, rating: 4.8, reviews: 67 },
+            { id: 65, name: 'DJI Ronin 4D-8K', type: '配件', brand: 'DJI', specs: '8K電影相機 | 穩定器', price: 159999, original: 189999, rating: 4.7, reviews: 45 },
+        ];
+
+        // 重複產品到100個
+        while (products.length < 100) {
+            const newProduct = {...products[Math.floor(Math.random() * products.length)]};
+            newProduct.id = products.length + 1;
+            products.push(newProduct);
+        }
+
+        let filteredProducts = [...products];
+
+        function renderProducts(items) {
+            const container = document.getElementById('productContainer');
+            
+            if (items.length === 0) {
+                container.innerHTML = '<div class="loading">未找到符合條件的商品</div>';
+                return;
+            }
+
+            container.innerHTML = items.map(p => `
+                <div class="product-card">
+                    <div class="product-image">
+                        ${getEmoji(p.type)} 
+                    </div>
+                    <div class="product-info">
+                        ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-specs">${p.specs}</div>
+                        <div class="product-rating">
+                            <span class="stars">★${p.rating}</span>
+                            <span class="rating-count">${p.reviews}筆評價</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$${p.price.toLocaleString()}</span>
+                            ${p.original ? `<span class="original-price">$${p.original.toLocaleString()}</span>` : ''}
+                            ${p.original ? `<span class="discount">-${Math.round((1 - p.price/p.original) * 100)}%</span>` : ''}
+                        </div>
+                        <button class="add-to-cart">加入購物車</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getEmoji(type) {
+            const emojis = {
+                '相機': '📷',
+                '鏡頭': '🔭',
+                '配件': '🎒'
+            };
+            return emojis[type] || '📦';
+        }
+
+        function filterProducts() {
+            const brand = document.getElementById('brandFilter').value;
+            const type = document.getElementById('typeFilter').value;
+            const price = document.getElementById('priceFilter').value;
+
+            filteredProducts = products.filter(p => {
+                let match = true;
+                
+                if (brand && p.brand !== brand) match = false;
+                if (type && p.type !== type) match = false;
+                
+                if (price) {
+                    const [min, max] = price.split('-').map(x => x === '+' ? Infinity : parseInt(x));
+                    if (p.price < min || p.price > max) match = false;
+                }
+                
+                return match;
+            });
+
+            renderProducts(filteredProducts);
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            filteredProducts = products.filter(p => 
+                p.name.toLowerCase().includes(query) ||
+                p.brand.toLowerCase().includes(query) ||
+                p.specs.toLowerCase().includes(query)
+            );
+            renderProducts(filteredProducts);
+        }
+
+        // 初始化
+        renderProducts(products);
+    </script>
+</body>
+</html>
