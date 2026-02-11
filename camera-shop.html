@@ -494,30 +494,27 @@
     </footer>
 
     <script>
-        // 真實相機圖片 URLs (來自免費圖片庫 + 官方網站截圖)
+        // 高品質相機圖片 - 來自免費授權圖庫
         const cameraImages = [
-            // Canon
-            'https://images.pexels.com/photos/606933/pexels-photo-606933.jpeg',
-            'https://images.pexels.com/photos/606941/pexels-photo-606941.jpeg',
-            'https://images.pexels.com/photos/606930/pexels-photo-606930.jpeg',
-            'https://images.pexels.com/photos/606938/pexels-photo-606938.jpeg',
-            'https://images.pexels.com/photos/606935/pexels-photo-606935.jpeg',
-            // Nikon
-            'https://images.pexels.com/photos/274973/pexels-photo-274973.jpeg',
-            'https://images.pexels.com/photos/606945/pexels-photo-606945.jpeg',
-            'https://images.pexels.com/photos/606946/pexels-photo-606946.jpeg',
-            'https://images.pexels.com/photos/606947/pexels-photo-606947.jpeg',
-            // Sony
-            'https://images.pexels.com/photos/606951/pexels-photo-606951.jpeg',
-            'https://images.pexels.com/photos/606952/pexels-photo-606952.jpeg',
-            'https://images.pexels.com/photos/606953/pexels-photo-606953.jpeg',
-            // 更多
-            'https://images.pexels.com/photos/606954/pexels-photo-606954.jpeg',
-            'https://images.pexels.com/photos/606955/pexels-photo-606955.jpeg',
-            'https://images.pexels.com/photos/606956/pexels-photo-606956.jpeg',
-            'https://images.pexels.com/photos/606957/pexels-photo-606957.jpeg',
-            'https://images.pexels.com/photos/606958/pexels-photo-606958.jpeg',
-            'https://images.pexels.com/photos/606959/pexels-photo-606959.jpeg',
+            // 高品質相機圖片
+            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606933248051-5ce88adc6ecf?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606933248051-5ce88adc6ecf?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606933248051-5ce88adc6ecf?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606933248051-5ce88adc6ecf?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop',
         ];
 
         // 產品資料庫
@@ -611,7 +608,7 @@
         let filteredProducts = [...products];
 
         function getImageForProduct(index) {
-            return cameraImages[index % cameraImages.length];
+            return cameraImages[Math.floor(Math.random() * cameraImages.length)];
         }
 
         function renderProducts(items) {
