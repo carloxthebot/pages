@@ -328,21 +328,35 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 12px 20px;
             background: #fafafa;
-            font-size: 0.85em;
+            font-size: 0.95em;
             border-bottom: 1px solid var(--border);
+        }
+
+        .header-top-left {
+            display: flex;
+            gap: 25px;
+        }
+
+        .header-top-right {
+            display: flex;
+            gap: 25px;
         }
 
         .header-top a {
             color: #666;
             text-decoration: none;
-            margin: 0 15px;
             transition: color 0.2s;
+            white-space: nowrap;
         }
 
         .header-top a:hover {
             color: var(--secondary);
+        }
+
+        .header-top a.hidden-mobile {
+            display: inline;
         }
 
         .header-main {
@@ -452,25 +466,34 @@
             border-bottom-color: var(--secondary);
         }
 
-        nav.mobile-menu {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            padding: 0;
-            background: white;
+        .nav-category {
+            display: none;
+        }
+
+        .nav-category.show {
+            display: block;
+        }
+
+        .nav-category-title {
+            padding: 15px 20px 8px;
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 0.9em;
+            text-transform: uppercase;
             border-top: 1px solid var(--border);
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
         }
 
-        nav.mobile-menu.open {
-            max-height: 500px;
+        .nav-category-title:first-child {
+            border-top: none;
         }
 
-        nav.mobile-menu a {
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--border);
+        .nav-category a {
+            display: block;
+            padding: 10px 20px;
+            margin-left: 20px;
+            border: none;
+            font-size: 0.9em;
+            border-bottom: none;
         }
 
         /* Banner */
@@ -624,17 +647,17 @@
             position: absolute;
             top: 8px;
             right: 8px;
-            background: white;
+            background: transparent;
             border: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
+            width: auto;
+            height: auto;
+            border-radius: 0;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.6em;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+            box-shadow: none;
             transition: all 0.2s;
             padding: 0;
             line-height: 1;
@@ -773,15 +796,13 @@
         }
 
         @media (max-width: 768px) {
-            .header-top {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
+            .header-top-left {
+                display: none;
             }
 
-            .header-top a {
-                margin: 0 5px;
-                font-size: 0.75em;
+            .header-top-right {
+                width: 100%;
+                justify-content: flex-end;
             }
 
             .header-main {
@@ -814,8 +835,25 @@
 
             nav.mobile-menu {
                 display: flex;
+                flex-direction: column;
                 position: relative;
                 border-top: 1px solid var(--border);
+                padding: 0;
+                width: 100%;
+            }
+
+            nav.mobile-menu a {
+                display: block;
+                padding: 10px 20px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-category {
+                display: none;
+            }
+
+            .nav-category.show {
+                display: block;
             }
 
             .products {
@@ -855,12 +893,12 @@
     <!-- Header -->
     <header>
         <div class="header-top">
-            <div>
+            <div class="header-top-left">
                 <a href="#">售後服務</a>
                 <a href="#">購物說明</a>
                 <a href="#">關於我們</a>
             </div>
-            <div>
+            <div class="header-top-right">
                 <a href="#">登入</a>
                 <a href="#">註冊</a>
             </div>
@@ -886,12 +924,31 @@
 
         <!-- Mobile Navigation -->
         <nav id="mobileNav" class="mobile-menu">
-            <a href="camera-shop.html" class="active">首頁</a>
-            <a href="camera-shop.html">全部商品</a>
-            <a href="camera-shop.html">相機</a>
-            <a href="camera-shop.html">鏡頭</a>
-            <a href="camera-shop.html">配件</a>
-            <a href="camera-about.html">關於我們</a>
+            <a href="camera-shop.html" class="active" onclick="closeMobileMenu()">首頁</a>
+            
+            <div class="nav-category show">
+                <div class="nav-category-title">服務</div>
+                <a href="#">售後服務</a>
+                <a href="#">購物說明</a>
+                <a href="#">關於我們</a>
+                <a href="#">登入</a>
+                <a href="#">註冊</a>
+            </div>
+
+            <div class="nav-category show">
+                <div class="nav-category-title">商品分類</div>
+                <a href="camera-shop.html" onclick="closeMobileMenu()">全部商品</a>
+                <a href="camera-shop.html" onclick="closeMobileMenu()">相機</a>
+                <a href="camera-shop.html" onclick="closeMobileMenu()">鏡頭</a>
+                <a href="camera-shop.html" onclick="closeMobileMenu()">配件</a>
+            </div>
+
+            <div class="nav-category show">
+                <div class="nav-category-title">關於</div>
+                <a href="camera-about.html" onclick="closeMobileMenu()">關於我們</a>
+                <a href="camera-contact.html" onclick="closeMobileMenu()">聯絡我們</a>
+                <a href="camera-faq.html" onclick="closeMobileMenu()">常見問題</a>
+            </div>
         </nav>
     </header>
 
@@ -1034,17 +1091,18 @@
         let wishlist = JSON.parse(localStorage.getItem('camera-wishlist') || '[]');
         let currentSort = '';
 
-        // 高品質相機圖片 URL (Google 免費圖庫授權)
+        // 真實相機照片 URL (Unsplash - 實際相機產品)
         const cameraImages = [
-            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1614008375890-cb53b6c5f8d5?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1616088724416-415cbf02e7b8?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1518611505867-48a4f959f93a?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1610417235142-13814b6aca48?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1615738945684-38319fafcf81?w=300&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1622343256776-5fb4e6d1c8c9?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1606933248051-5ce98fedff9f?w=300&h=300&fit=crop', // Canon DSLR
+            'https://images.unsplash.com/photo-1606986628120-7f0d99ea78e1?w=300&h=300&fit=crop', // Sony Alpha
+            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop', // Mirrorless
+            'https://images.unsplash.com/photo-1604587220917-0504bc5d37b5?w=300&h=300&fit=crop', // Nikon
+            'https://images.unsplash.com/photo-1614008375890-cb53b6c5f8d5?w=300&h=300&fit=crop', // Compact
+            'https://images.unsplash.com/photo-1604538877294-0fa94a64400a?w=300&h=300&fit=crop', // SLR Camera
+            'https://images.unsplash.com/photo-1518611505867-48a4f959f93a?w=300&h=300&fit=crop', // Professional
+            'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=300&h=300&fit=crop', // Film Camera
+            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop', // DSLR Close-up
+            'https://images.unsplash.com/photo-1606933248051-5ce98fedff9f?w=300&h=300&fit=crop', // Canon EOS
         ];
 
         // 產品資料庫
@@ -1140,6 +1198,11 @@
         function toggleMobileMenu() {
             const nav = document.getElementById('mobileNav');
             nav.classList.toggle('open');
+        }
+
+        function closeMobileMenu() {
+            const nav = document.getElementById('mobileNav');
+            nav.classList.remove('open');
         }
 
         function getProductImage(productId) {
