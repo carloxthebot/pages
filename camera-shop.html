@@ -4837,6 +4837,29 @@
 
         // 初始化用戶 UI
         updateUserUI();
+
+        // ========== 初始化頁面 ==========
+        renderFlashSale();
+        updateFlashTimer();
+        setInterval(updateFlashTimer, 60000); // 每分鐘更新一次倒計時
+
+        renderProducts(products);
+        renderRecommended(getRecommendedProducts());
+        updateCartUI();
+        updatePageTitle();
+
+        // 搜尋欄 Enter 鍵事件
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchProducts();
+        });
+
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') closeModal();
+        });
+
+        document.getElementById('checkoutModal').addEventListener('click', (e) => {
+            if (e.target.id === 'checkoutModal') closeCheckout();
+        });
     </script>
 </body>
 </html>
