@@ -2295,6 +2295,295 @@
                 padding: 8px 10px;
             }
         }
+
+        /* 第9回合優化: 快速結帳 + 庫存提示 + 訂單追蹤頁面 */
+
+        /* 庫存提示 */
+        .stock-indicator {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .stock-low {
+            background: #ffe8e8;
+            color: #d91018;
+        }
+
+        .stock-out {
+            background: #f0f0f0;
+            color: #999;
+        }
+
+        .stock-available {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        /* 快速結帳按鈕 */
+        .quick-checkout-btn {
+            background: linear-gradient(135deg, #f5a623, #e89a1c);
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .quick-checkout-btn:hover {
+            background: linear-gradient(135deg, #e89a1c, #d87f0d);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+        }
+
+        .quick-checkout-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 快速結帳模態 */
+        .quick-checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 400;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s;
+        }
+
+        .quick-checkout-modal.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .quick-checkout-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .quick-checkout-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+        }
+
+        .quick-checkout-close:hover {
+            color: var(--secondary);
+        }
+
+        .quick-checkout-section {
+            margin-bottom: 20px;
+        }
+
+        .quick-checkout-section h3 {
+            font-size: 1em;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .quick-payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+
+        .payment-method {
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+            background: #fffbf5;
+        }
+
+        .payment-method.selected {
+            border-color: var(--secondary);
+            background: #ffeeec;
+        }
+
+        .payment-icon {
+            font-size: 1.8em;
+            margin-bottom: 6px;
+        }
+
+        .payment-name {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* 訂單追蹤頁面 */
+        .order-tracking-container {
+            display: none;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .order-tracking-container.show {
+            display: block;
+        }
+
+        .order-tracking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .order-tracking-header h2 {
+            font-size: 1.5em;
+            color: var(--dark);
+        }
+
+        .order-back-btn {
+            padding: 8px 16px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .order-back-btn:hover {
+            background: var(--border);
+        }
+
+        .order-tracking-timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 45px;
+            width: 2px;
+            height: 40px;
+            background: var(--border);
+        }
+
+        .timeline-item.completed::after {
+            background: var(--secondary);
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .timeline-item.completed .timeline-dot {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-top: 5px;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .timeline-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .timeline-time {
+            font-size: 0.8em;
+            color: #999;
+        }
+
+        .quick-checkout-confirm {
+            width: 100%;
+            padding: 12px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 20px;
+        }
+
+        .quick-checkout-confirm:hover {
+            background: #d91018;
+        }
+
+        @media (max-width: 768px) {
+            .quick-checkout-content {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .quick-payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .order-tracking-container {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2538,6 +2827,7 @@
                 <span id="cartTotal">$0</span>
             </div>
             <button class="checkout-btn" id="checkoutBtn" style="display: none;" onclick="openCheckout();">結帳</button>
+            <button class="quick-checkout-btn" id="quickCheckoutBtn" style="display: none;" onclick="openQuickCheckout();">⚡ 快速結帳</button>
         </div>
     </div>
 
@@ -2669,6 +2959,73 @@
                     <button class="checkout-btn" style="margin-top: 20px; width: 200px; margin-left: auto; margin-right: auto; display: block;" onclick="completeCheckout()">返回首頁</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Quick Checkout Modal (第9回合優化) -->
+    <div class="quick-checkout-modal" id="quickCheckoutModal">
+        <div class="quick-checkout-content">
+            <span class="quick-checkout-close" onclick="closeQuickCheckout()">✕</span>
+            
+            <h2 style="margin-bottom: 20px; color: var(--dark);">⚡ 快速結帳</h2>
+            
+            <!-- Quick Address Section -->
+            <div class="quick-checkout-section">
+                <h3>📍 收貨地址</h3>
+                <input type="text" id="quickName" placeholder="收貨人姓名" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px;">
+                <input type="tel" id="quickPhone" placeholder="電話號碼 (09xxxxxxxx)" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px;">
+                <input type="text" id="quickAddress" placeholder="詳細地址" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px;">
+            </div>
+            
+            <!-- Quick Payment Method -->
+            <div class="quick-checkout-section">
+                <h3>💳 支付方式</h3>
+                <div class="quick-payment-methods">
+                    <div class="payment-method selected" onclick="selectQuickPayment(this, 'credit')">
+                        <div class="payment-icon">💳</div>
+                        <div class="payment-name">信用卡</div>
+                    </div>
+                    <div class="payment-method" onclick="selectQuickPayment(this, 'transfer')">
+                        <div class="payment-icon">🏦</div>
+                        <div class="payment-name">銀行轉帳</div>
+                    </div>
+                    <div class="payment-method" onclick="selectQuickPayment(this, 'convenience')">
+                        <div class="payment-icon">🏪</div>
+                        <div class="payment-name">超商付款</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="quick-checkout-section" style="background: var(--light); padding: 15px; border-radius: 6px;">
+                <h3>📦 訂單摘要</h3>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>小計：</span>
+                    <span id="quickSubtotal">$0</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>運費：</span>
+                    <span id="quickShipping">$150</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1em; color: var(--secondary); border-top: 1px solid var(--border); padding-top: 8px;">
+                    <span>合計：</span>
+                    <span id="quickTotal">$0</span>
+                </div>
+            </div>
+            
+            <button class="quick-checkout-confirm" onclick="confirmQuickCheckout()">確認快速結帳</button>
+        </div>
+    </div>
+
+    <!-- Order Tracking Page (第9回合優化) -->
+    <div class="order-tracking-container" id="orderTrackingContainer">
+        <div class="order-tracking-header">
+            <h2>📦 訂單詳情</h2>
+            <button class="order-back-btn" onclick="closeOrderTracking()">← 返回</button>
+        </div>
+        
+        <div id="orderTrackingContent" style="margin-top: 30px;">
+            <!-- 動態內容將插入這裡 -->
         </div>
     </div>
 
@@ -3211,6 +3568,8 @@
             if (cartItems.length === 0) {
                 cartContent.innerHTML = '<div class="cart-empty">購物車是空的</div>';
                 checkoutBtn.style.display = 'none';
+                const quickCheckoutBtn = document.getElementById('quickCheckoutBtn');
+                if (quickCheckoutBtn) quickCheckoutBtn.style.display = 'none';
             } else {
                 cartContent.innerHTML = cartItems.map(([productId, item]) => `
                     <div class="cart-item">
@@ -3227,6 +3586,8 @@
                     </div>
                 `).join('');
                 checkoutBtn.style.display = 'block';
+                const quickCheckoutBtn = document.getElementById('quickCheckoutBtn');
+                if (quickCheckoutBtn) quickCheckoutBtn.style.display = 'block';
             }
         }
 
@@ -4221,6 +4582,251 @@
                 currentDiscount = 0;
                 document.getElementById('couponCode').value = '';
             }, 1000);
+        };
+
+        // ========== 第9回合優化：快速結帳 + 庫存提示 + 訂單追蹤 ==========
+
+        // 快速結帳相關變數
+        let quickSelectedPayment = 'credit';
+
+        // 開啟快速結帳模態
+        function openQuickCheckout() {
+            if (Object.keys(cart).length === 0) {
+                alert('購物車是空的');
+                return;
+            }
+            updateQuickCheckoutSummary();
+            document.getElementById('quickCheckoutModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 關閉快速結帳模態
+        function closeQuickCheckout() {
+            document.getElementById('quickCheckoutModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 更新快速結帳摘要
+        function updateQuickCheckoutSummary() {
+            const cartItems = Object.entries(cart);
+            const subtotal = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+            const shipping = subtotal > 50000 ? 0 : 150;
+            
+            document.getElementById('quickSubtotal').textContent = '$' + subtotal.toLocaleString();
+            document.getElementById('quickShipping').textContent = shipping === 0 ? '免運' : '$' + shipping.toLocaleString();
+            document.getElementById('quickTotal').textContent = '$' + (subtotal + shipping).toLocaleString();
+        }
+
+        // 選擇快速支付方式
+        function selectQuickPayment(element, method) {
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            quickSelectedPayment = method;
+        }
+
+        // 確認快速結帳
+        function confirmQuickCheckout() {
+            const name = document.getElementById('quickName').value.trim();
+            const phone = document.getElementById('quickPhone').value.trim();
+            const address = document.getElementById('quickAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('❌ 請填寫完整的收貨地址');
+                return;
+            }
+
+            if (!/^09\d{8}$/.test(phone)) {
+                alert('❌ 請輸入有效的電話號碼 (09xxxxxxxx)');
+                return;
+            }
+
+            // 生成訂單編號
+            const orderNumber = 'ORD' + new Date().getTime();
+            
+            // 保存訂單
+            if (currentUser) {
+                const cartItems = Object.entries(cart);
+                const subtotal = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+                const shipping = subtotal > 50000 ? 0 : 150;
+
+                const order = {
+                    orderNumber: orderNumber,
+                    date: new Date().toLocaleDateString('zh-TW'),
+                    items: cartItems.map(([id, item]) => ({ id, name: item.name, qty: item.qty, price: item.price })),
+                    address: address,
+                    total: subtotal + shipping,
+                    status: 'pending',
+                    payment: quickSelectedPayment,
+                    customerName: name,
+                    customerPhone: phone
+                };
+
+                if (!userOrders[currentUser.email]) {
+                    userOrders[currentUser.email] = [];
+                }
+                userOrders[currentUser.email].push(order);
+                localStorage.setItem('camera-user-orders', JSON.stringify(userOrders));
+            }
+
+            // 顯示成功訊息
+            alert('✅ 快速結帳成功！訂單編號：' + orderNumber);
+            
+            // 清空購物車並關閉模態
+            cart = {};
+            localStorage.setItem('camera-cart', JSON.stringify(cart));
+            closeQuickCheckout();
+            updateCart();
+            
+            // 顯示訂單追蹤
+            if (currentUser) {
+                showOrderTracking(orderNumber);
+            }
+        }
+
+        // 顯示訂單追蹤頁面
+        function showOrderTracking(orderNumber) {
+            if (!currentUser) return;
+
+            const userEmail = currentUser.email;
+            const orders = userOrders[userEmail] || [];
+            const order = orders.find(o => o.orderNumber === orderNumber);
+
+            if (!order) return;
+
+            const timelineStages = [
+                {
+                    title: '訂單已成立',
+                    description: '我們已收到您的訂單',
+                    completed: true,
+                    time: '剛剛'
+                },
+                {
+                    title: '準備出貨',
+                    description: '商品正在打包中',
+                    completed: order.status !== 'pending',
+                    time: order.status !== 'pending' ? '1-2 天後' : '待處理'
+                },
+                {
+                    title: '已出貨',
+                    description: '订単已交給配送商',
+                    completed: order.status === 'shipped' || order.status === 'completed',
+                    time: order.status === 'shipped' || order.status === 'completed' ? '1-3 天後' : '待處理'
+                },
+                {
+                    title: '已送達',
+                    description: '商品已成功送達',
+                    completed: order.status === 'completed',
+                    time: order.status === 'completed' ? '今天' : '待處理'
+                }
+            ];
+
+            let timelineHTML = timelineStages.map((stage, idx) => `
+                <div class="timeline-item ${stage.completed ? 'completed' : ''}">
+                    <div class="timeline-dot">${stage.completed ? '✓' : idx + 1}</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">${stage.title}</div>
+                        <div class="timeline-description">${stage.description}</div>
+                        <div class="timeline-time">${stage.time}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            const contentHTML = `
+                <div style="background: var(--light); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div>
+                            <strong>訂單編號</strong>
+                            <div style="font-size: 1.1em; color: var(--secondary);">${order.orderNumber}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>訂購日期</strong>
+                            <div style="font-size: 1em;">${order.date}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px; color: var(--dark);">📍 配送進度</h3>
+                <div class="order-tracking-timeline">
+                    ${timelineHTML}
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: var(--dark);">📦 訂單內容</h3>
+                <div style="background: var(--light); padding: 15px; border-radius: 8px;">
+                    ${order.items.map(item => `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
+                            <div>
+                                <strong>${item.name}</strong>
+                                <div style="font-size: 0.9em; color: #666;">數量：${item.qty}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--secondary); font-weight: 600;">$${(item.price * item.qty).toLocaleString()}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div style="display: flex; justify-content: space-between; margin-top: 15px; font-weight: 700; font-size: 1.1em; color: var(--secondary);">
+                        <span>總金額</span>
+                        <span>$${order.total.toLocaleString()}</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: var(--dark);">📮 收貨地址</h3>
+                <div style="background: var(--light); padding: 15px; border-radius: 8px;">
+                    <div><strong>${order.customerName}</strong></div>
+                    <div>${order.customerPhone}</div>
+                    <div>${order.address}</div>
+                </div>
+            `;
+
+            document.getElementById('orderTrackingContent').innerHTML = contentHTML;
+            document.getElementById('orderTrackingContainer').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 關閉訂單追蹤
+        function closeOrderTracking() {
+            document.getElementById('orderTrackingContainer').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 為產品卡片添加庫存提示
+        function renderStockIndicator(product) {
+            let stock = Math.max(0, 100 - product.id % 50); // 模擬庫存
+            if (stock === 0) {
+                return '<div class="stock-indicator stock-out">❌ 庫存不足</div>';
+            } else if (stock < 10) {
+                return `<div class="stock-indicator stock-low">⚠️ 僅剩 ${stock} 件</div>`;
+            } else {
+                return '<div class="stock-indicator stock-available">✓ 庫存充足</div>';
+            }
+        }
+
+        // 更新商品卡片，添加庫存提示和快速結帳按鈕
+        const originalRenderProducts = renderProducts;
+        renderProducts = function(filteredProducts) {
+            originalRenderProducts.call(this, filteredProducts);
+            // 添加庫存提示到每個卡片
+            filteredProducts.forEach(p => {
+                const cardElement = document.querySelector(`[data-product-id="${p.id}"]`);
+                if (cardElement) {
+                    const stockHTML = renderStockIndicator(p);
+                    // 在價格下方添加庫存提示
+                    const priceElement = cardElement.querySelector('.product-price');
+                    if (priceElement && !cardElement.querySelector('.stock-indicator')) {
+                        priceElement.insertAdjacentHTML('afterend', stockHTML);
+                    }
+                }
+            });
+        };
+
+        // 修改 addToCart 以顯示快速結帳按鈕
+        const originalAddToCart = addToCart;
+        addToCart = function(productId, productName, price) {
+            originalAddToCart.call(this, productId, productName, price);
+            // 顯示快速結帳按鈕（如果購物車不為空）
+            const quickCheckoutBtn = document.getElementById('quickCheckoutBtn');
+            if (Object.keys(cart).length > 0 && quickCheckoutBtn) {
+                quickCheckoutBtn.style.display = 'block';
+            }
         };
 
         // 初始化 A/B 測試
