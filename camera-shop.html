@@ -162,6 +162,101 @@
             border-color: var(--secondary);
         }
 
+        /* Reviews & Q&A */
+        .detail-reviews-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .detail-reviews-section h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .review-item {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .review-date {
+            font-size: 0.8em;
+            color: #999;
+        }
+
+        .review-rating {
+            font-size: 0.85em;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .review-text {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .qna-item {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .qna-question {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qna-question:hover {
+            color: var(--secondary);
+        }
+
+        .qna-toggle {
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+
+        .qna-item.expanded .qna-toggle {
+            transform: rotate(90deg);
+        }
+
+        .qna-answer {
+            display: none;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+
+        .qna-item.expanded .qna-answer {
+            display: block;
+        }
+
         /* Cart Sidebar */
         .cart-sidebar {
             position: fixed;
@@ -1145,6 +1240,54 @@
             products.push(newProduct);
         }
 
+        // 評論數據庫
+        const reviews = {
+            1: [
+                { author: '王小明', rating: 5, date: '2月12日', text: '相機品質很好，拍照效果超棒！配送很快，強力推薦！' },
+                { author: '李美玲', rating: 5, date: '2月10日', text: '無論是色彩準確度還是對焦速度都令人印象深刻。是專業人士的好選擇。' },
+                { author: '陳俊傑', rating: 4, date: '2月8日', text: '很好用，但電池消耗有點快。整體來說值得購買。' },
+            ],
+            2: [
+                { author: '黃芷蓁', rating: 5, date: '2月11日', text: '這款相機CP值很高！轉接全片幅鏡頭效果也很不錯。' },
+                { author: '吳昊天', rating: 5, date: '2月9日', text: '錄影功能強大，4K視頻質量很高。專業創作者必備！' },
+            ],
+            3: [
+                { author: '劉詩涵', rating: 5, date: '2月7日', text: '經典款相機，穩定可靠。我用了3年還是好好的！' },
+            ],
+        };
+
+        const qnas = {
+            1: [
+                { q: '這款相機支援哪些卡口類型？', a: '支援RF卡口，與所有Canon RF鏡頭兼容。可用轉接器支援EF/EF-S卡口鏡頭。' },
+                { q: '電池續航能拍多少張？', a: '在標準測試條件下約650張。實際續航取決於使用條件、閃光燈使用頻率等因素。' },
+                { q: '防塵防水等級如何？', a: '機身採用灰塵密封設計，快門簾和反光鏡都經過強化。防塵等級為IP72。' },
+            ],
+            2: [
+                { q: '適合初學者使用嗎？', a: '非常適合！這款擁有簡易操作模式和自動曝光，同時又有充足的手動控制選項。' },
+                { q: '保修期是多久？', a: '享有2年國際保修，並提供一年延伸保修選項。' },
+            ],
+            3: [
+                { q: '與新款R5相比有什麼區別？', a: '分辨率降低（3040萬 vs 4500萬），但動作追蹤性能相似，價格更經濟。' },
+            ],
+        };
+
+        // 為其他產品自動生成評論和QA（簡略版）
+        function getReviewsForProduct(productId) {
+            if (reviews[productId]) return reviews[productId];
+            return [
+                { author: '客戶A', rating: 4 + Math.random() < 0.5 ? 1 : 0, date: '最近', text: '很好用，推薦購買。' },
+                { author: '客戶B', rating: 5, date: '最近', text: '品質不錯，值得入手。' },
+            ];
+        }
+
+        function getQnasForProduct(productId) {
+            if (qnas[productId]) return qnas[productId];
+            return [
+                { q: '這款產品的保修期是多久？', a: '享有2年國際保修，可購買延伸保修。' },
+                { q: '支援哪些付款方式？', a: '支援信用卡、PayPal、銀行轉帳等多種支付方式。' },
+            ];
+        }
+
         let filteredProducts = [...products];
 
         function getProductImage(productId) {
@@ -1158,6 +1301,8 @@
             const isWishlisted = wishlist.includes(productId);
             const modal = document.getElementById('productModal');
             const content = document.getElementById('productDetailContent');
+            const productReviews = getReviewsForProduct(productId);
+            const productQnas = getQnasForProduct(productId);
             
             content.innerHTML = `
                 <div class="product-detail">
@@ -1187,8 +1332,39 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="detail-reviews-section">
+                    <h3>📝 用戶評論 (${productReviews.length})</h3>
+                    ${productReviews.map(r => `
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="review-author">${r.author}</span>
+                                <span class="review-date">${r.date}</span>
+                            </div>
+                            <div class="review-rating">★ ${r.rating} 分</div>
+                            <div class="review-text">${r.text}</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="detail-reviews-section">
+                    <h3>❓ 常見問題 (${productQnas.length})</h3>
+                    ${productQnas.map((item, idx) => `
+                        <div class="qna-item" onclick="toggleQna(this)">
+                            <div class="qna-question">
+                                <span class="qna-toggle">▶</span>
+                                <span>${item.q}</span>
+                            </div>
+                            <div class="qna-answer">${item.a}</div>
+                        </div>
+                    `).join('')}
+                </div>
             `;
             modal.classList.add('show');
+        }
+
+        function toggleQna(element) {
+            element.classList.toggle('expanded');
         }
 
         function closeModal() {
