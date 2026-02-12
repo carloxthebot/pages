@@ -509,6 +509,324 @@
             background: #d91018;
         }
 
+        /* Checkout Modal */
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 400;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkout-modal.show {
+            display: flex;
+        }
+
+        .checkout-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 95vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .checkout-header h2 {
+            font-size: 1.8em;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .checkout-close {
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .checkout-close:hover {
+            color: var(--secondary);
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-section {
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .form-section h3 {
+            font-size: 1.1em;
+            margin: 0 0 15px 0;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-size: 0.9em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .payment-method input {
+            display: none;
+        }
+
+        .payment-method label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        .payment-method input:checked + label {
+            border-color: var(--primary);
+            background: rgba(245, 166, 35, 0.1);
+            color: var(--primary);
+        }
+
+        .coupon-section {
+            display: flex;
+            gap: 8px;
+        }
+
+        .coupon-section input {
+            flex: 1;
+        }
+
+        .coupon-section button {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .coupon-section button:hover {
+            background: #e89a1c;
+        }
+
+        .checkout-summary {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-header {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            color: #666;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .summary-item-name {
+            flex: 1;
+        }
+
+        .summary-item-qty {
+            color: #999;
+            font-size: 0.85em;
+            margin: 0 10px;
+        }
+
+        .summary-item-price {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-line-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .summary-line-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .summary-line.discount {
+            color: var(--primary);
+        }
+
+        .summary-line.discount .summary-line-value {
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-top: 2px solid var(--primary);
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .summary-total-value {
+            color: var(--secondary);
+        }
+
+        .place-order-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .place-order-btn:hover {
+            background: #d91018;
+            transform: scale(1.02);
+        }
+
+        .place-order-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .success-message h3 {
+            font-size: 1.5em;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .order-number {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 15px 0;
+            font-family: monospace;
+        }
+
         .cart-badge {
             position: absolute;
             top: -8px;
@@ -680,17 +998,184 @@
             text-align: center;
             margin-bottom: 20px;
             border-bottom: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: bannerShine 3s infinite;
+        }
+
+        @keyframes bannerShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .banner h2 {
             font-size: 2.5em;
             margin-bottom: 10px;
             font-weight: 700;
+            animation: fadeInDown 0.8s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         .banner p {
             font-size: 1.15em;
             opacity: 0.95;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Flash Sale Section */
+        .flash-sale-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+            padding: 25px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .flash-sale-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .flash-sale-header h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .flash-sale-timer {
+            background: rgba(0,0,0,0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95em;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .flash-sale-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .flash-sale-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .flash-sale-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .flash-sale-image {
+            width: 100%;
+            height: 140px;
+            background: var(--light);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .flash-sale-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .flash-sale-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--secondary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8em;
+        }
+
+        .flash-sale-info {
+            padding: 10px;
+        }
+
+        .flash-sale-name {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+            line-height: 1.3;
+            min-height: 2em;
+        }
+
+        .flash-sale-price {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .flash-sale-current {
+            font-size: 1.1em;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .flash-sale-original {
+            font-size: 0.8em;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .flash-sale-btn {
+            width: 100%;
+            padding: 8px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8em;
+            transition: all 0.2s;
+        }
+
+        .flash-sale-btn:hover {
+            background: #e89a1c;
+            transform: scale(1.02);
         }
 
         /* Main Container */
@@ -1138,6 +1623,14 @@
 
     <!-- Main Content -->
     <div class="container">
+        <!-- Flash Sale Section -->
+        <div class="flash-sale-section" id="flashSaleSection">
+            <div class="flash-sale-header">
+                <h3>⚡ 限時優惠</h3>
+                <div class="flash-sale-timer">距結束：<span id="flashTimer">23:45</span></div>
+            </div>
+            <div class="flash-sale-products" id="flashSaleProducts"></div>
+        </div>
         <!-- Filters & Sort -->
         <div class="filters">
             <div class="filter-group">
@@ -1217,7 +1710,138 @@
                 <span>小計：</span>
                 <span id="cartTotal">$0</span>
             </div>
-            <button class="checkout-btn" id="checkoutBtn" style="display: none;">結帳</button>
+            <button class="checkout-btn" id="checkoutBtn" style="display: none;" onclick="openCheckout();">結帳</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h2>🛒 完成購買</h2>
+                <span class="checkout-close" onclick="closeCheckout()">✕</span>
+            </div>
+            
+            <div id="checkoutForm" class="checkout-grid">
+                <!-- Form Section -->
+                <div class="checkout-form">
+                    <!-- Shipping Address -->
+                    <div class="form-section">
+                        <h3>📍 收貨地址</h3>
+                        <div class="form-group">
+                            <label>收貨人姓名</label>
+                            <input type="text" id="receiverName" placeholder="請輸入收貨人姓名" value="Carlos Chen">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>電話</label>
+                                <input type="tel" id="receiverPhone" placeholder="例：0912345678" value="0912345678">
+                            </div>
+                            <div class="form-group">
+                                <label>郵遞區號</label>
+                                <input type="text" id="zipCode" placeholder="例：100" value="100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>城市 / 縣市</label>
+                            <select id="city">
+                                <option>台北市</option>
+                                <option>新北市</option>
+                                <option>台中市</option>
+                                <option>台南市</option>
+                                <option>高雄市</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>詳細地址</label>
+                            <input type="text" id="address" placeholder="請輸入詳細地址" value="中正區信義路 123 號">
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h3>💳 支付方式</h3>
+                        <div class="payment-methods">
+                            <div class="payment-method">
+                                <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" checked>
+                                <label for="creditCard">💳 信用卡</label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
+                                <label for="bankTransfer">🏦 銀行轉帳</label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="convenience" name="paymentMethod" value="convenience">
+                                <label for="convenience">🏪 超商付款</label>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; padding: 12px; background: white; border-radius: 6px; border-left: 3px solid var(--primary); font-size: 0.85em; color: #666;">
+                            ℹ️ 信用卡：Visa、Mastercard、JCB（即時扣款）<br>
+                            銀行轉帳：匯款後 2-4 小時認證<br>
+                            超商付款：7-Eleven / FamilyMart（7 天內付款）
+                        </div>
+                    </div>
+
+                    <!-- Coupon Code -->
+                    <div class="form-section">
+                        <h3>🎟️ 優惠碼</h3>
+                        <div class="coupon-section">
+                            <input type="text" id="couponCode" placeholder="輸入優惠碼" maxlength="12">
+                            <button onclick="applyCoupon()">套用</button>
+                        </div>
+                        <div id="couponMessage" style="font-size: 0.85em; margin-top: 8px; display: none;"></div>
+                    </div>
+
+                    <!-- Remarks -->
+                    <div class="form-section">
+                        <h3>📝 訂購備註</h3>
+                        <div class="form-group">
+                            <textarea id="remarks" placeholder="例：請優先配送、不需要發票等" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="checkout-summary" id="orderSummary">
+                    <div class="summary-header">訂單摘要</div>
+                    <div id="summaryItems"></div>
+                    
+                    <div class="summary-line">
+                        <span class="summary-line-label">商品小計</span>
+                        <span class="summary-line-value">$<span id="summarySubtotal">0</span></span>
+                    </div>
+                    
+                    <div class="summary-line">
+                        <span class="summary-line-label">運費</span>
+                        <span class="summary-line-value">$<span id="summaryShipping">150</span></span>
+                    </div>
+                    
+                    <div class="summary-line" id="discountLine" style="display: none;">
+                        <span class="summary-line-label">優惠</span>
+                        <span class="summary-line-value">-$<span id="summaryDiscount">0</span></span>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>總金額</span>
+                        <span class="summary-total-value">$<span id="summaryTotal">0</span></span>
+                    </div>
+                    
+                    <button class="place-order-btn" onclick="placeOrder()">確認訂購</button>
+                </div>
+            </div>
+
+            <!-- Success Message (initially hidden) -->
+            <div id="successMessage" style="display: none;">
+                <div class="success-message">
+                    <div class="success-icon">✅</div>
+                    <h3>訂購成功！</h3>
+                    <p>感謝您的購買</p>
+                    <div class="order-number" id="orderNumber">訂單編號：2026021200001</div>
+                    <p>我們已寄出確認信到您的電郵</p>
+                    <p>預計 1-3 個工作天送達</p>
+                    <button class="checkout-btn" style="margin-top: 20px; width: 200px; margin-left: auto; margin-right: auto; display: block;" onclick="completeCheckout()">返回首頁</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1866,7 +2490,168 @@
             renderRecommended(getRecommendedProducts());
         }
 
-        // 初始化
+        // ========== 首頁優化：Flash Sale 區域 ==========
+        let flashSaleDiscount = 0;
+
+        function getFlashSaleProducts() {
+            // 挑選最熱銷的 8 個商品作為限時優惠
+            return products
+                .filter(p => p.reviews > 100)
+                .sort((a, b) => b.reviews - a.reviews)
+                .slice(0, 8)
+                .map(p => ({...p, originalPrice: p.price, price: Math.floor(p.price * 0.85)}));
+        }
+
+        function renderFlashSale() {
+            const container = document.getElementById('flashSaleProducts');
+            const flashProducts = getFlashSaleProducts();
+
+            container.innerHTML = flashProducts.map(p => `
+                <div class="flash-sale-card" onclick="openModal(${p.id})">
+                    <div class="flash-sale-image">
+                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
+                        <div class="flash-sale-badge">15% OFF</div>
+                    </div>
+                    <div class="flash-sale-info">
+                        <div class="flash-sale-name">${p.name}</div>
+                        <div class="flash-sale-price">
+                            <span class="flash-sale-current">$${p.price.toLocaleString()}</span>
+                            <span class="flash-sale-original">$${p.originalPrice.toLocaleString()}</span>
+                        </div>
+                        <button class="flash-sale-btn" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}); event.stopPropagation();">
+                            快速搶購
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateFlashTimer() {
+            const now = new Date();
+            const hours = String(23 - now.getHours()).padStart(2, '0');
+            const minutes = String(59 - now.getMinutes()).padStart(2, '0');
+            document.getElementById('flashTimer').textContent = `${hours}:${minutes}`;
+        }
+
+        // ========== 支付流程 ==========
+        let currentDiscount = 0;
+        const validCoupons = {
+            'WELCOME10': 0.1,  // 10% off
+            'CAMERA20': 0.2,   // 20% off
+            'NEW15': 0.15,     // 15% off
+        };
+
+        function openCheckout() {
+            if (Object.keys(cart).length === 0) {
+                alert('購物車是空的，請先加入商品');
+                return;
+            }
+            updateCheckoutSummary();
+            document.getElementById('checkoutModal').classList.add('show');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('show');
+        }
+
+        function updateCheckoutSummary() {
+            const cartItems = Object.entries(cart);
+            const subtotal = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+            const shipping = subtotal > 50000 ? 0 : 150; // 满 50000 免运
+            const discount = Math.floor(subtotal * currentDiscount);
+            const total = subtotal + shipping - discount;
+
+            // 商品列表
+            const summaryItems = document.getElementById('summaryItems');
+            summaryItems.innerHTML = cartItems.map(([productId, item]) => `
+                <div class="summary-item">
+                    <div class="summary-item-name">${item.name}</div>
+                    <div class="summary-item-qty">×${item.qty}</div>
+                    <div class="summary-item-price">$${(item.price * item.qty).toLocaleString()}</div>
+                </div>
+            `).join('');
+
+            // 更新摘要
+            document.getElementById('summarySubtotal').textContent = subtotal.toLocaleString();
+            document.getElementById('summaryShipping').textContent = shipping.toLocaleString();
+            document.getElementById('summaryTotal').textContent = total.toLocaleString();
+
+            const discountLine = document.getElementById('discountLine');
+            if (discount > 0) {
+                discountLine.style.display = 'flex';
+                document.getElementById('summaryDiscount').textContent = discount.toLocaleString();
+            } else {
+                discountLine.style.display = 'none';
+            }
+        }
+
+        function applyCoupon() {
+            const couponCode = document.getElementById('couponCode').value.toUpperCase().trim();
+            const messageDiv = document.getElementById('couponMessage');
+
+            if (!couponCode) {
+                messageDiv.textContent = '❌ 請輸入優惠碼';
+                messageDiv.style.color = '#e74c3c';
+                messageDiv.style.display = 'block';
+                return;
+            }
+
+            if (validCoupons[couponCode]) {
+                currentDiscount = validCoupons[couponCode];
+                messageDiv.textContent = `✅ 已套用優惠碼 "${couponCode}"，享 ${Math.round(currentDiscount * 100)}% 折扣！`;
+                messageDiv.style.color = var(--primary);
+                messageDiv.style.display = 'block';
+                updateCheckoutSummary();
+            } else {
+                messageDiv.textContent = '❌ 無效的優惠碼';
+                messageDiv.style.color = '#e74c3c';
+                messageDiv.style.display = 'block';
+                currentDiscount = 0;
+                updateCheckoutSummary();
+            }
+        }
+
+        function placeOrder() {
+            const receiverName = document.getElementById('receiverName').value;
+            const receiverPhone = document.getElementById('receiverPhone').value;
+            const address = document.getElementById('address').value;
+
+            if (!receiverName || !receiverPhone || !address) {
+                alert('❌ 請填寫完整的收貨地址');
+                return;
+            }
+
+            if (!/^09\d{8}$/.test(receiverPhone)) {
+                alert('❌ 請輸入有效的電話號碼');
+                return;
+            }
+
+            // 生成訂單編號
+            const orderNumber = 'ORD' + new Date().getTime();
+            document.getElementById('orderNumber').textContent = `訂單編號：${orderNumber}`;
+
+            // 顯示成功訊息
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+
+            // 清空購物車
+            setTimeout(() => {
+                cart = {};
+                localStorage.setItem('camera-cart', JSON.stringify(cart));
+                currentDiscount = 0;
+                document.getElementById('couponCode').value = '';
+            }, 1000);
+        }
+
+        function completeCheckout() {
+            closeCheckout();
+            updateCartUI();
+            document.getElementById('checkoutForm').style.display = 'flex';
+            document.getElementById('successMessage').style.display = 'none';
+            toggleCart(); // 自動關閉購物車
+        }
+
+        // ========== 初始化 ==========
         document.getElementById('searchInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') searchProducts();
         });
@@ -1874,6 +2659,14 @@
         document.getElementById('productModal').addEventListener('click', (e) => {
             if (e.target.id === 'productModal') closeModal();
         });
+
+        document.getElementById('checkoutModal').addEventListener('click', (e) => {
+            if (e.target.id === 'checkoutModal') closeCheckout();
+        });
+
+        renderFlashSale();
+        updateFlashTimer();
+        setInterval(updateFlashTimer, 60000); // 每分鐘更新一次倒計時
 
         renderProducts(products);
         renderRecommended(getRecommendedProducts());
