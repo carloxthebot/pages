@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聯絡我們 - 相機殿</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #f5a623;
+            --secondary: #ee3124;
+            --dark: #333;
+            --light: #f5f5f5;
+            --border: #e8e8e8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: white;
+            color: var(--dark);
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: #fafafa;
+            font-size: 0.85em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-top a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.2s;
+        }
+
+        .header-top a:hover {
+            color: var(--secondary);
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            font-size: 1.3em;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--dark);
+            transition: transform 0.2s;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+        }
+
+        nav {
+            display: flex;
+            padding: 0 20px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        nav a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.95em;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a.active,
+        nav a:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 12px;
+        }
+
+        .banner h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .contact-info h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .contact-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .contact-label {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+        }
+
+        .contact-form h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary) 0%, #e89a1c 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(238, 49, 36, 0.3);
+        }
+
+        .faq-section {
+            margin-top: 50px;
+        }
+
+        .faq-section h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+        }
+
+        .faq-item {
+            background: var(--light);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .faq-question {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 40px;
+            text-align: center;
+            border-top: 3px solid var(--primary);
+        }
+
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .banner h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div>
+                <a href="camera-about.html">關於我們</a>
+                <a href="camera-contact.html">聯絡我們</a>
+                <a href="camera-faq.html">常見問題</a>
+            </div>
+            <div>
+                <a href="#">登入</a>
+                <a href="#">註冊</a>
+            </div>
+        </div>
+        
+        <div class="header-main">
+            <a href="camera-shop.html" class="logo">相機<span>殿</span></a>
+            <div class="header-icons">
+                <a href="camera-shop.html" class="icon-btn">🛒</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="camera-shop.html">首頁</a>
+        <a href="camera-shop.html">全部商品</a>
+        <a href="camera-shop.html">相機</a>
+        <a href="camera-shop.html">鏡頭</a>
+        <a href="camera-shop.html">配件</a>
+        <a href="camera-contact.html" class="active">聯絡我們</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Banner -->
+        <div class="banner">
+            <h1>📞 聯絡我們</h1>
+            <p>有任何問題或建議？我們很樂意聽取您的意見</p>
+        </div>
+
+        <!-- Contact Content -->
+        <div class="content-grid">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h2>聯絡方式</h2>
+                
+                <div class="contact-item">
+                    <div class="contact-label">📧 電子郵件</div>
+                    <div class="contact-value">
+                        shop@camera.com<br>
+                        <small>客服回覆時間：24 小時內</small>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">📞 客服熱線</div>
+                    <div class="contact-value">
+                        0800-000-000<br>
+                        <small>營業時間：09:00-18:00 (一～五)<br>
+                        假日：09:00-17:00</small>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">💬 線上客服</div>
+                    <div class="contact-value">
+                        可用時間：09:00-21:00 (每日)<br>
+                        <small>點擊右下角客服按鈕開始對話</small>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">🏢 公司地址</div>
+                    <div class="contact-value">
+                        台北市信義區松壽路 1 號<br>
+                        <small>僅限預約參訪</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2>發送訊息</h2>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">電子郵件 *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">主旨 *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">訊息 *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">發送訊息</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>常見問題</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: 運費多少？</div>
+                <div class="faq-answer">A: 消費滿 $3,000 免運費，未滿則運費為 $100。提供超商取貨（順豐）及宅配兩種方式。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: 可以退貨嗎？</div>
+                <div class="faq-answer">A: 購買後 30 天內可無條件退貨，需保持原廠包裝完整且未使用。詳見退貨政策。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: 保固期多長？</div>
+                <div class="faq-answer">A: 所有商品均享有原廠保固，相機通常為 1-2 年。詳細保固期請見商品介紹。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: 可以分期付款嗎？</div>
+                <div class="faq-answer">A: 金額超過 $5,000 的商品可使用信用卡 0 利率分期。詳情請洽客服。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: 如何追蹤訂單？</div>
+                <div class="faq-answer">A: 訂單確認後會發送追蹤碼至您的郵箱，可直接在物流公司網站查詢。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: left; max-width: 1400px; margin: 0 auto 30px; color: #ccc;">
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">關於相機殿</h4>
+                <ul style="list-style: none;">
+                    <li><a href="camera-about.html">關於我們</a></li>
+                    <li><a href="camera-contact.html">聯絡我們</a></li>
+                    <li><a href="camera-faq.html">常見問題</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">購物指南</h4>
+                <ul style="list-style: none;">
+                    <li><a href="#">購物說明</a></li>
+                    <li><a href="#">運費說明</a></li>
+                    <li><a href="#">退貨政策</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">客服</h4>
+                <ul style="list-style: none;">
+                    <li>📧 shop@camera.com</li>
+                    <li>📞 0800-000-000</li>
+                    <li>⏰ 09:00-18:00</li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #444; margin-bottom: 20px;">
+        <p>&copy; 2026 相機殿 - 專業相機鏡頭商城 | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('感謝您的訊息！我們會在 24 小時內回覆您。');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
