@@ -3187,6 +3187,175 @@
             updatePageTitle();
         };
 
+        // ========== A/B 測試框架 ==========
+        let abTestVariants = JSON.parse(localStorage.getItem('camera-ab-variants') || '{}');
+        let abTestMetrics = JSON.parse(localStorage.getItem('camera-ab-metrics') || '{}');
+
+        // A/B 測試配置
+        const abTests = {
+            // 按鈕顏色測試
+            'buttonColor': {
+                name: '購物車按鈕顏色',
+                active: true,
+                variants: {
+                    'control': { color: 'var(--primary)', name: '橙色（原始）' },
+                    'red': { color: '#e74c3c', name: '紅色' },
+                    'green': { color: '#27ae60', name: '綠色' }
+                },
+                weight: 1/3
+            },
+            // 文案變體測試
+            'cta-text': {
+                name: '加入購物車文案',
+                active: true,
+                variants: {
+                    'add-to-cart': { text: '加入購物車', name: '標準文案' },
+                    'quick-buy': { text: '立即購買', name: '立即購買' },
+                    'add-now': { text: '加入 💰', name: '加入 + 表情符號' }
+                },
+                weight: 1/3
+            },
+            // 按鈕位置測試
+            'button-position': {
+                name: '購物車按鈕位置',
+                active: true,
+                variants: {
+                    'bottom': { position: 'flex-end', name: '底部（原始）' },
+                    'top': { position: 'flex-start', name: '頂部' }
+                },
+                weight: 0.5
+            }
+        };
+
+        // 初始化 A/B 測試
+        function initABTest() {
+            // 為每個 A/B 測試分配用戶變體
+            Object.keys(abTests).forEach(testId => {
+                if (!abTestVariants[testId]) {
+                    const test = abTests[testId];
+                    const variants = Object.keys(test.variants);
+                    const randomVariant = variants[Math.floor(Math.random() * variants.length)];
+                    abTestVariants[testId] = randomVariant;
+                    
+                    if (!abTestMetrics[testId]) {
+                        abTestMetrics[testId] = {};
+                    }
+                    if (!abTestMetrics[testId][randomVariant]) {
+                        abTestMetrics[testId][randomVariant] = {
+                            views: 0,
+                            clicks: 0,
+                            conversions: 0,
+                            revenue: 0
+                        };
+                    }
+                }
+            });
+
+            localStorage.setItem('camera-ab-variants', JSON.stringify(abTestVariants));
+            localStorage.setItem('camera-ab-metrics', JSON.stringify(abTestMetrics));
+            applyABTestStyles();
+        }
+
+        // 應用 A/B 測試樣式
+        function applyABTestStyles() {
+            const buttonColorVariant = abTestVariants['buttonColor'];
+            const buttonColor = abTests['buttonColor'].variants[buttonColorVariant];
+            
+            // 動態注入 CSS 變數
+            const style = document.createElement('style');
+            style.textContent = `:root {
+                --ab-button-color: ${buttonColor.color};
+            }`;
+            document.head.appendChild(style);
+
+            // 更新按鈕顏色
+            const addToCartButtons = document.querySelectorAll('.add-to-cart, .flash-sale-btn, .detail-add-cart, .recommendation-add-btn, .checkout-btn');
+            addToCartButtons.forEach(btn => {
+                btn.style.background = buttonColor.color;
+                btn.addEventListener('click', () => trackABMetric('buttonColor', 'click'));
+            });
+        }
+
+        // 追蹤 A/B 測試指標
+        function trackABMetric(testId, metricType) {
+            const variant = abTestVariants[testId];
+            if (!abTestMetrics[testId]) {
+                abTestMetrics[testId] = {};
+            }
+            if (!abTestMetrics[testId][variant]) {
+                abTestMetrics[testId][variant] = {
+                    views: 0,
+                    clicks: 0,
+                    conversions: 0,
+                    revenue: 0
+                };
+            }
+
+            abTestMetrics[testId][variant][metricType]++;
+            localStorage.setItem('camera-ab-metrics', JSON.stringify(abTestMetrics));
+        }
+
+        // 記錄轉換
+        function trackConversion(testId, revenue = 0) {
+            const variant = abTestVariants[testId];
+            if (!abTestMetrics[testId]) abTestMetrics[testId] = {};
+            if (!abTestMetrics[testId][variant]) {
+                abTestMetrics[testId][variant] = { views: 0, clicks: 0, conversions: 0, revenue: 0 };
+            }
+
+            abTestMetrics[testId][variant].conversions++;
+            abTestMetrics[testId][variant].revenue += revenue;
+            localStorage.setItem('camera-ab-metrics', JSON.stringify(abTestMetrics));
+        }
+
+        // 顯示 A/B 測試報告
+        function showABTestReport() {
+            console.log('=== A/B 測試報告 ===');
+            Object.keys(abTestMetrics).forEach(testId => {
+                const test = abTests[testId];
+                console.log(`\n${test.name}:`);
+                Object.entries(abTestMetrics[testId]).forEach(([variant, metrics]) => {
+                    const variantName = test.variants[variant]?.name || variant;
+                    const ctr = metrics.clicks > 0 ? ((metrics.conversions / metrics.clicks) * 100).toFixed(2) : '0';
+                    console.log(`  ${variantName}: ${metrics.views} views | ${metrics.clicks} clicks | ${metrics.conversions} conversions | CTR: ${ctr}%`);
+                });
+            });
+        }
+
+        // 重置 A/B 測試
+        function resetABTests() {
+            localStorage.removeItem('camera-ab-variants');
+            localStorage.removeItem('camera-ab-metrics');
+            location.reload();
+        }
+
+        // 修改原始 addToCart 函數以支持 A/B 測試
+        const originalAddToCart = addToCart;
+        addToCart = function(productId, productName, price) {
+            trackABMetric('cta-text', 'click');
+            trackABMetric('button-position', 'click');
+            
+            // 更新轉換指標（基於最終訂單值）
+            trackConversion('buttonColor', price);
+            trackConversion('cta-text', price);
+            
+            originalAddToCart.call(this, productId, productName, price);
+        };
+
+        // 修改 placeOrder 函數以記錄完整轉換
+        const originalPlaceOrder = placeOrder;
+        placeOrder = function() {
+            const cartItems = Object.entries(cart);
+            const totalRevenue = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+
+            // 所有測試都記錄完整轉換
+            Object.keys(abTestVariants).forEach(testId => {
+                trackConversion(testId, totalRevenue);
+            });
+
+            originalPlaceOrder.call(this);
+        };
+
         // ========== 初始化 ==========
         document.getElementById('searchInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') searchProducts();
@@ -3221,6 +3390,12 @@
         
         // 初始化頁面標題
         updatePageTitle();
+
+        // 初始化 A/B 測試
+        initABTest();
+
+        // 在控制台打印測試報告指令
+        console.log('📊 A/B 測試已啟動！使用 showABTestReport() 查看報告，resetABTests() 重置測試。');
     </script>
 </body>
 </html>
