@@ -257,6 +257,127 @@
             display: block;
         }
 
+        /* Recommendation Sections */
+        .recommendation-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .recommendation-section h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .recommendation-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .recommendation-card {
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .recommendation-card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .recommendation-image {
+            width: 100%;
+            height: 140px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .recommendation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .recommendation-info {
+            padding: 10px;
+        }
+
+        .recommendation-name {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.3;
+            margin-bottom: 6px;
+            min-height: 2.15em;
+        }
+
+        .recommendation-price {
+            font-size: 1em;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-action {
+            display: flex;
+            gap: 6px;
+            font-size: 0.75em;
+        }
+
+        .recommendation-add-btn {
+            flex: 1;
+            padding: 6px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .recommendation-add-btn:hover {
+            background: #e89a1c;
+            transform: scale(1.05);
+        }
+
+        .recommendation-wishlist-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 4px;
+            background: var(--light);
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .recommendation-wishlist-btn:hover {
+            background: var(--border);
+            transform: scale(1.1);
+        }
+
+        .recommendation-wishlist-btn.saved {
+            background: var(--secondary);
+            color: white;
+        }
+
         /* Cart Sidebar */
         .cart-sidebar {
             position: fixed;
@@ -1288,6 +1409,124 @@
             ];
         }
 
+        // 推薦系統：常搭配購買
+        function getBundleRecommendations(productId) {
+            const currentProduct = products.find(p => p.id === productId);
+            if (!currentProduct) return [];
+
+            // 相機配套：相機 + 鏡頭 + 配件
+            if (currentProduct.type === '相機') {
+                return products.filter(p => 
+                    p.id !== productId && 
+                    (p.type === '鏡頭' || p.type === '配件') &&
+                    p.brand === currentProduct.brand
+                ).sort(() => Math.random() - 0.5).slice(0, 4);
+            }
+
+            // 鏡頭配套：配件和同品牌相機
+            if (currentProduct.type === '鏡頭') {
+                return products.filter(p =>
+                    p.id !== productId &&
+                    (p.type === '配件' || (p.type === '相機' && p.brand === currentProduct.brand))
+                ).sort(() => Math.random() - 0.5).slice(0, 4);
+            }
+
+            // 配件配套：相同品牌的其他配件或相機
+            return products.filter(p =>
+                p.id !== productId &&
+                p.brand === currentProduct.brand &&
+                (p.type === '配件' || p.type === '相機')
+            ).sort(() => Math.random() - 0.5).slice(0, 4);
+        }
+
+        // 推薦系統：看過的人也看了
+        let viewHistory = JSON.parse(localStorage.getItem('camera-view-history') || '[]');
+
+        function trackProductView(productId) {
+            if (!viewHistory.includes(productId)) {
+                viewHistory.unshift(productId);
+                viewHistory = viewHistory.slice(0, 20);
+                localStorage.setItem('camera-view-history', JSON.stringify(viewHistory));
+            }
+        }
+
+        function getViewedAlsoViewedRecommendations(productId) {
+            const currentProduct = products.find(p => p.id === productId);
+            if (viewHistory.length < 3) return [];
+
+            // 根據瀏覽歷史找相似產品
+            const similarType = products.filter(p => 
+                p.type === currentProduct.type && 
+                p.id !== productId
+            );
+
+            const viewedOthers = products.filter(p => viewHistory.includes(p.id) && p.id !== productId);
+            
+            return [...new Set([...viewedOthers, ...similarType])]
+                .filter(p => p.id !== productId)
+                .slice(0, 4);
+        }
+
+        function renderBundleRecommendation(productId) {
+            const items = getBundleRecommendations(productId);
+            if (items.length === 0) return '';
+
+            return `
+                <div class="recommendation-section">
+                    <h3>🎁 常搭配購買</h3>
+                    <div class="recommendation-products">
+                        ${items.map(p => `
+                            <div class="recommendation-card" onclick="openModal(${p.id})">
+                                <div class="recommendation-image">
+                                    <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
+                                </div>
+                                <div class="recommendation-info">
+                                    <div class="recommendation-name">${p.name}</div>
+                                    <div class="recommendation-price">$${p.price.toLocaleString()}</div>
+                                    <div class="recommendation-action">
+                                        <button class="recommendation-add-btn" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}); event.stopPropagation();">加入</button>
+                                        <button class="recommendation-wishlist-btn ${wishlist.includes(p.id) ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();">
+                                            ${wishlist.includes(p.id) ? '❤️' : '🤍'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderViewedAlsoViewedRecommendation(productId) {
+            const items = getViewedAlsoViewedRecommendations(productId);
+            if (items.length === 0) return '';
+
+            return `
+                <div class="recommendation-section">
+                    <h3>👀 看過的人也看了</h3>
+                    <div class="recommendation-products">
+                        ${items.map(p => `
+                            <div class="recommendation-card" onclick="openModal(${p.id})">
+                                <div class="recommendation-image">
+                                    <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
+                                </div>
+                                <div class="recommendation-info">
+                                    <div class="recommendation-name">${p.name}</div>
+                                    <div class="recommendation-price">$${p.price.toLocaleString()}</div>
+                                    <div class="recommendation-action">
+                                        <button class="recommendation-add-btn" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}); event.stopPropagation();">加入</button>
+                                        <button class="recommendation-wishlist-btn ${wishlist.includes(p.id) ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();">
+                                            ${wishlist.includes(p.id) ? '❤️' : '🤍'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
         let filteredProducts = [...products];
 
         function getProductImage(productId) {
@@ -1295,6 +1534,7 @@
         }
 
         function openModal(productId) {
+            trackProductView(productId);
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
@@ -1359,6 +1599,9 @@
                         </div>
                     `).join('')}
                 </div>
+
+                ${renderBundleRecommendation(productId)}
+                ${renderViewedAlsoViewedRecommendation(productId)}
             `;
             modal.classList.add('show');
         }
