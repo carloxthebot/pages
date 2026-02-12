@@ -375,8 +375,9 @@
             display: flex;
             background: var(--light);
             border-radius: 4px;
-            overflow: hidden;
+            overflow: visible;
             border: 1px solid var(--border);
+            position: relative;
         }
 
         .search-bar input {
@@ -398,6 +399,65 @@
 
         .search-bar button:hover {
             background: #e89a1c;
+        }
+
+        /* Search Suggestions */
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 50;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .search-suggestions.show {
+            display: block;
+        }
+
+        .suggestion-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover {
+            background: var(--light);
+            color: var(--secondary);
+        }
+
+        .suggestion-item.category {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .trending-searches {
+            padding: 15px 0;
+            border-top: 2px solid var(--light);
+        }
+
+        .trending-title {
+            padding: 8px 15px;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #999;
+            text-transform: uppercase;
         }
 
         .header-icons {
@@ -790,8 +850,9 @@
         <div class="header-main">
             <div class="logo">相機<span>殿</span></div>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="搜尋相機、鏡頭...">
+                <input type="text" id="searchInput" placeholder="搜尋相機、鏡頭..." autocomplete="off">
                 <button onclick="searchProducts()">🔍</button>
+                <div class="search-suggestions" id="searchSuggestions"></div>
             </div>
             <div class="header-icons">
                 <div class="icon-btn-wrapper">
@@ -916,6 +977,24 @@
         let cart = JSON.parse(localStorage.getItem('camera-cart') || '{}');
         let wishlist = JSON.parse(localStorage.getItem('camera-wishlist') || '[]');
         let currentSort = '';
+
+        // 熱門搜尋詞和類別
+        const trendingSearches = [
+            'Canon EOS R5',
+            'Sony α7 IV',
+            'Nikon Z9',
+            '24-70mm 鏡頭',
+            '相機三腳架',
+            '入門相機',
+            '全片幅相機',
+            '視頻相機'
+        ];
+
+        const categories = [
+            { icon: '📷', name: '全部相機' },
+            { icon: '🔍', name: '全部鏡頭' },
+            { icon: '⚙️', name: '全部配件' },
+        ];
 
         // 購物車圖片池（真實相機圖片 URL）
         const cameraImages = [
@@ -1081,7 +1160,7 @@
                 return `
                 <div class="product-card">
                     <div class="product-image-wrapper loading" onclick="openModal(${p.id})">
-                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">
+                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <button class="wishlist-btn ${isWishlisted ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();" title="加入收藏">
                             ${isWishlisted ? '❤️' : '🤍'}
                         </button>
@@ -1120,7 +1199,7 @@
                 return `
                 <div class="product-card">
                     <div class="product-image-wrapper loading" onclick="openModal(${p.id})">
-                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy">
+                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
                         <button class="wishlist-btn ${isWishlisted ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();">
                             ${isWishlisted ? '❤️' : '🤍'}
                         </button>
@@ -1300,9 +1379,77 @@
             renderRecommended(getRecommendedProducts());
         }
 
+        // 搜尋建議功能
+        function updateSearchSuggestions(query) {
+            const suggestionsDiv = document.getElementById('searchSuggestions');
+            
+            if (!query.trim()) {
+                suggestionsDiv.classList.remove('show');
+                return;
+            }
+
+            const lowerQuery = query.toLowerCase();
+            
+            // 根據查詢推薦產品名稱
+            const productSuggestions = products
+                .filter(p => p.name.toLowerCase().includes(lowerQuery) || p.brand.toLowerCase().includes(lowerQuery))
+                .slice(0, 4)
+                .map(p => ({ type: 'product', text: p.name }));
+
+            // 根據查詢推薦熱門搜尋詞
+            const trendingSuggestions = trendingSearches
+                .filter(t => t.toLowerCase().includes(lowerQuery))
+                .slice(0, 3)
+                .map(t => ({ type: 'trending', text: t }));
+
+            const allSuggestions = [...productSuggestions, ...trendingSuggestions];
+
+            if (allSuggestions.length === 0) {
+                suggestionsDiv.classList.remove('show');
+                return;
+            }
+
+            suggestionsDiv.innerHTML = allSuggestions.map(item => `
+                <div class="suggestion-item" onclick="selectSuggestion('${item.text.replace(/'/g, "\\'")}')">
+                    <span>${item.type === 'product' ? '📦' : '🔥'}</span>
+                    <span>${item.text}</span>
+                </div>
+            `).join('');
+
+            // 加入趨勢搜尋標題
+            if (trendingSuggestions.length > 0 && allSuggestions.length > 0) {
+                const html = suggestionsDiv.innerHTML;
+                suggestionsDiv.innerHTML = html;
+            }
+
+            suggestionsDiv.classList.add('show');
+        }
+
+        function selectSuggestion(text) {
+            document.getElementById('searchInput').value = text;
+            searchProducts();
+        }
+
         // 初始化
-        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') searchProducts();
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            updateSearchSuggestions(e.target.value);
+        });
+
+        searchInput.addEventListener('blur', () => {
+            setTimeout(() => {
+                document.getElementById('searchSuggestions').classList.remove('show');
+            }, 200);
+        });
+
+        searchInput.addEventListener('focus', (e) => {
+            if (e.target.value.trim()) {
+                updateSearchSuggestions(e.target.value);
+            }
         });
 
         // 點擊 modal 外部關閉
