@@ -919,6 +919,374 @@
             font-family: monospace;
         }
 
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-modal.show {
+            display: flex;
+        }
+
+        .auth-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .auth-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .auth-close:hover {
+            color: var(--secondary);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h2 {
+            font-size: 1.8em;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .auth-header p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .auth-tab.active {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form input {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border-color 0.2s;
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+        }
+
+        .auth-submit {
+            padding: 12px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 1em;
+        }
+
+        .auth-submit:hover {
+            background: #d91018;
+        }
+
+        .auth-divider {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            margin: 20px 0;
+        }
+
+        .auth-error {
+            padding: 12px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            border-radius: 6px;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        .auth-error.show {
+            display: block;
+        }
+
+        /* User Account Panel */
+        .account-panel {
+            display: none;
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            border-left: 1px solid var(--border);
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+            z-index: 200;
+            transition: right 0.3s ease;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .account-panel.open {
+            right: 0;
+        }
+
+        .account-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .account-header h3 {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .account-close {
+            cursor: pointer;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .account-user-info {
+            padding: 20px;
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .account-user-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            font-weight: 700;
+        }
+
+        .account-user-name {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .account-user-email {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .account-tabs {
+            display: flex;
+            gap: 0;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border);
+            background: white;
+        }
+
+        .account-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-size: 0.9em;
+        }
+
+        .account-tab.active {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        .account-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .account-section {
+            display: none;
+        }
+
+        .account-section.active {
+            display: block;
+        }
+
+        .account-menu-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .account-menu-item:hover {
+            background: var(--light);
+        }
+
+        .account-menu-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .account-menu-icon {
+            color: #999;
+        }
+
+        /* Orders */
+        .order-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .order-number-label {
+            font-weight: 700;
+            color: var(--dark);
+            font-family: monospace;
+        }
+
+        .order-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .order-status.completed {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .order-status.shipped {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .order-detail {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .order-date {
+            color: #999;
+            font-size: 0.8em;
+        }
+
+        .order-total {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.1em;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .account-logout {
+            position: sticky;
+            bottom: 0;
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid var(--border);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--secondary);
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .account-logout:hover {
+            background: var(--light);
+        }
+
         .cart-badge {
             position: absolute;
             top: -8px;
@@ -1939,8 +2307,9 @@
                 <a href="#">關於我們</a>
             </div>
             <div class="header-top-right">
-                <a href="#">登入</a>
-                <a href="#">註冊</a>
+                <a href="#" onclick="openAuthModal('login'); return false;">登入</a>
+                <a href="#" onclick="openAuthModal('register'); return false;">註冊</a>
+                <a id="userLink" style="display:none;" href="#" onclick="openUserAccount(); return false;"></a>
             </div>
         </div>
         
@@ -2066,6 +2435,92 @@
             <span class="modal-close" onclick="closeModal()">✕</span>
             <div id="productDetailContent"></div>
         </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-content">
+            <span class="auth-close" onclick="closeAuthModal()">×</span>
+            <div class="auth-header">
+                <h2 id="authTitle">登入帳戶</h2>
+                <p id="authSubtitle">享受更好的購物體驗</p>
+            </div>
+
+            <div class="auth-error" id="authError"></div>
+
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">登入</div>
+                <div class="auth-tab" onclick="switchAuthTab('register')">註冊</div>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                <input type="email" placeholder="電子郵件" required>
+                <input type="password" placeholder="密碼" required>
+                <button type="submit" class="auth-submit">登入</button>
+                <div class="auth-divider">或繼續購物</div>
+            </form>
+
+            <!-- Register Form -->
+            <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+                <input type="text" placeholder="姓名" required>
+                <input type="email" placeholder="電子郵件" required>
+                <input type="password" placeholder="密碼（最少 6 個字符）" minlength="6" required>
+                <input type="password" placeholder="確認密碼" required>
+                <button type="submit" class="auth-submit">建立帳戶</button>
+                <div class="auth-divider">已有帳戶？<a href="#" onclick="switchAuthTab('login'); return false;" style="color: var(--secondary); text-decoration: none;">立即登入</a></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Account Panel -->
+    <div class="account-panel" id="accountPanel">
+        <div class="account-header">
+            <h3>我的帳戶</h3>
+            <span class="account-close" onclick="closeUserAccount()">✕</span>
+        </div>
+
+        <div class="account-user-info">
+            <div class="account-user-avatar" id="userAvatar">用</div>
+            <div class="account-user-name" id="userName">用戶名</div>
+            <div class="account-user-email" id="userEmail">user@example.com</div>
+        </div>
+
+        <div class="account-tabs">
+            <div class="account-tab active" onclick="switchAccountTab('orders')">訂單歷史</div>
+            <div class="account-tab" onclick="switchAccountTab('profile')">個人資料</div>
+            <div class="account-tab" onclick="switchAccountTab('saved')">收藏</div>
+        </div>
+
+        <div class="account-content">
+            <!-- Orders Tab -->
+            <div class="account-section active" id="ordersSection">
+                <div id="ordersList"></div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div class="account-section" id="profileSection">
+                <div class="account-menu-item" onclick="editProfile()">
+                    <span class="account-menu-label">編輯個人資料</span>
+                    <span class="account-menu-icon">›</span>
+                </div>
+                <div class="account-menu-item" onclick="changePassword()">
+                    <span class="account-menu-label">變更密碼</span>
+                    <span class="account-menu-icon">›</span>
+                </div>
+                <div class="account-menu-item" onclick="manageSavedAddresses()">
+                    <span class="account-menu-label">收貨地址</span>
+                    <span class="account-menu-icon">›</span>
+                </div>
+            </div>
+
+            <!-- Saved Items Tab -->
+            <div class="account-section" id="savedSection">
+                <div id="savedItemsList"></div>
+            </div>
+        </div>
+
+        <div class="account-logout" onclick="handleLogout()">登出</div>
     </div>
 
     <!-- Cart Sidebar -->
@@ -3391,11 +3846,391 @@
         // 初始化頁面標題
         updatePageTitle();
 
+        // ========== 用戶帳戶系統 ==========
+        let currentUser = JSON.parse(localStorage.getItem('camera-current-user') || 'null');
+        let users = JSON.parse(localStorage.getItem('camera-users') || '{}');
+        let userOrders = JSON.parse(localStorage.getItem('camera-user-orders') || '{}');
+        let userSavedItems = JSON.parse(localStorage.getItem('camera-user-saved-items') || '{}');
+
+        // 更新頁面顯示用戶狀態
+        function updateUserUI() {
+            const loginLinks = document.querySelector('.header-top-right');
+            const userLink = document.getElementById('userLink');
+            const loginBtn = loginLinks.querySelector('a:nth-child(1)');
+            const registerBtn = loginLinks.querySelector('a:nth-child(2)');
+
+            if (currentUser) {
+                // 用戶已登入
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                userLink.style.display = 'inline';
+                userLink.textContent = `👤 ${currentUser.name}`;
+            } else {
+                // 用戶未登入
+                loginBtn.style.display = 'inline';
+                registerBtn.style.display = 'inline';
+                userLink.style.display = 'none';
+            }
+        }
+
+        // 打開登入/註冊彈窗
+        function openAuthModal(tab = 'login') {
+            document.getElementById('authModal').classList.add('show');
+            switchAuthTab(tab);
+            document.getElementById('authError').classList.remove('show');
+        }
+
+        // 關閉登入/註冊彈窗
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('show');
+            document.getElementById('authError').classList.remove('show');
+        }
+
+        // 切換標籤
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach((t, i) => {
+                t.classList.toggle('active', t.textContent === (tab === 'login' ? '登入' : '註冊'));
+            });
+
+            document.querySelectorAll('.auth-form').forEach((f, i) => {
+                f.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
+            });
+
+            const title = document.getElementById('authTitle');
+            const subtitle = document.getElementById('authSubtitle');
+            if (tab === 'login') {
+                title.textContent = '登入帳戶';
+                subtitle.textContent = '享受更好的購物體驗';
+            } else {
+                title.textContent = '建立新帳戶';
+                subtitle.textContent = '加入相機殿家族';
+            }
+        }
+
+        // 登入功能
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = e.target.elements[0].value;
+            const password = e.target.elements[1].value;
+            const errorDiv = document.getElementById('authError');
+
+            // 驗證用戶
+            if (users[email] && users[email].password === password) {
+                currentUser = {
+                    email: email,
+                    name: users[email].name,
+                    phone: users[email].phone || '',
+                    address: users[email].address || ''
+                };
+                localStorage.setItem('camera-current-user', JSON.stringify(currentUser));
+                closeAuthModal();
+                updateUserUI();
+                alert(`歡迎回來，${currentUser.name}！`);
+                e.target.reset();
+            } else {
+                errorDiv.textContent = '❌ 電子郵件或密碼錯誤';
+                errorDiv.classList.add('show');
+            }
+        }
+
+        // 註冊功能
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = e.target.elements[0].value;
+            const email = e.target.elements[1].value;
+            const password = e.target.elements[2].value;
+            const confirmPassword = e.target.elements[3].value;
+            const errorDiv = document.getElementById('authError');
+
+            // 驗證
+            if (password !== confirmPassword) {
+                errorDiv.textContent = '❌ 密碼不匹配';
+                errorDiv.classList.add('show');
+                return;
+            }
+
+            if (users[email]) {
+                errorDiv.textContent = '❌ 此電子郵件已被註冊';
+                errorDiv.classList.add('show');
+                return;
+            }
+
+            // 建立新用戶
+            users[email] = {
+                name: name,
+                password: password,
+                phone: '',
+                address: ''
+            };
+            userOrders[email] = [];
+            userSavedItems[email] = [];
+
+            localStorage.setItem('camera-users', JSON.stringify(users));
+            localStorage.setItem('camera-user-orders', JSON.stringify(userOrders));
+            localStorage.setItem('camera-user-saved-items', JSON.stringify(userSavedItems));
+
+            // 自動登入
+            currentUser = { email, name, phone: '', address: '' };
+            localStorage.setItem('camera-current-user', JSON.stringify(currentUser));
+
+            closeAuthModal();
+            updateUserUI();
+            alert(`帳戶建立成功！歡迎，${name}！`);
+            e.target.reset();
+        }
+
+        // 打開用戶帳戶面板
+        function openUserAccount() {
+            if (!currentUser) {
+                openAuthModal('login');
+                return;
+            }
+            document.getElementById('accountPanel').classList.add('open');
+            loadUserProfile();
+            loadUserOrders();
+            loadUserSavedItems();
+        }
+
+        // 關閉用戶帳戶面板
+        function closeUserAccount() {
+            document.getElementById('accountPanel').classList.remove('open');
+        }
+
+        // 切換帳戶標籤
+        function switchAccountTab(tab) {
+            document.querySelectorAll('.account-tab').forEach(t => {
+                t.classList.toggle('active', t.textContent.includes(
+                    tab === 'orders' ? '訂單' : 
+                    tab === 'profile' ? '個人' : 
+                    '收藏'
+                ));
+            });
+
+            document.querySelectorAll('.account-section').forEach((s, i) => {
+                const sections = ['orders', 'profile', 'saved'];
+                s.classList.toggle('active', sections[i] === tab);
+            });
+        }
+
+        // 加載用戶資料
+        function loadUserProfile() {
+            document.getElementById('userAvatar').textContent = currentUser.name[0];
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userEmail').textContent = currentUser.email;
+        }
+
+        // 加載訂單歷史
+        function loadUserOrders() {
+            const orders = userOrders[currentUser.email] || [];
+            const ordersList = document.getElementById('ordersList');
+
+            if (orders.length === 0) {
+                ordersList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📦</div>
+                        <p>還沒有訂單</p>
+                        <p style="font-size: 0.8em; color: #ccc;">開始購物，探索我們精選的產品吧！</p>
+                    </div>
+                `;
+                return;
+            }
+
+            ordersList.innerHTML = orders.map(order => `
+                <div class="order-item">
+                    <div class="order-header">
+                        <span class="order-number-label">${order.orderNumber}</span>
+                        <span class="order-status ${order.status}">${
+                            order.status === 'completed' ? '✅ 已送達' :
+                            order.status === 'shipped' ? '🚚 配送中' :
+                            '⏳ 待處理'
+                        }</span>
+                    </div>
+                    <div class="order-detail">📦 ${order.items.length} 件商品</div>
+                    <div class="order-detail">📍 ${order.address}</div>
+                    <div class="order-detail order-date">${order.date}</div>
+                    <div style="text-align: right; margin-top: 10px;">
+                        <span class="order-total">$${order.total.toLocaleString()}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 加載收藏商品
+        function loadUserSavedItems() {
+            const savedIds = userSavedItems[currentUser.email] || [];
+            const savedProducts = products.filter(p => savedIds.includes(p.id));
+            const savedList = document.getElementById('savedItemsList');
+
+            if (savedProducts.length === 0) {
+                savedList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">❤️</div>
+                        <p>沒有收藏的商品</p>
+                        <p style="font-size: 0.8em; color: #ccc;">点擊 ❤️ 保存喜愛的產品。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            savedList.innerHTML = `
+                <div class="products" style="margin-top: 0;">
+                    ${savedProducts.map(p => `
+                        <div class="product-card">
+                            <div class="product-image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=200&h=200&fit=crop" alt="${p.name}" loading="lazy" decoding="async">
+                                <button class="wishlist-btn saved" onclick="removeFromSaved(${p.id}); return false;">❤️</button>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name" onclick="openModal(${p.id})">${p.name}</div>
+                                <div class="product-rating">
+                                    <span class="stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span>
+                                    <span class="rating-count">(${p.reviews})</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price">$${p.price.toLocaleString()}</span>
+                                </div>
+                                <button class="add-to-cart" onclick="addToCart(${p.id}, '${p.name}', ${p.price})">加入購物車</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // 從收藏中移除
+        function removeFromSaved(productId) {
+            if (!currentUser) return;
+            const userEmail = currentUser.email;
+            userSavedItems[userEmail] = (userSavedItems[userEmail] || []).filter(id => id !== productId);
+            localStorage.setItem('camera-user-saved-items', JSON.stringify(userSavedItems));
+            loadUserSavedItems();
+        }
+
+        // 處理登出
+        function handleLogout() {
+            if (confirm('確定要登出嗎？')) {
+                currentUser = null;
+                localStorage.removeItem('camera-current-user');
+                closeUserAccount();
+                updateUserUI();
+                alert('已成功登出。');
+            }
+        }
+
+        // 編輯個人資料（佔位符）
+        function editProfile() {
+            alert('編輯個人資料功能即將推出！');
+        }
+
+        // 變更密碼（佔位符）
+        function changePassword() {
+            alert('變更密碼功能即將推出！');
+        }
+
+        // 管理地址（佔位符）
+        function manageSavedAddresses() {
+            alert('管理地址功能即將推出！');
+        }
+
+        // 重寫收藏系統以支持用戶帳戶
+        const originalToggleWishlist = toggleWishlist;
+        const originalAddWishlist = addWishlist;
+        const originalRemoveWishlist = removeWishlist;
+
+        toggleWishlist = function(productId) {
+            if (!currentUser) {
+                alert('請先登入帳戶才能收藏商品');
+                openAuthModal('login');
+                return;
+            }
+            originalToggleWishlist.call(this, productId);
+        };
+
+        addWishlist = function(productId) {
+            if (currentUser && !userSavedItems[currentUser.email]) {
+                userSavedItems[currentUser.email] = [];
+            }
+            if (currentUser && !userSavedItems[currentUser.email].includes(productId)) {
+                userSavedItems[currentUser.email].push(productId);
+                localStorage.setItem('camera-user-saved-items', JSON.stringify(userSavedItems));
+            }
+            originalAddWishlist.call(this, productId);
+        };
+
+        removeWishlist = function(productId) {
+            if (currentUser && userSavedItems[currentUser.email]) {
+                userSavedItems[currentUser.email] = userSavedItems[currentUser.email].filter(id => id !== productId);
+                localStorage.setItem('camera-user-saved-items', JSON.stringify(userSavedItems));
+            }
+            originalRemoveWishlist.call(this, productId);
+        };
+
+        // 修改 placeOrder 以保存訂單到用戶帳戶
+        const originalPlaceOrderUserSystem = placeOrder;
+        placeOrder = function() {
+            const receiverName = document.getElementById('receiverName').value;
+            const receiverPhone = document.getElementById('receiverPhone').value;
+            const address = document.getElementById('address').value;
+
+            if (!receiverName || !receiverPhone || !address) {
+                alert('❌ 請填寫完整的收貨地址');
+                return;
+            }
+
+            if (!/^09\d{8}$/.test(receiverPhone)) {
+                alert('❌ 請輸入有效的電話號碼');
+                return;
+            }
+
+            // 生成訂單編號
+            const orderNumber = 'ORD' + new Date().getTime();
+            document.getElementById('orderNumber').textContent = `訂單編號：${orderNumber}`;
+
+            // 如果用戶已登入，保存訂單
+            if (currentUser) {
+                const cartItems = Object.entries(cart);
+                const subtotal = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+                const shipping = subtotal > 50000 ? 0 : 150;
+                const discount = Math.floor(subtotal * currentDiscount);
+                const total = subtotal + shipping - discount;
+
+                const order = {
+                    orderNumber: orderNumber,
+                    date: new Date().toLocaleDateString('zh-TW'),
+                    items: cartItems.map(([id, item]) => ({ id, name: item.name, qty: item.qty, price: item.price })),
+                    address: address,
+                    total: total,
+                    status: 'pending'
+                };
+
+                if (!userOrders[currentUser.email]) {
+                    userOrders[currentUser.email] = [];
+                }
+                userOrders[currentUser.email].push(order);
+                localStorage.setItem('camera-user-orders', JSON.stringify(userOrders));
+            }
+
+            // 顯示成功訊息
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+
+            // 清空購物車
+            setTimeout(() => {
+                cart = {};
+                localStorage.setItem('camera-cart', JSON.stringify(cart));
+                currentDiscount = 0;
+                document.getElementById('couponCode').value = '';
+            }, 1000);
+        };
+
         // 初始化 A/B 測試
         initABTest();
 
         // 在控制台打印測試報告指令
         console.log('📊 A/B 測試已啟動！使用 showABTestReport() 查看報告，resetABTests() 重置測試。');
+
+        // 初始化用戶 UI
+        updateUserUI();
     </script>
 </body>
 </html>
