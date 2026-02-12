@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>相機殿 - 專業相機鏡頭商城</title>
-    <meta name="description" content="專業相機鏡頭商城 - Canon Nikon Sony Fujifilm">
+    <meta name="description" content="相機殿 - 專業相機鏡頭商城，精選全球知名品牌">
     <style>
         * {
             margin: 0;
@@ -160,12 +160,6 @@
 
         .detail-wishlist:hover {
             border-color: var(--secondary);
-        }
-
-        @media (max-width: 600px) {
-            .product-detail {
-                grid-template-columns: 1fr;
-            }
         }
 
         /* Cart Sidebar */
@@ -356,12 +350,16 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 20px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .logo {
             font-size: 1.8em;
             font-weight: bold;
             color: var(--secondary);
+            text-decoration: none;
+            white-space: nowrap;
         }
 
         .logo span {
@@ -370,14 +368,12 @@
 
         .search-bar {
             flex: 1;
-            max-width: 500px;
-            margin: 0 30px;
+            min-width: 200px;
             display: flex;
             background: var(--light);
             border-radius: 4px;
-            overflow: visible;
+            overflow: hidden;
             border: 1px solid var(--border);
-            position: relative;
         }
 
         .search-bar input {
@@ -401,65 +397,6 @@
             background: #e89a1c;
         }
 
-        /* Search Suggestions */
-        .search-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border: 1px solid var(--border);
-            border-top: none;
-            border-radius: 0 0 4px 4px;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 50;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .search-suggestions.show {
-            display: block;
-        }
-
-        .suggestion-item {
-            padding: 10px 15px;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9em;
-        }
-
-        .suggestion-item:last-child {
-            border-bottom: none;
-        }
-
-        .suggestion-item:hover {
-            background: var(--light);
-            color: var(--secondary);
-        }
-
-        .suggestion-item.category {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .trending-searches {
-            padding: 15px 0;
-            border-top: 2px solid var(--light);
-        }
-
-        .trending-title {
-            padding: 8px 15px;
-            font-weight: 600;
-            font-size: 0.85em;
-            color: #999;
-            text-transform: uppercase;
-        }
-
         .header-icons {
             display: flex;
             gap: 20px;
@@ -478,9 +415,20 @@
             transform: scale(1.1);
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--dark);
+            padding: 5px;
+        }
+
         /* Navigation */
         nav {
             display: flex;
+            width: 100%;
             padding: 0 20px;
             background: white;
             border-bottom: 1px solid var(--border);
@@ -502,6 +450,27 @@
         nav a:hover {
             color: var(--secondary);
             border-bottom-color: var(--secondary);
+        }
+
+        nav.mobile-menu {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        nav.mobile-menu.open {
+            max-height: 500px;
+        }
+
+        nav.mobile-menu a {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
         }
 
         /* Banner */
@@ -657,17 +626,18 @@
             right: 8px;
             background: white;
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8em;
+            font-size: 0.6em;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             transition: all 0.2s;
             padding: 0;
+            line-height: 1;
         }
 
         .wishlist-btn:hover,
@@ -803,22 +773,61 @@
         }
 
         @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .header-top a {
+                margin: 0 5px;
+                font-size: 0.75em;
+            }
+
+            .header-main {
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                flex-basis: 100%;
+                order: 0;
+            }
+
             .search-bar {
-                max-width: 100%;
-                margin: 0 10px;
+                order: 1;
+                flex-basis: 100%;
+                min-width: unset;
+            }
+
+            .menu-toggle {
+                display: flex;
+                order: 2;
+            }
+
+            .header-icons {
+                order: 3;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.mobile-menu {
+                display: flex;
+                position: relative;
+                border-top: 1px solid var(--border);
             }
 
             .products {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
 
-            .header-main {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
             .banner h2 {
                 font-size: 1.8em;
+            }
+
+            .banner p {
+                font-size: 0.9em;
             }
 
             .cart-sidebar {
@@ -829,6 +838,15 @@
             .filters {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+
+            .product-detail {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 20px;
             }
         }
     </style>
@@ -849,12 +867,12 @@
         </div>
         
         <div class="header-main">
-            <div class="logo">相機<span>殿</span></div>
+            <a href="camera-shop.html" class="logo">相機<span>殿</span></a>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="搜尋相機、鏡頭..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="搜尋相機、鏡頭...">
                 <button onclick="searchProducts()">🔍</button>
-                <div class="search-suggestions" id="searchSuggestions"></div>
             </div>
+            <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
             <div class="header-icons">
                 <div class="icon-btn-wrapper">
                     <a href="#" class="icon-btn" onclick="toggleWishlist(); return false;">❤️</a>
@@ -865,9 +883,19 @@
                 </div>
             </div>
         </div>
+
+        <!-- Mobile Navigation -->
+        <nav id="mobileNav" class="mobile-menu">
+            <a href="camera-shop.html" class="active">首頁</a>
+            <a href="camera-shop.html">全部商品</a>
+            <a href="camera-shop.html">相機</a>
+            <a href="camera-shop.html">鏡頭</a>
+            <a href="camera-shop.html">配件</a>
+            <a href="camera-about.html">關於我們</a>
+        </nav>
     </header>
 
-    <!-- Navigation -->
+    <!-- Desktop Navigation -->
     <nav>
         <a href="camera-shop.html" class="active">首頁</a>
         <a href="camera-shop.html">全部商品</a>
@@ -1006,35 +1034,17 @@
         let wishlist = JSON.parse(localStorage.getItem('camera-wishlist') || '[]');
         let currentSort = '';
 
-        // 熱門搜尋詞和類別
-        const trendingSearches = [
-            'Canon EOS R5',
-            'Sony α7 IV',
-            'Nikon Z9',
-            '24-70mm 鏡頭',
-            '相機三腳架',
-            '入門相機',
-            '全片幅相機',
-            '視頻相機'
-        ];
-
-        const categories = [
-            { icon: '📷', name: '全部相機' },
-            { icon: '🔍', name: '全部鏡頭' },
-            { icon: '⚙️', name: '全部配件' },
-        ];
-
-        // 購物車圖片池（真實相機圖片 URL）
+        // 高品質相機圖片 URL (Google 免費圖庫授權)
         const cameraImages = [
-            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=200&h=200&fit=crop',
-            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=200&h=200&fit=crop',
-            'https://images.unsplash.com/photo-1614008375890-cb53b6c5f8d5?w=200&h=200&fit=crop',
-            'https://images.unsplash.com/photo-1616088724416-415cbf02e7b8?w=200&h=200&fit=crop',
-            'https://images.unsplash.com/photo-1518611505867-48a4f959f93a?w=200&h=200&fit=crop',
-            'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=200&h=200&fit=crop',
-            'https://images.unsplash.com/photo-1610417235142-13814b6aca48?w=200&h=200&fit=crop',
-            'https://images.unsplash.com/photo-1615738945684-38319fafcf81?w=200&h=200&fit=crop',
-            'https://images.unsplash.com/photo-1622343256776-5fb4e6d1c8c9?w=200&h=200&fit=crop',
+            'https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1614008375890-cb53b6c5f8d5?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1616088724416-415cbf02e7b8?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1518611505867-48a4f959f93a?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1610417235142-13814b6aca48?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1615738945684-38319fafcf81?w=300&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1622343256776-5fb4e6d1c8c9?w=300&h=300&fit=crop',
         ];
 
         // 產品資料庫
@@ -1127,6 +1137,11 @@
 
         let filteredProducts = [...products];
 
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mobileNav');
+            nav.classList.toggle('open');
+        }
+
         function getProductImage(productId) {
             return cameraImages[productId % cameraImages.length];
         }
@@ -1188,7 +1203,7 @@
                 return `
                 <div class="product-card">
                     <div class="product-image-wrapper loading" onclick="openModal(${p.id})">
-                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">
                         <button class="wishlist-btn ${isWishlisted ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();" title="加入收藏">
                             ${isWishlisted ? '❤️' : '🤍'}
                         </button>
@@ -1227,7 +1242,7 @@
                 return `
                 <div class="product-card">
                     <div class="product-image-wrapper loading" onclick="openModal(${p.id})">
-                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
+                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy">
                         <button class="wishlist-btn ${isWishlisted ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();">
                             ${isWishlisted ? '❤️' : '🤍'}
                         </button>
@@ -1333,7 +1348,6 @@
         }
 
         function getRecommendedProducts() {
-            // 根據購物車或收藏推薦相關產品
             const cartProductIds = Object.keys(cart).map(Number);
             const allIds = [...cartProductIds, ...wishlist];
             
@@ -1407,80 +1421,11 @@
             renderRecommended(getRecommendedProducts());
         }
 
-        // 搜尋建議功能
-        function updateSearchSuggestions(query) {
-            const suggestionsDiv = document.getElementById('searchSuggestions');
-            
-            if (!query.trim()) {
-                suggestionsDiv.classList.remove('show');
-                return;
-            }
-
-            const lowerQuery = query.toLowerCase();
-            
-            // 根據查詢推薦產品名稱
-            const productSuggestions = products
-                .filter(p => p.name.toLowerCase().includes(lowerQuery) || p.brand.toLowerCase().includes(lowerQuery))
-                .slice(0, 4)
-                .map(p => ({ type: 'product', text: p.name }));
-
-            // 根據查詢推薦熱門搜尋詞
-            const trendingSuggestions = trendingSearches
-                .filter(t => t.toLowerCase().includes(lowerQuery))
-                .slice(0, 3)
-                .map(t => ({ type: 'trending', text: t }));
-
-            const allSuggestions = [...productSuggestions, ...trendingSuggestions];
-
-            if (allSuggestions.length === 0) {
-                suggestionsDiv.classList.remove('show');
-                return;
-            }
-
-            suggestionsDiv.innerHTML = allSuggestions.map(item => `
-                <div class="suggestion-item" onclick="selectSuggestion('${item.text.replace(/'/g, "\\'")}')">
-                    <span>${item.type === 'product' ? '📦' : '🔥'}</span>
-                    <span>${item.text}</span>
-                </div>
-            `).join('');
-
-            // 加入趨勢搜尋標題
-            if (trendingSuggestions.length > 0 && allSuggestions.length > 0) {
-                const html = suggestionsDiv.innerHTML;
-                suggestionsDiv.innerHTML = html;
-            }
-
-            suggestionsDiv.classList.add('show');
-        }
-
-        function selectSuggestion(text) {
-            document.getElementById('searchInput').value = text;
-            searchProducts();
-        }
-
         // 初始化
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('keypress', (e) => {
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') searchProducts();
         });
 
-        searchInput.addEventListener('input', (e) => {
-            updateSearchSuggestions(e.target.value);
-        });
-
-        searchInput.addEventListener('blur', () => {
-            setTimeout(() => {
-                document.getElementById('searchSuggestions').classList.remove('show');
-            }, 200);
-        });
-
-        searchInput.addEventListener('focus', (e) => {
-            if (e.target.value.trim()) {
-                updateSearchSuggestions(e.target.value);
-            }
-        });
-
-        // 點擊 modal 外部關閉
         document.getElementById('productModal').addEventListener('click', (e) => {
             if (e.target.id === 'productModal') closeModal();
         });
