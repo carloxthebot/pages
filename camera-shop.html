@@ -429,16 +429,6 @@
             transform: scale(1.1);
         }
 
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: var(--dark);
-            padding: 5px;
-        }
-
         /* Navigation */
         nav {
             display: flex;
@@ -464,36 +454,6 @@
         nav a:hover {
             color: var(--secondary);
             border-bottom-color: var(--secondary);
-        }
-
-        .nav-category {
-            display: none;
-        }
-
-        .nav-category.show {
-            display: block;
-        }
-
-        .nav-category-title {
-            padding: 15px 20px 8px;
-            font-weight: 700;
-            color: var(--secondary);
-            font-size: 0.9em;
-            text-transform: uppercase;
-            border-top: 1px solid var(--border);
-        }
-
-        .nav-category-title:first-child {
-            border-top: none;
-        }
-
-        .nav-category a {
-            display: block;
-            padding: 10px 20px;
-            margin-left: 20px;
-            border: none;
-            font-size: 0.9em;
-            border-bottom: none;
         }
 
         /* Banner */
@@ -805,55 +765,9 @@
                 justify-content: flex-end;
             }
 
-            .header-main {
-                flex-wrap: wrap;
-            }
-
-            .logo {
-                flex-basis: 100%;
-                order: 0;
-            }
-
             .search-bar {
-                order: 1;
-                flex-basis: 100%;
-                min-width: unset;
-            }
-
-            .menu-toggle {
-                display: flex;
-                order: 2;
-            }
-
-            .header-icons {
-                order: 3;
-            }
-
-            nav {
-                display: none;
-            }
-
-            nav.mobile-menu {
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                border-top: 1px solid var(--border);
-                padding: 0;
-                width: 100%;
-            }
-
-            nav.mobile-menu a {
-                display: block;
-                padding: 10px 20px;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .nav-category {
-                display: none;
-            }
-
-            .nav-category.show {
-                display: block;
+                max-width: 100%;
+                margin: 0 10px;
             }
 
             .products {
@@ -886,6 +800,15 @@
                 width: 95%;
                 padding: 20px;
             }
+
+            nav {
+                overflow-x: auto;
+            }
+
+            nav a {
+                font-size: 0.85em;
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
@@ -910,7 +833,6 @@
                 <input type="text" id="searchInput" placeholder="搜尋相機、鏡頭...">
                 <button onclick="searchProducts()">🔍</button>
             </div>
-            <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
             <div class="header-icons">
                 <div class="icon-btn-wrapper">
                     <a href="#" class="icon-btn" onclick="toggleWishlist(); return false;">❤️</a>
@@ -921,35 +843,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Navigation -->
-        <nav id="mobileNav" class="mobile-menu">
-            <a href="camera-shop.html" class="active" onclick="closeMobileMenu()">首頁</a>
-            
-            <div class="nav-category show">
-                <div class="nav-category-title">服務</div>
-                <a href="#">售後服務</a>
-                <a href="#">購物說明</a>
-                <a href="#">關於我們</a>
-                <a href="#">登入</a>
-                <a href="#">註冊</a>
-            </div>
-
-            <div class="nav-category show">
-                <div class="nav-category-title">商品分類</div>
-                <a href="camera-shop.html" onclick="closeMobileMenu()">全部商品</a>
-                <a href="camera-shop.html" onclick="closeMobileMenu()">相機</a>
-                <a href="camera-shop.html" onclick="closeMobileMenu()">鏡頭</a>
-                <a href="camera-shop.html" onclick="closeMobileMenu()">配件</a>
-            </div>
-
-            <div class="nav-category show">
-                <div class="nav-category-title">關於</div>
-                <a href="camera-about.html" onclick="closeMobileMenu()">關於我們</a>
-                <a href="camera-contact.html" onclick="closeMobileMenu()">聯絡我們</a>
-                <a href="camera-faq.html" onclick="closeMobileMenu()">常見問題</a>
-            </div>
-        </nav>
     </header>
 
     <!-- Desktop Navigation -->
@@ -1194,16 +1087,6 @@
         }
 
         let filteredProducts = [...products];
-
-        function toggleMobileMenu() {
-            const nav = document.getElementById('mobileNav');
-            nav.classList.toggle('open');
-        }
-
-        function closeMobileMenu() {
-            const nav = document.getElementById('mobileNav');
-            nav.classList.remove('open');
-        }
 
         function getProductImage(productId) {
             return cameraImages[productId % cameraImages.length];
