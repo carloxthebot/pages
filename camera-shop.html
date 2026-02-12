@@ -657,21 +657,22 @@
             right: 8px;
             background: white;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2em;
+            font-size: 0.8em;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             transition: all 0.2s;
+            padding: 0;
         }
 
         .wishlist-btn:hover,
         .wishlist-btn.saved {
-            transform: scale(1.1);
+            transform: scale(1.15);
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
@@ -868,12 +869,12 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#" class="active">首頁</a>
-        <a href="#">全部商品</a>
-        <a href="#">相機</a>
-        <a href="#">鏡頭</a>
-        <a href="#">配件</a>
-        <a href="#">今日特價</a>
+        <a href="camera-shop.html" class="active">首頁</a>
+        <a href="camera-shop.html">全部商品</a>
+        <a href="camera-shop.html">相機</a>
+        <a href="camera-shop.html">鏡頭</a>
+        <a href="camera-shop.html">配件</a>
+        <a href="camera-about.html">關於我們</a>
     </nav>
 
     <!-- Banner -->
@@ -969,7 +970,34 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 相機殿 - 專業相機鏡頭商城 | 聯絡我們：shop@camera.com | 服務熱線：0800-000-000</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: left; max-width: 1400px; margin: 0 auto 30px; color: #ccc;">
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">關於相機殿</h4>
+                <ul style="list-style: none;">
+                    <li><a href="camera-about.html" style="color: #ccc; text-decoration: none;">關於我們</a></li>
+                    <li><a href="camera-contact.html" style="color: #ccc; text-decoration: none;">聯絡我們</a></li>
+                    <li><a href="camera-faq.html" style="color: #ccc; text-decoration: none;">常見問題</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">購物指南</h4>
+                <ul style="list-style: none;">
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">購物說明</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">運費說明</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">退貨政策</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">客服</h4>
+                <ul style="list-style: none;">
+                    <li>📧 shop@camera.com</li>
+                    <li>📞 0800-000-000</li>
+                    <li>⏰ 09:00-18:00 (一~五)</li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #444; margin-bottom: 20px;">
+        <p>&copy; 2026 相機殿 - 專業相機鏡頭商城 | All Rights Reserved</p>
     </footer>
 
     <script>
