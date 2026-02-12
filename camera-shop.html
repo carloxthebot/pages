@@ -2971,7 +2971,7 @@
             if (validCoupons[couponCode]) {
                 currentDiscount = validCoupons[couponCode];
                 messageDiv.textContent = `✅ 已套用優惠碼 "${couponCode}"，享 ${Math.round(currentDiscount * 100)}% 折扣！`;
-                messageDiv.style.color = var(--primary);
+                messageDiv.style.color = '#f5a623';
                 messageDiv.style.display = 'block';
                 updateCheckoutSummary();
             } else {
