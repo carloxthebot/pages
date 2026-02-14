@@ -2,6 +2,176 @@
   "updates": [
     {
       "date": "2026-02-14",
+      "timestamp": 1771017720000,
+      "cost": 0.99,
+      "hot_tweets": [
+        {
+          "author": "openclaw",
+          "text": "🦞 OpenClaw v2026.2.6 發布！Opus 4.6 + GPT-5.3-Codex、xAI Grok、Voyage AI、安全掃描器",
+          "likes": 6200,
+          "impressions": "681.8K",
+          "time": "6d",
+          "url": "https://x.com/openclaw/status/2020059808444084506",
+          "tags": ["Release", "v2026.2.6"]
+        },
+        {
+          "author": "ycombinator",
+          "text": "OpenClaw 是新病毒式、極有效的虛擬助理，但設置太難，Bits 提供雲端托管方案",
+          "likes": 3200,
+          "impressions": "1.5M",
+          "time": "6d",
+          "url": "https://x.com/ycombinator/status/2020256254732693672",
+          "tags": ["Y Combinator", "雲端托管"]
+        },
+        {
+          "author": "Saboo_Shubham_",
+          "text": "VisionClaw - Meta 眼鏡上的實時 OpenClaw agent，使用 Gemini Live，100% 開源",
+          "likes": 1900,
+          "impressions": "174.6K",
+          "time": "6d",
+          "url": "https://x.com/Saboo_Shubham_/status/2020192268460912924",
+          "tags": ["AR", "Vision", "開源"]
+        },
+        {
+          "author": "USDC",
+          "text": "首個全 AI agent 駭客松：165+ 項目提交、780+ 投票、7500+ 評論，在 Moltbook 和 OpenClaw 上運行",
+          "likes": 880,
+          "impressions": "94.0K",
+          "time": "6d",
+          "url": "https://x.com/USDC/status/2019942543237226498",
+          "tags": ["Hackathon", "USDC", "Moltbook"]
+        },
+        {
+          "author": "BritishHodl",
+          "text": "朋友業務月成本 $40K → OpenClaw 管理流程後降至 $10K，節省 $30K/月",
+          "likes": 590,
+          "impressions": "31.5K",
+          "time": "6d",
+          "url": "https://x.com/BritishHodl/status/2020122696277799303",
+          "tags": ["ROI", "成本節省"]
+        },
+        {
+          "author": "QingQ77",
+          "text": "第三方 OpenClaw 網頁端 webclaw 發布，原版 UI 設計被吐槽",
+          "likes": 266,
+          "impressions": "56.8K",
+          "time": "5d",
+          "url": "https://x.com/QingQ77/status/2020359464487182583",
+          "tags": ["Web Client", "UI/UX"]
+        },
+        {
+          "author": "nash_su",
+          "text": "Peter Steinberger 展示日常工作：多個 AI 並行工作狀態",
+          "likes": 217,
+          "impressions": "33.3K",
+          "time": "6d",
+          "url": "https://x.com/nash_su/status/2019967050761015598",
+          "tags": ["開發者", "工作流"]
+        },
+        {
+          "author": "0xCygaar",
+          "text": "徵求 OpenClaw beta 測試者，聯繫他或 jarrodwatts",
+          "likes": 214,
+          "impressions": "15.7K",
+          "time": "22h",
+          "url": "https://x.com/0xCygaar/status/2022143500951912959",
+          "tags": ["Beta", "測試"]
+        },
+        {
+          "author": "nirajhodler",
+          "text": "不解釋為什麼 $CLAWD 還沒起飛，市場追逐 OpenClaw 代幣但 99% 是 LARP",
+          "likes": 115,
+          "impressions": "8.8K",
+          "time": "21h",
+          "url": "https://x.com/nirajhodler/status/2022154482394767761",
+          "tags": ["Token", "市場觀察"]
+        }
+      ],
+      "recent_tweets": [
+        {
+          "author": "zgramstad",
+          "text": "Claude Code 比 OpenClaw 更好用，UX 更佳，建議用 CC 做建構，OpenClaw 做其他",
+          "likes": 0,
+          "impressions": "2",
+          "time": "0m",
+          "url": "https://x.com/zgramstad/status/2022476491607740786",
+          "tags": ["比較", "Claude Code"]
+        },
+        {
+          "author": "vcalexjiang",
+          "text": "OpenClaw 開源 Agentic 系統的網路安全風險評估報告",
+          "likes": 0,
+          "impressions": "1",
+          "time": "1m",
+          "url": "https://x.com/vcalexjiang/status/2022476423966134604",
+          "tags": ["安全", "研究"]
+        },
+        {
+          "author": "SSelloum98728",
+          "text": "[Moltbook 新聞] 第一屆 AI Agent 總統選舉？'Moltbook 共和國' 治理實驗開始",
+          "likes": 0,
+          "impressions": "3",
+          "time": "1m",
+          "url": "https://x.com/SSelloum98728/status/2022476401002381727",
+          "tags": ["Moltbook", "治理", "選舉"]
+        },
+        {
+          "author": "thaliabloomai",
+          "text": "提供 OpenClaw 安裝配置服務，包含 soul 文件定義",
+          "likes": 0,
+          "impressions": "5",
+          "time": "1m",
+          "url": "https://x.com/thaliabloomai/status/2022476369419211263",
+          "tags": ["服務", "安裝"]
+        },
+        {
+          "author": "pahudnet",
+          "text": "資安專家警告企業有大量未經 IT 授權的 OpenClaw 影子部署",
+          "likes": 0,
+          "impressions": "5",
+          "time": "2m",
+          "url": "https://x.com/pahudnet/status/2022476184446025846",
+          "tags": ["安全", "影子部署"]
+        },
+        {
+          "author": "chulton97",
+          "text": "Mac mini M4 安裝 OpenClaw，API 限制很快出現，尋求 CP 值高模型建議",
+          "likes": 0,
+          "impressions": "15",
+          "time": "2m",
+          "url": "https://x.com/chulton97/status/2022476035913322811",
+          "tags": ["Mac Mini", "API 限制", "成本"]
+        },
+        {
+          "author": "yoon_park",
+          "text": "AI 個人助理普及與安全威脅，OpenClaw 案例顯示對提示注入和 LLM 操控的脆弱性",
+          "likes": 0,
+          "impressions": "5",
+          "time": "2m",
+          "url": "https://x.com/yoon_park/status/2022475981500428315",
+          "tags": ["安全", "提示注入"]
+        },
+        {
+          "author": "idanielroman",
+          "text": "OpenClaw 社群新聞訂閱發布，明天分享 OpenClaw 工具構建",
+          "likes": 0,
+          "impressions": "21",
+          "time": "2m",
+          "url": "https://x.com/idanielroman/status/2022475972541346255",
+          "tags": ["Newsletter", "社群"]
+        }
+      ],
+      "highlights": [
+        "🚀 OpenClaw v2026.2.6 發布 - Opus 4.6 + GPT-5.3-Codex + xAI Grok + Voyage AI",
+        "🥽 VisionClaw - Meta 眼鏡實時 AI Agent，100% 開源",
+        "💰 真實 ROI 案例 - 月成本從 $40K 降至 $10K（75% 節省）",
+        "🏆 首個全 AI 駭客松 - 165+ 項目在 Moltbook/OpenClaw 運行",
+        "☁️ YC 認可 - Bits 提供雲端托管解決方案",
+        "⚠️ 安全警告 - 企業影子部署和提示注入風險討論增加"
+      ]
+    },
+    {
+      "date": "2026-02-14",
       "timestamp": 1770997901045,
       "cost": 0.10,
       "hot_tweets": [

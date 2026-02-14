@@ -1,525 +1,399 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenClaw 每日摘要</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            min-height: 100vh;
-            color: #e2e8f0;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 40px 20px;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header p {
-            font-size: 1.1em;
-            color: #cbd5e1;
-            margin-bottom: 20px;
-        }
-
-        .date-selector {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .date-selector label {
-            font-weight: 600;
-            color: #a5f3fc;
-        }
-
-        .date-selector select {
-            background: rgba(102, 126, 234, 0.2);
-            border: 1px solid #667eea;
-            color: #e2e8f0;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 0.95em;
-            cursor: pointer;
-            min-width: 150px;
-        }
-
-        .date-selector select option {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            color: #a5f3fc;
-            margin: 20px 0;
-        }
-
-        .content {
-            display: none;
-        }
-
-        .content.active {
-            display: block;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-left: 4px solid #667eea;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-        }
-
-        .highlight-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #a5f3fc;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .highlight-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .highlight-list li {
-            padding: 10px 0;
-            padding-left: 25px;
-            position: relative;
-            color: #cbd5e1;
-        }
-
-        .highlight-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-            color: #a5f3fc;
-        }
-
-        .tweets-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .tweet-card {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tweet-card:hover {
-            background: rgba(30, 41, 59, 0.95);
-            border-color: #667eea;
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-        }
-
-        .tweet-rank {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.8em;
-            margin-bottom: 12px;
-            width: fit-content;
-        }
-
-        .tweet-author {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .tweet-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 0.85em;
-            margin-right: 10px;
-            flex-shrink: 0;
-        }
-
-        .tweet-author-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .tweet-author-name {
-            font-weight: 600;
-            font-size: 0.95em;
-            color: #f1f5f9;
-        }
-
-        .tweet-time {
-            font-size: 0.8em;
-            color: #64748b;
-        }
-
-        .tweet-text {
-            margin-bottom: 15px;
-            color: #cbd5e1;
-            flex: 1;
-            word-break: break-word;
-        }
-
-        .tweet-metrics {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 12px 0;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            border-bottom: 1px solid rgba(100, 116, 139, 0.3);
-            font-size: 0.9em;
-        }
-
-        .metric {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .metric-icon {
-            font-size: 1em;
-        }
-
-        .metric-value {
-            font-weight: 600;
-            color: #a5f3fc;
-        }
-
-        .tweet-link {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 14px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-        }
-
-        .tweet-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .tag {
-            display: inline-block;
-            background: rgba(165, 243, 252, 0.1);
-            color: #a5f3fc;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            margin-right: 5px;
-            margin-top: 8px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.8em;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #94a3b8;
-            margin-top: 5px;
-        }
-
-        .footer {
-            text-align: center;
-            color: #64748b;
-            padding: 20px;
-            border-top: 1px solid rgba(102, 126, 234, 0.2);
-            margin-top: 40px;
-        }
-
-        .no-data {
-            text-align: center;
-            padding: 40px 20px;
-            color: #94a3b8;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .tweets-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .date-selector {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .date-selector select {
-                width: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw 每日摘要 | Daily Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      min-height: 100vh;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 20px;
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #5eead4 0%, #0ea5e9 50%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    .subtitle { color: #94a3b8; font-size: 1.1rem; }
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .date-selector {
+      background: rgba(30, 41, 59, 0.8);
+      border: 2px solid rgba(94, 234, 212, 0.3);
+      border-radius: 12px;
+      padding: 12px 20px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 200px;
+    }
+    .date-selector:hover {
+      border-color: #5eead4;
+      box-shadow: 0 0 20px rgba(94, 234, 212, 0.2);
+    }
+    .stats-bar {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .stat-pill {
+      background: linear-gradient(135deg, #0ea5e9 0%, #5eead4 100%);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: rgba(30, 41, 59, 0.6);
+      border-radius: 16px;
+      border: 1px solid rgba(94, 234, 212, 0.15);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(94, 234, 212, 0.4);
+    }
+    .card-header {
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border-bottom: 1px solid rgba(94, 234, 212, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header h2 {
+      font-size: 1.3rem;
+      color: #5eead4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-body { padding: 20px; }
+    .tweet-item {
+      padding: 15px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border-left: 3px solid #0ea5e9;
+      transition: all 0.2s ease;
+    }
+    .tweet-item:hover {
+      background: rgba(15, 23, 42, 0.8);
+      border-left-color: #5eead4;
+    }
+    .tweet-item:last-child { margin-bottom: 0; }
+    .tweet-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .author {
+      font-weight: 600;
+      color: #5eead4;
+      text-decoration: none;
+    }
+    .author:hover { text-decoration: underline; }
+    .tweet-stats {
+      display: flex;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    .tweet-text {
+      color: #e2e8f0;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .tweet-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      background: rgba(94, 234, 212, 0.15);
+      color: #5eead4;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .tag.hot { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
+    .tag.recent { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+    .highlights {
+      background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 2px solid rgba(251, 146, 60, 0.3);
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+    .highlights h2 {
+      color: #fb923c;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .highlight-item {
+      padding: 12px 15px;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      color: #e2e8f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .loading {
+      text-align: center;
+      padding: 60px;
+      font-size: 1.2rem;
+      color: #94a3b8;
+    }
+    .error {
+      text-align: center;
+      padding: 40px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 16px;
+      color: #fca5a5;
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #64748b;
+      font-size: 0.9rem;
+      margin-top: 40px;
+      border-top: 1px solid rgba(94, 234, 212, 0.1);
+    }
+    footer a { color: #5eead4; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      h1 { font-size: 1.8rem; }
+      .grid { grid-template-columns: 1fr; }
+      .controls { flex-direction: column; }
+    }
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #94a3b8;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🦞 OpenClaw 每日摘要</h1>
-            <p>X.com 社群動態追蹤</p>
-        </div>
+  <div class="container">
+    <header>
+      <h1>🦞 OpenClaw 每日摘要</h1>
+      <p class="subtitle">Daily X Digest • 自動追蹤 OpenClaw 社群動態</p>
+    </header>
 
-        <div class="date-selector">
-            <label for="dateSelect">📅 選擇日期：</label>
-            <select id="dateSelect">
-                <option value="">載入中...</option>
-            </select>
-            <span id="dateInfo" style="color: #a5f3fc; font-size: 0.9em;"></span>
-        </div>
-
-        <div class="loading" id="loading">
-            <p>載入中...</p>
-        </div>
-
-        <div id="content" class="no-data">
-            <p>選擇日期以查看數據</p>
-        </div>
+    <div class="controls">
+      <select id="dateSelector" class="date-selector">
+        <option value="">選擇日期...</option>
+      </select>
+      <div class="stats-bar">
+        <span class="stat-pill" id="costStat">💰 $0.00</span>
+        <span class="stat-pill" id="tweetCount">📊 0 tweets</span>
+      </div>
     </div>
 
-    <script>
-        const DATA_FILE = 'openclaw-daily-data.json';
+    <div id="content">
+      <div class="loading">🔄 載入資料中...</div>
+    </div>
 
-        async function loadData() {
-            try {
-                const response = await fetch(DATA_FILE);
-                if (!response.ok) throw new Error('File not found');
-                return await response.json();
-            } catch (error) {
-                console.error('載入數據失敗:', error);
-                return { updates: [] };
-            }
+    <footer>
+      <p>由 CarloX 🤖 自動生成 • 每 4 小時更新一次</p>
+      <p>資料來源：X/Twitter API • <a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw GitHub</a></p>
+    </footer>
+  </div>
+
+  <script>
+    let allData = { updates: [] };
+    let currentDate = null;
+
+    async function loadData() {
+      try {
+        const response = await fetch('openclaw-daily-data.json?t=' + Date.now());
+        if (!response.ok) throw new Error('Failed to load data');
+        allData = await response.json();
+        populateDateSelector();
+        showLatestData();
+      } catch (error) {
+        document.getElementById('content').innerHTML = `
+          <div class="error">
+            ❌ 載入資料失敗: ${error.message}<br>
+            請稍後重試或檢查網路連線
+          </div>
+        `;
+      }
+    }
+
+    function populateDateSelector() {
+      const selector = document.getElementById('dateSelector');
+      selector.innerHTML = '<option value="">選擇日期...</option>';
+      
+      const sortedUpdates = [...allData.updates].sort((a, b) => b.timestamp - a.timestamp);
+      
+      sortedUpdates.forEach(update => {
+        const option = document.createElement('option');
+        option.value = update.date;
+        option.textContent = `${update.date} (${update.hot_tweets?.length || 0} 熱門 / ${update.recent_tweets?.length || 0} 最新)`;
+        if (update.date === new Date().toISOString().split('T')[0]) {
+          option.textContent += ' 📅 今天';
         }
+        selector.appendChild(option);
+      });
 
-        function renderTweetCard(tweet, rank, type) {
-            const avatar = tweet.author?.charAt(0).toUpperCase() || '?';
-            const time = tweet.created_at ? new Date(tweet.created_at).toLocaleDateString('zh-TW') : 'N/A';
-            
-            return `
-                <div class="tweet-card">
-                    <span class="tweet-rank">#${rank} ${type === 'hot' ? '熱門' : '最新'}</span>
-                    <div class="tweet-author">
-                        <div class="tweet-avatar">${avatar}</div>
-                        <div class="tweet-author-info">
-                            <div class="tweet-author-name">@${tweet.author || 'unknown'}</div>
-                            <div class="tweet-time">${tweet.time || time}</div>
-                        </div>
-                    </div>
-                    <div class="tweet-text">${tweet.text || '(無內容)'}</div>
-                    <div class="tweet-metrics">
-                        <div class="metric"><span class="metric-icon">❤️</span><span class="metric-value">${tweet.likes || 0}</span></div>
-                        <div class="metric"><span class="metric-icon">👁️</span><span class="metric-value">${tweet.impressions || 0}</span></div>
-                    </div>
-                    ${tweet.tags ? tweet.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
-                    <a href="${tweet.url || '#'}" target="_blank" class="tweet-link" style="margin-top: 10px;">查看貼文 →</a>
-                </div>
-            `;
+      selector.addEventListener('change', (e) => {
+        if (e.target.value) {
+          showDataForDate(e.target.value);
         }
+      });
+    }
 
-        function renderContent(data) {
-            if (!data) {
-                return '<div class="no-data"><p>此日期無數據</p></div>';
-            }
+    function showLatestData() {
+      if (allData.updates.length === 0) {
+        document.getElementById('content').innerHTML = `
+          <div class="empty-state">
+            📭 暫無資料<br>請稍後再試
+          </div>
+        `;
+        return;
+      }
 
-            const highlightsList = (data.highlights || []).map(h => `<li>${h}</li>`).join('');
-            const hotTweetsHtml = (data.hot_tweets || []).map((t, i) => renderTweetCard(t, i + 1, 'hot')).join('');
-            const recentTweetsHtml = (data.recent_tweets || []).map((t, i) => renderTweetCard(t, i + 1, 'recent')).join('');
+      const sorted = [...allData.updates].sort((a, b) => b.timestamp - a.timestamp);
+      showDataForDate(sorted[0].date);
+      document.getElementById('dateSelector').value = sorted[0].date;
+    }
 
-            return `
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">${data.hot_tweets?.length || 0}</div>
-                        <div class="stat-label">最熱貼文</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">${data.recent_tweets?.length || 0}</div>
-                        <div class="stat-label">最新貼文</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">$${(data.cost || 0).toFixed(2)}</div>
-                        <div class="stat-label">查詢成本</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">${(data.highlights || []).length}</div>
-                        <div class="stat-label">關鍵亮點</div>
-                    </div>
-                </div>
+    function showDataForDate(date) {
+      const update = allData.updates.find(u => u.date === date);
+      if (!update) return;
 
-                ${highlightsList ? `
-                    <div class="highlight-box">
-                        <div class="highlight-title">⭐ 今日亮點</div>
-                        <ul class="highlight-list">
-                            ${highlightsList}
-                        </ul>
-                    </div>
-                ` : ''}
+      currentDate = date;
+      
+      // Update stats
+      document.getElementById('costStat').textContent = `💰 $${update.cost?.toFixed(2) || '0.00'}`;
+      const totalTweets = (update.hot_tweets?.length || 0) + (update.recent_tweets?.length || 0);
+      document.getElementById('tweetCount').textContent = `📊 ${totalTweets} tweets`;
 
-                ${hotTweetsHtml ? `
-                    <div class="section">
-                        <div class="section-title">🔥 最熱話題</div>
-                        <div class="tweets-grid">
-                            ${hotTweetsHtml}
-                        </div>
-                    </div>
-                ` : ''}
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <div class="grid">
+          <div class="card">
+            <div class="card-header">
+              <h2>🔥 最熱門貼文 TOP 10</h2>
+            </div>
+            <div class="card-body">
+              ${renderTweets(update.hot_tweets, 'hot')}
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <h2>📰 最新動態 TOP 10</h2>
+            </div>
+            <div class="card-body">
+              ${renderTweets(update.recent_tweets, 'recent')}
+            </div>
+          </div>
+        </div>
+        
+        <div class="highlights">
+          <h2>✨ 今日亮點總結</h2>
+          ${update.highlights?.map(h => `
+            <div class="highlight-item">
+              <span style="font-size: 1.2rem;">${h.split(' ')[0]}</span>
+              <span>${h.substring(h.indexOf(' ') + 1)}</span>
+            </div>
+          `).join('') || '<div class="empty-state">暫無亮點</div>'}
+        </div>
+      `;
+    }
 
-                ${recentTweetsHtml ? `
-                    <div class="section">
-                        <div class="section-title">⏰ 最新動態</div>
-                        <div class="tweets-grid">
-                            ${recentTweetsHtml}
-                        </div>
-                    </div>
-                ` : ''}
+    function renderTweets(tweets, type) {
+      if (!tweets || tweets.length === 0) {
+        return '<div class="empty-state">暫無資料</div>';
+      }
 
-                <div class="footer">
-                    <p>📊 查詢日期：${data.date || 'N/A'} | 成本：$${(data.cost || 0).toFixed(2)}</p>
-                </div>
-            `;
-        }
+      return tweets.map((tweet, index) => `
+        <div class="tweet-item">
+          <div class="tweet-header">
+            <a href="${tweet.url}" target="_blank" class="author">@${tweet.author}</a>
+            <span style="color: #64748b; font-size: 0.85rem;">#${index + 1}</span>
+          </div>
+          <div class="tweet-text">${escapeHtml(tweet.text)}</div>
+          <div class="tweet-stats">
+            <span>❤️ ${formatNumber(tweet.likes)}</span>
+            <span>👁️ ${tweet.impressions}</span>
+            <span>🕐 ${tweet.time}</span>
+          </div>
+          <div class="tweet-tags">
+            ${tweet.tags?.map(tag => `<span class="tag ${type}">${escapeHtml(tag)}</span>`).join('') || ''}
+          </div>
+        </div>
+      `).join('');
+    }
 
-        async function init() {
-            const data = await loadData();
-            const dateSelect = document.getElementById('dateSelect');
-            const contentDiv = document.getElementById('content');
-            const dateInfo = document.getElementById('dateInfo');
+    function formatNumber(num) {
+      if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+      if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+      return num.toString();
+    }
 
-            if (!data.updates || data.updates.length === 0) {
-                contentDiv.innerHTML = '<div class="no-data"><p>尚無數據</p></div>';
-                dateSelect.innerHTML = '<option value="">無可用數據</option>';
-                return;
-            }
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
 
-            // 按日期排序（最新優先）
-            const sortedUpdates = [...data.updates].sort((a, b) => 
-                new Date(b.date) - new Date(a.date)
-            );
+    // Auto-refresh every 15 minutes
+    setInterval(loadData, 15 * 60 * 1000);
 
-            // 填充日期選擇器
-            dateSelect.innerHTML = sortedUpdates.map(update => 
-                `<option value="${update.date}">${update.date}</option>`
-            ).join('');
-
-            // 默認顯示最新日期
-            dateSelect.value = sortedUpdates[0].date;
-            updateDisplay(sortedUpdates, sortedUpdates[0].date, dateInfo, contentDiv);
-
-            // 日期變化事件
-            dateSelect.addEventListener('change', (e) => {
-                updateDisplay(sortedUpdates, e.target.value, dateInfo, contentDiv);
-            });
-        }
-
-        function updateDisplay(updates, selectedDate, dateInfo, contentDiv) {
-            const selectedData = updates.find(u => u.date === selectedDate);
-            
-            if (selectedData) {
-                const daysAgo = Math.floor((new Date() - new Date(selectedData.date)) / (1000 * 60 * 60 * 24));
-                const timeText = daysAgo === 0 ? '今天' : `${daysAgo} 天前`;
-                dateInfo.textContent = `(${timeText})`;
-            }
-
-            contentDiv.innerHTML = renderContent(selectedData);
-            contentDiv.classList.add('active');
-        }
-
-        // 初始化
-        init();
-    </script>
+    // Load data on page load
+    loadData();
+  </script>
 </body>
 </html>
