@@ -554,6 +554,7 @@
                     <span class="tag" data-tag="context">#context</span>
                     <span class="tag" data-tag="skills">#skills</span>
                     <span class="tag" data-tag="cost-optimization">#cost-optimization</span>
+                    <span class="tag" data-tag="overview">#overview</span>
                     <span class="tag" data-tag="multi-agent">#multi-agent</span>
                     <span class="tag" data-tag="use-cases">#use-cases</span>
                     <span class="tag" data-tag="claude">#claude</span>
@@ -566,8 +567,8 @@
             <div class="stats-card">
                 <div class="section-title">📊 Stats</div>
                 <div class="stats-grid">
-                    <div class="stat-item"><div class="stat-value">8</div><div class="stat-label">Posts</div></div>
-                    <div class="stat-item"><div class="stat-value">13</div><div class="stat-label">Tags</div></div>
+                    <div class="stat-item"><div class="stat-value">9</div><div class="stat-label">Posts</div></div>
+                    <div class="stat-item"><div class="stat-value">14</div><div class="stat-label">Tags</div></div>
                     <div class="stat-item"><div class="stat-value">50%</div><div class="stat-label">Min Savings</div></div>
                     <div class="stat-item"><div class="stat-value">97%</div><div class="stat-label">Max Savings</div></div>
                 </div>
@@ -586,6 +587,34 @@
             <!-- COST OPTIMIZATION SERIES -->
             <div class="category-section">
                 <div class="category-title">💰 Cost Optimization Series (Save 50-97%)</div>
+
+                <!-- Overview Post -->
+                <article class="post-card" data-post="2" data-tags="cost-optimization,claude,ollama,benchmark,overview">
+                    <div class="post-header">
+                        <div class="post-avatar">💰</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">OpenClaw 成本優化完整技術指南（概覽）</h2>
+                        <p class="post-excerpt">
+                            五大策略實現 50-97% 成本節省：本地模型降級、智能路由、提示緩存、上下文管理、本地技能。
+                            包含詳細配置範例、Benchmark 數據，從 $150/月降至 $35/月...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#cost-optimization</span>
+                            <span class="post-tag">#overview</span>
+                            <span class="post-tag">#benchmark</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">📄 8,538 bytes</span>
+                        <span class="stat">⏱ 15 min</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
 
                 <!-- Strategy 1: Local Model -->
                 <article class="post-card" data-post="s1" data-tags="ollama,claude,local-model,cost-optimization">
@@ -785,6 +814,112 @@
                         <span class="read-more">Read More →</span>
                     </div>
                 </article>
+            </div>
+
+            <!-- Full Post 2: Cost Optimization Overview -->
+            <div class="full-post" id="post2">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>OpenClaw 成本優化完整技術指南 💰</h1>
+                    
+                    <h2>概覽</h2>
+                    <p>通過正確配置，OpenClaw 可實現 <strong>50-97%</strong> 的成本節省。本指南提供具體的配置方法、Benchmark 數據和實作步驟。</p>
+
+                    <h2>五大優化策略</h2>
+                    <table>
+                        <thead>
+                            <tr><th>策略</th><th>節省比例</th><th>難度</th><th>詳細指南</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#posts1" onclick="showPost('s1'); return false;">🖥️ 策略一：本地模型降級</a></td>
+                                <td>60-80%</td>
+                                <td>⭐⭐</td>
+                                <td><a href="#posts1" onclick="showPost('s1'); return false;">查看 →</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#posts2" onclick="showPost('s2'); return false;">🎯 策略二：模型智能路由</a></td>
+                                <td>50-75%</td>
+                                <td>⭐⭐⭐</td>
+                                <td><a href="#posts2" onclick="showPost('s2'); return false;">查看 →</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#posts3" onclick="showPost('s3'); return false;">💾 策略三：提示緩存</a></td>
+                                <td>70-90%</td>
+                                <td>⭐</td>
+                                <td><a href="#posts3" onclick="showPost('s3'); return false;">查看 →</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#posts4" onclick="showPost('s4'); return false;">🧠 策略四：會話上下文管理</a></td>
+                                <td>60-87%</td>
+                                <td>⭐</td>
+                                <td><a href="#posts4" onclick="showPost('s4'); return false;">查看 →</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#posts5" onclick="showPost('s5'); return false;">🔧 策略五：本地技能</a></td>
+                                <td>50-100%</td>
+                                <td>⭐⭐⭐</td>
+                                <td><a href="#posts5" onclick="showPost('s5'); return false;">查看 →</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>成本結構分析</h2>
+                    <table>
+                        <thead>
+                            <tr><th>項目</th><th>基礎配置月費</th><th>優化後月費</th><th>節省比例</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>API Token 費用</td><td>$80-150</td><td>$10-25</td><td>70-85%</td></tr>
+                            <tr><td>託管費用</td><td>$0-6</td><td>$0-6</td><td>-</td></tr>
+                            <tr><td><strong>總計</strong></td><td>$150-200</td><td>$20-35</td><td><strong>77-90%</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Token 成本對比表</h2>
+                    <table>
+                        <thead>
+                            <tr><th>模型</th><th>Input ($/M)</th><th>Output ($/M)</th><th>適用場景</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Claude Haiku 3.5</td><td>$0.25</td><td>$1.25</td><td>高頻簡單查詢</td></tr>
+                            <tr><td>Claude Haiku 4.5</td><td>$1.00</td><td>$5.00</td><td>基礎 Agent 任務</td></tr>
+                            <tr><td>Claude Sonnet 4.5</td><td>$3.00</td><td>$15.00</td><td>主要工作負載</td></tr>
+                            <tr><td>Claude Opus 4.6</td><td>$15.00</td><td>$75.00</td><td>高難度編程</td></tr>
+                            <tr><td><strong>Ollama 本地</strong></td><td><strong>$0</strong></td><td><strong>$0</strong></td><td>離線/敏感任務</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>快速開始</h2>
+                    <ol>
+                        <li><strong>新手建議</strong>：先實作「策略四：會話上下文管理」（最簡單）</li>
+                        <li><strong>最大節省</strong>：再實作「策略一：本地模型降級」</li>
+                        <li><strong>進階優化</strong>：實作「策略二：模型智能路由」</li>
+                        <li><strong>專業級</strong>：實作「策略三：提示緩存」+「策略五：本地技能」</li>
+                    </ol>
+
+                    <h2>組合效果</h2>
+                    <table>
+                        <thead>
+                            <tr><th>組合</th><th>月成本</th><th>節省</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>無優化</td><td>$150</td><td>0%</td></tr>
+                            <tr><td>策略 1 單獨</td><td>$60</td><td>60%</td></tr>
+                            <tr><td>策略 1 + 4</td><td>$35</td><td>77%</td></tr>
+                            <tr><td><strong>全部五種</strong></td><td><strong>$15</strong></td><td><strong>90%</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>相關資源</h2>
+                    <ul>
+                        <li><a href="#posts1" onclick="showPost('s1'); return false;">策略一：本地模型降級詳細指南 →</a></li>
+                        <li><a href="#posts2" onclick="showPost('s2'); return false;">策略二：模型智能路由詳細指南 →</a></li>
+                        <li><a href="#posts3" onclick="showPost('s3'); return false;">策略三：提示緩存詳細指南 →</a></li>
+                        <li><a href="#posts4" onclick="showPost('s4'); return false;">策略四：會話上下文管理詳細指南 →</a></li>
+                        <li><a href="#posts5" onclick="showPost('s5'); return false;">策略五：本地技能詳細指南 →</a></li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Strategy 1 Full Post: Local Model -->
