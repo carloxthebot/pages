@@ -79,16 +79,27 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2rem;
+            grid-template-columns: 260px 1fr;
+            gap: 1.5rem;
         }
 
         .sidebar {
             position: sticky;
-            top: 100px;
+            top: 90px;
             height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 2px;
         }
 
         .search-box {
@@ -344,17 +355,52 @@
 
         .hidden { display: none !important; }
 
+        /* Mobile Responsiveness */
         @media (max-width: 900px) {
-            .container { grid-template-columns: 1fr; }
-            .sidebar { position: static; order: 2; }
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            .sidebar {
+                position: static;
+                order: 2;
+                max-height: none;
+            }
             .main-content { order: 1; }
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav { gap: 1rem; }
         }
 
         @media (max-width: 600px) {
-            .container { padding: 1rem; }
-            .intro-title { font-size: 1.5rem; }
-            .post-title { font-size: 1.25rem; }
-            .full-post { padding: 1.5rem; }
+            .container { padding: 0.75rem; }
+            .header { padding: 1rem; }
+            .logo { font-size: 1.25rem; }
+            .logo-emoji { font-size: 1.5rem; }
+            .intro-title { font-size: 1.35rem; }
+            .intro-text { font-size: 1rem; }
+            .post-title { font-size: 1.2rem; }
+            .post-header { padding: 1rem 1rem 0; }
+            .post-content { padding: 1rem; }
+            .post-footer { padding: 0.75rem 1rem; }
+            .full-post { padding: 1rem; }
+            .full-post h1 { font-size: 1.5rem; }
+            .full-post h2 { font-size: 1.25rem; }
+            .tag-cloud { gap: 0.4rem; }
+            .tag { padding: 0.25rem 0.6rem; font-size: 0.75rem; }
+            .post-body pre {
+                padding: 1rem;
+                font-size: 0.8rem;
+            }
+            .post-body table {
+                font-size: 0.8rem;
+            }
+            .post-body th,
+            .post-body td {
+                padding: 0.5rem;
+            }
         }
 
         ::-webkit-scrollbar { width: 8px; }
@@ -522,80 +568,80 @@
                     <h1>OpenClaw 應用案例研究 🦞</h1>
                     
                     <h2>概述</h2>
-                    <p>OpenClaw（前身为 Clawdbot/Moltbot）是一个开源的 AI Agent 框架，设计用于在本地机器上运行高度自主的、基于目标的 AI Agent。它通过消息应用（WhatsApp、Telegram、Slack、Discord、iMessage）与用户交互，使用用户选择的 LLM（如 ChatGPT、Claude、Gemini）来解释目标、规划行动并部署工具。</p>
+                    <p>OpenClaw（前身為 Clawdbot/Moltbot）是一個開源的 AI Agent 框架，設計用於在本地機器上運行高度自主的、基於目標的 AI Agent。它通過訊息應用（WhatsApp、Telegram、Slack、Discord、iMessage）與用戶交互，使用用戶選擇的 LLM（如 ChatGPT、Claude、Gemini）來解釋目標、規劃行動並部署工具。</p>
 
                     <h2>核心能力</h2>
                     <h3>自主性</h3>
                     <ul>
-                        <li>用户设定高级目标（如"整理我的收件箱"、"总结会议并明天提醒"、"预订航班"），OpenClaw 将其分解为多步骤行动</li>
-                        <li>跨会话持久记忆，通过对话历史和日志适应用户习惯</li>
-                        <li>无需持续人工监督即可完整运行</li>
+                        <li>用戶設定高級目標（如"整理我的收件匣"、"總結會議並明天提醒"、"預訂航班"），OpenClaw 將其分解為多步驟行動</li>
+                        <li>跨會話持久記憶，通過對話歷史和日誌適應用戶習慣</li>
+                        <li>無需持續人工監督即可完整運行</li>
                     </ul>
 
-                    <h3>多通道与多 Agent 支持</h3>
+                    <h3>多通道與多 Agent 支援</h3>
                     <ul>
-                        <li>作为持久守护进程/网关运行，支持隔离会话</li>
-                        <li>媒体处理（图像、音频、文档）</li>
-                        <li>Web UI 仪表盘和移动节点配对</li>
-                        <li>支持模型路由、故障转移和通过 Ollama 使用本地模型</li>
+                        <li>作為持久守護進程/閘道運行，支援隔離會話</li>
+                        <li>媒體處理（圖像、音訊、文件）</li>
+                        <li>Web UI 儀表盤和移動節點配對</li>
+                        <li>支援模型路由、故障轉移和通過 Ollama 使用本地模型</li>
                     </ul>
 
-                    <h2>主要应用案例</h2>
+                    <h2>主要應用案例</h2>
                     
-                    <h3>1. 金融交易与预测市场 💰</h3>
+                    <h3>1. 金融交易與預測市場 💰</h3>
                     <ul>
-                        <li><strong>Polymarket 自动交易</strong>：用户在预测市场上部署自主交易 Agent</li>
-                        <li><strong>显著成果</strong>：
+                        <li><strong>Polymarket 自動交易</strong>：用戶在預測市場上部署自主交易 Agent</li>
+                        <li><strong>顯著成果</strong>：
                             <ul>
-                                <li>6 种策略并行，500+ 笔交易，实现 <strong>1,560% ROI</strong></li>
-                                <li>AI 逆向策略接近 <strong>11,000% 回报</strong></li>
-                                <li>TBO 指标和 TBT 背离策略分别达到 75% 和 58.4% 胜率</li>
-                                <li>套利策略：$50 → $2,980（48 小时内）</li>
+                                <li>6 種策略並行，500+ 筆交易，實現 <strong>1,560% ROI</strong></li>
+                                <li>AI 逆向策略接近 <strong>11,000% 回報</strong></li>
+                                <li>TBO 指標和 TBT 背離策略分別達到 75% 和 58.4% 勝率</li>
+                                <li>套利策略：$50 → $2,980（48 小時內）</li>
                             </ul>
                         </li>
-                        <li><strong>技术实现</strong>：每 10 分钟扫描 Polymarket 机会，使用 ADX、布林带等指标进行风险管理</li>
+                        <li><strong>技術實現</strong>：每 10 分鐘掃描 Polymarket 機會，使用 ADX、布林帶等指標進行風險管理</li>
                     </ul>
 
-                    <h3>2. 个人助理自动化 👤</h3>
+                    <h3>2. 個人助理自動化 👤</h3>
                     <ul>
-                        <li><strong>邮件管理</strong>：自动退订、分类、回复</li>
-                        <li><strong>日历与提醒</strong>：每日简报、交通时间计算</li>
-                        <li><strong>健康数据集成</strong>：连接 WHOOP 等设备获取生物特征和活动数据</li>
-                        <li><strong>家庭自动化</strong>：控制智能设备（如 Winix 空气净化器）</li>
+                        <li><strong>郵件管理</strong>：自動退訂、分類、回覆</li>
+                        <li><strong>日曆與提醒</strong>：每日簡報、交通時間計算</li>
+                        <li><strong>健康數據整合</strong>：連接 WHOOP 等設備獲取生物特徵和活動數據</li>
+                        <li><strong>家庭自動化</strong>：控制智能設備（如 Winix 空氣淨化器）</li>
                     </ul>
 
-                    <h3>3. 软件开发协助 💻</h3>
+                    <h3>3. 軟體開發協助 💻</h3>
                     <ul>
-                        <li><strong>Claude Code / Codex 集成</strong>：从手机触发代码会话</li>
-                        <li><strong>错误监控</strong>：通过 Sentry webhook 捕获错误，自主修复并创建 PR</li>
-                        <li><strong>多 Agent 开发团队</strong>：主 Agent 委托给专业 Agent（代码审查、测试、设计）</li>
-                        <li><strong>技能自动创建</strong>：用户通过对话描述需求，Agent 自行创建技能</li>
+                        <li><strong>Claude Code / Codex 整合</strong>：從手機觸發代碼會話</li>
+                        <li><strong>錯誤監控</strong>：通過 Sentry webhook 捕獲錯誤，自主修復並創建 PR</li>
+                        <li><strong>多 Agent 開發團隊</strong>：主 Agent 委託給專業 Agent（代碼審查、測試、設計）</li>
+                        <li><strong>技能自動創建</strong>：用戶通過對話描述需求，Agent 自行創建技能</li>
                     </ul>
 
-                    <h3>4. 内容创作与媒体处理 🎨</h3>
+                    <h3>4. 內容創作與媒體處理 🎨</h3>
                     <ul>
-                        <li>YouTube 视频处理：将视频转为可复用的 Agent 技能</li>
-                        <li>Sora 视频生成：自动化水印去除、API 密钥配置、完整工作流</li>
-                        <li>RSS 和新闻聚合：JMAP 搜索、Nano 香蕉 RSS 解析</li>
+                        <li>YouTube 視頻處理：將視頻轉為可複用的 Agent 技能</li>
+                        <li>Sora 視頻生成：自動化水印去除、API 密鑰配置、完整工作流</li>
+                        <li>RSS 和新聞聚合：JMAP 搜索、Nano 香蕉 RSS 解析</li>
                     </ul>
 
-                    <h2>开源与社区</h2>
+                    <h2>開源與社群</h2>
                     <ul>
-                        <li>MIT 许可证，无供应商锁定</li>
-                        <li>技能生态系统：SKILL.md 文件定义可复用能力</li>
-                        <li>基于 Markdown 的本地记忆系统（AGENTS.md、TOOLS.md）</li>
-                        <li><strong>创始人决定</strong>：Peter Steinberger 拒绝十亿美元级收购/融资提案，坚持完全免费开源立场</li>
-                        <li><strong>社群规模</strong>：160,000+ GitHub Stars | 562+ Contributors</li>
+                        <li>MIT 許可證，無供應商鎖定</li>
+                        <li>技能生態系統：SKILL.md 文件定義可複用能力</li>
+                        <li>基於 Markdown 的本地記憶系統（AGENTS.md、TOOLS.md）</li>
+                        <li><strong>創始人決定</strong>：Peter Steinberger 拒絕十億美元級收購/融資提案，堅持完全免費開源立場</li>
+                        <li><strong>社群規模</strong>：160,000+ GitHub Stars | 562+ Contributors</li>
                     </ul>
 
-                    <h2>用户评价</h2>
-                    <blockquote>"感觉像早年 Linux vs Windows 的体验——你在掌控中，可以黑客改造"</blockquote>
-                    <blockquote>"这绝对是重磅！最有趣的构建体验"</blockquote>
-                    <blockquote>"这是普通人使用 AI 的未来方式"</blockquote>
+                    <h2>用戶評價</h2>
+                    <blockquote>"感覺像早年 Linux vs Windows 的體驗——你在掌控中，可以黑客改造"</blockquote>
+                    <blockquote>"這絕對是重磅！最有趣的構建體驗"</blockquote>
+                    <blockquote>"這是普通人使用 AI 的未來方式"</blockquote>
 
-                    <h2>相关链接</h2>
+                    <h2>相關連結</h2>
                     <ul>
-                        <li>官网：https://openclaw.ai</li>
+                        <li>官網：https://openclaw.ai</li>
                         <li>GitHub：https://github.com/openclaw/openclaw</li>
                     </ul>
                 </div>
