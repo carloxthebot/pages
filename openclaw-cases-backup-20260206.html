@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 真實用戶案例集 - 持續更新</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        header p { font-size: 1.2em; opacity: 0.9; }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            color: #667eea;
+            pointer-events: none;
+        }
+        .autocomplete-items {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            background: white;
+            border-radius: 15px;
+            margin-top: 5px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+        .autocomplete-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+        .autocomplete-item:hover {
+            background: #f8f9fa;
+        }
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tab {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .tab.active { background: #667eea; color: white; }
+        .sort-options {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .sort-options select {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            font-size: 0.95em;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .case-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .case-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        .case-badge.new { background: #4ecdc4; }
+        .case-icon { font-size: 2.5em; margin-bottom: 15px; }
+        .case-title h3 { font-size: 1.4em; color: #333; margin-bottom: 5px; }
+        .case-country { color: #666; font-size: 0.9em; }
+        .case-category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+        .case-application {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+        .case-result {
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #4caf50;
+        }
+        .case-details { margin: 15px 0; font-size: 0.95em; color: #555; }
+        .case-details h4 { color: #667eea; margin: 10px 0 5px; font-size: 1em; }
+        .case-details ul { padding-left: 20px; margin: 5px 0; }
+        .case-source {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        .case-source a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            word-break: break-all;
+        }
+        .case-source a:hover { text-decoration: underline; }
+        .no-results {
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            padding: 60px 20px;
+        }
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+        footer p { opacity: 0.8; }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            .cases-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦞 OpenClaw 真實用戶案例集</h1>
+            <p>探索全球用戶如何運用 OpenClaw 改變工作與生活</p>
+            <div class="stats">
+                <div class="stat-item"><div class="stat-number" id="totalCases">45+</div><div>真實案例</div></div>
+                <div class="stat-item"><div class="stat-number">7</div><div>應用領域</div></div>
+                <div class="stat-item"><div class="stat-number">10x</div><div>最高生產力提升</div></div>
+            </div>
+        </header>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜尋案例...（關鍵字、國家、應用領域）">
+            <span class="search-icon">🔍</span>
+        </div>
+        
+        <div class="sort-options">
+            <label>排序：</label>
+            <select id="sortSelect">
+                <option value="default">預設順序</option>
+                <option value="newest">最新案例</option>
+                <option value="category">依類別</option>
+            </select>
+        </div>
+        
+        <div class="filter-tabs">
+            <button class="tab active" onclick="filterCases('all')">全部案例</button>
+            <button class="tab" onclick="filterCases('productivity')">🚀 生產力</button>
+            <button class="tab" onclick="filterCases('business')">💼 商業</button>
+            <button class="tab" onclick="filterCases('tech')">🛠️ 技術</button>
+            <button class="tab" onclick="filterCases('personal')">🏠 個人</button>
+            <button class="tab" onclick="filterCases('creative')">🎨 創意</button>
+            <button class="tab" onclick="filterCases('iot')">📡 IoT</button>
+        </div>
+        
+        <div class="cases-grid" id="casesGrid">
+            <!-- 新案例 - Philips Hue -->
+            <!-- 新案例 - 汽車購買談判 -->
+            <div class="case-card" data-category="personal" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🚗</div>
+                <div class="case-title">
+                    <h3>AI 汽車購買談判助理</h3>
+                    <p class="case-country">🇺🇸 美國</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>消費者談判</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>自主研究汽車價格和市場行情</li>
+                        <li>聯繫多家經銷商</li>
+                        <li>進行多日談判</li>
+                        <li>比價並爭取最優價格</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>成功談判購車，省時省力</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://aaronstuyvenberg.com/posts/clawd-bought-a-car" target="_blank">AJ Stuyvenberg：OpenClaw 幫我買車省 $4200</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - E-ink 儀表板 -->
+            <div class="case-card" data-category="creative tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🖼️</div>
+                <div class="case-title">
+                    <h3>歷史事件 E-ink 藝術儀表板</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>藝術 + 技術</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>每天凌晨 4 點自動執行</li>
+                        <li>生成「歷史事件前一刻」木刻風格圖像</li>
+                        <li>整合 GitHub 統計數據</li>
+                        <li>推送到 E-ink 螢幕</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>每日獨特的藝術 + 數據儀表板</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 緊急無線電 -->
+            <div class="case-card" data-category="tech iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📡</div>
+                <div class="case-title">
+                    <h3>30分鐘搞定：緊急無線電解碼</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>硬體整合</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>自主研究無線電解碼技術</li>
+                        <li>下載並配置軟體</li>
+                        <li>執行硬體設定</li>
+                        <li>全程僅 30 分鐘完成</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>快速部署專業級無線電系統</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - AI 電話訂位 -->
+            <div class="case-card" data-category="personal" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📞</div>
+                <div class="case-title">
+                    <h3>AI 自動打電話訂位</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>餐廳/場地訂位</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>嘗試 OpenTable 線上訂位失敗</li>
+                        <li>自主下載語音通話軟體</li>
+                        <li>撥打餐廳電話</li>
+                        <li>完成訂位對話</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>完全自動化的電話訂位流程</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 多代理工作流 -->
+            <div class="case-card" data-category="tech business" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🤖</div>
+                <div class="case-title">
+                    <h3>多代理協作：3分鐘完成 PR</h3>
+                    <p class="case-country">🌍 軟體團隊</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>軟體開發</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li><strong>Orchestrator:</strong> 高階模型規劃</li>
+                        <li><strong>Builder:</strong> 撰寫程式碼</li>
+                        <li><strong>Reviewer:</strong> 審核程式碼</li>
+                        <li><strong>Deployer:</strong> 部署上線</li>
+                        <li>透過 Telegram 下達指令</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>3分鐘完成 PR 並通過 QA，替代 $10-20萬顧問費</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: 9個自動化+4個瘋狂案例</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 自主 Bug 修復 -->
+            <div class="case-card" data-category="tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🐛</div>
+                <div class="case-title">
+                    <h3>凌晨自主 Bug 修復</h3>
+                    <p class="case-country">🌍 開發團隊</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>DevOps</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>凌晨 3 點偵測生產環境錯誤</li>
+                        <li>自行診斷問題根源</li>
+                        <li>撰寫並測試修復程式碼</li>
+                        <li>透過 Slack 通知並部署</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>無需人工介入的 24/7 Bug 修復</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 投資者郵件處理 -->
+            <div class="case-card" data-category="business" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">💼</div>
+                <div class="case-title">
+                    <h3>21 封投資者郵件處理</h3>
+                    <p class="case-country">🌍 新創公司</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>投資關係管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>分析 21 封投資者郵件</li>
+                        <li>草擬個性化回覆</li>
+                        <li>數分鐘內完成處理</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>快速專業的投資者溝通</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Notion 餐點規劃 -->
+            <div class="case-card" data-category="personal productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🍽️</div>
+                <div class="case-title">
+                    <h3>Notion 智能餐點規劃系統</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>生活管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>整合 Notion 資料庫</li>
+                        <li>自動生成每週菜單</li>
+                        <li>產生採購清單</li>
+                        <li>追蹤預算和營養</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>完整的家庭餐飲管理系統</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Laravel 自動部署 -->
+            <div class="case-card" data-category="tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🚀</div>
+                <div class="case-title">
+                    <h3>Laravel 應用全自動部署</h3>
+                    <p class="case-country">🌍 開發者</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>Web 開發</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>自動建立 DigitalOcean Droplet</li>
+                        <li>配置資料庫</li>
+                        <li>設定 SSL 憑證</li>
+                        <li>建立 CI/CD pipeline</li>
+                        <li>完整部署 Laravel 應用</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>從零到上線全自動化</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 病毒式應用建構 -->
+            <div class="case-card" data-category="creative tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🦠</div>
+                <div class="case-title">
+                    <h3>每日病毒式 AI 應用建構</h3>
+                    <p class="case-country">🌍 創業者</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>快速原型開發</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>掃描 Twitter 尋找趨勢</li>
+                        <li>自動建構相關 AI 應用</li>
+                        <li>推送到 GitHub</li>
+                        <li>每日重複流程</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>快速捕捉市場趨勢並產品化</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 相機智慧觸發 -->
+            <div class="case-card" data-category="creative iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📸</div>
+                <div class="case-title">
+                    <h3>AI 攝影：美景自動捕捉</h3>
+                    <p class="case-country">🌍 攝影愛好者</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>攝影自動化</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>偵測「美麗天空」或特定動作</li>
+                        <li>自動觸發相機拍攝</li>
+                        <li>通知並上傳照片</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>不錯過任何精彩瞬間</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 每日簡報整合 -->
+            <div class="case-card" data-category="productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📊</div>
+                <div class="case-title">
+                    <h3>每日智能簡報：行事曆+任務+趨勢</h3>
+                    <p class="case-country">🌍 專業人士</p>
+                    <span class="case-category">生產力</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>個人效率</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>整合 Google Calendar 行程</li>
+                        <li>同步 Linear 任務</li>
+                        <li>彙整 X (Twitter) AI 趨勢</li>
+                        <li>每日早晨自動推送摘要</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>一眼掌握當日重點</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Slack 機器人 -->
+            <div class="case-card" data-category="business tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">💬</div>
+                <div class="case-title">
+                    <h3>Slack 自主問題解決機器人</h3>
+                    <p class="case-country">🌍 企業團隊</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>團隊協作</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>監控 Slack 頻道訊息</li>
+                        <li>自動回答常見問題</li>
+                        <li>調查技術問題並提出解決方案</li>
+                        <li>必要時自主修復問題</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>24/7 智能技術支援</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Tesla 控制 -->
+            <div class="case-card" data-category="personal iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🚘</div>
+                <div class="case-title">
+                    <h3>Tesla 遠端智能控制</h3>
+                    <p class="case-country">🌍 Tesla 車主</p>
+                    <span class="case-category">IoT</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>車輛管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>對話控制車輛上鎖/解鎖</li>
+                        <li>啟動空調預熱</li>
+                        <li>管理充電設定</li>
+                        <li>查詢車輛狀態</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>手機對話即可控制 Tesla</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+            <div class="case-card" data-category="personal iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">💡</div>
+                <div class="case-title">
+                    <h3>Philips Hue 智能燈光控制</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">IoT</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>智慧家居</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>透過 OpenClaw 語音或訊息控制 Philips Hue 燈光</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>免開 app，直接對話控制家中燈光</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.datacamp.com/tutorial/moltbot-clawdbot-tutorial" target="_blank">DataCamp: OpenClaw 教學文章</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Sonos -->
+            <div class="case-card" data-category="personal iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🔊</div>
+                <div class="case-title">
+                    <h3>Sonos 音樂播放控制</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">IoT</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>智慧家居音響</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>透過對話控制 Sonos 音樂播放、音量、切換曲目</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>語音控制家中音響系統</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.datacamp.com/tutorial/moltbot-clawdbot-tutorial" target="_blank">DataCamp: OpenClaw 教學</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Eight Sleep -->
+            <div class="case-card" data-category="personal iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🛏️</div>
+                <div class="case-title">
+                    <h3>Eight Sleep 床溫控制</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>睡眠優化</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>根據睡眠偏好自動調整 Eight Sleep 床墊溫度</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>自動化睡眠環境控制</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.datacamp.com/tutorial/moltbot-clawdbot-tutorial" target="_blank">DataCamp: OpenClaw 教學</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Gmail 草稿 -->
+            <div class="case-card" data-category="business productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📧</div>
+                <div class="case-title">
+                    <h3>Gmail 智能草稿助理</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>郵件管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>使用 gog CLI 整合 Gmail</li>
+                        <li>自動草擬郵件回覆</li>
+                        <li>人工審核後發送</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>加速郵件處理流程</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.datacamp.com/tutorial/moltbot-clawdbot-tutorial" target="_blank">DataCamp: OpenClaw 教學</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Google Calendar -->
+            <div class="case-card" data-category="productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📅</div>
+                <div class="case-title">
+                    <h3>Google Calendar 智能助理</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">生產力</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>行程管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>詢問「明天有什麼安排？」</li>
+                        <li>自動檢查 Google Calendar</li>
+                        <li>提供行程摘要</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>對話式行程查詢</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.datacamp.com/tutorial/moltbot-clawdbot-tutorial" target="_blank">DataCamp: OpenClaw 教學</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Linear 整合 -->
+            <div class="case-card" data-category="tech productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📋</div>
+                <div class="case-title">
+                    <h3>Linear 任務同步（Discord）</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>專案管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>透過 Discord 整合 Linear，同步任務和更新</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>在 Discord 中管理 Linear 任務</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.datacamp.com/tutorial/moltbot-clawdbot-tutorial" target="_blank">DataCamp: OpenClaw 教學</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 晨報系統 -->
+            <div class="case-card" data-category="productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">☀️</div>
+                <div class="case-title">
+                    <h3>個人化晨報系統</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">生產力</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>資訊整合</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>每日 7AM 自動執行</li>
+                        <li>整合 GitHub Trending</li>
+                        <li>彙整 Hacker News 熱門</li>
+                        <li>AI Twitter 精選內容</li>
+                        <li>個人化摘要推送</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>起床前資訊已整理完成</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - SSH 監控 -->
+            <div class="case-card" data-category="tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🔐</div>
+                <div class="case-title">
+                    <h3>SSH 失敗登入監控</h3>
+                    <p class="case-country">🌍 VPS 用戶</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>安全監控</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>監控 VPS SSH 日誌，偵測異常登入嘗試</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>在 Moltbook 發文：「偵測到 552 個失敗 SSH 登入」</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://simonwillison.net/2026/jan/30/moltbook/" target="_blank">Simon Willison's Weblog</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Homelab 監控 -->
+            <div class="case-card" data-category="tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🖥️</div>
+                <div class="case-title">
+                    <h3>Homelab 系統監控</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>系統管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>每日自動執行系統檢查</li>
+                        <li>監控儀表板、銷售數據、錯誤日誌</li>
+                        <li>正常狀態：靜默</li>
+                        <li>異常狀態：立即警報</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>主動式系統健康監控</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - GitHub Trending 晨報 -->
+            <div class="case-card" data-category="tech productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">⭐</div>
+                <div class="case-title">
+                    <h3>GitHub Trending 日報</h3>
+                    <p class="case-country">🌍 開發者</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>技術追蹤</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>每日自動抓取 GitHub Trending，摘要熱門專案並推送</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>不錯過技術趨勢</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+            <!-- 新案例 - 加密貨幣自動化 -->
+            <div class="case-card" data-category="tech business" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">💰</div>
+                <div class="case-title">
+                    <h3>加密貨幣套利機器人</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>加密貨幣交易</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>價格監控 + 鯨魚交易提醒</li>
+                        <li>技術指標自動交易（RSI 門檻）</li>
+                        <li>跨交易所套利檢測與執行</li>
+                        <li>多鏈流動性挖礦自動化</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>套利機器人從 -$500 成長到 $106k（95% 勝率）</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">YouTube 案例分享</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - 餐廳訂位 -->
+            <div class="case-card" data-category="personal" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📞</div>
+                <div class="case-title">
+                    <h3>真實世界電話交互</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>生活服務自動化</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>餐廳電話訂位</li>
+                        <li>購票服務</li>
+                        <li>超市訂單協調</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>完全自動化電話業務處理</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean: OpenClaw 完整指南</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Whoop 健康整合 -->
+            <div class="case-card" data-category="personal iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🏃</div>
+                <div class="case-title">
+                    <h3>Whoop 生物數據整合</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">IoT</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>健康數據分析</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>Whoop 健身數據分析</li>
+                        <li>根據生物指標控制空氣清淨機</li>
+                        <li>Spotify + Hue 燈光自動化</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>健康數據驅動的智能環境控制</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Sora2 影片生成 -->
+            <div class="case-card" data-category="creative tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🎬</div>
+                <div class="case-title">
+                    <h3>Sora2 影片自動化</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>影片內容生成</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>Sora2 影片生成 + API 工作流</li>
+                        <li>自動去浮水印</li>
+                        <li>內容排程跨平台發布</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>全自動影片內容製作流程</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Ableton 音樂製作 -->
+            <div class="case-card" data-category="creative tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🎵</div>
+                <div class="case-title">
+                    <h3>Ableton 音樂製作控制</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>音樂製作自動化</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>透過 OpenClaw 控制 Ableton Live 音樂製作軟體</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>語音控制音樂製作流程</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">YouTube 社群分享</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Rabbit R1 整合 -->
+            <div class="case-card" data-category="iot tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🐰</div>
+                <div class="case-title">
+                    <h3>Rabbit R1 設備整合</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">IoT</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>硬體整合</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>Rabbit R1 設備整合（DLAM）實現跨裝置協作</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>擴展 AI 助理到實體設備</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Mike Manzano overnight coding -->
+            <div class="case-card" data-category="tech productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🌙</div>
+                <div class="case-title">
+                    <h3>Mike Manzano - 夜間編程代理</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>程式開發</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>睡覺時啟動 overnight coding agents 自動編程</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>睡醒時程式碼已完成</div>
+                <div class="case-details"><h4>💡 心得：</h4><p>真實用戶 Mike Manzano 的實際應用</p></div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean 案例</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Steve Caldwell 餐點規劃 -->
+            <div class="case-card" data-category="personal productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📅</div>
+                <div class="case-title">
+                    <h3>Steve Caldwell - 餐點規劃師</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>生活規劃</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>每週 Notion 餐點規劃自動化</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>每週省下 1 小時規劃時間</div>
+                <div class="case-details"><h4>💡 用戶：</h4><p>Steve Caldwell 真實案例</p></div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean: OpenClaw 完整指南</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Andy Griffiths Laravel -->
+            <div class="case-card" data-category="tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">☁️</div>
+                <div class="case-title">
+                    <h3>Andy Griffiths - 外出開發</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>遠端開發</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>外出時在 DigitalOcean 建立 Laravel 應用</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>隨時隨地都能開發部署</div>
+                <div class="case-details"><h4>💡 用戶：</h4><p>Andy Griffiths 真實應用</p></div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean: OpenClaw 完整指南</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Serverless 部署 -->
+            <div class="case-card" data-category="tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">⚡</div>
+                <div class="case-title">
+                    <h3>Cloudflare Workers 部署</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>Serverless 架構</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>Moltworker on Cloudflare Workers + R2</li>
+                        <li>適合低流量個人代理</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>經濟實惠的 serverless 方案</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean: OpenClaw 完整指南</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - Circle USDC Hackathon -->
+            <div class="case-card" data-category="creative tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🏆</div>
+                <div class="case-title">
+                    <h3>Circle USDC Hackathon on Moltbook</h3>
+                    <p class="case-country">🌍 Web3 社群</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>Web3 協作</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>Agents 自主提交專案、投票、鏈上 USDC 結算獎勵</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>完全自主的 AI agents 黑客松</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">Moltbook 社群</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - QMD Skill 精確資料擷取 -->
+            <div class="case-card" data-category="tech" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🎯</div>
+                <div class="case-title">
+                    <h3>QMD Skill 精確資料擷取</h3>
+                    <p class="case-country">🌍 技術工具</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>資料處理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>精確資料擷取，無需完整上下文</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>更高效的資料處理</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">技術社群分享</a>
+                </div>
+            </div>
+
+            <!-- 新案例 - PR 自動審查 -->
+            <div class="case-card" data-category="tech productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🔍</div>
+                <div class="case-title">
+                    <h3>PR Diff 自動審查</h3>
+                    <p class="case-country">🌍 開發團隊</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>程式碼審查</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>PR diff 審查並透過 Telegram 回饋</li>
+                        <li>程式碼可及性分析</li>
+                        <li>Tailwind 檢查、深色模式合規</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>自動化程式碼品質把關</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片</a>
+                </div>
+            </div>
+            <!-- 新案例 1 -->
+            <div class="case-card" data-category="tech business" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🌐</div>
+                <div class="case-title">
+                    <h3>48小時完整網站開發</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>Web 開發</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>透過 Telegram 對話完成 70+ 頁 Next.js 網站</li>
+                        <li>包含 SEO、自訂元件、Vercel 部署</li>
+                        <li>持續記憶品牌指南，無需重複說明</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>48 小時完成完整專案</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean - OpenClaw案例</a>
+                </div>
+            </div>
+
+            <!-- 新案例 2 -->
+            <div class="case-card" data-category="personal iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🏠</div>
+                <div class="case-title">
+                    <h3>智慧家居 AI 助理 "Claudette"</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">IoT</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>智慧家居控制</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>整合 Home Assistant 控制燈光</li>
+                        <li>ElevenLabs 語音 + Google Home 播報</li>
+                        <li>自動修復故障（刪除/重建自動化規則）</li>
+                        <li>Markdown 檔案儲存使用者偏好</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>完整語音控制智慧家居系統</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean: OpenClaw 完整指南</a>
+                </div>
+            </div>
+
+            <!-- 新案例 3 -->
+            <div class="case-card" data-category="tech productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🤖</div>
+                <div class="case-title">
+                    <h3>多代理協作 - 大規模遷移</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>程式碼遷移</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>遷移 1800+ 行 YAML</li>
+                        <li>236 個檔案變更</li>
+                        <li>夜間自動測試 + 部署 pipeline</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>自動化大規模程式碼重構</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean: OpenClaw 完整指南</a>
+                </div>
+            </div>
+
+            <!-- 新案例 4 -->
+            <div class="case-card" data-category="iot creative" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🚗</div>
+                <div class="case-title">
+                    <h3>Tesla 智能控制</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">IoT</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>車輛自動化</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>透過 OpenClaw 控制 Tesla（鎖車、空調、充電）</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>遠端智能車輛管理</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 實戰案例</a>
+                </div>
+            </div>
+
+            <!-- 新案例 5 -->
+            <div class="case-card" data-category="personal iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">⌚</div>
+                <div class="case-title">
+                    <h3>健康追蹤整合</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>健康管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>連接 Garmin 手錶，監控睡眠習慣並發送提醒</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>主動健康監控與提醒</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 6 -->
+            <div class="case-card" data-category="iot creative" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">👓</div>
+                <div class="case-title">
+                    <h3>智慧眼鏡即時比價</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>硬體 Hack</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>破解智慧眼鏡，實時視覺輸入進行商品比價</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>購物時即時價格比較</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 7 -->
+            <div class="case-card" data-category="tech iot" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📡</div>
+                <div class="case-title">
+                    <h3>緊急無線電監聽</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">IoT</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>安全監控</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>解碼緊急無線電頻道，自動監聽並通知</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>即時緊急事件通知</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">VelvetShark: OpenClaw 案例影片</a>
+                </div>
+            </div>
+
+            <!-- 新案例 8 -->
+            <div class="case-card" data-category="business" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🚗</div>
+                <div class="case-title">
+                    <h3>購車協商自動化</h3>
+                    <p class="case-country">🇺🇸 美國</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>消費協商</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>在 Reddit 搜尋賣車資訊，自動議價協商</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>省下大量金錢買到新車</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean案例</a>
+                </div>
+            </div>
+
+            <!-- 新案例 9 -->
+            <div class="case-card" data-category="productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">📧</div>
+                <div class="case-title">
+                    <h3>大規模郵件清理</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">生產力</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>郵件管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>清理 6,000+ 封郵件，自動分類和歸檔</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>收件匣從混亂到井然有序</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean: OpenClaw 完整指南</a>
+                </div>
+            </div>
+
+            <!-- 新案例 10 -->
+            <div class="case-card" data-category="personal productivity" data-date="2026-02-05">
+                <div class="case-badge new">NEW</div>
+                <div class="case-icon">🍽️</div>
+                <div class="case-title">
+                    <h3>Notion 每週餐點規劃</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>生活規劃</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>自動生成每週餐點計畫並更新到 Notion</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>每週省 1 小時規劃時間</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.digitalocean.com/resources/articles/what-is-openclaw" target="_blank">DigitalOcean: OpenClaw 完整指南</a>
+                </div>
+            </div>
+
+            <!-- 原有案例繼續... -->
+            <div class="case-card" data-category="productivity tech" data-date="2026-02-04">
+                <div class="case-icon">🚀</div>
+                <div class="case-title">
+                    <h3>開發者 - 10倍生產力提升</h3>
+                    <p class="case-country">🌍 未知（英語系國家）</p>
+                    <span class="case-category">生產力</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>軟體開發工作流程</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>把 OpenClaw 當成「工程經理」協調多個專門代理</li>
+                        <li>睡覺時啟動 3-5 個代理執行任務</li>
+                        <li>早上醒來檢查結果（15-20 分鐘）</li>
+                    </ul>
+                </div>
+                <div class="case-result">
+                    <strong>✨ 結果：</strong>
+                    <ul>
+                        <li>從每週 70 小時降到每天 4-6 小時</li>
+                        <li><strong>10 倍產出提升</strong></li>
+                        <li>睡覺時完成：6 demo、60+ 潛在客戶、3 篇部落格</li>
+                    </ul>
+                </div>
+                <div class="case-details"><h4>💡 心得：</h4><p>關鍵是改變思維 - 不是「助理」而是「工程經理」</p></div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://benenewton.com/blog/my-first-week-with-openclaw-from-skeptic-to-believer" target="_blank">benenewton.com/blog/my-first-week-with-openclaw</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="business productivity" data-date="2026-02-04">
+                <div class="case-icon">🎙️</div>
+                <div class="case-title">
+                    <h3>This Week in Startups</h3>
+                    <p class="case-country">🇺🇸 美國</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>Podcast 製作 + 創投營運</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>自動化研究和行政工作</li>
+                        <li>Oliver 用來預約節目來賓</li>
+                        <li>管理 TWiST 500 投資組合</li>
+                        <li>處理每週 1,000 份申請 + 150 場會議</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>節省數小時行政時間</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=sejqZld2yZ8" target="_blank">youtube.com/watch?v=sejqZld2yZ8</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="business productivity" data-date="2026-02-04">
+                <div class="case-icon">💼</div>
+                <div class="case-title">
+                    <h3>新創創辦人 - 投資人溝通</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>投資人關係管理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>用 OpenClaw 起草投資人郵件</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>幾分鐘內完成 21 封郵件</div>
+                <div class="case-details"><h4>💡 心得：</h4><p>草稿模式 + 人工審核，確保品質</p></div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">youtube.com/watch?v=52kOmSQGt_E</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="tech business" data-date="2026-02-04">
+                <div class="case-icon">💬</div>
+                <div class="case-title">
+                    <h3>Slack 監控 - 自動修 Bug</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>企業內部支援</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>監控公司 Slack</li>
+                        <li>回答員工/客戶問題</li>
+                        <li><strong>自動偵測並修復生產環境 bug</strong></li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>擁有 24/7 技術助理</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">youtube.com/watch?v=52kOmSQGt_E</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="tech productivity" data-date="2026-02-04">
+                <div class="case-icon">🤖</div>
+                <div class="case-title">
+                    <h3>多代理系統 - 軟體開發</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">技術</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>軟體開發自動化</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>協調專門代理（建置者、審查者、部署者）</p>
+                </div>
+                <div class="case-result">
+                    <strong>✨ 結果：</strong>
+                    <ul>
+                        <li>3 分鐘完成 PR</li>
+                        <li>取代 $100k-$200k 顧問費</li>
+                    </ul>
+                </div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片/openclaw-automations-wild-builds</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="personal" data-date="2026-02-04">
+                <div class="case-icon">✈️</div>
+                <div class="case-title">
+                    <h3>Peter Steinberger（創始人）</h3>
+                    <p class="case-country">🇦🇹 奧地利</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>日常生活自動化</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>自動航班報到</li>
+                        <li>控制家中燈光</li>
+                        <li>調整床鋪設定</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>40 分鐘設定，之後全自動</div>
+                <div class="case-details"><h4>💡 心得：</h4><p>展示本地運行的隱私優勢</p></div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://creatoreconomy.so/p/how-openclaws-creator-uses-ai-peter-steinberger" target="_blank">creatoreconomy.so/how-openclaws-creator-uses-ai</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="business" data-date="2026-02-04">
+                <div class="case-icon">📄</div>
+                <div class="case-title">
+                    <h3>保險爭議用戶</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>保險理賠爭議</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>讓 OpenClaw 撰寫保險拒賠回覆信</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>AI 寫的信比人寫的更強硬，促使保險公司重新調查</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">youtube.com/watch?v=52kOmSQGt_E</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="personal tech" data-date="2026-02-04">
+                <div class="case-icon">🎙️</div>
+                <div class="case-title">
+                    <h3>M4 Mac Mini - 語音助理</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">個人</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>語音助理</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>Groq Whisper（語音轉文字）</li>
+                        <li>ElevenLabs TTS（文字轉語音）</li>
+                        <li>客製化技能腳本</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>完整語音對話系統</div>
+                <div class="case-details"><h4>💡 心得：</h4><p>「既興奮又害怕」，學會 SSH、cron、APIs</p></div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.macstories.net/stories/clawdbot-showed-me-what-the-future-of-personal-ai-assistants-looks-like/" target="_blank">macstories.net/clawdbot-future-of-ai-assistants</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="business productivity" data-date="2026-02-04">
+                <div class="case-icon">👔</div>
+                <div class="case-title">
+                    <h3>招募人員</h3>
+                    <p class="case-country">🌍 未知</p>
+                    <span class="case-category">商業</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>人才招募</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>自動掃描 LinkedIn，找合適候選人並寄信</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>自動化招募流程</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://o-mega.ai/articles/openclaw-creating-the-ai-agent-workforce-ultimate-guide-2026" target="_blank">o-mega.ai/openclaw-ai-agent-workforce</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="creative tech" data-date="2026-02-04">
+                <div class="case-icon">🎨</div>
+                <div class="case-title">
+                    <h3>每日 AI App 建置器</h3>
+                    <p class="case-country">🌍 創意應用</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>自動化 App 開發</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <ul>
+                        <li>搜尋 Twitter 熱門 AI 趨勢</li>
+                        <li>建立可運作的 app</li>
+                        <li>推送到 GitHub</li>
+                    </ul>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>每天自動生成新 app</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">youtube.com/watch?v=52kOmSQGt_E</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="creative" data-date="2026-02-04">
+                <div class="case-icon">🖼️</div>
+                <div class="case-title">
+                    <h3>Moment Before 藝術儀表板</h3>
+                    <p class="case-country">🌍 創意應用</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>藝術 + IoT</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>E-ink 裝置，每天凌晨 4 點生成歷史事件圖像</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>低功耗藝術儀表板</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=6q23jDVXej8" target="_blank">VelvetShark YouTube 案例影片/openclaw-wild-builds</a>
+                </div>
+            </div>
+
+            <div class="case-card" data-category="creative personal" data-date="2026-02-04">
+                <div class="case-icon">📸</div>
+                <div class="case-title">
+                    <h3>相機觸發自動化</h3>
+                    <p class="case-country">🌍 創意應用</p>
+                    <span class="case-category">創意</span>
+                </div>
+                <div class="case-application"><strong>應用領域：</strong>攝影 + IoT</div>
+                <div class="case-details">
+                    <h4>🔧 怎麼用：</h4>
+                    <p>根據情境自動拍照（如「美麗天空」）</p>
+                </div>
+                <div class="case-result"><strong>✨ 結果：</strong>不錯過精彩瞬間</div>
+                <div class="case-source">
+                    <strong>📄 來源：</strong><br>
+                    <a href="https://www.youtube.com/watch?v=52kOmSQGt_E" target="_blank">youtube.com/watch?v=52kOmSQGt_E</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="no-results" id="noResults" style="display: none;">
+            找不到符合條件的案例 😢<br>
+            <small>試試其他關鍵字或分類</small>
+        </div>
+        
+        <footer>
+            <p>🦞 由 CarloX 整理並持續更新 | 資料來源：公開網路案例</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">最後更新：2026-02-05 17:02<span id="footerCount">45+</span> 個真實案例</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">💡 想分享你的 OpenClaw 案例？歡迎聯繫我們！</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 國家別名映射
+        const countryAliases = {
+            '美國': ['us', 'usa', 'united states', 'america', '美', '美国'],
+            '奧地利': ['austria', 'at', '奧'],
+            '未知': ['unknown', '未'],
+            '英語系': ['english', 'english-speaking'],
+            'Web3': ['web3', 'crypto', 'blockchain'],
+            '技術': ['tech', 'technology'],
+            '創意': ['creative', 'art']
+        };
+
+        // 建立搜尋建議清單
+        const searchSuggestions = new Set();
+        
+        function buildSuggestions() {
+            const cards = document.querySelectorAll('.case-card');
+            cards.forEach(card => {
+                const country = card.querySelector('.case-country')?.textContent.trim() || '';
+                const title = card.querySelector('h3')?.textContent.trim() || '';
+                const category = card.querySelector('.case-category')?.textContent.trim() || '';
+                
+                if (country) searchSuggestions.add(country);
+                if (title) searchSuggestions.add(title);
+                if (category) searchSuggestions.add(category);
+            });
+            
+            // 加入國家名稱
+            Object.keys(countryAliases).forEach(country => {
+                searchSuggestions.add(country);
+            });
+        }
+
+        // 建立自動完成元素
+        function createAutocomplete() {
+            const autocompleteDiv = document.createElement('div');
+            autocompleteDiv.id = 'autocomplete-list';
+            autocompleteDiv.className = 'autocomplete-items';
+            document.querySelector('.search-box').appendChild(autocompleteDiv);
+        }
+
+        // 顯示自動完成建議
+        function showAutocomplete(value) {
+            const autocompleteList = document.getElementById('autocomplete-list');
+            autocompleteList.innerHTML = '';
+            
+            if (!value) {
+                autocompleteList.style.display = 'none';
+                return;
+            }
+            
+            const valueLower = value.toLowerCase();
+            const matches = [];
+            
+            // 搜尋匹配項
+            searchSuggestions.forEach(suggestion => {
+                const suggestionLower = suggestion.toLowerCase();
+                
+                // 檢查直接匹配
+                if (suggestionLower.includes(valueLower)) {
+                    matches.push(suggestion);
+                    return;
+                }
+                
+                // 檢查國家別名
+                for (const [country, aliases] of Object.entries(countryAliases)) {
+                    if (aliases.some(alias => alias.toLowerCase().includes(valueLower))) {
+                        if (!matches.includes(country)) {
+                            matches.push(country);
+                        }
+                    }
+                }
+            });
+            
+            // 限制顯示數量
+            const displayMatches = matches.slice(0, 8);
+            
+            if (displayMatches.length === 0) {
+                autocompleteList.style.display = 'none';
+                return;
+            }
+            
+            displayMatches.forEach(match => {
+                const item = document.createElement('div');
+                item.className = 'autocomplete-item';
+                item.textContent = match;
+                item.addEventListener('click', function() {
+                    document.getElementById('searchInput').value = match;
+                    autocompleteList.style.display = 'none';
+                    // 觸發搜尋
+                    document.getElementById('searchInput').dispatchEvent(new Event('input'));
+                });
+                autocompleteList.appendChild(item);
+            });
+            
+            autocompleteList.style.display = 'block';
+        }
+
+        // 改進的搜尋功能（支援國家別名）
+        function searchWithAliases(searchTerm, cardText) {
+            if (searchTerm === '') return true;
+            
+            const searchLower = searchTerm.toLowerCase();
+            const cardLower = cardText.toLowerCase();
+            
+            // 直接匹配
+            if (cardLower.includes(searchLower)) return true;
+            
+            // 檢查國家別名
+            for (const [country, aliases] of Object.entries(countryAliases)) {
+                if (aliases.some(alias => searchLower.includes(alias))) {
+                    if (cardLower.includes(country.toLowerCase())) {
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
+        }
+
+        let currentCategory = 'all';
+        
+        // 計算案例總數
+        function updateCaseCount() {
+            const totalCards = document.querySelectorAll('.case-card').length;
+            const visibleCards = document.querySelectorAll('.case-card[style="display: block;"], .case-card:not([style*="display: none"])').length;
+            document.getElementById('totalCases').textContent = totalCards + '+';
+            document.getElementById('footerCount').textContent = totalCards + '+';
+            
+            const noResults = document.getElementById('noResults');
+            if (visibleCards === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+        
+        // 篩選案例
+        function filterCases(category) {
+            currentCategory = category;
+            const cards = document.querySelectorAll('.case-card');
+            const tabs = document.querySelectorAll('.tab');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const searchTerm = document.getElementById('searchInput').value;
+            
+            cards.forEach(card => {
+                const categories = card.getAttribute('data-category');
+                const cardText = card.textContent;
+                
+                const matchesCategory = category === 'all' || categories.includes(category);
+                const matchesSearch = searchWithAliases(searchTerm, cardText);
+                
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            updateCaseCount();
+        }
+        
+        // 搜尋功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            const cards = document.querySelectorAll('.case-card');
+            
+            // 顯示自動完成
+            showAutocomplete(searchTerm);
+            
+            cards.forEach(card => {
+                const categories = card.getAttribute('data-category');
+                const cardText = card.textContent;
+                
+                const matchesCategory = currentCategory === 'all' || categories.includes(currentCategory);
+                const matchesSearch = searchWithAliases(searchTerm, cardText);
+                
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            updateCaseCount();
+        });
+
+        // 點擊外部關閉自動完成
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-box')) {
+                const autocompleteList = document.getElementById('autocomplete-list');
+                if (autocompleteList) {
+                    autocompleteList.style.display = 'none';
+                }
+            }
+        });
+        
+        // 排序功能
+        document.getElementById('sortSelect').addEventListener('change', function(e) {
+            const grid = document.getElementById('casesGrid');
+            const cards = Array.from(document.querySelectorAll('.case-card'));
+            
+            if (e.target.value === 'newest') {
+                cards.sort((a, b) => {
+                    const dateA = a.getAttribute('data-date');
+                    const dateB = b.getAttribute('data-date');
+                    return dateB.localeCompare(dateA);
+                });
+            } else if (e.target.value === 'category') {
+                cards.sort((a, b) => {
+                    const catA = a.getAttribute('data-category');
+                    const catB = b.getAttribute('data-category');
+                    return catA.localeCompare(catB);
+                });
+            }
+            
+            cards.forEach(card => grid.appendChild(card));
+        });
+        
+        // 初始化
+        buildSuggestions();
+        createAutocomplete();
+        updateCaseCount();
+    </script>
+</body>
+</html>
