@@ -281,9 +281,19 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 2.5rem;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
-        .full-post.active { display: block; }
+        .full-post.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .back-button {
             display: inline-flex;
@@ -391,17 +401,33 @@
             .tag-cloud { gap: 0.4rem; }
             .tag { padding: 0.25rem 0.6rem; font-size: 0.75rem; }
             
-            /* Fix for tables on mobile */
+            /* Fix for tables on mobile - make them scrollable */
+            .post-body {
+                overflow-x: hidden;
+            }
             .post-body table {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
                 display: block;
+                width: 100%;
                 overflow-x: auto;
-                white-space: nowrap;
-                max-width: 100%;
+                -webkit-overflow-scrolling: touch;
+                border-collapse: collapse;
+            }
+            .post-body table::-webkit-scrollbar {
+                height: 4px;
+            }
+            .post-body table::-webkit-scrollbar-thumb {
+                background: var(--accent);
+                border-radius: 2px;
             }
             .post-body th,
             .post-body td {
-                padding: 0.4rem 0.5rem;
+                padding: 0.35rem 0.4rem;
+                white-space: nowrap;
+                min-width: fit-content;
+            }
+            .post-body th {
+                font-size: 0.65rem;
             }
             
             /* Fix for code blocks */
