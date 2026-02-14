@@ -732,6 +732,43 @@
                         <li><strong>社群規模</strong>：160,000+ GitHub Stars | 562+ Contributors</li>
                     </ul>
 
+                    <h2>最新版本資訊（2026年2月）</h2>
+                    <h3>v2026.2.12（2月13日）</h3>
+                    <ul>
+                        <li>新增模型支援：Anthropic Opus 4.6、OpenAI Codex gpt-5.3-codex、xAI (Grok)</li>
+                        <li>修復 bundled hooks 因 tsdown 遷移導致的故障問題</li>
+                        <li>月營運成本 $10K-$20K，目前自給自足</li>
+                    </ul>
+
+                    <h3>v2026.2.2（2月4日）</h3>
+                    <ul>
+                        <li>新增 Feishu/Lark 外掛</li>
+                        <li>新增 Agents Dashboard Web UI 介面</li>
+                        <li>新增 QMD memory backend</li>
+                        <li>多重安全修復：operator approvals、Matrix allowlists、Slack gating</li>
+                    </ul>
+
+                    <h2>⚠️ 安全警告（2026年2月更新）</h2>
+                    <ul>
+                        <li><strong>CVE-2026-25253</strong>（2月11日報告）：高危漏洞，所有未修補版本存在 API Token 未授權訪問風險</li>
+                        <li>CVSS 評分 8.8，影響約 6,800-17,500 個暴露實例</li>
+                        <li>建議：立即輪換憑證、應用安全修補</li>
+                    </ul>
+
+                    <h2>新應用案例（2026年2月）</h2>
+                    <h3>Antfarm 多 Agent 工作流</h3>
+                    <ul>
+                        <li><strong>安全審計工作流</strong>（7 個 Agent）：掃描漏洞 → 優先級排序 → 應用修補 → 創建 PR</li>
+                        <li><strong>Bug 修復工作流</strong>（6 個 Agent）：分類 → 調查 → 修復 → 驗證 → 提交 PR</li>
+                        <li>YAML 定義，支援 GitHub 整合</li>
+                    </ul>
+
+                    <h3>VisionClaw AR 即時助手</h3>
+                    <ul>
+                        <li>整合 Meta Ray-Ban Glasses，語音 + 視覺部署 OpenClaw</li>
+                        <li>應用場景：即時導航、物品識別、即時翻譯</li>
+                    </ul>
+
                     <h2>用戶評價</h2>
                     <blockquote>"感覺像早年 Linux vs Windows 的體驗——你在掌控中，可以黑客改造"</blockquote>
                     <blockquote>"這絕對是重磅！最有趣的構建體驗"</blockquote>
@@ -863,6 +900,46 @@ openclaw agents add code      # Sonnet 4.5</code></pre>
                         <li>小型企業：<strong>$150/月 → $35/月</strong>（77% 節省）</li>
                         <li>個人用戶：<strong>$1,200/月 → $36/月</strong>（97% 節省）</li>
                     </ul>
+
+                    <h2>企業級 FinOps 實施路線圖</h2>
+                    <table>
+                        <thead>
+                            <tr><th>階段</th><th>時間</th><th>行動項</th><th>預期節省</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>審計期</td><td>第 1-2 週</td><td>追蹤各功能 token 消耗、識別高峰</td><td>基線建立</td></tr>
+                            <tr><td>快速優化</td><td>第 3-6 週</td><td>多模型路由、基礎快取、成本告警</td><td>40-60%</td></tr>
+                            <tr><td>深度優化</td><td>第 7-12 週</td><td>預測分析、用戶配額、提供商切換</td><td>60-80%</td></tr>
+                            <tr><td>規模化</td><td>持續</td><td>成本模擬、分階段發布、ROI 追蹤</td><td>80%+</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>批量處理 + 快取疊加實戰</h2>
+                    <p><strong>場景</strong>：200K 快取 tokens，100 次請求</p>
+                    <pre><code>方案 A（優化）：初始寫入 $1.20 + 批量快取讀取 $5.94 = $7.14
+方案 B（無優化）：$60.00
+實際節省：88% ($52.86)
+
+額外優化：如果啟用提示壓縮，可再節省 20-30%</code></pre>
+
+                    <h2>開源模型替代方案</h2>
+                    <ul>
+                        <li><strong>LLaMA 2 本地部署</strong>：敏感資料/高頻場景可節省高達 70%</li>
+                        <li><strong>Ollama 整合</strong>：OpenClaw 原生支援本地模型，零 API 成本</li>
+                        <li>權衡：推理速度 vs 成本，需評估具體場景</li>
+                    </ul>
+
+                    <h3>企業級年度成本基準（2025-2026）</h3>
+                    <table>
+                        <thead>
+                            <tr><th>部署規模</th><th>年成本範圍</th><th>主要成本構成</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>小型企業</td><td>$25K - $50K</td><td>API tokens, 基礎基礎設施</td></tr>
+                            <tr><td>中型企業</td><td>$100K - $250K</td><td>多模型路由、快取層、監控系統</td></tr>
+                            <tr><td>大型企業</td><td>$500K+</td><td>企業級安全、多地區部署、維護費</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -1004,6 +1081,90 @@ openclaw agents list --verbose
 
 # 查看 Agent 間通信日誌
 openclaw logs --all-agents --pattern "Handoff\|sessions_send"</code></pre>
+
+                    <h2>YAML 工作流定義（Antfarm）</h2>
+                    <p>OpenClaw 支援 YAML 定義多 Agent 工作流，以下是安全審計工作流範例：</p>
+                    <pre><code>id: security-audit
+name: Repository Security Audit
+agents:
+  - id: scanner
+    name: Vulnerability Scanner
+    role: scan_dependencies
+  - id: prioritizer
+    name: Risk Prioritizer
+    role: severity_ranking
+  - id: patcher
+    name: Auto Patcher
+    role: apply_fixes
+  - id: tester
+    name: Test Validator
+    role: regression_tests
+  - id: pr-creator
+    name: PR Manager
+    role: create_pull_request
+
+flow:
+  scanner → prioritizer → patcher → tester → pr-creator</code></pre>
+
+                    <h2>協作模式詳解</h2>
+
+                    <h3>模式 1: 主從模式（Master-Worker）</h3>
+                    <pre><code>用戶請求 → 主 Agent（協調者）
+              ↓
+    ┌─────────┼─────────┐
+    ↓         ↓         ↓
+專業 Agent 1  專業 Agent 2  專業 Agent 3
+（分析）     （執行）      （驗證）
+    └─────────┬─────────┘
+              ↓
+         結果聚合 → 用戶</code></pre>
+
+                    <h3>模式 2: 市場模式（Agent Marketplace）</h3>
+                    <pre><code>用戶請求 → 路由 Agent → 能力匹配 → 最優 Agent 執行
+                     ↓
+              或創建臨時 Agent（一次性任務）</code></pre>
+
+                    <h3>模式 3: 委員會模式（Round Table）</h3>
+                    <pre><code>用戶提案 → Agent 1（正方）→ Agent 2（反方）→ Agent 3（總結決策）</code></pre>
+
+                    <h2>權限與安全隔離</h2>
+                    <table>
+                        <thead>
+                            <tr><th>等級</th><th>Shell 訪問</th><th>檔案系統</th><th>網路訪問</th><th>金融操作</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Sandbox</td><td>只讀</td><td>隔離目錄</td><td>白名單</td><td>禁止</td></tr>
+                            <tr><td>Standard</td><td>受限命令</td><td>用戶目錄</td><td>開放</td><td>禁止</td></tr>
+                            <tr><td>Trusted</td><td>完整 Shell</td><td>全系統</td><td>開放</td><td>需確認</td></tr>
+                            <tr><td>Autonomous</td><td>完整 Shell</td><td>全系統</td><td>開放</td><td>自動（高風險）</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Docker Compose 企業級部署</h2>
+                    <pre><code>version: '3.8'
+services:
+  master:
+    image: openclaw/agent:latest
+    environment:
+      - ROLE=master
+      - RISK_LIMIT=1000USD
+    volumes:
+      - ./agents/master:/workspace
+      - shared-memory:/shared
+
+  researcher:
+    image: openclaw/agent:research
+    environment:
+      - ROLE=researcher
+      - MAX_COST=50USD/day
+      - MODEL=claude-haiku-4.5</code></pre>
+
+                    <h2>最新更新（2026年2月）</h2>
+                    <ul>
+                        <li>新增 Agents Dashboard Web UI，支援視覺化管理多 Agent</li>
+                        <li>支持 xAI (Grok) 作為多 Agent 路由選項</li>
+                        <li>強化 Session 間安全隔離，防止數據洩露</li>
+                    </ul>
                 </div>
             </div>
         </main>
