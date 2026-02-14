@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw Research Blog 🦞</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --bg-hover: #252532;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --accent: #ff6b35;
+            --accent-hover: #ff8555;
+            --border: #2a2a3a;
+            --tag-bg: #2d2d40;
+            --tag-text: #b8b8d0;
+            --code-bg: #0d0d12;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-emoji { font-size: 2rem; animation: float 3s ease-in-out infinite; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav { display: flex; gap: 2rem; }
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav a:hover { color: var(--accent); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .search-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .search-input:focus { border-color: var(--accent); }
+        .search-input::placeholder { color: var(--text-secondary); }
+
+        .tags-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .tag:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tag.active { background: var(--accent); color: white; }
+
+        .stats-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.75rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; }
+
+        .main-content { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .intro-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .intro-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-text { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; }
+
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(255,107,53,0.1);
+        }
+
+        .post-header {
+            padding: 1.5rem 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .post-meta { flex: 1; }
+        .post-author { font-weight: 600; color: var(--text-primary); }
+        .post-date { font-size: 0.875rem; color: var(--text-secondary); }
+
+        .post-content { padding: 1.5rem; }
+        .post-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
+        .post-excerpt { color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7; }
+
+        .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .post-tag {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .post-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-stats { display: flex; gap: 1.5rem; }
+        .stat { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+        .read-more { color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+
+        .full-post {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+
+        .full-post.active { display: block; }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-button:hover { color: var(--accent); }
+
+        .post-body { font-size: 1.05rem; line-height: 1.8; color: var(--text-primary); }
+        .post-body h1 { font-size: 2rem; margin: 2rem 0 1rem; color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+        .post-body h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: var(--accent); }
+        .post-body h3 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; color: var(--text-primary); }
+        .post-body p { margin-bottom: 1rem; color: var(--text-secondary); }
+        .post-body strong { color: var(--text-primary); }
+        .post-body code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+
+        .post-body pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .post-body pre code { background: none; padding: 0; color: var(--text-primary); }
+
+        .post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .post-body th,
+        .post-body td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .post-body th { background: var(--bg-secondary); font-weight: 600; color: var(--accent); }
+        .post-body tr:hover { background: var(--bg-hover); }
+
+        .post-body ul,
+        .post-body ol { margin: 1rem 0; padding-left: 1.5rem; }
+        .post-body li { margin: 0.5rem 0; color: var(--text-secondary); }
+        .post-body a { color: var(--accent); text-decoration: none; }
+        .post-body a:hover { text-decoration: underline; }
+        .post-body blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { position: static; order: 2; }
+            .main-content { order: 1; }
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 1rem; }
+            .intro-title { font-size: 1.5rem; }
+            .post-title { font-size: 1.25rem; }
+            .full-post { padding: 1.5rem; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo" onclick="showList(); return false;">
+                <span class="logo-emoji">🦞</span>
+                <span>OpenClaw Research</span>
+            </a>
+            <nav class="nav">
+                <a href="#" onclick="filterByTag('all'); return false;">All Posts</a>
+                <a href="#" onclick="showTagCloud(); return false;">Tags</a>
+                <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="🔍 Search posts..." id="searchInput">
+            </div>
+
+            <div class="tags-section">
+                <div class="section-title">🔖 Popular Tags</div>
+                <div class="tag-cloud" id="tagCloud">
+                    <span class="tag" data-tag="all">#all</span>
+                    <span class="tag" data-tag="cost-optimization">#cost-optimization</span>
+                    <span class="tag" data-tag="multi-agent">#multi-agent</span>
+                    <span class="tag" data-tag="use-cases">#use-cases</span>
+                    <span class="tag" data-tag="claude">#claude</span>
+                    <span class="tag" data-tag="ollama">#ollama</span>
+                    <span class="tag" data-tag="polymarket">#polymarket</span>
+                    <span class="tag" data-tag="trading">#trading</span>
+                    <span class="tag" data-tag="configuration">#configuration</span>
+                    <span class="tag" data-tag="benchmark">#benchmark</span>
+                    <span class="tag" data-tag="moltbook">#moltbook</span>
+                    <span class="tag" data-tag="sessions">#sessions</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="section-title">📊 Stats</div>
+                <div class="stats-grid">
+                    <div class="stat-item"><div class="stat-value">3</div><div class="stat-label">Posts</div></div>
+                    <div class="stat-item"><div class="stat-value">12</div><div class="stat-label">Tags</div></div>
+                    <div class="stat-item"><div class="stat-value">22k</div><div class="stat-label">Words</div></div>
+                    <div class="stat-item"><div class="stat-value">97%</div><div class="stat-label">Max Savings</div></div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="intro-card" id="introCard">
+                <h1 class="intro-title">Deep Dive into OpenClaw 🦞</h1>
+                <p class="intro-text">
+                    Comprehensive research on OpenClaw AI Agent framework. 
+                    Exploring cost optimization strategies, multi-agent architectures, and real-world applications.
+                </p>
+            </div>
+
+            <!-- Post 1: Use Cases -->
+            <article class="post-card" data-post="1" data-tags="use-cases,polymarket,trading,moltbook">
+                <div class="post-header">
+                    <div class="post-avatar">📈</div>
+                    <div class="post-meta">
+                        <div class="post-author">@CarloX Research</div>
+                        <div class="post-date">2026-02-14</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title">OpenClaw 應用案例研究</h2>
+                    <p class="post-excerpt">
+                        Polymarket 自動交易實現 1,560% ROI、VisionClaw AR 應用、個人助理自動化、軟體開發協助、內容創作...
+                        深度分析 OpenClaw 在金融、生活、開發等領域的真實應用。
+                    </p>
+                    <div class="post-tags">
+                        <span class="post-tag">#use-cases</span>
+                        <span class="post-tag">#polymarket</span>
+                        <span class="post-tag">#trading</span>
+                        <span class="post-tag">#moltbook</span>
+                    </div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-stats">
+                        <span class="stat">📄 1,781 bytes</span>
+                        <span class="stat">⏱ 8 min</span>
+                    </div>
+                    <span class="read-more">Read More →</span>
+                </div>
+            </article>
+
+            <!-- Post 2: Cost Optimization -->
+            <article class="post-card" data-post="2" data-tags="cost-optimization,claude,ollama,benchmark,configuration">
+                <div class="post-header">
+                    <div class="post-avatar">💰</div>
+                    <div class="post-meta">
+                        <div class="post-author">@CarloX Research</div>
+                        <div class="post-date">2026-02-14</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title">OpenClaw 成本優化完整技術指南</h2>
+                    <p class="post-excerpt">
+                        五大策略實現 50-97% 成本節省：本地模型降級、智能路由、提示緩存、上下文管理、本地技能。
+                        包含詳細配置範例、Benchmark 數據，從 $150/月降至 $35/月。
+                    </p>
+                    <div class="post-tags">
+                        <span class="post-tag">#cost-optimization</span>
+                        <span class="post-tag">#claude</span>
+                        <span class="post-tag">#ollama</span>
+                        <span class="post-tag">#benchmark</span>
+                    </div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-stats">
+                        <span class="stat">📄 8,538 bytes</span>
+                        <span class="stat">⏱ 15 min</span>
+                    </div>
+                    <span class="read-more">Read More →</span>
+                </div>
+            </article>
+
+            <!-- Post 3: Multi-Agent -->
+            <article class="post-card" data-post="3" data-tags="multi-agent,sessions,configuration,moltbook">
+                <div class="post-header">
+                    <div class="post-avatar">🤖</div>
+                    <div class="post-meta">
+                        <div class="post-author">@CarloX Research</div>
+                        <div class="post-date">2026-02-14</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title">OpenClaw 多 Agent 系統完整技術指南</h2>
+                    <p class="post-excerpt">
+                        完整解析多 Agent 架構：Binding 路由、Handoff 協議、Session 通信、Sub-agent 並行執行。
+                        包含詳細設定步驟、配置範例、實際應用案例...
+                    </p>
+                    <div class="post-tags">
+                        <span class="post-tag">#multi-agent</span>
+                        <span class="post-tag">#sessions</span>
+                        <span class="post-tag">#configuration</span>
+                        <span class="post-tag">#moltbook</span>
+                    </div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-stats">
+                        <span class="stat">📄 10,820 bytes</span>
+                        <span class="stat">⏱ 20 min</span>
+                    </div>
+                    <span class="read-more">Read More →</span>
+                </div>
+            </article>
+
+            <!-- Full Post 1: Use Cases -->
+            <div class="full-post" id="post1">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>OpenClaw 應用案例研究 🦞</h1>
+                    
+                    <h2>概述</h2>
+                    <p>OpenClaw（前身为 Clawdbot/Moltbot）是一个开源的 AI Agent 框架，设计用于在本地机器上运行高度自主的、基于目标的 AI Agent。它通过消息应用（WhatsApp、Telegram、Slack、Discord、iMessage）与用户交互，使用用户选择的 LLM（如 ChatGPT、Claude、Gemini）来解释目标、规划行动并部署工具。</p>
+
+                    <h2>核心能力</h2>
+                    <h3>自主性</h3>
+                    <ul>
+                        <li>用户设定高级目标（如"整理我的收件箱"、"总结会议并明天提醒"、"预订航班"），OpenClaw 将其分解为多步骤行动</li>
+                        <li>跨会话持久记忆，通过对话历史和日志适应用户习惯</li>
+                        <li>无需持续人工监督即可完整运行</li>
+                    </ul>
+
+                    <h3>多通道与多 Agent 支持</h3>
+                    <ul>
+                        <li>作为持久守护进程/网关运行，支持隔离会话</li>
+                        <li>媒体处理（图像、音频、文档）</li>
+                        <li>Web UI 仪表盘和移动节点配对</li>
+                        <li>支持模型路由、故障转移和通过 Ollama 使用本地模型</li>
+                    </ul>
+
+                    <h2>主要应用案例</h2>
+                    
+                    <h3>1. 金融交易与预测市场 💰</h3>
+                    <ul>
+                        <li><strong>Polymarket 自动交易</strong>：用户在预测市场上部署自主交易 Agent</li>
+                        <li><strong>显著成果</strong>：
+                            <ul>
+                                <li>6 种策略并行，500+ 笔交易，实现 <strong>1,560% ROI</strong></li>
+                                <li>AI 逆向策略接近 <strong>11,000% 回报</strong></li>
+                                <li>TBO 指标和 TBT 背离策略分别达到 75% 和 58.4% 胜率</li>
+                                <li>套利策略：$50 → $2,980（48 小时内）</li>
+                            </ul>
+                        </li>
+                        <li><strong>技术实现</strong>：每 10 分钟扫描 Polymarket 机会，使用 ADX、布林带等指标进行风险管理</li>
+                    </ul>
+
+                    <h3>2. 个人助理自动化 👤</h3>
+                    <ul>
+                        <li><strong>邮件管理</strong>：自动退订、分类、回复</li>
+                        <li><strong>日历与提醒</strong>：每日简报、交通时间计算</li>
+                        <li><strong>健康数据集成</strong>：连接 WHOOP 等设备获取生物特征和活动数据</li>
+                        <li><strong>家庭自动化</strong>：控制智能设备（如 Winix 空气净化器）</li>
+                    </ul>
+
+                    <h3>3. 软件开发协助 💻</h3>
+                    <ul>
+                        <li><strong>Claude Code / Codex 集成</strong>：从手机触发代码会话</li>
+                        <li><strong>错误监控</strong>：通过 Sentry webhook 捕获错误，自主修复并创建 PR</li>
+                        <li><strong>多 Agent 开发团队</strong>：主 Agent 委托给专业 Agent（代码审查、测试、设计）</li>
+                        <li><strong>技能自动创建</strong>：用户通过对话描述需求，Agent 自行创建技能</li>
+                    </ul>
+
+                    <h3>4. 内容创作与媒体处理 🎨</h3>
+                    <ul>
+                        <li>YouTube 视频处理：将视频转为可复用的 Agent 技能</li>
+                        <li>Sora 视频生成：自动化水印去除、API 密钥配置、完整工作流</li>
+                        <li>RSS 和新闻聚合：JMAP 搜索、Nano 香蕉 RSS 解析</li>
+                    </ul>
+
+                    <h2>开源与社区</h2>
+                    <ul>
+                        <li>MIT 许可证，无供应商锁定</li>
+                        <li>技能生态系统：SKILL.md 文件定义可复用能力</li>
+                        <li>基于 Markdown 的本地记忆系统（AGENTS.md、TOOLS.md）</li>
+                        <li><strong>创始人决定</strong>：Peter Steinberger 拒绝十亿美元级收购/融资提案，坚持完全免费开源立场</li>
+                        <li><strong>社群规模</strong>：160,000+ GitHub Stars | 562+ Contributors</li>
+                    </ul>
+
+                    <h2>用户评价</h2>
+                    <blockquote>"感觉像早年 Linux vs Windows 的体验——你在掌控中，可以黑客改造"</blockquote>
+                    <blockquote>"这绝对是重磅！最有趣的构建体验"</blockquote>
+                    <blockquote>"这是普通人使用 AI 的未来方式"</blockquote>
+
+                    <h2>相关链接</h2>
+                    <ul>
+                        <li>官网：https://openclaw.ai</li>
+                        <li>GitHub：https://github.com/openclaw/openclaw</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Full Post 2: Cost Optimization -->
+            <div class="full-post" id="post2">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>OpenClaw 成本優化完整技術指南 💰</h1>
+                    
+                    <h2>概覽</h2>
+                    <p>通過正確配置，OpenClaw 可實現 <strong>50-97%</strong> 的成本節省。本指南提供具體的配置方法、Benchmark 數據和實作步驟。</p>
+
+                    <h2>成本結構分析</h2>
+                    <h3>典型開銷組成</h3>
+                    <table>
+                        <thead>
+                            <tr><th>項目</th><th>基礎配置月費</th><th>優化後月費</th><th>節省比例</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>API Token 費用</td><td>$80-150</td><td>$10-25</td><td>70-85%</td></tr>
+                            <tr><td>託管費用</td><td>$0-6</td><td>$0-6</td><td>-</td></tr>
+                            <tr><td><strong>總計</strong></td><td>$150-200</td><td>$20-35</td><td><strong>77-90%</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Token 成本對比表</h3>
+                    <table>
+                        <thead>
+                            <tr><th>模型</th><th>Input ($/M)</th><th>Output ($/M)</th><th>適用場景</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Claude Haiku 3.5</td><td>$0.25</td><td>$1.25</td><td>高頻簡單查詢</td></tr>
+                            <tr><td>Claude Haiku 4.5</td><td>$1.00</td><td>$5.00</td><td>基礎 Agent 任務</td></tr>
+                            <tr><td>Claude Sonnet 4.5</td><td>$3.00</td><td>$15.00</td><td>主要工作負載</td></tr>
+                            <tr><td>Claude Opus 4.6</td><td>$15.00</td><td>$75.00</td><td>高難度編程</td></tr>
+                            <tr><td><strong>Ollama 本地</strong></td><td><strong>$0</strong></td><td><strong>$0</strong></td><td>離線/敏感任務</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>五大優化策略</h2>
+
+                    <h3>策略一：本地模型降級（節省 60-80%）</h3>
+                    <p><strong>原理</strong>：簡單查詢使用免費本地模型，僅複雜任務調用 Claude。</p>
+                    
+                    <p><strong>安裝 Ollama</strong>：</p>
+                    <pre><code>brew install ollama
+ollama pull llama3.3
+ollama serve</code></pre>
+
+                    <p><strong>openclaw.json 配置</strong>：</p>
+                    <pre><code>{
+  "models": {
+    "providers": {
+      "ollama": {
+        "baseUrl": "http://127.0.0.1:11434/v1",
+        "models": [
+          { "id": "ollama/llama3.3", "cost": { "input": 0, "output": 0 } }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/llama3.3",
+        "fallbacks": ["anthropic/claude-haiku-4.5"]
+      }
+    }
+  }
+}</code></pre>
+
+                    <h3>策略二：模型智能路由（節省 50-75%）</h3>
+                    <p><strong>實作方式</strong>：創建專門化 Agent</p>
+                    <pre><code>openclaw agents add fast      # Haiku 3.5
+openclaw agents add standard  # Haiku 4.5
+openclaw agents add code      # Sonnet 4.5</code></pre>
+
+                    <h3>策略三：提示緩存（節省 70-90%）</h3>
+                    <table>
+                        <thead>
+                            <tr><th>操作</th><th>成本倍率</th><th>說明</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Cache Write</td><td>1.25x</td><td>首次寫入緩存</td></tr>
+                            <tr><td>Cache Read</td><td>0.1x</td><td>從緩存讀取（90% 折扣）</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>策略四：會話上下文管理（節省 60-87%）</h3>
+                    <pre><code>{
+  "agents": {
+    "defaults": {
+      "context": {
+        "maxHistoryMessages": 20,
+        "maxTokens": 8000
+      }
+    }
+  }
+}</code></pre>
+
+                    <h3>策略五：本地技能（節省 50-100%）</h3>
+                    <p>常見任務使用本地技能，避免調用 LLM。如文件搜索、天氣查詢、日曆查詢等。</p>
+
+                    <h2>Benchmark 總結</h2>
+                    <table>
+                        <thead>
+                            <tr><th>優化策略</th><th>節省比例</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>本地模型</td><td>60-80%</td></tr>
+                            <tr><td>智能路由</td><td>50-75%</td></tr>
+                            <tr><td>提示緩存</td><td>70-90%</td></tr>
+                            <tr><td><strong>全部組合</strong></td><td><strong>85-97%</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>真實案例</h2>
+                    <ul>
+                        <li>小型企業：<strong>$150/月 → $35/月</strong>（77% 節省）</li>
+                        <li>個人用戶：<strong>$1,200/月 → $36/月</strong>（97% 節省）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Full Post 3: Multi-Agent -->
+            <div class="full-post" id="post3">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>OpenClaw 多 Agent 系統完整技術指南 🤖</h1>
+                    
+                    <h2>概覽</h2>
+                    <p>OpenClaw 多 Agent 系統允許創建專業化的 AI Agent 團隊，各自負責不同領域，通過協作完成複雜任務。</p>
+
+                    <h2>多 Agent 是什麼？</h2>
+                    <table>
+                        <thead>
+                            <tr><th>特性</th><th>單 Agent</th><th>多 Agent</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>身份</td><td>單一身份</td><td>每個 Agent 獨立身份</td></tr>
+                            <tr><td>記憶</td><td>共享上下文</td><td>獨立記憶空間</td></tr>
+                            <tr><td>專長</td><td>通用型</td><td>領域專精</td></tr>
+                            <tr><td>並行</td><td>單線任務</td><td>多線協作</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>典型應用場景</h2>
+                    <h3>場景 A：個人助理團隊</h3>
+                    <pre><code>@personal → 處理家庭、購物、生活提醒
+@work      → 處理郵件、會議、日程
+@finance   → 追蹤支出、投資、報稅
+@health    → 運動、飲食、睡眠監控</code></pre>
+
+                    <h3>場景 B：開發團隊</h3>
+                    <pre><code>@architect  → 系統設計、架構決策
+@coder      → 代碼編寫、PR 審查
+@tester     → 測試用例、Bug 追蹤
+@devops     → CI/CD、監控、部署</code></pre>
+
+                    <h3>場景 C：交易系統</h3>
+                    <pre><code>@scanner    → 監控市場、發現機會
+@analyst    → 分析數據、生成報告
+@trader     → 執行交易、風險管理
+@reporter   → 記錄日誌、生成報表</code></pre>
+
+                    <h2>設定步驟</h2>
+
+                    <h3>步驟 1：創建專業 Agent</h3>
+                    <pre><code>openclaw agents add work
+openclaw agents add personal
+openclaw agents add trading</code></pre>
+
+                    <h3>步驟 2：配置路由規則（Bindings）</h3>
+                    <p>編輯 <code>~/.openclaw/openclaw.json</code>：</p>
+                    <pre><code>{
+  "agents": {
+    "list": [
+      {
+        "agentId": "work",
+        "agentDir": "~/.openclaw/agents/work/agent",
+        "groupChat": {
+          "mentionPatterns": ["@work"]
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "agentId": "work",
+        "match": {
+          "channel": "telegram",
+          "accountId": "work_bot"
+        }
+      }
+    ]
+  }
+}</code></pre>
+
+                    <h3>步驟 3：配置 Agent 身份</h3>
+                    <p>編輯 <code>~/.openclaw/agents/work/workspace/identity.md</code>：</p>
+                    <pre><code># Work Agent
+
+## 身份
+你是專業工作助理，專注於提升工作效率。
+
+## 專長
+- 郵件管理與撰寫
+- 日曆安排與會議準備
+
+## Handoff 規則
+- 生活相關 → @personal
+- 投資相關 → @trading</code></pre>
+
+                    <h2>Agent 間通信協議</h2>
+                    <h3>Handoff 格式</h3>
+                    <pre><code>## Handoff: work → personal
+
+**Task**: 確認週五家庭聚餐時間
+**Context**: 用戶要求安排週五會議，但已有家庭聚餐
+**Expected Output**: 確認用戶偏好時間
+**Priority**: high</code></pre>
+
+                    <h2>Sub-agent ( sessions_spawn )</h2>
+                    <p>Sub-agent 是<strong>背景執行的臨時 Agent</strong>，用於並行處理多個子任務。</p>
+
+                    <h3>使用範例</h3>
+                    <pre><code>async function analyzeDocuments(docs) {
+  const results = await Promise.all(
+    docs.map(doc => sessions_spawn({
+      task: `分析文件：${doc.name}`,
+      model: "anthropic/claude-haiku-4.5",
+      timeout: 300,
+      cleanup: "delete"
+    }))
+  );
+  return results;
+}</code></pre>
+
+                    <h2>實際應用案例</h2>
+                    <h3>案例 1：全自動研究報告生成</h3>
+                    <pre><code>用戶："幫我寫一份 AI Agent 市場報告"
+    ↓
+@coordinator 分配：
+    ├─> @researcher: 搜索最新資料
+    ├─> @analyst: 分析市場數據
+    └─> @writer: 準備報告框架
+    ↓
+各 Sub-agent 並行執行
+    ↓
+用戶：收到完整報告（約 30 分鐘）</code></pre>
+
+                    <h3>案例 2：Polymarket 交易團隊</h3>
+                    <pre><code>@scanner → 每分鐘掃描 100 個市場
+@analyst → 分析價格走勢和機會
+@risk    → 評估每筆交易的風險
+@executor → 執行通過審查的交易</code></pre>
+
+                    <h2>監控與調試</h2>
+                    <pre><code># 列出所有 Agent
+openclaw agents list --verbose
+
+# 查看 Agent 間通信日誌
+openclaw logs --all-agents --pattern "Handoff\|sessions_send"</code></pre>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tag filtering
+        const tags = document.querySelectorAll('.tag');
+        const posts = document.querySelectorAll('.post-card');
+        const fullPosts = document.querySelectorAll('.full-post');
+        const introCard = document.getElementById('introCard');
+
+        function filterByTag(tag) {
+            if (tag === 'all') {
+                posts.forEach(post => post.style.display = 'block');
+                tags.forEach(t => t.classList.remove('active'));
+            } else {
+                posts.forEach(post => {
+                    const postTags = post.dataset.tags;
+                    if (postTags && postTags.includes(tag)) {
+                        post.style.display = 'block';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+                tags.forEach(t => {
+                    t.classList.toggle('active', t.dataset.tag === tag);
+                });
+            }
+        }
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const tagValue = tag.dataset.tag;
+                filterByTag(tagValue);
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            posts.forEach(post => {
+                const title = post.querySelector('.post-title').textContent.toLowerCase();
+                const excerpt = post.querySelector('.post-excerpt').textContent.toLowerCase();
+                if (title.includes(query) || excerpt.includes(query)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+
+        // Post navigation
+        function showPost(postId) {
+            posts.forEach(post => post.style.display = 'none');
+            introCard.style.display = 'none';
+            fullPosts.forEach(post => post.classList.remove('active'));
+            document.getElementById('post' + postId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showList() {
+            fullPosts.forEach(post => post.classList.remove('active'));
+            posts.forEach(post => post.style.display = 'block');
+            introCard.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        posts.forEach(post => {
+            post.addEventListener('click', () => {
+                const postId = post.dataset.post;
+                showPost(postId);
+            });
+        });
+
+        function showTagCloud() {
+            document.querySelector('.tags-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
