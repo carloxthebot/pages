@@ -390,16 +390,38 @@
             .full-post h2 { font-size: 1.25rem; }
             .tag-cloud { gap: 0.4rem; }
             .tag { padding: 0.25rem 0.6rem; font-size: 0.75rem; }
-            .post-body pre {
-                padding: 1rem;
-                font-size: 0.8rem;
-            }
+            
+            /* Fix for tables on mobile */
             .post-body table {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                max-width: 100%;
             }
             .post-body th,
             .post-body td {
-                padding: 0.5rem;
+                padding: 0.4rem 0.5rem;
+            }
+            
+            /* Fix for code blocks */
+            .post-body pre {
+                padding: 0.75rem;
+                font-size: 0.75rem;
+                max-width: 100%;
+                overflow-x: auto;
+            }
+            .post-body pre code {
+                font-size: 0.75rem;
+            }
+            
+            /* Better content wrapping */
+            .post-body {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            .post-body p {
+                word-wrap: break-word;
             }
         }
 
@@ -912,6 +934,9 @@ openclaw logs --all-agents --pattern "Handoff\|sessions_send"</code></pre>
     </div>
 
     <script>
+        // Browser history state management
+        let currentView = 'list';
+        
         // Tag filtering
         const tags = document.querySelectorAll('.tag');
         const posts = document.querySelectorAll('.post-card');
@@ -959,8 +984,12 @@ openclaw logs --all-agents --pattern "Handoff\|sessions_send"</code></pre>
             });
         });
 
-        // Post navigation
+        // Post navigation with history
         function showPost(postId) {
+            // Save state to history
+            history.pushState({ view: 'post', postId: postId }, '', '#post' + postId);
+            currentView = 'post';
+            
             posts.forEach(post => post.style.display = 'none');
             introCard.style.display = 'none';
             fullPosts.forEach(post => post.classList.remove('active'));
@@ -969,18 +998,58 @@ openclaw logs --all-agents --pattern "Handoff\|sessions_send"</code></pre>
         }
 
         function showList() {
+            // Save state to history
+            history.pushState({ view: 'list' }, '', window.location.pathname);
+            currentView = 'list';
+            
             fullPosts.forEach(post => post.classList.remove('active'));
             posts.forEach(post => post.style.display = 'block');
             introCard.style.display = 'block';
             window.scrollTo(0, 0);
         }
 
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            if (event.state) {
+                if (event.state.view === 'list') {
+                    fullPosts.forEach(post => post.classList.remove('active'));
+                    posts.forEach(post => post.style.display = 'block');
+                    introCard.style.display = 'block';
+                    currentView = 'list';
+                } else if (event.state.view === 'post' && event.state.postId) {
+                    posts.forEach(post => post.style.display = 'none');
+                    introCard.style.display = 'none';
+                    fullPosts.forEach(post => post.classList.remove('active'));
+                    document.getElementById('post' + event.state.postId).classList.add('active');
+                    currentView = 'post';
+                }
+            } else {
+                // Default to list view
+                showList();
+            }
+        });
+
+        // Handle post card clicks
         posts.forEach(post => {
             post.addEventListener('click', () => {
                 const postId = post.dataset.post;
                 showPost(postId);
             });
         });
+
+        // Handle initial hash (e.g., direct link to post)
+        function handleInitialHash() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#post')) {
+                const postId = hash.replace('#post', '');
+                if (document.getElementById('post' + postId)) {
+                    showPost(postId);
+                }
+            }
+        }
+
+        // Initialize
+        handleInitialHash();
 
         function showTagCloud() {
             document.querySelector('.tags-section').scrollIntoView({ behavior: 'smooth' });
