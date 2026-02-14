@@ -1025,10 +1025,10 @@
                                 <td><a href="#posts4" onclick="showPost('posts4'); return false;">查看 →</a></td>
                             </tr>
                             <tr>
-                                <td><a href="#posts5" onclick="showPost('posts5'); return false;">🔧 策略五：本地技能</a></td>
+                                <td><a href="#posts5" onclick="showPost('s5'); return false;">🔧 策略五：本地技能</a></td>
                                 <td>50-100%</td>
                                 <td>⭐⭐⭐</td>
-                                <td><a href="#posts5" onclick="showPost('posts5'); return false;">查看 →</a></td>
+                                <td><a href="#posts5" onclick="showPost('s5'); return false;">查看 →</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1086,7 +1086,7 @@
                         <li><a href="#posts2" onclick="showPost('posts2'); return false;">策略二：模型智能路由詳細指南 →</a></li>
                         <li><a href="#posts3" onclick="showPost('posts3'); return false;">策略三：提示緩存詳細指南 →</a></li>
                         <li><a href="#posts4" onclick="showPost('posts4'); return false;">策略四：會話上下文管理詳細指南 →</a></li>
-                        <li><a href="#posts5" onclick="showPost('posts5'); return false;">策略五：本地技能詳細指南 →</a></li>
+                        <li><a href="#posts5" onclick="showPost('s5'); return false;">策略五：本地技能詳細指南 →</a></li>
                     </ul>
                 </div>
             </div>
