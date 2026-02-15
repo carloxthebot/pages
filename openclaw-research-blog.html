@@ -521,6 +521,85 @@
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Deploy Footer */
+        .deploy-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+            border-top: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .deploy-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+
+        .deploy-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-secondary);
+        }
+
+        .deploy-icon { font-size: 1rem; }
+
+        .deploy-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .deploy-value {
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .deploy-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            background: var(--tag-bg);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .deploy-link:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .deploy-divider {
+            color: var(--border);
+            font-weight: 300;
+        }
+
+        /* Adjust main content for fixed footer */
+        .main-content {
+            padding-bottom: 4rem;
+        }
+
+        @media (max-width: 640px) {
+            .deploy-content {
+                gap: 0.75rem;
+                font-size: 0.75rem;
+            }
+            .deploy-divider { display: none; }
+            .deploy-item:nth-child(5) { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -545,26 +624,12 @@
             </div>
 
             <div class="tags-section">
-                <div class="section-title">🔖 Popular Tags</div>
+                <div class="section-title">🔖 Categories</div>
                 <div class="tag-cloud" id="tagCloud">
-                    <span class="tag" data-tag="all">#all</span>
-                    <span class="tag" data-tag="ollama">#ollama</span>
-                    <span class="tag" data-tag="routing">#routing</span>
-                    <span class="tag" data-tag="caching">#caching</span>
-                    <span class="tag" data-tag="context">#context</span>
-                    <span class="tag" data-tag="skills">#skills</span>
-                    <span class="tag" data-tag="cost-optimization">#cost-optimization</span>
-                    <span class="tag" data-tag="overview">#overview</span>
-                    <span class="tag" data-tag="multi-agent">#multi-agent</span>
-                    <span class="tag" data-tag="sessions_spawn">#sessions_spawn</span>
-                    <span class="tag" data-tag="use-cases">#use-cases</span>
-                    <span class="tag" data-tag="claude">#claude</span>
-                    <span class="tag" data-tag="polymarket">#polymarket</span>
-                    <span class="tag" data-tag="trading">#trading</span>
-                    <span class="tag" data-tag="moltbook">#moltbook</span>
-                    <span class="tag" data-tag="defi">#defi</span>
-                    <span class="tag" data-tag="nft">#nft</span>
-                    <span class="tag" data-tag="x402">#x402</span>
+                    <span class="tag active" data-tag="all">All</span>
+                    <span class="tag" data-tag="cost">💰 Cost Optimization</span>
+                    <span class="tag" data-tag="multi-agent">🤖 Multi-Agent</span>
+                    <span class="tag" data-tag="use-cases">🚀 Use Cases</span>
                 </div>
             </div>
 
@@ -594,7 +659,7 @@
                 <div class="category-title">📝 All Posts (Newest First)</div>
 
                 <!-- Latest Updates (2026-02-15 12:00) -->
-                <article class="post-card" data-post="15" data-tags="news,email,meeting,productivity">
+                <article class="post-card" data-post="15" data-tags="use-cases,email,meeting,productivity,office,automation">
                     <div class="post-header">
                         <div class="post-avatar">✉️</div>
                         <div class="post-meta">
@@ -624,7 +689,7 @@
                 </article>
 
                 <!-- Latest Updates (2026-02-15 09:00) -->
-                <article class="post-card" data-post="13" data-tags="news,tiktok,ecommerce,cost-optimization,serverless">
+                <article class="post-card" data-post="13" data-tags="use-cases,tiktok,ecommerce,serverless,mac-mini">
                     <div class="post-header">
                         <div class="post-avatar">🛒</div>
                         <div class="post-meta">
@@ -653,7 +718,7 @@
                     </div>
                 </article>
 
-                <article class="post-card" data-post="14" data-tags="news,codex,review,development">
+                <article class="post-card" data-post="14" data-tags="use-cases,codex,review,development,code-audit">
                     <div class="post-header">
                         <div class="post-avatar">👨‍💻</div>
                         <div class="post-meta">
@@ -682,7 +747,7 @@
                 </article>
 
                 <!-- Latest Updates (2026-02-14 18:00) -->
-                <article class="post-card" data-post="10" data-tags="news,defi,nft,base,aavegotchi">
+                <article class="post-card" data-post="10" data-tags="use-cases,defi,nft,base,aavegotchi,blockchain">
                     <div class="post-header">
                         <div class="post-avatar">⛓️</div>
                         <div class="post-meta">
@@ -710,7 +775,7 @@
                     </div>
                 </article>
 
-                <article class="post-card" data-post="11" data-tags="news,x402,payment,solana">
+                <article class="post-card" data-post="11" data-tags="use-cases,x402,payment,solana,usdc">
                     <div class="post-header">
                         <div class="post-avatar">💳</div>
                         <div class="post-meta">
@@ -738,7 +803,7 @@
                     </div>
                 </article>
 
-                <article class="post-card" data-post="12" data-tags="news,batch,anthropic,cost-optimization">
+                <article class="post-card" data-post="12" data-tags="cost-optimization,batch,anthropic,api-discount">
                     <div class="post-header">
                         <div class="post-avatar">📦</div>
                         <div class="post-meta">
@@ -766,7 +831,7 @@
                     </div>
                 </article>
 
-                <article class="post-card" data-post="4" data-tags="news,minimax,cost-optimization,intel">
+                <article class="post-card" data-post="4" data-tags="cost-optimization,minimax,intel,local-model">
                     <div class="post-header">
                         <div class="post-avatar">🚀</div>
                         <div class="post-meta">
@@ -794,7 +859,7 @@
                     </div>
                 </article>
 
-                <article class="post-card" data-post="5" data-tags="news,digitalocean,deployment,multi-agent">
+                <article class="post-card" data-post="5" data-tags="multi-agent,digitalocean,deployment,scaling">
                     <div class="post-header">
                         <div class="post-avatar">☁️</div>
                         <div class="post-meta">
@@ -821,7 +886,7 @@
                     </div>
                 </article>
                 
-                <article class="post-card" data-post="6" data-tags="news,polymarket,trading">
+                <article class="post-card" data-post="6" data-tags="use-cases,polymarket,trading,prediction-market">
                     <div class="post-header">
                         <div class="post-avatar">📈</div>
                         <div class="post-meta">
@@ -848,7 +913,7 @@
                     </div>
                 </article>
 
-                <article class="post-card" data-post="7" data-tags="news,claude,opus,cost-optimization">
+                <article class="post-card" data-post="7" data-tags="cost-optimization,claude,opus,effort-parameter">
                     <div class="post-header">
                         <div class="post-avatar">🎯</div>
                         <div class="post-meta">
@@ -875,7 +940,7 @@
                     </div>
                 </article>
 
-                <article class="post-card" data-post="8" data-tags="news,security,cve">
+                <article class="post-card" data-post="8" data-tags="use-cases,security,cve,vulnerability,moltbook">
                     <div class="post-header">
                         <div class="post-avatar">🔒</div>
                         <div class="post-meta">
@@ -902,7 +967,7 @@
                     </div>
                 </article>
 
-                <article class="post-card" data-post="9" data-tags="news,multi-agent,yaml">
+                <article class="post-card" data-post="9" data-tags="multi-agent,sessions-spawn,yaml,parallel">
                     <div class="post-header">
                         <div class="post-avatar">🤖</div>
                         <div class="post-meta">
@@ -929,7 +994,7 @@
                 </article>
 
                 <!-- Cost Optimization Series -->
-                <article class="post-card" data-post="2" data-tags="cost-optimization,claude,ollama,benchmark,overview">
+                <article class="post-card" data-post="2" data-tags="cost-optimization,claude,ollama,benchmark,overview,strategies">
                     <div class="post-header">
                         <div class="post-avatar">💰</div>
                         <div class="post-meta">
@@ -957,7 +1022,7 @@
                 </article>
 
                 <!-- Strategy 1: Local Model -->
-                <article class="post-card" data-post="s1" data-tags="ollama,claude,local-model,cost-optimization">
+                <article class="post-card" data-post="s1" data-tags="cost-optimization,ollama,claude,local-model,strategy">
                     <div class="post-header">
                         <div class="post-avatar">🖥️</div>
                         <div class="post-meta">
@@ -985,7 +1050,7 @@
                 </article>
 
                 <!-- Strategy 2: Model Routing -->
-                <article class="post-card" data-post="s2" data-tags="routing,claude,haiku,sonnet,cost-optimization">
+                <article class="post-card" data-post="s2" data-tags="cost-optimization,routing,claude,haiku,sonnet,strategy">
                     <div class="post-header">
                         <div class="post-avatar">🎯</div>
                         <div class="post-meta">
@@ -1013,7 +1078,7 @@
                 </article>
 
                 <!-- Strategy 3: Prompt Caching -->
-                <article class="post-card" data-post="s3" data-tags="caching,claude,cost-optimization">
+                <article class="post-card" data-post="s3" data-tags="cost-optimization,caching,claude,strategy">
                     <div class="post-header">
                         <div class="post-avatar">💾</div>
                         <div class="post-meta">
@@ -1041,7 +1106,7 @@
                 </article>
 
                 <!-- Strategy 4: Context Management -->
-                <article class="post-card" data-post="s4" data-tags="context,memory,cost-optimization">
+                <article class="post-card" data-post="s4" data-tags="cost-optimization,context,memory,strategy">
                     <div class="post-header">
                         <div class="post-avatar">🧠</div>
                         <div class="post-meta">
@@ -1069,7 +1134,7 @@
                 </article>
 
                 <!-- Strategy 5: Local Skills -->
-                <article class="post-card" data-post="s5" data-tags="skills,local,bm25,cost-optimization">
+                <article class="post-card" data-post="s5" data-tags="cost-optimization,skills,local,bm25,strategy">
                     <div class="post-header">
                         <div class="post-avatar">🔧</div>
                         <div class="post-meta">
@@ -1102,7 +1167,7 @@
                 <div class="category-title">📚 General Research</div>
 
                 <!-- Post 1: Use Cases -->
-                <article class="post-card" data-post="1" data-tags="use-cases,polymarket,trading,moltbook">
+                <article class="post-card" data-post="1" data-tags="use-cases,polymarket,trading,moltbook,overview">
                     <div class="post-header">
                         <div class="post-avatar">📈</div>
                         <div class="post-meta">
@@ -1129,7 +1194,7 @@
                 </article>
 
                 <!-- Post 3: Multi-Agent -->
-                <article class="post-card" data-post="3" data-tags="multi-agent,sessions,configuration,moltbook">
+                <article class="post-card" data-post="3" data-tags="multi-agent,sessions,configuration,moltbook,routing">
                     <div class="post-header">
                         <div class="post-avatar">🤖</div>
                         <div class="post-meta">
@@ -2429,24 +2494,37 @@ openclaw cron add --name="code-monitor" --interval="1h" --task="review-changes"<
         const fullPosts = document.querySelectorAll('.full-post');
         const introCard = document.getElementById('introCard');
 
+        // 主題分類映射
+        const categoryMap = {
+            'cost': ['cost-optimization', 'claude', 'ollama', 'minimax', 'batch', 'api', 'pricing'],
+            'multi-agent': ['multi-agent', 'sessions_spawn', 'spawn', 'parallel', 'agent', 'routing', 'configuration'],
+            'use-cases': ['use-cases', 'polymarket', 'trading', 'moltbook', 'defi', 'nft', 'x402', 'payment', 'tiktok', 'ecommerce', 'email', 'meeting']
+        };
+
         function filterByTag(tag) {
+            // 更新標籤 active 狀態
+            tags.forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-tag="${tag}"]`)?.classList.add('active');
+
             if (tag === 'all') {
                 posts.forEach(post => post.style.display = 'block');
                 document.querySelectorAll('.category-section').forEach(s => s.style.display = 'block');
-                tags.forEach(t => t.classList.remove('active'));
             } else {
+                const mappedTags = categoryMap[tag] || [tag];
                 posts.forEach(post => {
-                    const postTags = post.dataset.tags;
-                    if (postTags && postTags.includes(tag)) {
-                        post.style.display = 'block';
-                    } else {
-                        post.style.display = 'none';
-                    }
-                });
-                tags.forEach(t => {
-                    t.classList.toggle('active', t.dataset.tag === tag);
+                    const postTags = post.dataset.tags || '';
+                    const hasMatch = mappedTags.some(t => postTags.includes(t));
+                    post.style.display = hasMatch ? 'block' : 'none';
                 });
             }
+            // 更新統計
+            updateVisibleStats();
+        }
+
+        function updateVisibleStats() {
+            const visiblePosts = Array.from(posts).filter(p => p.style.display !== 'none');
+            const statValues = document.querySelectorAll('.stat-value');
+            if (statValues[0]) statValues[0].textContent = visiblePosts.length;
         }
 
         tags.forEach(tag => {
@@ -2534,6 +2612,57 @@ openclaw cron add --name="code-monitor" --interval="1h" --task="review-changes"<
         function showTagCloud() {
             document.querySelector('.tags-section').scrollIntoView({ behavior: 'smooth' });
         }
+
+        // 顯示部署資訊
+        function showDeployInfo() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-TW', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            // 從 git 獲取 commit hash（預設值，實際由部署腳本更新）
+            const commitHash = 'DEPLOY_HASH';
+            const footer = document.createElement('div');
+            footer.className = 'deploy-info';
+            footer.innerHTML = `
+                <div class="deploy-line">
+                    <span class="deploy-label">🚀 Deployed:</span>
+                    <span class="deploy-time">${timeString}</span>
+                    <span class="deploy-separator">|</span>
+                    <span class="deploy-label">Commit:</span>
+                    <a href="https://github.com/carloxthebot/pages/commit/${commitHash}" 
+                       class="deploy-commit" target="_blank">${commitHash.substring(0, 7)}</a>
+                </div>
+            `;
+            document.body.appendChild(footer);
+        }
+        showDeployInfo();
     </script>
+
+    <!-- Deploy Info Footer -->
+    <div class="deploy-footer">
+        <div class="deploy-content">
+            <span class="deploy-item">
+                <span class="deploy-icon">🚀</span>
+                <span class="deploy-label">Last Push:</span>
+                <span id="deployTime" class="deploy-value">2026-02-15 15:11</span>
+            </span>
+            <span class="deploy-divider">|</span>
+            <span class="deploy-item">
+                <span class="deploy-icon">🔖</span>
+                <span class="deploy-label">Commit:</span>
+                <a id="deployCommit" href="https://github.com/carloxthebot/pages/commit/5d2a461" 
+                   class="deploy-link" target="_blank">5d2a461</a>
+            </span>
+            <span class="deploy-divider">|</span>
+            <span class="deploy-item">
+                <span class="deploy-icon">🦞</span>
+                <span class="deploy-label">OpenClaw Research</span>
+            </span>
+        </div>
+    </div>
 </body>
 </html>
