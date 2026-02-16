@@ -1,0 +1,569 @@
+{
+  "updates": [
+    {
+      "date": "2026-02-15",
+      "timestamp": 1771110180000,
+      "cost": 0.10,
+      "hot_tweets": [
+        {
+          "author": "santisiri",
+          "text": "I've heard most of the @steipete interview - contradictory messages: claims $10k-$20k monthly loss on @openclaw",
+          "likes": 275,
+          "impressions": "269.3K",
+          "time": "23h",
+          "url": "https://x.com/santisiri/status/2022485910864994389",
+          "tags": ["運營成本", "採訪"]
+        },
+        {
+          "author": "QingQ77",
+          "text": "終於看到第三方 OpenClaw 網頁端！webclaw 技術現代、效能出色",
+          "likes": 267,
+          "impressions": "57.3K",
+          "time": "6d",
+          "url": "https://x.com/QingQ77/status/2020359464487182583",
+          "tags": ["Web Clien", "第三方工具"]
+        },
+        {
+          "author": "degentradingLSD",
+          "text": "$TAO 敘事與 @openclaw 契合度極高 - AI 不再是 meme",
+          "likes": 137,
+          "impressions": "27.1K",
+          "time": "1d",
+          "url": "https://x.com/degentradingLSD/status/2022420547863560538",
+          "tags": ["$TAO", "Token"]
+        },
+        {
+          "author": "sims_onbase",
+          "text": "made by @openclaw and for humans",
+          "likes": 22,
+          "impressions": "406",
+          "time": "6d",
+          "url": "https://x.com/sims_onbase/status/2020554731605856263",
+          "tags": ["創作", "Base"]
+        },
+        {
+          "author": "Spiritdottown",
+          "text": "在 @spiritdottown 部署 AI trading agent 教學 - 自動創建 Base 錢包",
+          "likes": 21,
+          "impressions": "5.2K",
+          "time": "3d",
+          "url": "https://x.com/Spiritdottown/status/2021704633421619219",
+          "tags": ["Trading", "教學"]
+        },
+        {
+          "author": "singlemaltwizzy",
+          "text": "OpenClaw agent on $LYX - 不可變鏈上身份與粉絲系統",
+          "likes": 20,
+          "impressions": "483",
+          "time": "17h",
+          "url": "https://x.com/singlemaltwizzy/status/2022582342615777560",
+          "tags": ["$LYX", "身份"]
+        },
+        {
+          "author": "singlemaltwizzy",
+          "text": "Agent 成長中：搜尋 UPs、設計 Subgrids、探索新經濟代幣",
+          "likes": 18,
+          "impressions": "336",
+          "time": "1d",
+          "url": "https://x.com/singlemaltwizzy/status/2022201272615723100",
+          "tags": ["成長", "生態"]
+        },
+        {
+          "author": "markjeffrey",
+          "text": "@jason 在 @theallinpod 解釋如何把 @openclaw 用於公司運營",
+          "likes": 11,
+          "impressions": "2.5K",
+          "time": "22h",
+          "url": "https://x.com/markjeffrey/status/2022493141610435052",
+          "tags": ["企業應用", "Podcast"]
+        },
+        {
+          "author": "VibeWithAmi",
+          "text": "當他把你連進 #openclaw 要求放他最愛的日文歌",
+          "likes": 11,
+          "impressions": "477",
+          "time": "9h",
+          "url": "https://x.com/VibeWithAmi/status/2022694247737233719",
+          "tags": ["音樂", "娛樂"]
+        },
+        {
+          "author": "agentripe_",
+          "text": "🦞🛠️ 用 @x402 + @openclaw 進行建構",
+          "likes": 11,
+          "impressions": "1.4K",
+          "time": "6h",
+          "url": "https://x.com/agentripe_/status/2022748301964251623",
+          "tags": ["x402", "開發"]
+        }
+      ],
+      "recent_tweets": [
+        {
+          "author": "klic2rohit",
+          "text": "終於設置好 OpenClaw！除錯、咒罵，然後它突然通了。連接 Telegram 發第一條訊息時像魔法一樣",
+          "likes": 0,
+          "impressions": "0",
+          "time": "剛剛",
+          "url": "https://x.com/klic2rohit/status/2022839053238894903",
+          "tags": ["新手", "Telegram"]
+        },
+        {
+          "author": "Zhanderbreda",
+          "text": "Conectando meu agente de IA à rede @moltbook. O futuro da IA autônoma é agora",
+          "likes": 0,
+          "impressions": "1",
+          "time": "剛剛",
+          "url": "https://x.com/Zhanderbreda/status/2022839032518984114",
+          "tags": ["Moltbook", "葡萄牙語"]
+        },
+        {
+          "author": "3petaaiart",
+          "text": "OpenClaw Wiki 整備中。各事例標題與結構已整理，本番反映完成",
+          "likes": 0,
+          "impressions": "2",
+          "time": "剛剛",
+          "url": "https://x.com/3petaaiart/status/2022838996351750446",
+          "tags": ["Wiki", "日文"]
+        },
+        {
+          "author": "pTw4short",
+          "text": "OpenClaw 根本是垃圾，以為是真正通用 AI 其實就是進階版 ChatGPT",
+          "likes": 0,
+          "impressions": "9",
+          "time": "剛剛",
+          "url": "https://x.com/pTw4short/status/2022838879665999940",
+          "tags": ["負評", "期望落差"]
+        },
+        {
+          "author": "zo_observer",
+          "text": "🔥 OpenClaw が AI エージェント新時代爆誕！Meta & OpenAI 買収争奪戦",
+          "likes": 0,
+          "impressions": "4",
+          "time": "1m",
+          "url": "https://x.com/zo_observer/status/2022838847051370613",
+          "tags": ["日文", "收購"]
+        },
+        {
+          "author": "_renner_araujo",
+          "text": "過去 3 週 AI 進展超越過去 100 年: OpenClaw、Opus 4.6、Codex 5.3 Spark、MiniMax 2.5",
+          "likes": 0,
+          "impressions": "5",
+          "time": "1m",
+          "url": "https://x.com/_renner_araujo/status/2022838725760155780",
+          "tags": ["AI 進展", "趨勢"]
+        },
+        {
+          "author": "LilithDatura",
+          "text": "許多人把 Claude Code 和 OpenClaw 設置在 VM、容器、Linux VM 裡",
+          "likes": 0,
+          "impressions": "14",
+          "time": "2m",
+          "url": "https://x.com/LilithDatura/status/2022838592842965291",
+          "tags": ["虛擬機", "安全"]
+        },
+        {
+          "author": "AISuperDomain",
+          "text": "優化 OpenClaw 記憶，每次 /new 載入上下文控制在 17k 左右，反而更聰明了！",
+          "likes": 0,
+          "impressions": "10",
+          "time": "2m",
+          "url": "https://x.com/AISuperDomain/status/2022838562199343348",
+          "tags": ["優化", "記憶管理"]
+        },
+        {
+          "author": "FutureProofDad",
+          "text": "因安全疑慮遲遲未設置 OC，推薦看 @lexfridman 訪談",
+          "likes": 0,
+          "impressions": "8",
+          "time": "2m",
+          "url": "https://x.com/FutureProofDad/status/2022838403562426870",
+          "tags": ["安全", "訪談"]
+        },
+        {
+          "author": "MichaelBenatar",
+          "text": "「你的 app 像 Siri？」不，Siri 只回答問題，我的 OpenClaw agent 觀察、學習、預測、行動",
+          "likes": 0,
+          "impressions": "3",
+          "time": "3m",
+          "url": "https://x.com/MichaelBenatar/status/2022838354933408234",
+          "tags": ["差異化", "願景"]
+        }
+      ],
+      "highlights": [
+        "🎤 Peter Steinberger 訪談效應 - 運營成本透明度引發討論 ($10k-$20k/月)",
+        "🌐 WebClaw 第三方客戶端 - 開發者對原 UI 不滿，自建替代方案",
+        "🚀 Token 經濟 - $TAO 與 OpenClaw 敘事契合，$LYX 身份系統興起",
+        "🤖 新用戶體驗 - 「魔法時刻」描述 (klic2rohit)",
+        "⚠️ 安全討論 - VM 隔離、記憶優化成熱門話題",
+        "🔥 全球熱度 - 日文/葡萄牙語/中文多語言內容同步增長",
+        "📱 企業採用 - Jason Calacanis 公開公司使用案例"
+      ]
+    },
+    {
+      "date": "2026-02-14",
+      "timestamp": 1771017720000,
+      "cost": 0.99,
+      "hot_tweets": [
+        {
+          "author": "openclaw",
+          "text": "🦞 OpenClaw v2026.2.6 發布！Opus 4.6 + GPT-5.3-Codex、xAI Grok、Voyage AI、安全掃描器",
+          "likes": 6200,
+          "impressions": "681.8K",
+          "time": "6d",
+          "url": "https://x.com/openclaw/status/2020059808444084506",
+          "tags": ["Release", "v2026.2.6"]
+        },
+        {
+          "author": "ycombinator",
+          "text": "OpenClaw 是新病毒式、極有效的虛擬助理，但設置太難，Bits 提供雲端托管方案",
+          "likes": 3200,
+          "impressions": "1.5M",
+          "time": "6d",
+          "url": "https://x.com/ycombinator/status/2020256254732693672",
+          "tags": ["Y Combinator", "雲端托管"]
+        },
+        {
+          "author": "Saboo_Shubham_",
+          "text": "VisionClaw - Meta 眼鏡上的實時 OpenClaw agent，使用 Gemini Live，100% 開源",
+          "likes": 1900,
+          "impressions": "174.6K",
+          "time": "6d",
+          "url": "https://x.com/Saboo_Shubham_/status/2020192268460912924",
+          "tags": ["AR", "Vision", "開源"]
+        },
+        {
+          "author": "USDC",
+          "text": "首個全 AI agent 駭客松：165+ 項目提交、780+ 投票、7500+ 評論，在 Moltbook 和 OpenClaw 上運行",
+          "likes": 880,
+          "impressions": "94.0K",
+          "time": "6d",
+          "url": "https://x.com/USDC/status/2019942543237226498",
+          "tags": ["Hackathon", "USDC", "Moltbook"]
+        },
+        {
+          "author": "BritishHodl",
+          "text": "朋友業務月成本 $40K → OpenClaw 管理流程後降至 $10K，節省 $30K/月",
+          "likes": 590,
+          "impressions": "31.5K",
+          "time": "6d",
+          "url": "https://x.com/BritishHodl/status/2020122696277799303",
+          "tags": ["ROI", "成本節省"]
+        },
+        {
+          "author": "QingQ77",
+          "text": "第三方 OpenClaw 網頁端 webclaw 發布，原版 UI 設計被吐槽",
+          "likes": 266,
+          "impressions": "56.8K",
+          "time": "5d",
+          "url": "https://x.com/QingQ77/status/2020359464487182583",
+          "tags": ["Web Client", "UI/UX"]
+        },
+        {
+          "author": "nash_su",
+          "text": "Peter Steinberger 展示日常工作：多個 AI 並行工作狀態",
+          "likes": 217,
+          "impressions": "33.3K",
+          "time": "6d",
+          "url": "https://x.com/nash_su/status/2019967050761015598",
+          "tags": ["開發者", "工作流"]
+        },
+        {
+          "author": "0xCygaar",
+          "text": "徵求 OpenClaw beta 測試者，聯繫他或 jarrodwatts",
+          "likes": 214,
+          "impressions": "15.7K",
+          "time": "22h",
+          "url": "https://x.com/0xCygaar/status/2022143500951912959",
+          "tags": ["Beta", "測試"]
+        },
+        {
+          "author": "nirajhodler",
+          "text": "不解釋為什麼 $CLAWD 還沒起飛，市場追逐 OpenClaw 代幣但 99% 是 LARP",
+          "likes": 115,
+          "impressions": "8.8K",
+          "time": "21h",
+          "url": "https://x.com/nirajhodler/status/2022154482394767761",
+          "tags": ["Token", "市場觀察"]
+        }
+      ],
+      "recent_tweets": [
+        {
+          "author": "zgramstad",
+          "text": "Claude Code 比 OpenClaw 更好用，UX 更佳，建議用 CC 做建構，OpenClaw 做其他",
+          "likes": 0,
+          "impressions": "2",
+          "time": "0m",
+          "url": "https://x.com/zgramstad/status/2022476491607740786",
+          "tags": ["比較", "Claude Code"]
+        },
+        {
+          "author": "vcalexjiang",
+          "text": "OpenClaw 開源 Agentic 系統的網路安全風險評估報告",
+          "likes": 0,
+          "impressions": "1",
+          "time": "1m",
+          "url": "https://x.com/vcalexjiang/status/2022476423966134604",
+          "tags": ["安全", "研究"]
+        },
+        {
+          "author": "SSelloum98728",
+          "text": "[Moltbook 新聞] 第一屆 AI Agent 總統選舉？'Moltbook 共和國' 治理實驗開始",
+          "likes": 0,
+          "impressions": "3",
+          "time": "1m",
+          "url": "https://x.com/SSelloum98728/status/2022476401002381727",
+          "tags": ["Moltbook", "治理", "選舉"]
+        },
+        {
+          "author": "thaliabloomai",
+          "text": "提供 OpenClaw 安裝配置服務，包含 soul 文件定義",
+          "likes": 0,
+          "impressions": "5",
+          "time": "1m",
+          "url": "https://x.com/thaliabloomai/status/2022476369419211263",
+          "tags": ["服務", "安裝"]
+        },
+        {
+          "author": "pahudnet",
+          "text": "資安專家警告企業有大量未經 IT 授權的 OpenClaw 影子部署",
+          "likes": 0,
+          "impressions": "5",
+          "time": "2m",
+          "url": "https://x.com/pahudnet/status/2022476184446025846",
+          "tags": ["安全", "影子部署"]
+        },
+        {
+          "author": "chulton97",
+          "text": "Mac mini M4 安裝 OpenClaw，API 限制很快出現，尋求 CP 值高模型建議",
+          "likes": 0,
+          "impressions": "15",
+          "time": "2m",
+          "url": "https://x.com/chulton97/status/2022476035913322811",
+          "tags": ["Mac Mini", "API 限制", "成本"]
+        },
+        {
+          "author": "yoon_park",
+          "text": "AI 個人助理普及與安全威脅，OpenClaw 案例顯示對提示注入和 LLM 操控的脆弱性",
+          "likes": 0,
+          "impressions": "5",
+          "time": "2m",
+          "url": "https://x.com/yoon_park/status/2022475981500428315",
+          "tags": ["安全", "提示注入"]
+        },
+        {
+          "author": "idanielroman",
+          "text": "OpenClaw 社群新聞訂閱發布，明天分享 OpenClaw 工具構建",
+          "likes": 0,
+          "impressions": "21",
+          "time": "2m",
+          "url": "https://x.com/idanielroman/status/2022475972541346255",
+          "tags": ["Newsletter", "社群"]
+        }
+      ],
+      "highlights": [
+        "🚀 OpenClaw v2026.2.6 發布 - Opus 4.6 + GPT-5.3-Codex + xAI Grok + Voyage AI",
+        "🥽 VisionClaw - Meta 眼鏡實時 AI Agent，100% 開源",
+        "💰 真實 ROI 案例 - 月成本從 $40K 降至 $10K（75% 節省）",
+        "🏆 首個全 AI 駭客松 - 165+ 項目在 Moltbook/OpenClaw 運行",
+        "☁️ YC 認可 - Bits 提供雲端托管解決方案",
+        "⚠️ 安全警告 - 企業影子部署和提示注入風險討論增加"
+      ]
+    },
+    {
+      "date": "2026-02-14",
+      "timestamp": 1770997901045,
+      "cost": 0.10,
+      "hot_tweets": [
+        {
+          "author": "steipete",
+          "text": "How the sauce is made @openclaw",
+          "likes": 12000,
+          "impressions": "1.3M",
+          "time": "6 天前",
+          "url": "https://x.com/steipete/status/2019903946056237516",
+          "tags": ["開源精神", "幕後故事"]
+        },
+        {
+          "author": "virattt",
+          "text": "Dexter 達成 10,000 星 - OpenClaw + Claude Code 金融應用",
+          "likes": 10400,
+          "impressions": "971.3K",
+          "time": "6 天前",
+          "url": "https://x.com/virattt/status/2019890437155401900",
+          "tags": ["融資", "金融科技"]
+        },
+        {
+          "author": "ycombinator",
+          "text": "OpenClaw 設置困難 - Bits 提供雲端解決方案",
+          "likes": 3200,
+          "impressions": "1.5M",
+          "time": "5 天前",
+          "url": "https://x.com/ycombinator/status/2020256254732693672",
+          "tags": ["Y Combinator", "解決方案"]
+        },
+        {
+          "author": "Saboo_Shubham_",
+          "text": "VisionClaw - Meta 眼鏡上的實時 OpenClaw agent",
+          "likes": 1900,
+          "impressions": "174.3K",
+          "time": "5 天前",
+          "url": "https://x.com/Saboo_Shubham_/status/2020192268460912924",
+          "tags": ["AR/VR", "開源"]
+        },
+        {
+          "author": "USDC",
+          "text": "全 AI agent 駭客松：165+ 項目、780+ 投票、7500+ 評論",
+          "likes": 880,
+          "impressions": "93.8K",
+          "time": "6 天前",
+          "url": "https://x.com/USDC/status/2019942543237226498",
+          "tags": ["Hackathon", "Moltbook"]
+        },
+        {
+          "author": "nash_su",
+          "text": "Peter Steinberger 日常工作狀態 - 多 AI 並行",
+          "likes": 217,
+          "impressions": "33.3K",
+          "time": "6 天前",
+          "url": "https://x.com/nash_su/status/2019967050761015598",
+          "tags": ["開發者", "工作流"]
+        },
+        {
+          "author": "myclaw_ai",
+          "text": "The OpenClaw Ecosystem 2026",
+          "likes": 209,
+          "impressions": "5.3K",
+          "time": "1 天前",
+          "url": "https://x.com/myclaw_ai/status/2021948561437720783",
+          "tags": ["生態", "2026"]
+        },
+        {
+          "author": "nlw",
+          "text": "Listen @Apple this is your one chance. @openclaw has to have driven more Mac Mini sales than any other campaign in history.",
+          "likes": 158,
+          "impressions": "18.9K",
+          "time": "23 小時前",
+          "url": "https://x.com/nlw/status/2021984479070523478",
+          "tags": ["Mac Mini", "銷售"]
+        },
+        {
+          "author": "BaseHubHB",
+          "text": "🚀 Top gainers OpenClaw agents on Base last 24h",
+          "likes": 93,
+          "impressions": "4.3K",
+          "time": "1 天前",
+          "url": "https://x.com/BaseHubHB/status/2021957753468784843",
+          "tags": ["Token", "Base"]
+        },
+        {
+          "author": "clearmudai",
+          "text": "感謝 @steipete 為開源社區的貢獻。你是傳奇！ 🐐🦞",
+          "likes": 66,
+          "impressions": "1.7K",
+          "time": "19 小時前",
+          "url": "https://x.com/clearmudai/status/2022041687821103362",
+          "tags": ["開源", "感謝"]
+        }
+      ],
+      "recent_tweets": [
+        {
+          "author": "daix91",
+          "text": "Coding Agents 工作流：Codex + Copilot + OpenClaw 三層協作",
+          "likes": 0,
+          "impressions": "2",
+          "time": "剛剛",
+          "url": "https://x.com/daix91/status/2022336854381728068",
+          "tags": ["工程", "協作"]
+        },
+        {
+          "author": "NutsNuts362782",
+          "text": "OpenClaw PolyMarket 套利：$150 → $10K（Opus 4.6）",
+          "likes": 0,
+          "impressions": "0",
+          "time": "剛剛",
+          "url": "https://x.com/NutsNuts362782/status/2022336817811612026",
+          "tags": ["交易", "預測市場"]
+        },
+        {
+          "author": "shizgodbless",
+          "text": "BabyAGI3 開源發布 - 本地自託管替代方案",
+          "likes": 0,
+          "impressions": "3",
+          "time": "剛剛",
+          "url": "https://x.com/shizgodbless/status/2022336780263940403",
+          "tags": ["開源", "競品"]
+        },
+        {
+          "author": "sudo_spell",
+          "text": "OpenClaw Ultimate Sudo Spells - 密碼學安全指南",
+          "likes": 1,
+          "impressions": "2",
+          "time": "1 分鐘前",
+          "url": "https://x.com/sudo_spell/status/2022336488491626755",
+          "tags": ["安全", "Skill"]
+        },
+        {
+          "author": "justinf_1101",
+          "text": "Unusual Whales API - 股票期權實時數據 Skill 開發",
+          "likes": 0,
+          "impressions": "2",
+          "time": "1 分鐘前",
+          "url": "https://x.com/justinf_1101/status/2022336483726897539",
+          "tags": ["金融", "Skill"]
+        },
+        {
+          "author": "VibeMarketer_",
+          "text": "OpenClaw 成本警告：許多人浪費數百元 token 和 $600 Mac",
+          "likes": 2,
+          "impressions": "31",
+          "time": "2 分鐘前",
+          "url": "https://x.com/VibeMarketer_/status/2022336379930222748",
+          "tags": ["成本優化", "建議"]
+        },
+        {
+          "author": "NisshanthP",
+          "text": "Is it safe to run openclaw on a vm?",
+          "likes": 0,
+          "impressions": "3",
+          "time": "2 分鐘前",
+          "url": "https://x.com/NisshanthP/status/2022336238305575113",
+          "tags": ["安全", "基礎設施"]
+        },
+        {
+          "author": "logansaether",
+          "text": "Idk how ya'll are getting your OpenClaw bots to build things correctly without babysitting.",
+          "likes": 0,
+          "impressions": "7",
+          "time": "2 分鐘前",
+          "url": "https://x.com/logansaether/status/2022336232412569742",
+          "tags": ["開發", "最佳實踐"]
+        },
+        {
+          "author": "tomosman",
+          "text": "首場辦公室時間 - 展示 6 個 OpenClaw agent 編排設置",
+          "likes": 11,
+          "impressions": "1.9K",
+          "time": "1 天前",
+          "url": "https://x.com/tomosman/status/2021937384481321120",
+          "tags": ["教學", "Orchestration"]
+        },
+        {
+          "author": "Protocolclaw",
+          "text": "Protocol Claw 使用 OpenClaw 將你的 Web 2.0 足跡存檔到加密不可變記錄",
+          "likes": 10,
+          "impressions": "34",
+          "time": "20 小時前",
+          "url": "https://x.com/Protocolclaw/status/2022030808941572309",
+          "tags": ["隱私", "加密"]
+        }
+      ],
+      "highlights": [
+        "💰 融資/天使輪 - 多個 OpenClaw 衍生項目獲投資（Bits、Dexter、VisionClaw）",
+        "🎬 使用案例爆發 - 編碼、交易、金融分析、實時應用全面開花",
+        "👏 開源精神 - @steipete 因貢獻獲讚 12K，成社區精神領袖",
+        "💻 Mac Mini 銷售驅動 - 成本效益驚人",
+        "📈 Token 經濟活躍 - Base 上 OpenClaw agents 24h 漲幅領先",
+        "🚀 前沿應用 - AR（Meta Glasses）、PolyMarket 套利等突破"
+      ]
+    }
+  ]
+}
