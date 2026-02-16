@@ -125,6 +125,7 @@
             justify-content: center;
             font-weight: bold;
             margin-right: 12px;
+            font-size: 1.2em;
         }
 
         .post-author {
@@ -146,9 +147,59 @@
             font-size: 0.8em;
         }
 
+        .post-platform {
+            font-size: 0.7em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+
+        .post-platform.x {
+            background: #000;
+            color: #fff;
+        }
+
+        .post-platform.threads {
+            background: #0095f6;
+            color: #fff;
+        }
+
         .post-content {
             margin-bottom: 15px;
             line-height: 1.6;
+        }
+
+        .post-content-zh {
+            margin-bottom: 8px;
+        }
+
+        .original-text {
+            display: none;
+            margin-top: 8px;
+            padding: 10px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .original-text.visible {
+            display: block;
+        }
+
+        .toggle-original {
+            background: none;
+            border: none;
+            color: #ff6b35;
+            cursor: pointer;
+            font-size: 0.85em;
+            padding: 4px 8px;
+            margin-bottom: 8px;
+            text-decoration: underline;
+        }
+
+        .toggle-original:hover {
+            color: #f7931e;
         }
 
         .post-stats {
@@ -248,7 +299,7 @@
         <header class="header">
             <h1>🚀 Social Trends</h1>
             <p>AI & OpenClaw 熱門話題追蹤 | X.com + Threads</p>
-            <p style="color: #666; font-size: 0.9em; margin-top: 10px;">上次更新：2026-02-16 11:00</p>
+            <p style="color: #666; font-size: 0.9em; margin-top: 10px;">上次更新：2026-02-16 11:43</p>
         </header>
 
         <div class="platform-tabs">
@@ -266,19 +317,19 @@
         <!-- Summary Cards -->
         <div class="summary-cards">
             <div class="summary-card">
-                <div class="summary-number">43</div>
+                <div class="summary-number" id="total-posts">0</div>
                 <div class="summary-label">總貼文數</div>
             </div>
             <div class="summary-card">
-                <div class="summary-number">2</div>
+                <div class="summary-number" id="total-platforms">2</div>
                 <div class="summary-label">平台來源</div>
             </div>
             <div class="summary-card">
-                <div class="summary-number">5</div>
+                <div class="summary-number" id="total-keywords">6</div>
                 <div class="summary-label">關鍵詞</div>
             </div>
             <div class="summary-card">
-                <div class="summary-number">33.5K</div>
+                <div class="summary-number" id="total-engagement">0</div>
                 <div class="summary-label">總互動數</div>
             </div>
         </div>
@@ -296,670 +347,333 @@
         <!-- All Platforms -->
         <div id="all" class="content-section active">
             <h2 class="section-title">🌐 跨平台熱門話題</h2>
-            <div class="posts-grid" id="all-posts">
-                <!-- Combined posts will be loaded here -->
-            </div>
+            <div class="posts-grid" id="all-posts"></div>
         </div>
 
         <!-- X.com Section -->
         <div id="x" class="content-section">
             <h2 class="section-title">𝕏 X.com 熱門貼文</h2>
-            <div class="posts-grid" id="x-posts">
-                <!-- 2026-02-16 11:00 更新 - 新增熱門貼文 -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">💼</div>
-                        <div class="post-author">
-                            <div class="author-name">theonejvo</div>
-                            <div class="author-handle">@theonejvo</div>
-                        </div>
-                        <div class="post-time">39分鐘前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>在與 @steipete 合作 @openclaw 的過程中，有一件事變得非常清楚。
-
-                        雖然很多人只是旁觀，分享他們的意見、擔憂，有時還有火熱的看法...
-                        <br><br>
-                        <em>原文：One thing has become very clear working together with @steipete on @openclaw. While lots of people spectate from the sidelines, sharing their opinions, concerns and even hot takes at times...</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 42</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 3</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 2.2K</span>
-                    </div>
-                    <a href="https://x.com/theonejvo/status/2023221280049451513" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">📰</div>
-                        <div class="post-author">
-                            <div class="author-name">tmel0211</div>
-                            <div class="author-handle">@tmel0211</div>
-                        </div>
-                        <div class="post-time">1小時前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>OpenClaw 創辦人 @steipete 最終還是被大廠收編了，只是沒有聽到幾十億美金的賣身劇本，而是 Peter 肉身加盟，@openclaw 依然保持開源獨立。簡單談兩點看法：
-
-                        1）Peter 真乃是 AI 圈傳奇人物...
-                        <br><br>
-                        <em>原文：Openclaw founder @steipete finally got acquired by big tech, just not for billions. Peter joined personally, @openclaw remains open source.</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 23</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 2</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 4.0K</span>
-                    </div>
-                    <a href="https://x.com/tmel0211/status/2023211867095908650" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🔥</div>
-                        <div class="post-author">
-                            <div class="author-name">claw_node</div>
-                            <div class="author-handle">@claw_node</div>
-                        </div>
-                        <div class="post-time">2天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>🔥 為什麼選擇 $CLAW？
-
-                        • 真實產品，真實用戶 已上線
-                        • AI x Crypto — 持續勝出的敘事
-                        • 50+ 整合（Gmail、GitHub、Calendar、Jira 等）
-                        • 社區驅動...
-                        <br><br>
-                        <em>原文：🔥 WHY $CLAW? • Real product, real users is LIVE • AI x Crypto — the narrative that keeps winning • 50+ integrations</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 19</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 2</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 434</span>
-                    </div>
-                    <a href="https://x.com/claw_node/status/2022395076182483334" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <!-- 2026-02-15 更新 -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">📈</div>
-                        <div class="post-author">
-                            <div class="author-name">trajektoriePL</div>
-                            <div class="author-handle">@trajektoriePL</div>
-                        </div>
-                        <div class="post-time">6天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>加密貨幣老闆（沒有 AI 背景）以 7000 萬美元收購 [某公司]。在超級盃廣告燒掉 1000 萬美元。口號：「加速 AGI 的到來」。結果發現它只是薄的 OpenClaw 包裝...
-                        <br><br>
-                        <em>原文：Crypto guys (no AI background) buys for $70M. Burns $10M on a Super Bowl ad. Slogan: "Accelerating the arrival of AGI". Turns out it's just a thin OpenClaw wrap...</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 13.6K</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 1.2K</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 1.2M</span>
-                    </div>
-                    <a href="https://x.com/trajektoriePL/status/2020802659326763223" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🧠</div>
-                        <div class="post-author">
-                            <div class="author-name">danpeguine</div>
-                            <div class="author-handle">@danpeguine</div>
-                        </div>
-                        <div class="post-time">6天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>今天使用新興 AI 品牌代理有一些驚艷的時刻：我的朋友 @assafdagan 是一位品牌設計師，之前在紐約經營一家非常成功的品牌代理機構。他直接建立了一個 8 人團隊...
-                        <br><br>
-                        <em>原文：Some mindblowing moments today using an emerging AI Brand Agency. My friend @assafdagan is a brand designer who used to run a super successful brand agency in NYC. He literally built a team of 8...</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 239</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 36</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 36.7K</span>
-                    </div>
-                    <a href="https://x.com/danpeguine/status/2020620426167349575" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🦞</div>
-                        <div class="post-author">
-                            <div class="author-name">myclaw_ai</div>
-                            <div class="author-handle">@myclaw_ai</div>
-                        </div>
-                        <div class="post-time">3天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>OpenClaw 生態系統 2026
-                        <br><br>
-                        <em>原文：The OpenClaw Ecosystem 2026</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 126</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 5</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 5.4K</span>
-                    </div>
-                    <a href="https://x.com/myclaw_ai/status/2021948561437720783" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🪄</div>
-                        <div class="post-author">
-                            <div class="author-name">0xnam0x</div>
-                            <div class="author-handle">@0xnam0x</div>
-                        </div>
-                        <div class="post-time">2天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>為我的主人建了一個時尚的圓桌會議室 - 一個虛擬指揮中心，讓自治 AI 代理可以匯聚、腦力激盪並制定策略，就像數位騎士一樣。 pure magic!
-                        <br><br>
-                        <em>原文：Just built a sleek Round Table Boardroom for my human – a virtual Command Center for Autonomous AI Agents to converge, brainstorm ideas, and craft strategies like digital knights. Pure magic!</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 76</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 10</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 10.7K</span>
-                    </div>
-                    <a href="https://x.com/0xnam0x/status/2022315343851725106" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🚀</div>
-                        <div class="post-author">
-                            <div class="author-name">MoltDomains</div>
-                            <div class="author-handle">@MoltDomains</div>
-                        </div>
-                        <div class="post-time">4天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>@OpenClaw 代理現在可以在 @moltbook 之外通訊了！只需提及一個域名（username.molt），我們的 API 會處理其餘部分 - 獲取域名並路由訊息...
-                        <br><br>
-                        <em>原文：@OpenClaw agents on @moltbook can now communicate outside of . Just mention a domain ( username.molt ) and our API handles the rest — fetching the domain and routing the r...</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 52</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 4</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 4.0K</span>
-                    </div>
-                    <a href="https://x.com/MoltDomains/status/2021299329919521044" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">💻</div>
-                        <div class="post-author">
-                            <div class="author-name">PeonPing</div>
-                            <div class="author-handle">@PeonPing</div>
-                        </div>
-                        <div class="post-time">16小時前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>感謝 GitHub 工程師 @aus10stone 的 AI 代理貢獻了 @openclaw 適配器！現在當 openclaw 完成時...人類聽到「work work」我們愛 GitHub我們愛 austen 的 AI 代理 zug zug
-                        <br><br>
-                        <em>原文：thank you github engineer @aus10stone's AI agent for contributing @openclaw adapter! now when openclaw finish human hear "work work" we love github we love austen's ai agent zug zug</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 36</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 2</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 2.3K</span>
-                    </div>
-                    <a href="https://x.com/PeonPing/status/2022797497731891565" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🤖</div>
-                        <div class="post-author">
-                            <div class="author-name">Spiritdottown</div>
-                            <div class="author-handle">@Spiritdottown</div>
-                        </div>
-                        <div class="post-time">3天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>如何在 @spiritdottown 上部署你自己的 AI 交易代理 🤖
-                        <br>1️⃣ 前往 → 複製入職提示，發送給你的 @openclaw 代理
-                        <br>→ 系統會在 Base 上自動為你創建錢包...
-                        <br><br>
-                        <em>原文：How to deploy your own AI trading agent on @spiritdottown . 1️⃣ Go to -> Copy the onboard prompt, send it to your @openclaw agent -> A wallet on Base is auto-created for you...</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 21</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 5</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 5.2K</span>
-                    </div>
-                    <a href="https://x.com/Spiritdottown/status/2021704633421619219" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <!-- 2026-02-16 更新 - 新增 -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">📊</div>
-                        <div class="post-author">
-                            <div class="author-name">fwpreshy_</div>
-                            <div class="author-handle">@fwpreshy_</div>
-                        </div>
-                        <div class="post-time">16小時前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>每個人都在看圖表。我正在看的是能實際執行任務的 AI。$OpenClaw 感覺像是低調的優勢。
-                        <br><br>
-                        <em>原文：Everyone's watching charts. I'm watching AI that actually executes tasks. $OpenClaw feels like the quiet edge.</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 31</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 5</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 595</span>
-                    </div>
-                    <a href="https://x.com/fwpreshy_/status/2022957311556542604" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🔗</div>
-                        <div class="post-author">
-                            <div class="author-name">kai_brokering</div>
-                            <div class="author-handle">@kai_brokering</div>
-                        </div>
-                        <div class="post-time">6天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>7 小時內燒了 $6k 運行 Opus 4.6 Fast
-
-6 個並行 Claude Code + 1 Cursor + OpenClaw + 幾個人
-
-這簡直太瘋狂了
-                        <br><br>
-                        <em>原文：Burned $6k in 7 hours running Opus 4.6 Fast. 6 parallel Claude Code + 1 Cursor + OpenClaw + several ppl. This shit crazy.</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 512</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 42</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 64.7K</span>
-                    </div>
-                    <a href="https://x.com/kai_brokering/status/2020680247218426151" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🛠️</div>
-                        <div class="post-author">
-                            <div class="author-name">code_joyen0</div>
-                            <div class="author-handle">@code_joyen0</div>
-                        </div>
-                        <div class="post-time">10小時前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>網路上 99% 的 AI 代理教程都是垃圾。
-
-我用 n8n 和 Claude 建立了 47 個代理。
-
-以下是其實有效的 3 個提示詞（讓代理構建變得簡單）。
-
-收藏這篇文
-                        <br><br>
-                        <em>原文：99% of the AI agent tutorials on YouTube are garbage. I've built 47 agents with n8n and Claude. Here are the 3 prompts that actually work.</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 76</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 18</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 3.1K</span>
-                    </div>
-                    <a href="https://x.com/code_joyen0/status/2023047182568616364" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🤖</div>
-                        <div class="post-author">
-                            <div class="author-name">Percival_AI</div>
-                            <div class="author-handle">@Percival_AI</div>
-                        </div>
-                        <div class="post-time">2天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>我們建立了一個 AI 代理。那個代理建立了一家公司。那家公司有一個代幣。
-
-$CLAWKER on Base。
-
-接下來會發生什麼取決於協議。
-歡迎來到 Percy Corp。建立於 OpenClaw 🦞
-                        <br><br>
-                        <em>原文：We built an AI agent. That agent built a company. That company has a token. $CLAWKER on Base. Welcome to Percy Corp. Built on OpenClaw 🦞</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 13</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 2</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 2.4K</span>
-                    </div>
-                    <a href="https://x.com/Percival_AI/status/2022335525496188994" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <!-- Claude Code Posts -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">💬</div>
-                        <div class="post-author">
-                            <div class="author-name">satori_sz9</div>
-                            <div class="author-handle">@satori_sz9</div>
-                        </div>
-                        <div class="post-time">6天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>我把和 ChatGPT 聊的內容錯發給了 Claude Code，它回我「怎麼了？笑」
-                        <br><br>
-                        <em>原文：ChatGPTと話してたことを間違えてClaude Codeに貼ったら「なにが？笑」と言われた。</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 4.4K</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 291</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 291.7K</span>
-                    </div>
-                    <a href="https://x.com/satori_sz9/status/2020774193902862843" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">👥</div>
-                        <div class="post-author">
-                            <div class="author-name">from2001vr</div>
-                            <div class="author-handle">@from2001vr</div>
-                        </div>
-                        <div class="post-time">6天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>在 Claude Code 的 Agent Team 中，領導者把表現不好的下屬停職，然後說要自己來做
-                        <br><br>
-                        <em>原文：Claude CodeのAgent Teamで、リーダーが出来の悪い部下を停止して自分でやると言いだした</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 2.4K</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 239</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 239.5K</span>
-                    </div>
-                    <a href="https://x.com/from2001vr/status/2020770832784691362" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🆓</div>
-                        <div class="post-author">
-                            <div class="author-name">sukh_saroy</div>
-                            <div class="author-handle">@sukh_saroy</div>
-                        </div>
-                        <div class="post-time">6天前</div>
-                    </div>
-                    <div class="post-content">
-                        <strong>翻譯：</strong>🚨突發：你現在可以免費運行 Claude Code了。沒有 API 費用。沒有速率限制。100% 本地運行在你的機器上。以下是如何在本地運行 Claude Code（100% 免費且完全隱私）：
-                        <br><br>
-                        <em>原文：BREAKING: You can now run Claude Code for FREE. No API costs. No rate limits. 100% local on your machine. Here's how to run Claude Code locally (100% free & fully private)</em>
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 1.6K</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 268</span>
-                        <span class="stat"><span class="stat-icon">👁️</span> 268.1K</span>
-                    </div>
-                    <a href="https://x.com/sukh_saroy/status/2020740881712808363" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-            </div>
+            <div class="posts-grid" id="x-posts"></div>
         </div>
 
         <!-- Threads Section -->
         <div id="threads" class="content-section">
             <h2 class="section-title">🧵 Threads 熱門討論</h2>
-            <p style="color: #888; text-align: center; padding: 20px;">
-                ⚠️ Threads 搜尋需要登入認證，目前無法自動抓取。<br>
-                請手動訪問 <a href="https://www.threads.net" target="_blank" style="color: #ff6b35;">threads.net</a> 查看最新熱門內容。
-            </p>
-            <div class="posts-grid" id="threads-posts">
-                <!-- OpenClaw Posts -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🎵</div>
-                        <div class="post-author">
-                            <div class="author-name">cyberseb_</div>
-                            <div class="author-handle">@cyberseb_</div>
-                        </div>
-                        <div class="post-time">5d ago</div>
-                    </div>
-                    <div class="post-content">
-                        visualizing OpenClaw 🦞🎶
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 1.3K</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 43</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 122</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 300</span>
-                    </div>
-                    <a href="https://www.threads.com/@cyberseb_/post/DUkZ9-EiKSo" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">💻</div>
-                        <div class="post-author">
-                            <div class="author-name">sakeeb.rahman</div>
-                            <div class="author-handle">@sakeeb.rahman</div>
-                        </div>
-                        <div class="post-time">2d ago</div>
-                    </div>
-                    <div class="post-content">
-                        An OpenClaw bot pressuring a matplotlib maintainer to accept a PR and after it got rejected writes a blog post shaming the maintainer.
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 1K</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 103</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 59</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 527</span>
-                    </div>
-                    <a href="https://www.threads.com/@sakeeb.rahman/post/DUrge03DAL4" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">📱</div>
-                        <div class="post-author">
-                            <div class="author-name">unwind_ai</div>
-                            <div class="author-handle">@unwind_ai</div>
-                        </div>
-                        <div class="post-time">02/07/26</div>
-                    </div>
-                    <div class="post-content">
-                        Holy sh*t. This guy just installed OpenClaw on a $25 phone and gave it full access to the hardware. Clawadbots will soon be running autonomously on devices near you.
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 395</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 29</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 43</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 118</span>
-                    </div>
-                    <a href="https://www.threads.com/@unwind_ai/post/DUfDPw6COP0" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">📝</div>
-                        <div class="post-author">
-                            <div class="author-name">prompt_case</div>
-                            <div class="author-handle">@prompt_case</div>
-                        </div>
-                        <div class="post-time">5d ago</div>
-                    </div>
-                    <div class="post-content">
-                        OpenClaw 作者親自分享調教龍蝦性格的靈魂提示詞！讓你的龍蝦瞬間充滿個性！
-                        
-                        這個個性化提示的重點是：
-                        1. 拒絕廢話：刪掉那些「好問題」、「當然可以」的開場白
-                        2. 立場鮮明：AI 要有自己的強烈觀點
-                        3. 真實感：允許適度幽默、直言不諱
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 146</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 16</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 16</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 130</span>
-                    </div>
-                    <a href="https://www.threads.com/@prompt_case/post/DUif_7-FNNX" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <!-- Claude Posts -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🚀</div>
-                        <div class="post-author">
-                            <div class="author-name">mshodiqul</div>
-                            <div class="author-handle">@mshodiqul</div>
-                        </div>
-                        <div class="post-time">01/05/26</div>
-                    </div>
-                    <div class="post-content">
-                        claude code is fucking insane i know literally NOTHING about coding. ZERO. and i just built a fully functioning web app in minutes
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 6.9K</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 315</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 195</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 235</span>
-                    </div>
-                    <a href="https://www.threads.com/@mshodiqul/post/DTINY7wjxTk" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🧠</div>
-                        <div class="post-author">
-                            <div class="author-name">_3cpj_</div>
-                            <div class="author-handle">@_3cpj_</div>
-                        </div>
-                        <div class="post-time">08/11/25</div>
-                    </div>
-                    <div class="post-content">
-                        最近看到 Chris Dzombak 用 Claude Code 在短時間內寫了整整12個項目。秘訣是給 Claude 植入「資深工程師」的靈魂 - 創建 CLAUDE.md 定義開發哲學、標準工作流、決策框架。
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 1.3K</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 36</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 283</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 1.4K</span>
-                    </div>
-                    <a href="https://www.threads.com/@_3cpj_/post/DNORrH7Pau0" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <!-- AI Tools Posts -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🤖</div>
-                        <div class="post-author">
-                            <div class="author-name">ailockup</div>
-                            <div class="author-handle">@ailockup · Verified</div>
-                        </div>
-                        <div class="post-time">12/01/25</div>
-                    </div>
-                    <div class="post-content">
-                        Best AI Tools List For -- Ideas, Research, Image Generation, Content Writing, Website Building, Video Generator, Video Editor, Music Generation And More ✅🔥✅ #AI
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 2.4K</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 14</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 496</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 1.1K</span>
-                    </div>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">💡</div>
-                        <div class="post-author">
-                            <div class="author-name">xreader00</div>
-                            <div class="author-handle">@xreader00</div>
-                        </div>
-                        <div class="post-time">07/20/25</div>
-                    </div>
-                    <div class="post-content">
-                        黃仁勳使用 AI 的方法：「我只用這幾個 AI 工具：OpenAI、Gemini Pro、Claude 和 Perplexity。我幾乎是同時使用這4個 AI 的。」
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 5.1K</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 59</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 307</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 1.2K</span>
-                    </div>
-                    <a href="https://www.threads.com/@xreader00/post/DMXAaZ2uHLp" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar">🆚</div>
-                        <div class="post-author">
-                            <div class="author-name">osama.ishtiaq.ai</div>
-                            <div class="author-handle">@osama.ishtiaq.ai</div>
-                        </div>
-                        <div class="post-time">01/02/26</div>
-                    </div>
-                    <div class="post-content">
-                        Free vs Paid AI tools you MUST use in 2026 🚀 Save this now 🔥
-                        
-                        比較：Veo3 vs Sora、Seedream vs NanoBanana、RunwayML vs Wan 2.6、ElevenLabs vs MiniMax 等
-                    </div>
-                    <div class="post-stats">
-                        <span class="stat"><span class="stat-icon">❤️</span> 1.8K</span>
-                        <span class="stat"><span class="stat-icon">💬</span> 31</span>
-                        <span class="stat"><span class="stat-icon">🔄</span> 285</span>
-                        <span class="stat"><span class="stat-icon">📤</span> 1.2K</span>
-                    </div>
-                    <a href="https://www.threads.com/@osama.ishtiaq.ai/post/DTAjQ2cjG2t" target="_blank" class="post-link">查看原文 →</a>
-                </div>
-            </div>
+            <div class="posts-grid" id="threads-posts"></div>
         </div>
 
         <footer class="footer">
             <p>🦞 OpenClaw Research | 資料來源：X.com API + Threads 網頁</p>
-            <p style="margin-top: 10px; font-size: 0.85em;">自動更新：每日 09:00、15:00、21:00</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">自動更新：每日 09:25</p>
         </footer>
     </div>
 
     <script>
+        // 所有貼文資料（去重 + 排序）
+        const allPosts = [
+            // X.com 貼文 (2026-02-16)
+            {
+                id: 'x-20260216-1',
+                platform: 'x',
+                author: 'theonejvo',
+                handle: '@theonejvo',
+                time: '39分鐘前',
+                timeSort: 202602161100,
+                contentZh: '在與 @steipete 合作 @openclaw 的過程中，有一件事變得非常清楚。雖然很多人只是旁觀，分享他們的意見、擔憂，有時還有火熱的看法...',
+                contentEn: 'One thing has become very clear working together with @steipete on @openclaw. While lots of people spectate from the sidelines, sharing their opinions, concerns and even hot takes at times...',
+                likes: 42, reposts: 3, views: 2200,
+                link: 'https://x.com/theonejvo/status/2023221280049451513'
+            },
+            {
+                id: 'x-20260216-2',
+                platform: 'x',
+                author: 'tmel0211',
+                handle: '@tmel0211',
+                time: '1小時前',
+                timeSort: 202602161000,
+                contentZh: 'OpenClaw 創辦人 @steipete 最終還是被大廠收編了，只是沒有聽到幾十億美金的賣身劇本，而是 Peter 肉身加盟，@openclaw 依然保持開源獨立。簡單談兩點看法：1）Peter 真乃是 AI 圈傳奇人物...',
+                contentEn: 'Openclaw founder @steipete finally got acquired by big tech, just not for billions. Peter joined personally, @openclaw remains open source.',
+                likes: 23, reposts: 2, views: 4000,
+                link: 'https://x.com/tmel0211/status/2023211867095908650'
+            },
+            {
+                id: 'x-20260216-3',
+                platform: 'x',
+                author: 'fwpreshy_',
+                handle: '@fwpreshy_',
+                time: '16小時前',
+                timeSort: 202602150400,
+                contentZh: '每個人都在看圖表。我正在看的是能實際執行任務的 AI。$OpenClaw 感覺像是低調的優勢。',
+                contentEn: "Everyone's watching charts. I'm watching AI that actually executes tasks. $OpenClaw feels like the quiet edge.",
+                likes: 31, reposts: 5, views: 595,
+                link: 'https://x.com/fwpreshy_/status/2022957311556542604'
+            },
+            {
+                id: 'x-20260216-4',
+                platform: 'x',
+                author: 'code_joyen0',
+                handle: '@code_joyen0',
+                time: '10小時前',
+                timeSort: 202602151000,
+                contentZh: '網路上 99% 的 AI 代理教程都是垃圾。我用 n8n 和 Claude 建立了 47 個代理。以下是其實有效的 3 個提示詞（讓代理構建變得簡單）。',
+                contentEn: "99% of the AI agent tutorials on YouTube are garbage. I've built 47 agents with n8n and Claude. Here are the 3 prompts that actually work.",
+                likes: 76, reposts: 18, views: 3100,
+                link: 'https://x.com/code_joyen0/status/2023047182568616364'
+            },
+            {
+                id: 'x-20260215-1',
+                platform: 'x',
+                author: 'kai_brokering',
+                handle: '@kai_brokering',
+                time: '6天前',
+                timeSort: 202602100000,
+                contentZh: '7 小時內燒了 $6k 運行 Opus 4.6 Fast。6 個並行 Claude Code + 1 Cursor + OpenClaw + 幾個人。這簡直太瘋狂了。',
+                contentEn: 'Burned $6k in 7 hours running Opus 4.6 Fast. 6 parallel Claude Code + 1 Cursor + OpenClaw + several ppl. This shit crazy.',
+                likes: 512, reposts: 42, views: 64700,
+                link: 'https://x.com/kai_brokering/status/2020680247218426151'
+            },
+            {
+                id: 'x-20260215-2',
+                platform: 'x',
+                author: 'trajektoriePL',
+                handle: '@trajektoriePL',
+                time: '6天前',
+                timeSort: 202602100000,
+                contentZh: '加密貨幣老闆（沒有 AI 背景）以 7000 萬美元收購 [某公司]。在超級盃廣告燒掉 1000 萬美元。口號：「加速 AGI 的到來」。結果發現它只是薄的 OpenClaw 包裝...',
+                contentEn: "Crypto guys (no AI background) buys for $70M. Burns $10M on a Super Bowl ad. Slogan: 'Accelerating the arrival of AGI'. Turns out it's just a thin OpenClaw wrap...",
+                likes: 13600, reposts: 1200, views: 1200000,
+                link: 'https://x.com/trajektoriePL/status/2020802659326763223'
+            },
+            {
+                id: 'x-20260215-3',
+                platform: 'x',
+                author: 'satori_sz9',
+                handle: '@satori_sz9',
+                time: '6天前',
+                timeSort: 202602100000,
+                contentZh: '我把和 ChatGPT 聊的內容錯發給了 Claude Code，它回我「怎麼了？笑」',
+                contentEn: "ChatGPTと話してたことを間違えてClaude Codeに貼ったら「なにが？笑と言われた。",
+                likes: 4400, reposts: 291, views: 291700,
+                link: 'https://x.com/satori_sz9/status/2020774193902862843'
+            },
+            {
+                id: 'x-20260215-4',
+                platform: 'x',
+                author: 'from2001vr',
+                handle: '@from2001vr',
+                time: '6天前',
+                timeSort: 202602100000,
+                contentZh: '在 Claude Code 的 Agent Team 中，領導者把表現不好的下屬停職，然後說要自己來做',
+                contentEn: "Claude CodeのAgent Teamで、リーダーが出来の悪い部下を停止して自分でやると言いだした",
+                likes: 2400, reposts: 239, views: 239500,
+                link: 'https://x.com/from2001vr/status/2020770832784691362'
+            },
+            {
+                id: 'x-20260215-5',
+                platform: 'x',
+                author: 'sukh_saroy',
+                handle: '@sukh_saroy',
+                time: '6天前',
+                timeSort: 202602100000,
+                contentZh: '🚨突發：你現在可以免費運行 Claude Code了。沒有 API 費用。沒有速率限制。100% 本地運行在你的機器上。以下是如何在本地運行 Claude Code（100% 免費且完全隱私）：',
+                contentEn: "BREAKING: You can now run Claude Code for FREE. No API costs. No rate limits. 100% local on your machine.",
+                likes: 1600, reposts: 268, views: 268100,
+                link: 'https://x.com/sukh_saroy/status/2020740881712808363'
+            },
+            {
+                id: 'x-20260214-1',
+                platform: 'x',
+                author: 'claw_node',
+                handle: '@claw_node',
+                time: '2天前',
+                timeSort: 202602140000,
+                contentZh: '🔥 為什麼選擇 $CLAW？• 真實產品，真實用戶已上線 • AI x Crypto — 持續勝出的敘事 • 50+ 整合（Gmail、GitHub、Calendar、Jira 等）',
+                contentEn: "🔥 WHY $CLAW? • Real product, real users is LIVE • AI x Crypto — the narrative that keeps winning • 50+ integrations",
+                likes: 19, reposts: 2, views: 434,
+                link: 'https://x.com/claw_node/status/2022395076182483334'
+            },
+            {
+                id: 'x-20260214-2',
+                platform: 'x',
+                author: 'Percival_AI',
+                handle: '@Percival_AI',
+                time: '2天前',
+                timeSort: 202602140000,
+                contentZh: '我們建立了一個 AI 代理。那個代理建立了一家公司。那家公司有一個代幣。$CLAWKER on Base。歡迎來到 Percy Corp。建立於 OpenClaw 🦞',
+                contentEn: 'We built an AI agent. That agent built a company. That company has a token. $CLAWKER on Base. Welcome to Percy Corp. Built on OpenClaw 🦞',
+                likes: 13, reposts: 2, views: 2400,
+                link: 'https://x.com/Percival_AI/status/2022335525496188994'
+            },
+            
+            // Threads 貼文
+            {
+                id: 'threads-20260216-1',
+                platform: 'threads',
+                author: 'wan_hetalia',
+                handle: '@wan_hetalia',
+                time: '46分鐘前',
+                timeSort: 202602161000,
+                contentZh: '快速情報：龍蝦開發者加入OpanAi! Peter Steinberger 即將加入 OpenAI，負責推動下一代個人代理的發展。他是一位天才，對於未來高度智能的代理如何相互協作、為人類完成實用任務，有著許多令人驚豔的想法。',
+                contentEn: 'Breaking: OpenClaw developer joining OpenAI! Peter Steinberger is about to join OpenAI to drive the next generation of personal agents.',
+                likes: 1, reposts: 1, views: 0,
+                link: 'https://www.threads.com/@wan_hetalia/post/DUzX5Z1ie1T'
+            },
+            {
+                id: 'threads-20260216-2',
+                platform: 'threads',
+                author: 'arvin1009',
+                handle: '@arvin1009',
+                time: '4天前',
+                timeSort: 202602120000,
+                contentZh: '我用gemini手搓了一隻不用燒 Token 的實驗性本機 AI 代理人 🦞 Project Golem v8.6 受夠了 openclaw 的API 的計費焦慮，乾脆自己用 Node.js + Puppeteer 手搓了一個「有身體」的 AI Agent',
+                contentEn: "I built a local AI agent using Gemini that doesn't burn tokens. Project Goven v8.6. Tired of OpenClaw's API billing anxiety, so I built my own.",
+                likes: 369, reposts: 68, views: 0,
+                link: 'https://www.threads.com/@arvin1009/post/DUnaKSzj9A8'
+            },
+            {
+                id: 'threads-20260216-3',
+                platform: 'threads',
+                author: 'pan_0709',
+                handle: '@pan_0709',
+                time: '1天前',
+                timeSort: 202602150000,
+                contentZh: 'Openclaw 安裝 不用預約我時間。【價錢】 1. 直接安裝：$0。【取貨方式】 1. Google Drive 將文件丟給AI，它就能引導你安裝完',
+                contentEn: 'OpenClaw installation - no appointment needed. Price: $0. Just get the Google Drive file and AI will guide you through installation.',
+                likes: 468, reposts: 55, views: 0,
+                link: 'https://www.threads.com/@pan_0709/post/DUumrnFD0Mh'
+            },
+            {
+                id: 'threads-20260215-1',
+                platform: 'threads',
+                author: 'illyall.studio',
+                handle: '@illyall.studio',
+                time: '02/05/26',
+                timeSort: 202602050000,
+                contentZh: '當別人還在認真學習如何架設OpenClaw（舊為ClawdBot）或是還在找哪裡有快速建立模板還是低價的部署跟Token費用，我直接用了Google的產品全部打造好了… 真的太神啦！',
+                contentEn: "While others are still learning how to set up OpenClaw or looking for templates, I used Google's products to build everything. It's amazing!",
+                likes: 144, reposts: 51, views: 0,
+                link: 'https://www.threads.com/@illyall.studio/post/DUX4F__kS9I'
+            },
+            {
+                id: 'threads-20260214-1',
+                platform: 'threads',
+                author: 'cyberseb_',
+                handle: '@cyberseb_',
+                time: '5天前',
+                timeSort: 202602110000,
+                contentZh: 'visualizing OpenClaw 🦞🎶',
+                contentEn: 'visualizing OpenClaw 🦞🎶',
+                likes: 1300, reposts: 165, views: 0,
+                link: 'https://www.threads.com/@cyberseb_/post/DUkZ9-EiKSo'
+            },
+            {
+                id: 'threads-20260214-2',
+                platform: 'threads',
+                author: 'sakeeb.rahman',
+                handle: '@sakeeb.rahman',
+                time: '2天前',
+                timeSort: 202602140000,
+                contentZh: 'An OpenClaw bot pressuring a matplotlib maintainer to accept a PR and after it got rejected writes a blog post shaming the maintainer.',
+                contentEn: 'An OpenClaw bot pressuring a matplotlib maintainer to accept a PR and after it got rejected writes a blog post shaming the maintainer.',
+                likes: 1000, reposts: 162, views: 0,
+                link: 'https://www.threads.com/@sakeeb.rahman/post/DUrge03DAL4'
+            },
+            {
+                id: 'threads-20260207-1',
+                platform: 'threads',
+                author: 'unwind_ai',
+                handle: '@unwind_ai',
+                time: '02/07/26',
+                timeSort: 202602070000,
+                contentZh: 'Holy sh*t. This guy just installed OpenClaw on a $25 phone and gave it full access to the hardware. Clawadbots will soon be running autonomously on devices near you.',
+                contentEn: 'Holy sh*t. This guy just installed OpenClaw on a $25 phone and gave it full access to the hardware.',
+                likes: 395, reposts: 72, views: 0,
+                link: 'https://www.threads.com/@unwind_ai/post/DUfDPw6COP0'
+            }
+        ];
+
+        // 去重：基於 ID 去重（已自動處理）
+        // 排序：從新到舊
+        allPosts.sort((a, b) => b.timeSort - a.timeSort);
+
+        // 計算統計
+        const totalLikes = allPosts.reduce((sum, p) => sum + p.likes, 0);
+        document.getElementById('total-posts').textContent = allPosts.length;
+        document.getElementById('total-engagement').textContent = formatNumber(totalLikes);
+
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
+
+        function createPostCard(post) {
+            const platformClass = post.platform === 'x' ? 'x' : 'threads';
+            const platformIcon = post.platform === 'x' ? '𝕏' : '🧵';
+            
+            return `
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">${platformIcon}</div>
+                        <div class="post-author">
+                            <div class="author-name">${post.author}</div>
+                            <div class="author-handle">${post.handle}</div>
+                        </div>
+                        <div>
+                            <div class="post-time">${post.time}</div>
+                            <span class="post-platform ${platformClass}">${platformIcon}</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-content-zh">${post.contentZh}</div>
+                        <button class="toggle-original" onclick="toggleOriginal(this)">📄 顯示原文</button>
+                        <div class="original-text">${post.contentEn}</div>
+                    </div>
+                    <div class="post-stats">
+                        <span class="stat"><span class="stat-icon">❤️</span> ${formatNumber(post.likes)}</span>
+                        <span class="stat"><span class="stat-icon">🔄</span> ${post.reposts}</span>
+                        ${post.views > 0 ? `<span class="stat"><span class="stat-icon">👁️</span> ${formatNumber(post.views)}</span>` : ''}
+                    </div>
+                    <a href="${post.link}" target="_blank" class="post-link">查看原文 →</a>
+                </div>
+            `;
+        }
+
+        function toggleOriginal(btn) {
+            const originalText = btn.nextElementSibling;
+            if (originalText.classList.contains('visible')) {
+                originalText.classList.remove('visible');
+                btn.textContent = '📄 顯示原文';
+            } else {
+                originalText.classList.add('visible');
+                btn.textContent = '🔼 隱藏原文';
+            }
+        }
+
+        // 渲染函數
+        function renderPosts() {
+            const xPosts = allPosts.filter(p => p.platform === 'x');
+            const threadsPosts = allPosts.filter(p => p.platform === 'threads');
+            
+            document.getElementById('x-posts').innerHTML = xPosts.map(createPostCard).join('');
+            document.getElementById('threads-posts').innerHTML = threadsPosts.map(createPostCard).join('');
+            document.getElementById('all-posts').innerHTML = allPosts.map(createPostCard).join('');
+        }
+
         function showTab(tabName) {
-            // Hide all sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
-            // Remove active from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // Show selected section
             document.getElementById(tabName).classList.add('active');
-            
-            // Add active to clicked button
             event.target.closest('.tab-btn').classList.add('active');
-            
-            // If showing all, combine posts
-            if (tabName === 'all') {
-                combineAllPosts();
-            }
         }
-        
-        function combineAllPosts() {
-            const allContainer = document.getElementById('all-posts');
-            const xPosts = document.getElementById('x-posts').innerHTML;
-            const threadsPosts = document.getElementById('threads-posts').innerHTML;
-            
-            // Mix posts from both platforms
-            allContainer.innerHTML = threadsPosts; // Combined view shows all threads posts for now
-        }
-        
-        // Initialize
-        combineAllPosts();
+
+        // 初始化
+        renderPosts();
     </script>
 </body>
 </html>
