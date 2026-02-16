@@ -592,27 +592,33 @@
             }
         ];
 
-        // 去重：基於 ID 去重（已自動處理）
-        // 排序：從新到舊
-        allPosts.sort((a, b) => b.timeSort - a.timeSort);
-
-        // 計算統計
-        const totalLikes = allPosts.reduce((sum, p) => sum + p.likes, 0);
-        document.getElementById('total-posts').textContent = allPosts.length;
-        document.getElementById('total-engagement').textContent = formatNumber(totalLikes);
-
         function formatNumber(num) {
             if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
             if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
             return num.toString();
         }
 
+        // 去重函數：基於 ID 和內容雜湊去重
+        function deduplicatePosts(posts) {
+            const seen = new Set();
+            return posts.filter(post => {
+                const key = post.id || `${post.platform}-${post.author}-${post.time}`;
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
+        }
+
+        // 應用去重
+        const uniquePosts = deduplicatePosts(allPosts);
+
         function createPostCard(post) {
             const platformClass = post.platform === 'x' ? 'x' : 'threads';
             const platformIcon = post.platform === 'x' ? '𝕏' : '🧵';
+            const hasOriginal = post.contentEn && post.contentEn !== post.contentZh;
             
             return `
-                <div class="post-card">
+                <div class="post-card" data-post-id="${post.id}">
                     <div class="post-header">
                         <div class="post-avatar">${platformIcon}</div>
                         <div class="post-author">
@@ -626,8 +632,10 @@
                     </div>
                     <div class="post-content">
                         <div class="post-content-zh">${post.contentZh}</div>
-                        <button class="toggle-original" onclick="toggleOriginal(this)">📄 顯示原文</button>
-                        <div class="original-text">${post.contentEn}</div>
+                        ${hasOriginal ? `
+                            <button class="toggle-original" onclick="toggleOriginal(this)">📄 Show Original</button>
+                            <div class="original-text" style="display: none;">${post.contentEn}</div>
+                        ` : ''}
                     </div>
                     <div class="post-stats">
                         <span class="stat"><span class="stat-icon">❤️</span> ${formatNumber(post.likes)}</span>
@@ -641,23 +649,33 @@
 
         function toggleOriginal(btn) {
             const originalText = btn.nextElementSibling;
-            if (originalText.classList.contains('visible')) {
-                originalText.classList.remove('visible');
-                btn.textContent = '📄 顯示原文';
+            if (originalText.style.display === 'none') {
+                originalText.style.display = 'block';
+                btn.textContent = '🔼 Hide Original';
             } else {
-                originalText.classList.add('visible');
-                btn.textContent = '🔼 隱藏原文';
+                originalText.style.display = 'none';
+                btn.textContent = '📄 Show Original';
             }
         }
 
-        // 渲染函數
+        // 渲染函數 - 使用去重後的貼文
         function renderPosts() {
-            const xPosts = allPosts.filter(p => p.platform === 'x');
-            const threadsPosts = allPosts.filter(p => p.platform === 'threads');
+            const xPosts = uniquePosts.filter(p => p.platform === 'x');
+            const threadsPosts = uniquePosts.filter(p => p.platform === 'threads');
             
-            document.getElementById('x-posts').innerHTML = xPosts.map(createPostCard).join('');
-            document.getElementById('threads-posts').innerHTML = threadsPosts.map(createPostCard).join('');
-            document.getElementById('all-posts').innerHTML = allPosts.map(createPostCard).join('');
+            // 確保每個標籤頁都按時間排序（新到舊）
+            const sortedXPosts = [...xPosts].sort((a, b) => b.timeSort - a.timeSort);
+            const sortedThreadsPosts = [...threadsPosts].sort((a, b) => b.timeSort - a.timeSort);
+            const sortedAllPosts = [...uniquePosts].sort((a, b) => b.timeSort - a.timeSort);
+            
+            document.getElementById('x-posts').innerHTML = sortedXPosts.map(createPostCard).join('');
+            document.getElementById('threads-posts').innerHTML = sortedThreadsPosts.map(createPostCard).join('');
+            document.getElementById('all-posts').innerHTML = sortedAllPosts.map(createPostCard).join('');
+            
+            // 更新統計
+            document.getElementById('total-posts').textContent = uniquePosts.length;
+            const totalEngagement = uniquePosts.reduce((sum, p) => sum + p.likes + p.reposts, 0);
+            document.getElementById('total-engagement').textContent = formatNumber(totalEngagement);
         }
 
         function showTab(tabName) {
