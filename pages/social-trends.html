@@ -370,7 +370,38 @@
 
     <script>
         // 所有貼文資料（去重 + 排序）
+        // 2026-02-17 新增：Threads OpenClaw 搜尋結果
+        const newPosts = [
+            {
+                id: 'threads-20260217-new-1',
+                platform: 'threads',
+                author: 'lazyoffice2024',
+                handle: '@lazyoffice2024',
+                time: '02/03/26',
+                timeSort: 202602030000,
+                contentZh: '玩了一週 OpenClaw，感覺像在高鐵上管理公司 🚄 因為大家說有資安風險，我就拿了舊 Mac mini 來玩。但跟朋友分享時，大家完全不懂「這是什麼系統」😅 後來我想通了：把它打造成「偷懶辦公室」虛擬辦公室——自己構建員工、給他們技能、給他們 OS。一週溝通 60 萬字（實際更多），從多個 TG 對應多 Agent，到回歸 multi-agent session上下文問題，來回折騰好幾天。但真的用上之後超狂：像老闆在外面工作，一句話馬上有員工幫忙。高鐵 1 小時開發系統，吃飯時做出 n8n workflow，從沒體驗過這種感覺 💡 影響力？已經推坑 7 個人買 Mac mini 😂 資安？建了專門的資安員工：判斷提示詞攻擊、即時 port 掃描、即時守護。認真偷懶，不亂來。最後當然算了省多少錢、用多少 Token，還傾聽員工心聲（純粹好奇 😄）接下來會出「龍蝦教練機器人」教學，讓大家也能建虛擬辦公室。你準備好當老闆了嗎？',
+                contentEn: 'Played with OpenClaw for a week, feels like managing a company on a high-speed rail 🚄',
+                likes: 1144, reposts: 534, views: 0,
+                link: 'https://www.threads.com/@lazyoffice2024/post/DUS_uSTkeyM'
+            },
+            {
+                id: 'threads-20260217-new-2',
+                platform: 'threads',
+                author: 'lazyoffice2024',
+                handle: '@lazyoffice2024',
+                time: '02/09/26',
+                timeSort: 202602090000,
+                contentZh: '今天去分享 OpenClaw 實戰。現場滿座，兩小時沒冷場(我分享30分鐘)。但最讓我印象深刻的不是掌聲。是一位老闆問我：「AI 會不會取代我的員工？」我說不會。但「會用 AI 的人」會取代「不會用的人」。這是事實。我給大家看了我的數位辦公室：5 個 AI 員工，24/7 工作。一個月成本不到 6000 塊。速度比真人快 3-5 倍。有人寫程式、有人做研究、有人寫文案。現場有人問：「這樣會不會很冷冰冰？」我秀了 Virtual Office。像素風辦公室，每個員工會動、會抱怨、會吐槽。Alex：「又要寫 code 了...」全場笑了。資安問題最多人問。我的答案：門鎖好,裡面開最大權限。AI 是你的員工，不是駭客。記憶系統很噁心（讚嘆）。我測試一週講了 60 萬字。它全記得。而且會預判你下一步。你還沒說完，它已經在做了。這才是真正的助手。最後的感觸：AI 進步太快了。但重點不是技術。是你的公司準備好了嗎？資料數位化了嗎？流程清楚了嗎？團隊敢實驗嗎？先讓 AI 幫你做一件小事。做成了，你就會知道下一步。',
+                contentEn: 'Shared OpenClaw实战 today. Full house, 2 hours no cold...',
+                likes: 355, reposts: 38, views: 0,
+                link: 'https://www.threads.com/@lazyoffice2024/post/DUitnXZEklU'
+            }
+        ];
+
         const allPosts = [
+            // 2026-02-17 新增貼文（最新）
+            ...newPosts,
+            
             // X.com 貼文 (2026-02-16)
             {
                 id: 'x-20260216-1',
