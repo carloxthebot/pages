@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>運動追蹤 | CarloX</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .user-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .user-selector input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .user-selector button {
+            padding: 10px 20px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .user-selector button:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header .user-name {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-box .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .data-input {
+            background: #f5f7fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: scale(1.02);
+        }
+
+        .exercise-log {
+            list-style: none;
+        }
+
+        .exercise-log li {
+            background: #f5f7fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exercise-log .date {
+            font-weight: bold;
+            color: #667eea;
+            min-width: 100px;
+        }
+
+        .exercise-log .details {
+            flex: 1;
+            margin: 0 15px;
+        }
+
+        .exercise-log .type {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .exercise-log .duration {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .exercise-log .delete {
+            background: #ff6b6b;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+            border: none;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="user-selector">
+            <input type="text" id="userInput" placeholder="輸入使用者名稱" value="Carlos">
+            <button onclick="switchUser()">切換使用者</button>
+        </div>
+
+        <header>
+            <h1>💪 運動追蹤</h1>
+            <div class="user-name" id="currentUser">Carlos 的運動紀錄</div>
+            <p>記錄每日運動，堅持健身目標</p>
+        </header>
+
+        <div class="grid">
+            <!-- 資料輸入 -->
+            <div class="card">
+                <h2>📝 新增運動</h2>
+                <div class="data-input">
+                    <div class="form-group">
+                        <label>日期</label>
+                        <input type="date" id="exerciseDate" value="2026-02-11">
+                    </div>
+                    <div class="form-group">
+                        <label>運動類型</label>
+                        <select id="exerciseType">
+                            <option value="跑步">🏃 跑步</option>
+                            <option value="重訓">💪 重訓</option>
+                            <option value="游泳">🏊 游泳</option>
+                            <option value="騎車">🚴 騎車</option>
+                            <option value="瑜伽">🧘 瑜伽</option>
+                            <option value="其他">⚽ 其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>時間（分鐘）</label>
+                        <input type="number" id="exerciseDuration" placeholder="例：40" min="1">
+                    </div>
+                    <button onclick="addExercise()">新增</button>
+                </div>
+            </div>
+
+            <!-- 統計資訊 -->
+            <div class="card">
+                <h2>📊 今日統計</h2>
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="number" id="todayMins">60</div>
+                        <div class="label">總運動時間 (分鐘)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="todayTypes">2</div>
+                        <div class="label">運動類型</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 週次運動時間圖表 -->
+            <div class="card full-width">
+                <h2>📈 週次運動時間分佈</h2>
+                <div class="chart-container">
+                    <canvas id="weeklySumChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 運動類型圓餅圖 -->
+            <div class="card">
+                <h2>🎯 運動類型比例</h2>
+                <div class="chart-container">
+                    <canvas id="typeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 運動歷史 -->
+            <div class="card">
+                <h2>📋 運動日誌</h2>
+                <ul class="exercise-log" id="exerciseLog"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = 'Carlos';
+
+        function getStorageKey() {
+            return `exercises_${currentUser}`;
+        }
+
+        // 初始化資料
+        function loadExercises() {
+            const saved = localStorage.getItem(getStorageKey());
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            
+            // 初始資料只在 Carlos 首次使用時設定
+            if (currentUser === 'Carlos') {
+                return [
+                    { date: '2026-02-11', type: '跑步', duration: 40 },
+                    { date: '2026-02-11', type: '重訓', duration: 20 }
+                ];
+            }
+            return [];
+        }
+
+        let exercises = loadExercises();
+        let weeklySumChart, typeChart;
+
+        function switchUser() {
+            const newUser = document.getElementById('userInput').value.trim();
+            if (!newUser) {
+                alert('請输入使用者名稱');
+                return;
+            }
+            
+            currentUser = newUser;
+            exercises = loadExercises();
+            document.getElementById('currentUser').textContent = `${currentUser} 的運動紀錄`;
+            updateCharts();
+            renderLog();
+        }
+
+        function addExercise() {
+            const date = document.getElementById('exerciseDate').value;
+            const type = document.getElementById('exerciseType').value;
+            const duration = parseInt(document.getElementById('exerciseDuration').value);
+
+            if (!date || !type || !duration) {
+                alert('所有欄位均為必填');
+                return;
+            }
+
+            exercises.push({ date, type, duration });
+            localStorage.setItem(getStorageKey(), JSON.stringify(exercises));
+            
+            document.getElementById('exerciseDuration').value = '';
+            updateCharts();
+            renderLog();
+        }
+
+        function deleteExercise(index) {
+            exercises.splice(index, 1);
+            localStorage.setItem(getStorageKey(), JSON.stringify(exercises));
+            updateCharts();
+            renderLog();
+        }
+
+        function renderLog() {
+            const log = document.getElementById('exerciseLog');
+            log.innerHTML = exercises
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .map((ex, i) => `
+                    <li>
+                        <div class="date">${ex.date}</div>
+                        <div class="details">
+                            <div class="type">${ex.type}</div>
+                            <div class="duration">${ex.duration} 分鐘</div>
+                        </div>
+                        <button class="delete" onclick="deleteExercise(${exercises.indexOf(ex)})">刪除</button>
+                    </li>
+                `)
+                .join('');
+
+            // 更新今日統計
+            const today = new Date().toISOString().split('T')[0];
+            const todayEx = exercises.filter(e => e.date === today);
+            document.getElementById('todayMins').textContent = todayEx.reduce((sum, e) => sum + e.duration, 0);
+            document.getElementById('todayTypes').textContent = new Set(todayEx.map(e => e.type)).size;
+        }
+
+        function getWeekData() {
+            const today = new Date();
+            const weekSum = {};
+            
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const dateStr = d.toISOString().split('T')[0];
+                const dayName = ['日', '一', '二', '三', '四', '五', '六'][d.getDay()];
+                
+                const sum = exercises
+                    .filter(e => e.date === dateStr)
+                    .reduce((total, e) => total + e.duration, 0);
+                
+                weekSum[`${dateStr.substring(5)} (${dayName})`] = sum;
+            }
+            
+            return weekSum;
+        }
+
+        function getTypeData() {
+            const typeSum = {};
+            exercises.forEach(ex => {
+                typeSum[ex.type] = (typeSum[ex.type] || 0) + ex.duration;
+            });
+            return typeSum;
+        }
+
+        function updateCharts() {
+            // 週次圖表
+            const weekData = getWeekData();
+            const weeklySumCtx = document.getElementById('weeklySumChart').getContext('2d');
+            
+            if (weeklySumChart) weeklySumChart.destroy();
+            weeklySumChart = new Chart(weeklySumCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(weekData),
+                    datasets: [{
+                        label: '運動時間 (分鐘)',
+                        data: Object.values(weekData),
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#666' }
+                        },
+                        x: {
+                            ticks: { color: '#666' }
+                        }
+                    }
+                }
+            });
+
+            // 類型圖表
+            const typeData = getTypeData();
+            const typeCtx = document.getElementById('typeChart').getContext('2d');
+            
+            if (typeChart) typeChart.destroy();
+            typeChart = new Chart(typeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(typeData),
+                    datasets: [{
+                        data: Object.values(typeData),
+                        backgroundColor: [
+                            '#667eea',
+                            '#764ba2',
+                            '#f093fb',
+                            '#4facfe',
+                            '#00f2fe',
+                            '#43e97b'
+                        ],
+                        borderColor: 'white',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // 初始化
+        document.getElementById('currentUser').textContent = `${currentUser} 的運動紀錄`;
+        renderLog();
+        updateCharts();
+    </script>
+</body>
+</html>

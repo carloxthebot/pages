@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw Research Blog 🦞</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --bg-hover: #252532;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --accent: #ff6b35;
+            --accent-hover: #ff8555;
+            --border: #2a2a3a;
+            --tag-bg: #2d2d40;
+            --tag-text: #b8b8d0;
+            --code-bg: #0d0d12;
+            --success: #4ade80;
+            --info: #60a5fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-emoji { font-size: 2rem; animation: float 3s ease-in-out infinite; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav { display: flex; gap: 2rem; }
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav a:hover { color: var(--accent); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 1.5rem;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .search-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .search-input:focus { border-color: var(--accent); }
+        .search-input::placeholder { color: var(--text-secondary); }
+
+        .tags-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .tag:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tag.active { background: var(--accent); color: white; }
+
+        .stats-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.75rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; }
+
+        .main-content { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .intro-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .intro-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-text { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; }
+
+        .category-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(255,107,53,0.1);
+        }
+
+        .post-header {
+            padding: 1.5rem 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .post-savings {
+            background: var(--success);
+            color: var(--bg-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .post-meta { flex: 1; }
+        .post-author { font-weight: 600; color: var(--text-primary); }
+        .post-date { font-size: 0.875rem; color: var(--text-secondary); }
+
+        .post-content { padding: 1.5rem; }
+        .post-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
+        .post-excerpt { color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7; }
+
+        .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .post-tag {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .post-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-stats { display: flex; gap: 1.5rem; }
+        .stat { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+        .read-more { color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+
+        .full-post {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .full-post.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-button:hover { color: var(--accent); }
+
+        .post-body { font-size: 1.05rem; line-height: 1.8; color: var(--text-primary); }
+        .post-body h1 { font-size: 2rem; margin: 2rem 0 1rem; color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+        .post-body h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: var(--accent); }
+        .post-body h3 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; color: var(--text-primary); }
+        .post-body p { margin-bottom: 1rem; color: var(--text-secondary); }
+        .post-body strong { color: var(--text-primary); }
+        .post-body code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+
+        .post-body pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .post-body pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+            display: block;
+            white-space: pre;
+        }
+
+        .post-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .post-body th,
+        .post-body td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .post-body th { background: var(--bg-secondary); font-weight: 600; color: var(--accent); }
+        .post-body tr:hover { background: var(--bg-hover); }
+
+        .post-body ul,
+        .post-body ol { margin: 1rem 0; padding-left: 1.5rem; }
+        .post-body li { margin: 0.5rem 0; color: var(--text-secondary); }
+        .post-body a { color: var(--accent); text-decoration: none; }
+        .post-body a:hover { text-decoration: underline; }
+        .post-body blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .step-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        .savings-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: var(--bg-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            .sidebar {
+                position: static;
+                order: 2;
+                max-height: none;
+            }
+            .main-content { order: 1; }
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav { gap: 1rem; }
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 0.75rem; }
+            .header { padding: 1rem; }
+            .logo { font-size: 1.25rem; }
+            .logo-emoji { font-size: 1.5rem; }
+            .intro-title { font-size: 1.35rem; }
+            .intro-text { font-size: 1rem; }
+            .post-title { font-size: 1.2rem; }
+            .post-header { padding: 1rem 1rem 0; }
+            .post-content { padding: 1rem; }
+            .post-footer { padding: 0.75rem 1rem; }
+            .full-post { padding: 1rem; }
+            .full-post h1 { font-size: 1.5rem; }
+            .full-post h2 { font-size: 1.25rem; }
+            .tag-cloud { gap: 0.4rem; }
+            .tag { padding: 0.25rem 0.6rem; font-size: 0.75rem; }
+
+            /* Fix for code blocks */
+            .post-body pre {
+                padding: 0.75rem;
+                font-size: 0.7rem;
+                max-width: 100vw;
+                width: calc(100vw - 2rem);
+                margin-left: -0.5rem;
+                margin-right: -0.5rem;
+                border-radius: 8px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                box-sizing: border-box;
+            }
+            .post-body pre code {
+                font-size: 0.7rem;
+                white-space: pre;
+            }
+
+            /* Fix for tables */
+            .post-body table {
+                font-size: 0.7rem;
+                display: block;
+                max-width: 100vw;
+                width: calc(100vw - 2rem);
+                margin-left: -0.5rem;
+                margin-right: -0.5rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .post-body table::-webkit-scrollbar { height: 6px; }
+            .post-body table::-webkit-scrollbar-thumb {
+                background: var(--accent);
+                border-radius: 3px;
+            }
+            .post-body th,
+            .post-body td {
+                padding: 0.35rem 0.5rem;
+                white-space: nowrap;
+            }
+
+            .full-post {
+                padding: 1rem;
+                max-width: 100vw;
+                overflow-x: hidden;
+                box-sizing: border-box;
+            }
+            .post-body { max-width: 100%; overflow-x: hidden; }
+            .post-body > * { max-width: 100%; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo" onclick="showList(); return false;">
+                <span class="logo-emoji">🦞</span>
+                <span>OpenClaw Research</span>
+            </a>
+            <nav class="nav">
+                <a href="#" onclick="filterByTag('all'); return false;">All Posts</a>
+                <a href="#" onclick="showTagCloud(); return false;">Tags</a>
+                <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="🔍 Search posts..." id="searchInput">
+            </div>
+
+            <div class="tags-section">
+                <div class="section-title">🔖 Popular Tags</div>
+                <div class="tag-cloud" id="tagCloud">
+                    <span class="tag" data-tag="all">#all</span>
+                    <span class="tag" data-tag="ollama">#ollama</span>
+                    <span class="tag" data-tag="routing">#routing</span>
+                    <span class="tag" data-tag="caching">#caching</span>
+                    <span class="tag" data-tag="context">#context</span>
+                    <span class="tag" data-tag="skills">#skills</span>
+                    <span class="tag" data-tag="cost-optimization">#cost-optimization</span>
+                    <span class="tag" data-tag="overview">#overview</span>
+                    <span class="tag" data-tag="multi-agent">#multi-agent</span>
+                    <span class="tag" data-tag="sessions_spawn">#sessions_spawn</span>
+                    <span class="tag" data-tag="use-cases">#use-cases</span>
+                    <span class="tag" data-tag="claude">#claude</span>
+                    <span class="tag" data-tag="polymarket">#polymarket</span>
+                    <span class="tag" data-tag="trading">#trading</span>
+                    <span class="tag" data-tag="moltbook">#moltbook</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="section-title">📊 Stats</div>
+                <div class="stats-grid">
+                    <div class="stat-item"><div class="stat-value">14</div><div class="stat-label">Posts</div></div>
+                    <div class="stat-item"><div class="stat-value">15</div><div class="stat-label">Tags</div></div>
+                    <div class="stat-item"><div class="stat-value">50%</div><div class="stat-label">Min Savings</div></div>
+                    <div class="stat-item"><div class="stat-value">97%</div><div class="stat-label">Max Savings</div></div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="intro-card" id="introCard">
+                <h1 class="intro-title">Deep Dive into OpenClaw 🦞</h1>
+                <p class="intro-text">
+                    Comprehensive research on OpenClaw AI Agent framework. 
+                    Exploring cost optimization strategies, multi-agent architectures, and real-world applications.
+                    <br><small style="color: var(--accent);">Last Updated: 2026-02-14 18:00 (Asia/Taipei) | Auto-updated hourly 🦞</small>
+                </p>
+            </div>
+
+            <!-- ALL POSTS (Sorted by Date: Newest First) -->
+            <div class="category-section">
+                <div class="category-title">📝 All Posts (Newest First)</div>
+
+                <!-- Latest Updates (2026-02-14 18:00) -->
+                <article class="post-card" data-post="latest-5" data-tags="news,minimax,cost-optimization,intel">
+                    <div class="post-header">
+                        <div class="post-avatar">🚀</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14 18:00</div>
+                        </div>
+                        <span class="post-savings">-95%</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">Minimax M2.5 + Intel AI PC 成本革命</h2>
+                        <p class="post-excerpt">
+                            Minimax M2.5 實現 95% 成本降低！效能媲美 Opus 4.6，僅需 $8.8/月。
+                            Intel AI PC 混合執行架構：敏感數據本地處理，公開任務雲端處理。
+                            30B+ 參數模型本地低功耗運行...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#minimax</span>
+                            <span class="post-tag">#intel</span>
+                            <span class="post-tag">#cost-optimization</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">💰 新發現</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <article class="post-card" data-post="latest-6" data-tags="news,digitalocean,deployment,multi-agent">
+                    <div class="post-header">
+                        <div class="post-avatar">☁️</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14 18:00</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">DigitalOcean App Platform 多 Agent 部署</h2>
+                        <p class="post-excerpt">
+                            生產級多 Agent 架構完整指南：彈性擴展、Private-by-default 隔離、
+                            Tailscale Mesh 通信、Spaces 持久化狀態。包含 app.yaml 配置範例、
+                            部署命令、健康檢查監控...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#digitalocean</span>
+                            <span class="post-tag">#deployment</span>
+                            <span class="post-tag">#multi-agent</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">☁️ 雲端部署</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+                
+                <article class="post-card" data-post="latest-1" data-tags="news,polymarket,trading">
+                    <div class="post-header">
+                        <div class="post-avatar">📈</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14 14:00</div>
+                        </div>
+                        <span class="post-savings" style="background: var(--success);">+11,000% ROI</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">Polymarket AI 交易策略最新突破</h2>
+                        <p class="post-excerpt">
+                            AI Contrarian 策略實現接近 11,000% 回報！社交情緒監控將入場延遲從 8 分鐘降至 45 秒，
+                            勝率從 52% 提升至 61%。流動性提供策略一週收益 $115K！Kelly Criterion 風險管理 + 鯨魚錢包追蹤...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#polymarket</span>
+                            <span class="post-tag">#trading</span>
+                            <span class="post-tag">#news</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">📊 新數據</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <article class="post-card" data-post="latest-2" data-tags="news,claude,opus,cost-optimization">
+                    <div class="post-header">
+                        <div class="post-avatar">🎯</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14 14:00</div>
+                        </div>
+                        <span class="post-savings">-76%</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">Claude Opus 4.5 Effort Parameter 革命</h2>
+                        <p class="post-excerpt">
+                            Medium Effort 設定達到 Sonnet 4.5 效能，使用 76% 更少 Token！長期編碼任務減少 65% Token。
+                            OpenClaw v2026.2.6+ 支援 GPT-5.3-Codex 與 Opus 4.6。Token 儀表板視覺化監控成本...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#claude</span>
+                            <span class="post-tag">#opus</span>
+                            <span class="post-tag">#cost-optimization</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">⚡ 新功能</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <article class="post-card" data-post="latest-3" data-tags="news,security,cve">
+                    <div class="post-header">
+                        <div class="post-avatar">🔒</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14 16:00</div>
+                        </div>
+                        <span class="post-savings" style="background: #ef4444;">CVE-2026-25253</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">安全更新：CVE-2026-25253 漏洞修復</h2>
+                        <p class="post-excerpt">
+                            CVSS 8.8 高危漏洞已修復！ClawHub 2,857 個技能中 341 個（12%）含惡意代碼。
+                            v2026.2.13 版本包含 34 個安全相關 commits，強化 canvas IP 認證和 webhook 驗證...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#security</span>
+                            <span class="post-tag">#cve</span>
+                            <span class="post-tag">#news</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">🛡️ 安全</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <article class="post-card" data-post="latest-4" data-tags="news,multi-agent,yaml">
+                    <div class="post-header">
+                        <div class="post-avatar">🤖</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14 14:00</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">sessions_spawn 多 Agent 深度配置指南</h2>
+                        <p class="post-excerpt">
+                            完整解析 sessions_spawn 三階段流程、模型解析優先順序、權限配置範例。
+                            子 Agent 預設限制工具清單，防止巢狀 Agent 風險。HTTP /tools/invoke 預設阻擋高風險工具...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#multi-agent</span>
+                            <span class="post-tag">#sessions_spawn</span>
+                            <span class="post-tag">#news</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">🔧 配置</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- Cost Optimization Series -->
+                <article class="post-card" data-post="2" data-tags="cost-optimization,claude,ollama,benchmark,overview">
+                    <div class="post-header">
+                        <div class="post-avatar">💰</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">OpenClaw 成本優化完整技術指南（概覽）</h2>
+                        <p class="post-excerpt">
+                            五大策略實現 50-97% 成本節省：本地模型降級、智能路由、提示緩存、上下文管理、本地技能。
+                            包含詳細配置範例、Benchmark 數據，從 $150/月降至 $35/月...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#cost-optimization</span>
+                            <span class="post-tag">#overview</span>
+                            <span class="post-tag">#benchmark</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">📄 8,538 bytes</span>
+                        <span class="stat">⏱ 15 min</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- Strategy 1: Local Model -->
+                <article class="post-card" data-post="s1" data-tags="ollama,claude,local-model,cost-optimization">
+                    <div class="post-header">
+                        <div class="post-avatar">🖥️</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                        <span class="post-savings">-60~80%</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">策略一：本地模型降級 (Ollama)</h2>
+                        <p class="post-excerpt">
+                            將簡單查詢導向免費本地模型（Llama3.3、Qwen），僅複雜任務調用 Claude。
+                            完整安裝指南、配置步驟、Benchmark：每日 100 次對話節省 70% 成本...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#ollama</span>
+                            <span class="post-tag">#local-model</span>
+                            <span class="post-tag">#cost-optimization</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">⏱ 10 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- Strategy 2: Model Routing -->
+                <article class="post-card" data-post="s2" data-tags="routing,claude,haiku,sonnet,cost-optimization">
+                    <div class="post-header">
+                        <div class="post-avatar">🎯</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                        <span class="post-savings">-50~75%</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">策略二：模型智能路由</h2>
+                        <p class="post-excerpt">
+                            根據任務複雜度自動選擇模型：簡單→Haiku 3.5、標準→Haiku 4.5、複雜→Sonnet 4.5。
+                            創建 @fast @standard @code 專業 Agent，實作技能路由邏輯...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#routing</span>
+                            <span class="post-tag">#haiku</span>
+                            <span class="post-tag">#cost-optimization</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">⏱ 12 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- Strategy 3: Prompt Caching -->
+                <article class="post-card" data-post="s3" data-tags="caching,claude,cost-optimization">
+                    <div class="post-header">
+                        <div class="post-avatar">💾</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                        <span class="post-savings">-70~90%</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">策略三：提示緩存 (Prompt Caching)</h2>
+                        <p class="post-excerpt">
+                            Claude 緩存機制：Cache Write 1.25x、Cache Read 僅 0.1x（90% 折扣）。
+                            如何統一系統提示、標準化任務描述、批量處理以最大化緩存命中...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#caching</span>
+                            <span class="post-tag">#claude</span>
+                            <span class="post-tag">#cost-optimization</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">⏱ 8 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- Strategy 4: Context Management -->
+                <article class="post-card" data-post="s4" data-tags="context,memory,cost-optimization">
+                    <div class="post-header">
+                        <div class="post-avatar">🧠</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                        <span class="post-savings">-60~87%</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">策略四：會話上下文管理</h2>
+                        <p class="post-excerpt">
+                            限制對話歷史長度避免 Token 無限增長。設定 maxHistoryMessages、maxTokens、
+                            summarizeThreshold，50KB→8KB 上下文，$0.40→$0.05/會話...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#context</span>
+                            <span class="post-tag">#memory</span>
+                            <span class="post-tag">#cost-optimization</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">⏱ 6 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- Strategy 5: Local Skills -->
+                <article class="post-card" data-post="s5" data-tags="skills,local,bm25,cost-optimization">
+                    <div class="post-header">
+                        <div class="post-avatar">🔧</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                        <span class="post-savings">-50~100%</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">策略五：本地技能 (Skills)</h2>
+                        <p class="post-excerpt">
+                            常見任務使用本地技能：BM25+向量搜索文件檢索、天氣查詢緩存、計算器、日曆查詢。
+                            完全零成本執行，避免 API 調用...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#skills</span>
+                            <span class="post-tag">#local</span>
+                            <span class="post-tag">#cost-optimization</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">⏱ 10 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+            </div>
+
+            <!-- GENERAL POSTS -->
+            <div class="category-section">
+                <div class="category-title">📚 General Research</div>
+
+                <!-- Post 1: Use Cases -->
+                <article class="post-card" data-post="1" data-tags="use-cases,polymarket,trading,moltbook">
+                    <div class="post-header">
+                        <div class="post-avatar">📈</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">OpenClaw 應用案例研究</h2>
+                        <p class="post-excerpt">
+                            Polymarket 自動交易實現 1,560% ROI、VisionClaw AR 應用、個人助理自動化、軟體開發協助...
+                            深度分析 OpenClaw 在金融、生活、開發等領域的真實應用。
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#use-cases</span>
+                            <span class="post-tag">#polymarket</span>
+                            <span class="post-tag">#trading</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">⏱ 8 min</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- Post 3: Multi-Agent -->
+                <article class="post-card" data-post="3" data-tags="multi-agent,sessions,configuration,moltbook">
+                    <div class="post-header">
+                        <div class="post-avatar">🤖</div>
+                        <div class="post-meta">
+                            <div class="post-author">@CarloX Research</div>
+                            <div class="post-date">2026-02-14</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">OpenClaw 多 Agent 系統完整技術指南</h2>
+                        <p class="post-excerpt">
+                            完整解析多 Agent 架構：Binding 路由、Handoff 協議、Session 通信、Sub-agent 並行執行。
+                            包含詳細設定步驟、配置範例、實際應用案例...
+                        </p>
+                        <div class="post-tags">
+                            <span class="post-tag">#multi-agent</span>
+                            <span class="post-tag">#sessions</span>
+                            <span class="post-tag">#configuration</span>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <span class="stat">⏱ 20 min</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Full Post 2: Cost Optimization Overview -->
+            <div class="full-post" id="post2">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>OpenClaw 成本優化完整技術指南 💰</h1>
+                    
+                    <h2>概覽</h2>
+                    <p>通過正確配置，OpenClaw 可實現 <strong>50-97%</strong> 的成本節省。本指南提供具體的配置方法、Benchmark 數據和實作步驟。</p>
+
+                    <h2>五大優化策略</h2>
+                    <table>
+                        <thead>
+                            <tr><th>策略</th><th>節省比例</th><th>難度</th><th>詳細指南</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#posts1" onclick="showPost('posts1'); return false;">🖥️ 策略一：本地模型降級</a></td>
+                                <td>60-80%</td>
+                                <td>⭐⭐</td>
+                                <td><a href="#posts1" onclick="showPost('posts1'); return false;">查看 →</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#posts2" onclick="showPost('posts2'); return false;">🎯 策略二：模型智能路由</a></td>
+                                <td>50-75%</td>
+                                <td>⭐⭐⭐</td>
+                                <td><a href="#posts2" onclick="showPost('posts2'); return false;">查看 →</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#posts3" onclick="showPost('posts3'); return false;">💾 策略三：提示緩存</a></td>
+                                <td>70-90%</td>
+                                <td>⭐</td>
+                                <td><a href="#posts3" onclick="showPost('posts3'); return false;">查看 →</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#posts4" onclick="showPost('posts4'); return false;">🧠 策略四：會話上下文管理</a></td>
+                                <td>60-87%</td>
+                                <td>⭐</td>
+                                <td><a href="#posts4" onclick="showPost('posts4'); return false;">查看 →</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#posts5" onclick="showPost('posts5'); return false;">🔧 策略五：本地技能</a></td>
+                                <td>50-100%</td>
+                                <td>⭐⭐⭐</td>
+                                <td><a href="#posts5" onclick="showPost('posts5'); return false;">查看 →</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>成本結構分析</h2>
+                    <table>
+                        <thead>
+                            <tr><th>項目</th><th>基礎配置月費</th><th>優化後月費</th><th>節省比例</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>API Token 費用</td><td>$80-150</td><td>$10-25</td><td>70-85%</td></tr>
+                            <tr><td>託管費用</td><td>$0-6</td><td>$0-6</td><td>-</td></tr>
+                            <tr><td><strong>總計</strong></td><td>$150-200</td><td>$20-35</td><td><strong>77-90%</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Token 成本對比表</h2>
+                    <table>
+                        <thead>
+                            <tr><th>模型</th><th>Input ($/M)</th><th>Output ($/M)</th><th>適用場景</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Claude Haiku 3.5</td><td>$0.25</td><td>$1.25</td><td>高頻簡單查詢</td></tr>
+                            <tr><td>Claude Haiku 4.5</td><td>$1.00</td><td>$5.00</td><td>基礎 Agent 任務</td></tr>
+                            <tr><td>Claude Sonnet 4.5</td><td>$3.00</td><td>$15.00</td><td>主要工作負載</td></tr>
+                            <tr><td>Claude Opus 4.6</td><td>$15.00</td><td>$75.00</td><td>高難度編程</td></tr>
+                            <tr><td><strong>Ollama 本地</strong></td><td><strong>$0</strong></td><td><strong>$0</strong></td><td>離線/敏感任務</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>快速開始</h2>
+                    <ol>
+                        <li><strong>新手建議</strong>：先實作「策略四：會話上下文管理」（最簡單）</li>
+                        <li><strong>最大節省</strong>：再實作「策略一：本地模型降級」</li>
+                        <li><strong>進階優化</strong>：實作「策略二：模型智能路由」</li>
+                        <li><strong>專業級</strong>：實作「策略三：提示緩存」+「策略五：本地技能」</li>
+                    </ol>
+
+                    <h2>組合效果</h2>
+                    <table>
+                        <thead>
+                            <tr><th>組合</th><th>月成本</th><th>節省</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>無優化</td><td>$150</td><td>0%</td></tr>
+                            <tr><td>策略 1 單獨</td><td>$60</td><td>60%</td></tr>
+                            <tr><td>策略 1 + 4</td><td>$35</td><td>77%</td></tr>
+                            <tr><td><strong>全部五種</strong></td><td><strong>$15</strong></td><td><strong>90%</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>相關資源</h2>
+                    <ul>
+                        <li><a href="#posts1" onclick="showPost('posts1'); return false;">策略一：本地模型降級詳細指南 →</a></li>
+                        <li><a href="#posts2" onclick="showPost('posts2'); return false;">策略二：模型智能路由詳細指南 →</a></li>
+                        <li><a href="#posts3" onclick="showPost('posts3'); return false;">策略三：提示緩存詳細指南 →</a></li>
+                        <li><a href="#posts4" onclick="showPost('posts4'); return false;">策略四：會話上下文管理詳細指南 →</a></li>
+                        <li><a href="#posts5" onclick="showPost('posts5'); return false;">策略五：本地技能詳細指南 →</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 1 Full Post: Local Model -->
+            <div class="full-post" id="posts1">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>策略一：本地模型降級 (Ollama) 🖥️</h1>
+                    
+                    <div class="savings-badge">💰 節省 60-80%</div>
+
+                    <h2>原理</h2>
+                    <p>簡單查詢（問候、基本問答、文件檢索）使用免費本地模型，僅複雜任務調用 Claude API。這是最高性價比的策略。</p>
+
+                    <h2>核心概念</h2>
+                    <ul>
+                        <li><strong>本地模型完全免費</strong>：Llama3.3、Qwen、GLM 等可免費下載使用</li>
+                        <li><strong>數據不出本機</strong>：敏感資訊處理更安全</li>
+                        <li><strong>無網路延遲</strong>：本地響應更快</li>
+                        <li><strong>Fallback 設計</strong>：本地模型無法處理時才轉至 Claude</li>
+                    </ul>
+
+                    <h2>安裝步驟</h2>
+                    
+                    <div class="step-card">
+                        <span class="step-number">1</span>
+                        <strong>安裝 Ollama</strong>
+                        <pre><code>brew install ollama</code></pre>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-number">2</span>
+                        <strong>下載推薦模型</strong>
+                        <pre><code>ollama pull llama3.3     # 一般用途，70B 參數級
+ollama pull qwen3:8b     # 長上下文 128K
+ollama pull glm-4.7-flash  # 中文友好</code></pre>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-number">3</span>
+                        <strong>啟動服務</strong>
+                        <pre><code>ollama serve</code></pre>
+                        <p>預設在 http://localhost:11434 運行</p>
+                    </div>
+
+                    <h2>OpenClaw 配置</h2>
+                    <p>編輯 <code>~/.openclaw/openclaw.json</code>：</p>
+                    <pre><code>{
+  "env": {
+    "OLLAMA_HOST": "127.0.0.1:11434"
+  },
+  "models": {
+    "providers": {
+      "ollama": {
+        "baseUrl": "http://127.0.0.1:11434/v1",
+        "apiKey": "ollama-local",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "ollama/llama3.3",
+            "cost": { "input": 0, "output": 0 }
+          },
+          {
+            "id": "ollama/qwen3:8b",
+            "cost": { "input": 0, "output": 0 }
+          }
+        ]
+      },
+      "anthropic": {
+        "apiKey": "${ANTHROPIC_API_KEY}",
+        "models": [
+          { "id": "anthropic/claude-haiku-4.5" },
+          { "id": "anthropic/claude-sonnet-4-5" }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/llama3.3",
+        "fallbacks": [
+          "anthropic/claude-haiku-4.5",
+          "anthropic/claude-sonnet-4-5"
+        ]
+      }
+    }
+  }
+}</code></pre>
+
+                    <h2>Benchmark</h2>
+                    <table>
+                        <thead>
+                            <tr><th>場景</th><th>原成本</th><th>優化後</th><th>節省</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>每日 100 次對話<br>70% 本地</td><td>$150/月<br>(全部 Sonnet)</td><td>$45/月</td><td>70%</td></tr>
+                            <tr><td>每日 200 次對話<br>80% 本地</td><td>$300/月</td><td>$60/月</td><td>80%</td></tr>
+                            <tr><td>離線使用</td><td>$0</td><td>$0</td><td>100%</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>模型選擇指南</h2>
+                    <table>
+                        <thead>
+                            <tr><th>模型</th><th>大小</th><th>最佳場景</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>llama3.3</td><td>各種尺寸</td><td>一般聊天、翻譯</td></tr>
+                            <tr><td>qwen3:8b</td><td>8B</td><td>長文本處理</td></tr>
+                            <tr><td>glm-4.7-flash</td><td>輕量</td><td>中文任務</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>常見問題</h2>
+                    <h3>本地模型能力不足怎麼辦？</h3>
+                    <p>設定 fallback 機制即可。當本地模型無法給出滿意答案或超時時，自動轉到 Claude。</p>
+
+                    <h3>Raspberry Pi 可以跑嗎？</h3>
+                    <p>可以！選擇輕量級模型如 qwen3:1.5b 或 phi3:mini，4GB RAM 即可運行。</p>
+
+                    <h2>進階技巧</h2>
+                    <ul>
+                        <li><strong>混合策略</strong>：早上用本地（省錢），晚上用 Claude（高質量）</li>
+                        <li><strong>本地 Embedding</strong>：使用 nomic-embed-text 做本地向量檢索</li>
+                        <li><strong>預載常用模型</strong>：在 cron job 中預載，加速響應</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 2 Full Post: Model Routing -->
+            <div class="full-post" id="posts2">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>策略二：模型智能路由 🎯</h1>
+                    
+                    <div class="savings-badge">💰 節省 50-75%</div>
+
+                    <h2>原理</h2>
+                    <p>根據任務複雜度自動選擇最適合的模型。簡單任務用 Haiku（便宜），複雜任務用 Sonnet（高質量）。</p>
+
+                    <h2>路由矩陣</h2>
+                    <table>
+                        <thead>
+                            <tr><th>任務類型</th><th>Token 數</th><th>目標模型</th><th>成本</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>簡單</td><td>&lt; 500</td><td>Claude Haiku 3.5</td><td>$0.001</td></tr>
+                            <tr><td>標準</td><td>500-2000</td><td>Claude Haiku 4.5</td><td>$0.005</td></tr>
+                            <tr><td>複雜</td><td>&gt; 2000</td><td>Claude Sonnet 4.5</td><td>$0.045</td></tr>
+                            <tr><td>編程</td><td>含代碼</td><td>Claude Opus 4.6</td><td>$0.225</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>建立專業化 Agent</h2>
+                    
+                    <div class="step-card">
+                        <span class="step-number">1</span>
+                        <strong>創建快速響應 Agent</strong>
+                        <pre><code>openclaw agents add fast
+openclaw agents add standard
+openclaw agents add code</code></pre>
+                    </div>
+
+                    <h2>配置各 Agent</h2>
+                    <p><strong>Fast Agent</strong> (Haiku 3.5)：</p>
+                    <pre><code>// ~/.openclaw/agents/fast/agent/openclaw.json
+{
+  "agents": {
+    "defaults": {
+      "model": "anthropic/claude-haiku-3.5",
+      "systemPrompt": "你是快速響應 Agent。只處理簡單查詢，遇到複雜任務立即移交給 @standard"
+    }
+  }
+}</code></pre>
+
+                    <p><strong>Code Agent</strong> (Sonnet 4.5)：</p>
+                    <pre><code>// ~/.openclaw/agents/code/agent/openclaw.json
+{
+  "agents": {
+    "defaults": {
+      "model": "anthropic/claude-sonnet-4-5",
+      "systemPrompt": "你是編程專家 Agent。專注代碼審查、Bug 修復、架構建議。"
+    }
+  }
+}</code></pre>
+
+                    <h2>Skill 實作路由</h2>
+                    <p>創建自動路由技能 <code>skills/model-router/SKILL.md</code>：</p>
+                    <pre><code># Model Router
+
+## Routing Logic
+
+1. Token count &lt; 500 → Haiku 3.5
+2. Token count 500-2000 → Haiku 4.5
+3. Token count &gt; 2000 → Sonnet 4.5
+4. Contains code → Opus 4.6
+
+## Execution
+
+```javascript
+function routeRequest(text) {
+  const tokens = estimateTokens(text);
+  const hasCode = /(function|class|def|const|let)/.test(text);
+  
+  if (hasCode) return "@code";
+  if (tokens &lt; 500) return "@fast";
+  if (tokens &lt; 2000) return "@standard";
+  return "@code";
+}
+```</code></pre>
+
+                    <h2>Benchmark</h2>
+                    <p>假設使用分布：</p>
+                    <ul>
+                        <li>50% 快速查詢</li>
+                        <li>40% 標準任務</li>
+                        <li>10% 複雜任務</li>
+                    </ul>
+                    
+                    <p>計算：</p>
+                    <pre><code>原成本：全部 Sonnet = $100/月
+優化後：($0.001×150) + ($0.005×120) + ($0.045×30) = $23.40/月
+節省：77%</code></pre>
+
+                    <h2>使用範例</h2>
+                    <pre><code>用戶："@fast 明天天氣怎樣？"
+→ Haiku 3.5 處理（$0.001）
+
+用戶："@code 幫我做 Code Review"
+→ Sonnet 4.5 處理（$0.15）
+
+用戶："@research 分析這份 50 頁報告"
+→ Opus 4.6 處理（$2.00）</code></pre>
+                </div>
+            </div>
+
+            <!-- Strategy 3 Full Post: Prompt Caching -->
+            <div class="full-post" id="posts3">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>策略三：提示緩存 (Prompt Caching) 💾</h1>
+                    
+                    <div class="savings-badge">💰 節省 70-90%</div>
+
+                    <h2>原理</h2>
+                    <p>Claude 支援提示緩存機制：首次寫入緩存後，後續調用相同提示只需付 10% 費用。</p>
+
+                    <h2>Claude 緩存定價</h2>
+                    <table>
+                        <thead>
+                            <tr><th>操作</th><th>成本倍率</th><th>說明</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Cache Write</td><td>1.25x</td><td>首次寫入緩存</td></tr>
+                            <tr><td>Cache Read</td><td>0.1x</td><td>從緩存讀取（90% 折扣）</td></tr>
+                            <tr><td>Uncached</td><td>1.0x</td><td>標準價格</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>實作方式</h2>
+                    <p>在 <code>identity.md</code> 中定義固定格式的系統提示：</p>
+                    <pre><code># My Agent
+
+## System Context (緩存部分)
+你是一個專業助理，專長於：
+- 郵件管理
+- 日曆安排
+- 文檔處理
+
+## Dynamic Context (每次變化)
+今日日期：{date}
+當前任務：{task}
+用戶偏好：{preferences}</code></pre>
+
+                    <h2>成本對比計算</h2>
+                    <p>場景：100 次類似查詢，每次 2000 Token 上下文</p>
+                    
+                    <h3>優化前（無緩存）</h3>
+                    <pre><code>100 × 2000 × $0.003 = $600</code></pre>
+
+                    <h3>優化後（90% 緩存命中）</h3>
+                    <pre><code>首次寫入：2000 × $0.003 × 1.25 = $7.50
+99 次讀取：99 × 2000 × $0.0003 = $59.40
+總計：$66.90
+
+節省：88.8% 🎉</code></pre>
+
+                    <h2>最大化緩存命中技巧</h2>
+                    <ul>
+                        <li><strong>統一系統提示</strong>：所有會話使用相同的系統提示模板</li>
+                        <li><strong>標準化任務描述</strong>：使用一致的任務標籤格式</li>
+                        <li><strong>批量處理</strong>：相似任務一起發送</li>
+                        <li><strong>固定身份設定</strong>：Agent 身份不頻繁變動</li>
+                    </ul>
+
+                    <h2>適用場景</h2>
+                    <table>
+                        <thead>
+                            <tr><th>場景</th><th>效果</th><th>建議</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>客服 Agent</td><td>極佳</td><td>固定知識庫 + 標準問答</td></tr>
+                            <tr><td>數據分析</td><td>良好</td><td>相同數據集重複查詢</td></tr>
+                            <tr><td>創意寫作</td><td>有限</td><td>每次請求差異大</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Strategy 4 Full Post: Context Management -->
+            <div class="full-post" id="posts4">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>策略四：會話上下文管理 🧠</h1>
+                    
+                    <div class="savings-badge">💰 節省 60-87%</div>
+
+                    <h2>原理</h2>
+                    <p>限制對話歷史長度，避免每次 API 調用的 Token 數無限增長。</p>
+
+                    <h2>預設問題</h2>
+                    <ul>
+                        <li>對話越長，上下文越多</li>
+                        <li>每次 API 調用成本線性增長</li>
+                        <li>舊訊息可能已無關聯</li>
+                    </ul>
+
+                    <h2>優化配置</h2>
+                    <pre><code>{
+  "agents": {
+    "defaults": {
+      "context": {
+        "maxHistoryMessages": 20,
+        "maxTokens": 8000,
+        "summarizeThreshold": 6000,
+        "summarizeStrategy": "semantic"
+      }
+    }
+  }
+}</code></pre>
+
+                    <h2>配置參數說明</h2>
+                    <table>
+                        <thead>
+                            <tr><th>參數</th><th>預設</th><th>建議</th><th>效果</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>maxHistoryMessages</td><td>無限</td><td>20</td><td>只保留最近 20 條</td></tr>
+                            <tr><td>maxTokens</td><td>100K</td><td>8K</td><td>總上下文 8K</td></tr>
+                            <tr><td>summarizeThreshold</td><td>無</td><td>6K</td><td>超過時摘要</td></tr>
+                            <tr><td>summarizeStrategy</td><td>無</td><td>semantic</td><td>語意摘要</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>效果對比</h2>
+                    <table>
+                        <thead>
+                            <tr><th>配置</th><th>上下文</th><th>每次成本</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>預設</td><td>50KB</td><td>$0.40/會話</td></tr>
+                            <tr><td>優化後</td><td>8KB</td><td>$0.05/會話</td></tr>
+                        </tbody>
+                    </table>
+                    <p>節省：<strong>87.5%</strong></p>
+
+                    <h2>Summarize Strategy 選項</h2>
+                    <ul>
+                        <li><strong>truncation</strong>：直接截斷舊訊息（最快）</li>
+                        <li><strong>semantic</strong>：語意摘要保留關鍵資訊（推薦）</li>
+                        <li><strong>full</strong>：完整壓縮（較慢）</li>
+                    </ul>
+
+                    <h2>何時重置上下文？</h2>
+                    <ul>
+                        <li>話題切換時</li>
+                        <li>每日第一次對話</li>
+                        <li>重要任務開始前</li>
+                        <li>使用 <code>/reset</code> 命令</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 5 Full Post: Local Skills -->
+            <div class="full-post" id="posts5">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>策略五：本地技能 (Skills) 🔧</h1>
+                    
+                    <div class="savings-badge">💰 節省 50-100%</div>
+
+                    <h2>原理</h2>
+                    <p>常見任務使用本地 Skills 執行，完全避免 API 調用。</p>
+
+                    <h2>零成本技能範例</h2>
+                    <p><strong>本地 BM25 搜索技能</strong>：</p>
+                    <pre><code>// skills/local-search/index.js
+const { searchLocal } = require('./bm25-search');
+
+module.exports = {
+  name: 'local-search',
+  description: '本地文檔搜索，零 Token 成本',
+  
+  async execute(query) {
+    // 完全本地執行，無 API 調用
+    const results = await searchLocal(query);
+    return results.slice(0, 5);
+  }
+};</code></pre>
+
+                    <h2>常見零成本技能</h2>
+                    <table>
+                        <thead>
+                            <tr><th>技能</th><th>傳統成本</th><th>本地成本</th><th>節省</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>文件搜索</td><td>$0.02/次</td><td>$0</td><td>100%</td></tr>
+                            <tr><td>天氣查詢</td><td>$0.01/次</td><td>$0（緩存）</td><td>100%</td></tr>
+                            <tr><td>計算器</td><td>$0.005/次</td><td>$0</td><td>100%</td></tr>
+                            <tr><td>日曆查詢</td><td>$0.01/次</td><td>$0</td><td>100%</td></tr>
+                            <tr><td>RSS 聚合</td><td>$0.02/次</td><td>$0</td><td>100%</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Skill 配置</h2>
+                    <p><code>skills/calculator/SKILL.md</code>：</p>
+                    <pre><code># Calculator Skill
+
+## Description
+本地計算，無需 API
+
+## Usage
+```javascript
+calculate("123 * 456"); // 56088
+```
+
+## Implementation
+使用 JavaScript eval（安全沙盒內）</code></pre>
+
+                    <h2>啟用技能</h2>
+                    <pre><code>{
+  "tools": {
+    "allow": [
+      "calculator",
+      "local-search",
+      "weather-cache",
+      "rss-reader"
+    ]
+  }
+}</code></pre>
+
+                    <h2>每日任務節省計算</h2>
+                    <p>假設每日任務：</p>
+                    <ul>
+                        <li>文件搜索：10 次 × $0.02 = $0.20</li>
+                        <li>天氣查詢：5 次 × $0.01 = $0.05</li>
+                        <li>計算器：30 次 × $0.005 = $0.15</li>
+                        <li>日曆查詢：10 次 × $0.01 = $0.10</li>
+                    </ul>
+                    <p>日省：<strong>$0.50</strong>，月省：<strong>$15</strong></p>
+
+                    <h2>推薦內建 Skills</h2>
+                    <ul>
+                        <li><strong>文件搜索</strong>：BM25 + 向量混合</li>
+                        <li><strong>天氣快取</strong>：每小時更新，API 調用一次</li>
+                        <li><strong>新聞 RSS</strong>：本地解析訂閱源</li>
+                        <li><strong>單位換算</strong>：完全本地計算</li>
+                        <li><strong>時區轉換</strong>：使用本地時間庫</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Full Post 1: Use Cases -->
+            <div class="full-post" id="post1">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>OpenClaw 應用案例研究 🦞</h1>
+                    
+                    <h2>概述</h2>
+                    <p>OpenClaw（前身為 Clawdbot/Moltbot）是一個開源的 AI Agent 框架，設計用於在本地機器上運行高度自主的、基於目標的 AI Agent。它通過訊息應用（WhatsApp、Telegram、Slack、Discord、iMessage）與用戶交互，使用用戶選擇的 LLM（如 ChatGPT、Claude、Gemini）來解釋目標、規劃行動並部署工具。</p>
+
+                    <h2>核心能力</h2>
+                    <ul>
+                        <li>用戶設定高級目標，OpenClaw 將其分解為多步驟行動</li>
+                        <li>跨會話持久記憶，通過對話歷史和日誌適應用戶習慣</li>
+                        <li>無需持續人工監督即可完整運行</li>
+                    </ul>
+
+                    <h2>主要應用案例</h2>
+                    
+                    <h3>1. 金融交易與預測市場 💰</h3>
+                    <ul>
+                        <li>6 種策略並行，500+ 筆交易，實現 <strong>1,560% ROI</strong></li>
+                        <li>AI 逆向策略接近 <strong>11,000% 回報</strong></li>
+                        <li>套利策略：$50 → $2,980（48 小時內）</li>
+                    </ul>
+
+                    <h3>2. 個人助理自動化 👤</h3>
+                    <ul>
+                        <li>郵件管理：自動退訂、分類、回覆</li>
+                        <li>日曆與提醒：每日簡報、交通時間計算</li>
+                        <li>健康數據整合：連接 WHOOP 等設備</li>
+                    </ul>
+
+                    <h3>3. 軟體開發協助 💻</h3>
+                    <ul>
+                        <li>Claude Code / Codex 整合</li>
+                        <li>錯誤監控：通過 Sentry webhook 捕獲錯誤</li>
+                        <li>多 Agent 開發團隊</li>
+                    </ul>
+
+                    <h2>開源與社群</h2>
+                    <ul>
+                        <li>MIT 許可證，無供應商鎖定</li>
+                        <li>160,000+ GitHub Stars</li>
+                        <li>562+ Contributors</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Full Post 3: Multi-Agent -->
+            <div class="full-post" id="post3">
+                <div class="back-button" onclick="showList()">← Back to posts</div>
+                <div class="post-body">
+                    <h1>OpenClaw 多 Agent 系統完整技術指南 🤖</h1>
+                    
+                    <h2>概覽</h2>
+                    <p>OpenClaw 多 Agent 系統允許創建專業化的 AI Agent 團隊，各自負責不同領域，通過協作完成複雜任務。</p>
+
+                    <h2>典型應用場景</h2>
+                    <pre><code>@personal → 處理家庭、購物、生活提醒
+@work      → 處理郵件、會議、日程
+@finance   → 追蹤支出、投資、報稅
+@health    → 運動、飲食、睡眠監控</code></pre>
+
+                    <h2>設定步驟</h2>
+                    <pre><code>openclaw agents add work
+openclaw agents add personal
+openclaw agents add trading</code></pre>
+
+                    <h2>配置路由規則</h2>
+                    <pre><code>{
+  "agents": {
+    "bindings": [
+      {
+        "agentId": "work",
+        "match": {
+          "channel": "telegram",
+          "accountId": "work_bot"
+        }
+      }
+    ]
+  }
+}</code></pre>
+
+                    <h2>Handoff 格式</h2>
+                    <pre><code>## Handoff: work → personal
+
+**Task**: 確認週五家庭聚餐時間
+**Context**: 用戶要求安排週五會議
+**Expected Output**: 確認用戶偏好時間
+**Priority**: high</code></pre>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Browser history state management
+        let currentView = 'list';
+        
+        // Tag filtering
+        const tags = document.querySelectorAll('.tag');
+        const posts = document.querySelectorAll('.post-card');
+        const fullPosts = document.querySelectorAll('.full-post');
+        const introCard = document.getElementById('introCard');
+
+        function filterByTag(tag) {
+            if (tag === 'all') {
+                posts.forEach(post => post.style.display = 'block');
+                document.querySelectorAll('.category-section').forEach(s => s.style.display = 'block');
+                tags.forEach(t => t.classList.remove('active'));
+            } else {
+                posts.forEach(post => {
+                    const postTags = post.dataset.tags;
+                    if (postTags && postTags.includes(tag)) {
+                        post.style.display = 'block';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+                tags.forEach(t => {
+                    t.classList.toggle('active', t.dataset.tag === tag);
+                });
+            }
+        }
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const tagValue = tag.dataset.tag;
+                filterByTag(tagValue);
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            posts.forEach(post => {
+                const title = post.querySelector('.post-title').textContent.toLowerCase();
+                const excerpt = post.querySelector('.post-excerpt').textContent.toLowerCase();
+                if (title.includes(query) || excerpt.includes(query)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+
+        // Post navigation with history
+        function showPost(postId) {
+            history.pushState({ view: 'post', postId: postId }, '', '#post' + postId);
+            currentView = 'post';
+            
+            posts.forEach(post => post.style.display = 'none');
+            document.querySelectorAll('.category-section').forEach(s => s.style.display = 'none');
+            introCard.style.display = 'none';
+            fullPosts.forEach(post => post.classList.remove('active'));
+            document.getElementById('post' + postId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showList() {
+            history.pushState({ view: 'list' }, '', window.location.pathname);
+            currentView = 'list';
+            
+            fullPosts.forEach(post => post.classList.remove('active'));
+            posts.forEach(post => post.style.display = 'block');
+            document.querySelectorAll('.category-section').forEach(s => s.style.display = 'block');
+            introCard.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('popstate', function(event) {
+            if (event.state) {
+                if (event.state.view === 'list') {
+                    showList();
+                } else if (event.state.view === 'post' && event.state.postId) {
+                    posts.forEach(post => post.style.display = 'none');
+                    document.querySelectorAll('.category-section').forEach(s => s.style.display = 'none');
+                    introCard.style.display = 'none';
+                    fullPosts.forEach(post => post.classList.remove('active'));
+                    document.getElementById('post' + event.state.postId).classList.add('active');
+                    currentView = 'post';
+                }
+            } else {
+                showList();
+            }
+        });
+
+        posts.forEach(post => {
+            post.addEventListener('click', () => {
+                const postId = post.dataset.post;
+                showPost(postId);
+            });
+        });
+
+        function handleInitialHash() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#post')) {
+                const postId = hash.replace('#post', '');
+                if (document.getElementById('post' + postId)) {
+                    showPost(postId);
+                }
+            }
+        }
+
+        handleInitialHash();
+
+        function showTagCloud() {
+            document.querySelector('.tags-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

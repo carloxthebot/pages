@@ -1,0 +1,5251 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相機殿 - 專業相機鏡頭商城 | Canon • Nikon • Sony • Fujifilm</title>
+    <meta name="description" content="相機殿 - 精選全球知名品牌相機、鏡頭、配件商城。Canon、Nikon、Sony、Fujifilm 產品齊全，價格優惠，專業影像器材一站購齊。">
+    <meta name="keywords" content="相機,鏡頭,影像器材,Canon,Nikon,Sony,Fujifilm,相機商城,單眼相機,微單相機,攝影配件">
+    <meta name="author" content="相機殿">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-TW">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://carloxthebot.github.io/pages/camera-shop.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="相機殿 - 專業相機鏡頭商城">
+    <meta property="og:description" content="精選全球知名品牌相機、鏡頭、配件。Canon、Nikon、Sony、Fujifilm 產品齊全，優惠價格，專業影像器材一站購齊。">
+    <meta property="og:url" content="https://carloxthebot.github.io/pages/camera-shop.html">
+    <meta property="og:site_name" content="相機殿">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=1200&h=630&fit=crop">
+    <meta property="og:locale" content="zh_TW">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="相機殿 - 專業相機鏡頭商城">
+    <meta name="twitter:description" content="精選全球知名品牌相機、鏡頭、配件。Canon、Nikon、Sony、Fujifilm 產品齊全。">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=1200&h=630&fit=crop">
+    
+    <!-- Schema.org Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "WebSite",
+      "name": "相機殿",
+      "url": "https://carloxthebot.github.io/pages/camera-shop.html",
+      "description": "精選全球知名品牌相機、鏡頭、配件商城",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://carloxthebot.github.io/pages/camera-shop.html?search={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "相機殿",
+      "url": "https://carloxthebot.github.io/pages/camera-shop.html",
+      "description": "專業相機鏡頭商城",
+      "image": "https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=800",
+      "sameAs": [
+        "https://www.facebook.com/camerashop",
+        "https://www.instagram.com/camerashop"
+      ]
+    }
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://carloxthebot.github.io/pages/camera-shop.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "相機",
+          "item": "https://carloxthebot.github.io/pages/camera-shop.html?type=相機"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "鏡頭",
+          "item": "https://carloxthebot.github.io/pages/camera-shop.html?type=鏡頭"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "配件",
+          "item": "https://carloxthebot.github.io/pages/camera-shop.html?type=配件"
+        }
+      ]
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #f5a623;
+            --secondary: #ee3124;
+            --dark: #333;
+            --light: #f5f5f5;
+            --border: #e8e8e8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: white;
+            color: var(--dark);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 300;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: var(--secondary);
+        }
+
+        .product-detail {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        .product-detail-image {
+            width: 100%;
+            height: 300px;
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .product-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-detail-info h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .product-detail-specs {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .detail-rating {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .detail-rating span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .detail-price {
+            font-size: 1.8em;
+            color: var(--secondary);
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .detail-action {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .detail-action button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .detail-add-cart {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .detail-add-cart:hover {
+            background: #d91018;
+            transform: scale(1.02);
+        }
+
+        .detail-wishlist {
+            background: var(--light);
+            border: 2px solid var(--border);
+        }
+
+        .detail-wishlist:hover {
+            border-color: var(--secondary);
+        }
+
+        /* Reviews & Q&A */
+        .detail-reviews-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .detail-reviews-section h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .review-item {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .review-date {
+            font-size: 0.8em;
+            color: #999;
+        }
+
+        .review-rating {
+            font-size: 0.85em;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .review-text {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .qna-item {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .qna-question {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qna-question:hover {
+            color: var(--secondary);
+        }
+
+        .qna-toggle {
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+
+        .qna-item.expanded .qna-toggle {
+            transform: rotate(90deg);
+        }
+
+        .qna-answer {
+            display: none;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+
+        .qna-item.expanded .qna-answer {
+            display: block;
+        }
+
+        /* Recommendation Sections */
+        .recommendation-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .recommendation-section h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .recommendation-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .recommendation-card {
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .recommendation-card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .recommendation-image {
+            width: 100%;
+            height: 140px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .recommendation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .recommendation-info {
+            padding: 10px;
+        }
+
+        .recommendation-name {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.3;
+            margin-bottom: 6px;
+            min-height: 2.15em;
+        }
+
+        .recommendation-price {
+            font-size: 1em;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-action {
+            display: flex;
+            gap: 6px;
+            font-size: 0.75em;
+        }
+
+        .recommendation-add-btn {
+            flex: 1;
+            padding: 6px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .recommendation-add-btn:hover {
+            background: #e89a1c;
+            transform: scale(1.05);
+        }
+
+        .recommendation-wishlist-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 4px;
+            background: var(--light);
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .recommendation-wishlist-btn:hover {
+            background: var(--border);
+            transform: scale(1.1);
+        }
+
+        .recommendation-wishlist-btn.saved {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            border-left: 1px solid var(--border);
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+            z-index: 200;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 1.1em;
+        }
+
+        .cart-close {
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #666;
+        }
+
+        .cart-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .cart-qty {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-size: 0.8em;
+            border-radius: 2px;
+        }
+
+        .cart-remove {
+            cursor: pointer;
+            color: #999;
+            font-size: 1em;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border);
+            background: var(--light);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .cart-total span {
+            color: var(--secondary);
+            font-size: 1.2em;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background: #d91018;
+        }
+
+        /* Checkout Modal */
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 400;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkout-modal.show {
+            display: flex;
+        }
+
+        .checkout-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 95vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .checkout-header h2 {
+            font-size: 1.8em;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .checkout-close {
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .checkout-close:hover {
+            color: var(--secondary);
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-section {
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .form-section h3 {
+            font-size: 1.1em;
+            margin: 0 0 15px 0;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-size: 0.9em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .payment-method input {
+            display: none;
+        }
+
+        .payment-method label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        .payment-method input:checked + label {
+            border-color: var(--primary);
+            background: rgba(245, 166, 35, 0.1);
+            color: var(--primary);
+        }
+
+        .coupon-section {
+            display: flex;
+            gap: 8px;
+        }
+
+        .coupon-section input {
+            flex: 1;
+        }
+
+        .coupon-section button {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .coupon-section button:hover {
+            background: #e89a1c;
+        }
+
+        .checkout-summary {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-header {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            color: #666;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .summary-item-name {
+            flex: 1;
+        }
+
+        .summary-item-qty {
+            color: #999;
+            font-size: 0.85em;
+            margin: 0 10px;
+        }
+
+        .summary-item-price {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-line-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .summary-line-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .summary-line.discount {
+            color: var(--primary);
+        }
+
+        .summary-line.discount .summary-line-value {
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-top: 2px solid var(--primary);
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .summary-total-value {
+            color: var(--secondary);
+        }
+
+        .place-order-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .place-order-btn:hover {
+            background: #d91018;
+            transform: scale(1.02);
+        }
+
+        .place-order-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .success-message h3 {
+            font-size: 1.5em;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .order-number {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 15px 0;
+            font-family: monospace;
+        }
+
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-modal.show {
+            display: flex;
+        }
+
+        .auth-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .auth-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .auth-close:hover {
+            color: var(--secondary);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h2 {
+            font-size: 1.8em;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .auth-header p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .auth-tab.active {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form input {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border-color 0.2s;
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+        }
+
+        .auth-submit {
+            padding: 12px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 1em;
+        }
+
+        .auth-submit:hover {
+            background: #d91018;
+        }
+
+        .auth-divider {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            margin: 20px 0;
+        }
+
+        .auth-error {
+            padding: 12px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            border-radius: 6px;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        .auth-error.show {
+            display: block;
+        }
+
+        /* User Account Panel */
+        .account-panel {
+            display: none;
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            border-left: 1px solid var(--border);
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+            z-index: 200;
+            transition: right 0.3s ease;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .account-panel.open {
+            right: 0;
+        }
+
+        .account-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .account-header h3 {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .account-close {
+            cursor: pointer;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .account-user-info {
+            padding: 20px;
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .account-user-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            font-weight: 700;
+        }
+
+        .account-user-name {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .account-user-email {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .account-tabs {
+            display: flex;
+            gap: 0;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border);
+            background: white;
+        }
+
+        .account-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-size: 0.9em;
+        }
+
+        .account-tab.active {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        .account-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .account-section {
+            display: none;
+        }
+
+        .account-section.active {
+            display: block;
+        }
+
+        .account-menu-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .account-menu-item:hover {
+            background: var(--light);
+        }
+
+        .account-menu-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .account-menu-icon {
+            color: #999;
+        }
+
+        /* Orders */
+        .order-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .order-number-label {
+            font-weight: 700;
+            color: var(--dark);
+            font-family: monospace;
+        }
+
+        .order-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .order-status.completed {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .order-status.shipped {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .order-detail {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .order-date {
+            color: #999;
+            font-size: 0.8em;
+        }
+
+        .order-total {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.1em;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .account-logout {
+            position: sticky;
+            bottom: 0;
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid var(--border);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--secondary);
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .account-logout:hover {
+            background: var(--light);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .icon-btn-wrapper {
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: #fafafa;
+            font-size: 0.95em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-top-left {
+            display: flex;
+            gap: 25px;
+        }
+
+        .header-top-right {
+            display: flex;
+            gap: 25px;
+        }
+
+        .header-top a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .header-top a:hover {
+            color: var(--secondary);
+        }
+
+        .header-top a.hidden-mobile {
+            display: inline;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--secondary);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            padding: 10px 15px;
+            background: var(--light);
+            font-size: 0.95em;
+        }
+
+        .search-bar button {
+            background: var(--primary);
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: white;
+            transition: background 0.2s;
+        }
+
+        .search-bar button:hover {
+            background: #e89a1c;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            font-size: 1.3em;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--dark);
+            transition: transform 0.2s;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            width: 100%;
+            padding: 0 20px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        nav a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.95em;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a.active,
+        nav a:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        /* Banner */
+        .banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: bannerShine 3s infinite;
+        }
+
+        @keyframes bannerShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .banner h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            animation: fadeInDown 0.8s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner p {
+            font-size: 1.15em;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Flash Sale Section */
+        .flash-sale-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+            padding: 25px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .flash-sale-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .flash-sale-header h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .flash-sale-timer {
+            background: rgba(0,0,0,0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95em;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .flash-sale-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .flash-sale-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .flash-sale-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .flash-sale-image {
+            width: 100%;
+            height: 140px;
+            background: var(--light);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .flash-sale-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .flash-sale-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--secondary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8em;
+        }
+
+        .flash-sale-info {
+            padding: 10px;
+        }
+
+        .flash-sale-name {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+            line-height: 1.3;
+            min-height: 2em;
+        }
+
+        .flash-sale-price {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .flash-sale-current {
+            font-size: 1.1em;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .flash-sale-original {
+            font-size: 0.8em;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .flash-sale-btn {
+            width: 100%;
+            padding: 8px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8em;
+            transition: all 0.2s;
+        }
+
+        .flash-sale-btn:hover {
+            background: #e89a1c;
+            transform: scale(1.02);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .filter-group select:hover {
+            border-color: var(--primary);
+        }
+
+        .sort-divider {
+            width: 1px;
+            height: 24px;
+            background: var(--border);
+            margin: 0 5px;
+        }
+
+        /* Recommended Section */
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin: 30px 0 15px 0;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .recommended-section {
+            margin: 40px 0;
+        }
+
+        /* Products Grid */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transform: translateY(-6px);
+            border-color: var(--secondary);
+        }
+
+        /* Quick Preview */
+        .product-card .quick-preview {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            display: none;
+            gap: 8px;
+        }
+
+        .product-card:hover .quick-preview {
+            display: flex;
+        }
+
+        .quick-preview-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8em;
+            transition: all 0.2s;
+        }
+
+        .quick-view-btn {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .quick-view-btn:hover {
+            background: #d91018;
+            transform: scale(1.05);
+        }
+
+        /* Specs Expand */
+        .product-specs {
+            max-height: 2.2em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .product-specs.expanded {
+            max-height: 999px;
+        }
+
+        .product-specs-toggle {
+            font-size: 0.75em;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 4px;
+            display: inline-block;
+        }
+
+        .product-specs-toggle:hover {
+            text-decoration: underline;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 3em;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-image-wrapper.loading::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: transparent;
+            border: none;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            box-shadow: none;
+            transition: all 0.2s;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .wishlist-btn:hover,
+        .wishlist-btn.saved {
+            transform: scale(1.15);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .wishlist-btn.saved {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .product-info {
+            padding: 12px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 0.9em;
+            color: var(--dark);
+            margin-bottom: 6px;
+            line-height: 1.3;
+            min-height: 2.6em;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .product-name:hover {
+            color: var(--secondary);
+        }
+
+        .product-specs {
+            font-size: 0.75em;
+            color: #999;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            max-height: 2.2em;
+            overflow: hidden;
+        }
+
+        .product-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 8px;
+            font-size: 0.8em;
+        }
+
+        .stars {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .rating-count {
+            color: #999;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .original-price {
+            font-size: 0.75em;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            font-size: 0.7em;
+            background: var(--secondary);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: #f5a623;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.65em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 8px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .add-to-cart:hover {
+            background: #e89a1c;
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 40px;
+            text-align: center;
+            border-top: 3px solid var(--primary);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .mobile-menu-toggle.active::before {
+            content: '✕';
+        }
+
+        .mobile-menu-toggle:not(.active)::before {
+            content: '☰';
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 150;
+            flex-direction: column;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1em;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            background: var(--light);
+            color: var(--secondary);
+        }
+
+        /* Checkout Mobile Optimizations */
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        /* Mobile Friendly Buttons */
+        .mobile-submit-btn {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+        }
+
+        .mobile-submit-btn:hover {
+            background: #d91018;
+        }
+
+        @media (max-width: 768px) {
+            .header-top-left {
+                display: none;
+            }
+
+            .header-top-right {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .search-bar {
+                max-width: 100%;
+                margin: 0 10px;
+                flex: 0.9;
+            }
+
+            .header-icons {
+                gap: 15px;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+            }
+
+            .banner {
+                padding: 30px 15px;
+            }
+
+            .banner h2 {
+                font-size: 1.6em;
+            }
+
+            .banner p {
+                font-size: 0.85em;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-group select {
+                width: 100%;
+            }
+
+            .sort-divider {
+                display: none;
+            }
+
+            .product-detail {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+
+            nav {
+                overflow-x: auto;
+                display: none;
+            }
+
+            nav a {
+                font-size: 0.85em;
+                padding: 10px 15px;
+            }
+
+            /* Checkout Mobile */
+            .checkout-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .checkout-summary {
+                position: static;
+                background: var(--light);
+                border-radius: 8px;
+                padding: 15px;
+                height: auto;
+                margin-bottom: 60px;
+            }
+
+            .checkout-content {
+                padding: 15px;
+                padding-bottom: 80px;
+            }
+
+            .place-order-btn {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 15px 20px;
+                margin-top: 0;
+                border-radius: 0;
+                font-size: 1.05em;
+            }
+
+            .form-section {
+                padding: 15px;
+                margin-bottom: 12px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                flex-direction: column;
+            }
+
+            .payment-method {
+                min-width: 100%;
+            }
+
+            .payment-method label {
+                justify-content: flex-start;
+                padding: 12px;
+            }
+
+            /* Flash Sale Mobile */
+            .flash-sale-section {
+                padding: 15px 10px;
+                margin-bottom: 20px;
+            }
+
+            .flash-sale-products {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 8px;
+            }
+
+            .flash-sale-header {
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .flash-sale-header h3 {
+                font-size: 1.1em;
+            }
+
+            .flash-sale-timer {
+                font-size: 0.85em;
+                padding: 6px 12px;
+            }
+
+            /* Product Card Mobile */
+            .product-card:hover {
+                transform: translateY(-3px);
+            }
+
+            .product-image-wrapper {
+                height: 150px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-main {
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .logo {
+                font-size: 1.4em;
+            }
+
+            .search-bar {
+                min-width: 120px;
+            }
+
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                gap: 8px;
+            }
+
+            .banner h2 {
+                font-size: 1.3em;
+            }
+
+            .product-info {
+                padding: 8px;
+            }
+
+            .product-name {
+                font-size: 0.8em;
+            }
+
+            .add-to-cart {
+                padding: 6px;
+                font-size: 0.75em;
+            }
+
+            .flash-sale-products {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+
+            .modal-content {
+                width: 98%;
+                padding: 10px;
+            }
+
+            .product-detail-image {
+                height: 200px;
+            }
+
+            .checkout-header h2 {
+                font-size: 1.3em;
+            }
+
+            .form-group label {
+                font-size: 0.85em;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 0.9em;
+                padding: 8px 10px;
+            }
+        }
+
+        /* 第9回合優化: 快速結帳 + 庫存提示 + 訂單追蹤頁面 */
+
+        /* 庫存提示 */
+        .stock-indicator {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .stock-low {
+            background: #ffe8e8;
+            color: #d91018;
+        }
+
+        .stock-out {
+            background: #f0f0f0;
+            color: #999;
+        }
+
+        .stock-available {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        /* 快速結帳按鈕 */
+        .quick-checkout-btn {
+            background: linear-gradient(135deg, #f5a623, #e89a1c);
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .quick-checkout-btn:hover {
+            background: linear-gradient(135deg, #e89a1c, #d87f0d);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+        }
+
+        .quick-checkout-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 快速結帳模態 */
+        .quick-checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 400;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s;
+        }
+
+        .quick-checkout-modal.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .quick-checkout-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .quick-checkout-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+        }
+
+        .quick-checkout-close:hover {
+            color: var(--secondary);
+        }
+
+        .quick-checkout-section {
+            margin-bottom: 20px;
+        }
+
+        .quick-checkout-section h3 {
+            font-size: 1em;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .quick-payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+
+        .payment-method {
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+            background: #fffbf5;
+        }
+
+        .payment-method.selected {
+            border-color: var(--secondary);
+            background: #ffeeec;
+        }
+
+        .payment-icon {
+            font-size: 1.8em;
+            margin-bottom: 6px;
+        }
+
+        .payment-name {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* 訂單追蹤頁面 */
+        .order-tracking-container {
+            display: none;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .order-tracking-container.show {
+            display: block;
+        }
+
+        .order-tracking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .order-tracking-header h2 {
+            font-size: 1.5em;
+            color: var(--dark);
+        }
+
+        .order-back-btn {
+            padding: 8px 16px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .order-back-btn:hover {
+            background: var(--border);
+        }
+
+        .order-tracking-timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 45px;
+            width: 2px;
+            height: 40px;
+            background: var(--border);
+        }
+
+        .timeline-item.completed::after {
+            background: var(--secondary);
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .timeline-item.completed .timeline-dot {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-top: 5px;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .timeline-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .timeline-time {
+            font-size: 0.8em;
+            color: #999;
+        }
+
+        .quick-checkout-confirm {
+            width: 100%;
+            padding: 12px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 20px;
+        }
+
+        .quick-checkout-confirm:hover {
+            background: #d91018;
+        }
+
+        @media (max-width: 768px) {
+            .quick-checkout-content {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .quick-payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .order-tracking-container {
+                padding: 20px;
+            }
+        }
+
+        /* ========== 第10回合優化：購物體驗增強包 ========== */
+
+        /* 季節推薦面板樣式 */
+        #seasonalPanel {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 0;
+            border-radius: 12px;
+            border: 2px solid #667eea30;
+        }
+
+        #seasonalPanel .products {
+            padding: 20px;
+            margin: 0;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        }
+
+        #seasonalPanel .product-card {
+            border: 1px solid #667eea30;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+            transition: all 0.3s;
+        }
+
+        #seasonalPanel .product-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* 禮物包裝和祝賀卡樣式 */
+        #giftModalOverlay {
+            backdrop-filter: blur(4px);
+        }
+
+        #giftModalOverlay input[type="radio"] {
+            cursor: pointer;
+            margin: 0;
+            width: 18px;
+            height: 18px;
+        }
+
+        #giftModalOverlay textarea {
+            box-sizing: border-box;
+            font-size: 0.95em;
+        }
+
+        #giftModalOverlay textarea::placeholder {
+            color: #ccc;
+        }
+
+        #giftModalOverlay button {
+            font-size: 0.95em;
+            transition: all 0.2s;
+        }
+
+        #giftModalOverlay button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* 共享功能按鈕樣式 */
+        .share-product-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 8px;
+            transition: all 0.2s;
+        }
+
+        .share-product-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        /* 庫存預訂按鈕 */
+        .reserve-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 8px;
+            transition: all 0.2s;
+        }
+
+        .reserve-btn:hover {
+            background: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* 共享選項彈窗樣式 */
+        #shareModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 10000;
+            min-width: 300px;
+        }
+
+        #shareModal h3 {
+            margin: 0 0 20px;
+            color: var(--dark);
+            font-size: 1.1em;
+        }
+
+        #shareModal button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        #shareModal button:hover {
+            background: #764ba2;
+        }
+
+        #shareModal button:last-of-type {
+            background: #eee;
+            color: var(--dark);
+            margin-top: 15px;
+        }
+
+        #shareModal button:last-of-type:hover {
+            background: #ddd;
+        }
+
+        @media (max-width: 768px) {
+            #seasonalPanel .products {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                padding: 15px;
+            }
+
+            .share-product-btn,
+            .reserve-btn {
+                display: block;
+                width: 100%;
+                margin-left: 0;
+                margin-top: 8px;
+            }
+
+            #giftModalOverlay > div {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="header-top-left">
+                <a href="#">售後服務</a>
+                <a href="#">購物說明</a>
+                <a href="#">關於我們</a>
+            </div>
+            <div class="header-top-right">
+                <a href="#" onclick="openAuthModal('login'); return false;">登入</a>
+                <a href="#" onclick="openAuthModal('register'); return false;">註冊</a>
+                <a id="userLink" style="display:none;" href="#" onclick="openUserAccount(); return false;"></a>
+            </div>
+        </div>
+        
+        <div class="header-main">
+            <a href="camera-shop.html" class="logo">相機<span>殿</span></a>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="搜尋相機、鏡頭...">
+                <button onclick="searchProducts()">🔍</button>
+            </div>
+            <div class="header-icons">
+                <div class="icon-btn-wrapper">
+                    <a href="#" class="icon-btn" onclick="toggleWishlist(); return false;">❤️</a>
+                </div>
+                <div class="icon-btn-wrapper">
+                    <a href="#" class="icon-btn" onclick="toggleCart(); return false;">🛒</a>
+                    <div class="cart-badge" id="cartBadge" style="display: none;">0</div>
+                </div>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" id="mobileMenuToggle"></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="camera-shop.html" class="active">首頁</a>
+        <a href="camera-shop.html">全部商品</a>
+        <a href="camera-shop.html">相機</a>
+        <a href="camera-shop.html">鏡頭</a>
+        <a href="camera-shop.html">配件</a>
+        <a href="camera-about.html">關於我們</a>
+        <a href="#">售後服務</a>
+        <a href="#">購物說明</a>
+        <a href="#">登入</a>
+        <a href="#">註冊</a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav>
+        <a href="camera-shop.html" class="active">首頁</a>
+        <a href="camera-shop.html">全部商品</a>
+        <a href="camera-shop.html">相機</a>
+        <a href="camera-shop.html">鏡頭</a>
+        <a href="camera-shop.html">配件</a>
+        <a href="camera-about.html">關於我們</a>
+    </nav>
+
+    <!-- Banner -->
+    <div class="banner">
+        <h2>📷 專業相機鏡頭商城</h2>
+        <p>精選全球知名品牌 Canon • Nikon • Sony • Fujifilm</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Flash Sale Section -->
+        <div class="flash-sale-section" id="flashSaleSection">
+            <div class="flash-sale-header">
+                <h3>⚡ 限時優惠</h3>
+                <div class="flash-sale-timer">距結束：<span id="flashTimer">23:45</span></div>
+            </div>
+            <div class="flash-sale-products" id="flashSaleProducts"></div>
+        </div>
+        <!-- Filters & Sort -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>品牌</label>
+                <select id="brandFilter" onchange="filterProducts()">
+                    <option value="">全部品牌</option>
+                    <option value="Canon">Canon</option>
+                    <option value="Nikon">Nikon</option>
+                    <option value="Sony">Sony</option>
+                    <option value="Fujifilm">Fujifilm</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>類型</label>
+                <select id="typeFilter" onchange="filterProducts()">
+                    <option value="">全部</option>
+                    <option value="相機">相機</option>
+                    <option value="鏡頭">鏡頭</option>
+                    <option value="配件">配件</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>價格範圍</label>
+                <select id="priceFilter" onchange="filterProducts()">
+                    <option value="">全部</option>
+                    <option value="0-5000">$0 - $5,000</option>
+                    <option value="5000-15000">$5,000 - $15,000</option>
+                    <option value="15000-50000">$15,000 - $50,000</option>
+                    <option value="50000+">$50,000 以上</option>
+                </select>
+            </div>
+
+            <div class="sort-divider"></div>
+
+            <div class="filter-group">
+                <label>排序</label>
+                <select id="sortFilter" onchange="sortAndRender()">
+                    <option value="">推薦順序</option>
+                    <option value="price-asc">價格低到高</option>
+                    <option value="price-desc">價格高到低</option>
+                    <option value="rating">最高評分</option>
+                    <option value="popular">最受歡迎</option>
+                    <option value="newest">最新上架</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Recommended Section -->
+        <div class="recommended-section" id="recommendedSection" style="display: none;">
+            <div class="section-title">⭐ 為您推薦</div>
+            <div class="products" id="recommendedProducts"></div>
+        </div>
+
+        <!-- Seasonal Recommendations Panel -->
+        <div id="seasonalPanel" style="margin-bottom: 30px;"></div>
+
+        <!-- Products Grid -->
+        <div id="productContainer" class="products"></div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">✕</span>
+            <div id="productDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-content">
+            <span class="auth-close" onclick="closeAuthModal()">×</span>
+            <div class="auth-header">
+                <h2 id="authTitle">登入帳戶</h2>
+                <p id="authSubtitle">享受更好的購物體驗</p>
+            </div>
+
+            <div class="auth-error" id="authError"></div>
+
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">登入</div>
+                <div class="auth-tab" onclick="switchAuthTab('register')">註冊</div>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                <input type="email" placeholder="電子郵件" required>
+                <input type="password" placeholder="密碼" required>
+                <button type="submit" class="auth-submit">登入</button>
+                <div class="auth-divider">或繼續購物</div>
+            </form>
+
+            <!-- Register Form -->
+            <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+                <input type="text" placeholder="姓名" required>
+                <input type="email" placeholder="電子郵件" required>
+                <input type="password" placeholder="密碼（最少 6 個字符）" minlength="6" required>
+                <input type="password" placeholder="確認密碼" required>
+                <button type="submit" class="auth-submit">建立帳戶</button>
+                <div class="auth-divider">已有帳戶？<a href="#" onclick="switchAuthTab('login'); return false;" style="color: var(--secondary); text-decoration: none;">立即登入</a></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Account Panel -->
+    <div class="account-panel" id="accountPanel">
+        <div class="account-header">
+            <h3>我的帳戶</h3>
+            <span class="account-close" onclick="closeUserAccount()">✕</span>
+        </div>
+
+        <div class="account-user-info">
+            <div class="account-user-avatar" id="userAvatar">用</div>
+            <div class="account-user-name" id="userName">用戶名</div>
+            <div class="account-user-email" id="userEmail">user@example.com</div>
+        </div>
+
+        <div class="account-tabs">
+            <div class="account-tab active" onclick="switchAccountTab('orders')">訂單歷史</div>
+            <div class="account-tab" onclick="switchAccountTab('profile')">個人資料</div>
+            <div class="account-tab" onclick="switchAccountTab('saved')">收藏</div>
+        </div>
+
+        <div class="account-content">
+            <!-- Orders Tab -->
+            <div class="account-section active" id="ordersSection">
+                <div id="ordersList"></div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div class="account-section" id="profileSection">
+                <div class="account-menu-item" onclick="editProfile()">
+                    <span class="account-menu-label">編輯個人資料</span>
+                    <span class="account-menu-icon">›</span>
+                </div>
+                <div class="account-menu-item" onclick="changePassword()">
+                    <span class="account-menu-label">變更密碼</span>
+                    <span class="account-menu-icon">›</span>
+                </div>
+                <div class="account-menu-item" onclick="manageSavedAddresses()">
+                    <span class="account-menu-label">收貨地址</span>
+                    <span class="account-menu-icon">›</span>
+                </div>
+            </div>
+
+            <!-- Saved Items Tab -->
+            <div class="account-section" id="savedSection">
+                <div id="savedItemsList"></div>
+            </div>
+        </div>
+
+        <div class="account-logout" onclick="handleLogout()">登出</div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>購物車</h3>
+            <span class="cart-close" onclick="toggleCart()">✕</span>
+        </div>
+        <div class="cart-content" id="cartContent">
+            <div class="cart-empty">購物車是空的</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>小計：</span>
+                <span id="cartTotal">$0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" style="display: none;" onclick="openCheckout();">結帳</button>
+            <button class="quick-checkout-btn" id="quickCheckoutBtn" style="display: none;" onclick="openQuickCheckout();">⚡ 快速結帳</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h2>🛒 完成購買</h2>
+                <span class="checkout-close" onclick="closeCheckout()">✕</span>
+            </div>
+            
+            <div id="checkoutForm" class="checkout-grid">
+                <!-- Form Section -->
+                <div class="checkout-form">
+                    <!-- Shipping Address -->
+                    <div class="form-section">
+                        <h3>📍 收貨地址</h3>
+                        <div class="form-group">
+                            <label>收貨人姓名</label>
+                            <input type="text" id="receiverName" placeholder="請輸入收貨人姓名" value="Carlos Chen">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>電話</label>
+                                <input type="tel" id="receiverPhone" placeholder="例：0912345678" value="0912345678">
+                            </div>
+                            <div class="form-group">
+                                <label>郵遞區號</label>
+                                <input type="text" id="zipCode" placeholder="例：100" value="100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>城市 / 縣市</label>
+                            <select id="city">
+                                <option>台北市</option>
+                                <option>新北市</option>
+                                <option>台中市</option>
+                                <option>台南市</option>
+                                <option>高雄市</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>詳細地址</label>
+                            <input type="text" id="address" placeholder="請輸入詳細地址" value="中正區信義路 123 號">
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h3>💳 支付方式</h3>
+                        <div class="payment-methods">
+                            <div class="payment-method">
+                                <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" checked>
+                                <label for="creditCard">💳 信用卡</label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
+                                <label for="bankTransfer">🏦 銀行轉帳</label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="convenience" name="paymentMethod" value="convenience">
+                                <label for="convenience">🏪 超商付款</label>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; padding: 12px; background: white; border-radius: 6px; border-left: 3px solid var(--primary); font-size: 0.85em; color: #666;">
+                            ℹ️ 信用卡：Visa、Mastercard、JCB（即時扣款）<br>
+                            銀行轉帳：匯款後 2-4 小時認證<br>
+                            超商付款：7-Eleven / FamilyMart（7 天內付款）
+                        </div>
+                    </div>
+
+                    <!-- Coupon Code -->
+                    <div class="form-section">
+                        <h3>🎟️ 優惠碼</h3>
+                        <div class="coupon-section">
+                            <input type="text" id="couponCode" placeholder="輸入優惠碼" maxlength="12">
+                            <button onclick="applyCoupon()">套用</button>
+                        </div>
+                        <div id="couponMessage" style="font-size: 0.85em; margin-top: 8px; display: none;"></div>
+                    </div>
+
+                    <!-- Remarks -->
+                    <div class="form-section">
+                        <h3>📝 訂購備註</h3>
+                        <div class="form-group">
+                            <textarea id="remarks" placeholder="例：請優先配送、不需要發票等" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="checkout-summary" id="orderSummary">
+                    <div class="summary-header">訂單摘要</div>
+                    <div id="summaryItems"></div>
+                    
+                    <div class="summary-line">
+                        <span class="summary-line-label">商品小計</span>
+                        <span class="summary-line-value">$<span id="summarySubtotal">0</span></span>
+                    </div>
+                    
+                    <div class="summary-line">
+                        <span class="summary-line-label">運費</span>
+                        <span class="summary-line-value">$<span id="summaryShipping">150</span></span>
+                    </div>
+                    
+                    <div class="summary-line" id="discountLine" style="display: none;">
+                        <span class="summary-line-label">優惠</span>
+                        <span class="summary-line-value">-$<span id="summaryDiscount">0</span></span>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>總金額</span>
+                        <span class="summary-total-value">$<span id="summaryTotal">0</span></span>
+                    </div>
+                    
+                    <button class="place-order-btn" onclick="placeOrder()">確認訂購</button>
+                </div>
+            </div>
+
+            <!-- Success Message (initially hidden) -->
+            <div id="successMessage" style="display: none;">
+                <div class="success-message">
+                    <div class="success-icon">✅</div>
+                    <h3>訂購成功！</h3>
+                    <p>感謝您的購買</p>
+                    <div class="order-number" id="orderNumber">訂單編號：2026021200001</div>
+                    <p>我們已寄出確認信到您的電郵</p>
+                    <p>預計 1-3 個工作天送達</p>
+                    <button class="checkout-btn" style="margin-top: 20px; width: 200px; margin-left: auto; margin-right: auto; display: block;" onclick="completeCheckout()">返回首頁</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Checkout Modal (第9回合優化) -->
+    <div class="quick-checkout-modal" id="quickCheckoutModal">
+        <div class="quick-checkout-content">
+            <span class="quick-checkout-close" onclick="closeQuickCheckout()">✕</span>
+            
+            <h2 style="margin-bottom: 20px; color: var(--dark);">⚡ 快速結帳</h2>
+            
+            <!-- Quick Address Section -->
+            <div class="quick-checkout-section">
+                <h3>📍 收貨地址</h3>
+                <input type="text" id="quickName" placeholder="收貨人姓名" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px;">
+                <input type="tel" id="quickPhone" placeholder="電話號碼 (09xxxxxxxx)" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px;">
+                <input type="text" id="quickAddress" placeholder="詳細地址" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px;">
+            </div>
+            
+            <!-- Quick Payment Method -->
+            <div class="quick-checkout-section">
+                <h3>💳 支付方式</h3>
+                <div class="quick-payment-methods">
+                    <div class="payment-method selected" onclick="selectQuickPayment(this, 'credit')">
+                        <div class="payment-icon">💳</div>
+                        <div class="payment-name">信用卡</div>
+                    </div>
+                    <div class="payment-method" onclick="selectQuickPayment(this, 'transfer')">
+                        <div class="payment-icon">🏦</div>
+                        <div class="payment-name">銀行轉帳</div>
+                    </div>
+                    <div class="payment-method" onclick="selectQuickPayment(this, 'convenience')">
+                        <div class="payment-icon">🏪</div>
+                        <div class="payment-name">超商付款</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="quick-checkout-section" style="background: var(--light); padding: 15px; border-radius: 6px;">
+                <h3>📦 訂單摘要</h3>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>小計：</span>
+                    <span id="quickSubtotal">$0</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>運費：</span>
+                    <span id="quickShipping">$150</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1em; color: var(--secondary); border-top: 1px solid var(--border); padding-top: 8px;">
+                    <span>合計：</span>
+                    <span id="quickTotal">$0</span>
+                </div>
+            </div>
+            
+            <button class="quick-checkout-confirm" onclick="confirmQuickCheckout()">確認快速結帳</button>
+        </div>
+    </div>
+
+    <!-- Order Tracking Page (第9回合優化) -->
+    <div class="order-tracking-container" id="orderTrackingContainer">
+        <div class="order-tracking-header">
+            <h2>📦 訂單詳情</h2>
+            <button class="order-back-btn" onclick="closeOrderTracking()">← 返回</button>
+        </div>
+        
+        <div id="orderTrackingContent" style="margin-top: 30px;">
+            <!-- 動態內容將插入這裡 -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: left; max-width: 1400px; margin: 0 auto 30px; color: #ccc;">
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">關於相機殿</h4>
+                <ul style="list-style: none;">
+                    <li><a href="camera-about.html" style="color: #ccc; text-decoration: none;">關於我們</a></li>
+                    <li><a href="camera-contact.html" style="color: #ccc; text-decoration: none;">聯絡我們</a></li>
+                    <li><a href="camera-faq.html" style="color: #ccc; text-decoration: none;">常見問題</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">購物指南</h4>
+                <ul style="list-style: none;">
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">購物說明</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">運費說明</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">退貨政策</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 15px;">客服</h4>
+                <ul style="list-style: none;">
+                    <li>📧 shop@camera.com</li>
+                    <li>📞 0800-000-000</li>
+                    <li>⏰ 09:00-18:00 (一~五)</li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #444; margin-bottom: 20px;">
+        <p>&copy; 2026 相機殿 - 專業相機鏡頭商城 | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // 購物車和收藏 State
+        let cart = JSON.parse(localStorage.getItem('camera-cart') || '{}');
+        let wishlist = JSON.parse(localStorage.getItem('camera-wishlist') || '[]');
+        let currentSort = '';
+
+        // 真實相機照片 URL (Unsplash - 實際相機產品)
+        const cameraImages = [
+            'https://images.unsplash.com/photo-1606933248051-5ce98fedff9f?w=300&h=300&fit=crop', // Canon DSLR
+            'https://images.unsplash.com/photo-1606986628120-7f0d99ea78e1?w=300&h=300&fit=crop', // Sony Alpha
+            'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop', // Mirrorless
+            'https://images.unsplash.com/photo-1604587220917-0504bc5d37b5?w=300&h=300&fit=crop', // Nikon
+            'https://images.unsplash.com/photo-1614008375890-cb53b6c5f8d5?w=300&h=300&fit=crop', // Compact
+            'https://images.unsplash.com/photo-1604538877294-0fa94a64400a?w=300&h=300&fit=crop', // SLR Camera
+            'https://images.unsplash.com/photo-1518611505867-48a4f959f93a?w=300&h=300&fit=crop', // Professional
+            'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=300&h=300&fit=crop', // Film Camera
+            'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=300&h=300&fit=crop', // DSLR Close-up
+            'https://images.unsplash.com/photo-1606933248051-5ce98fedff9f?w=300&h=300&fit=crop', // Canon EOS
+        ];
+
+        // 產品資料庫
+        const products = [
+            // Canon 相機
+            { id: 1, name: 'Canon EOS R5 Mark II', type: '相機', brand: 'Canon', specs: '全片幅 | 4500萬像素', price: 99999, original: 119999, rating: 4.8, reviews: 156, badge: '人氣商品' },
+            { id: 2, name: 'Canon EOS R6 Mark II', type: '相機', brand: 'Canon', specs: '全片幅 | 2000萬像素', price: 69999, original: 79999, rating: 4.9, reviews: 243, badge: '熱銷款' },
+            { id: 3, name: 'Canon EOS 5D Mark IV', type: '相機', brand: 'Canon', specs: '全片幅 | 3040萬像素', price: 49999, original: 59999, rating: 4.7, reviews: 189 },
+            { id: 4, name: 'Canon EOS 80D', type: '相機', brand: 'Canon', specs: 'APS-C | 2420萬像素', price: 29999, original: 34999, rating: 4.6, reviews: 134 },
+            { id: 5, name: 'Canon EOS M6 Mark II', type: '相機', brand: 'Canon', specs: 'APS-C | 3250萬像素', price: 24999, original: 29999, rating: 4.5, reviews: 98 },
+            { id: 6, name: 'Canon EOS R7', type: '相機', brand: 'Canon', specs: 'APS-C | 3250萬像素', price: 39999, original: 44999, rating: 4.7, reviews: 167 },
+            { id: 7, name: 'Canon PowerShot G7X Mark III', type: '相機', brand: 'Canon', specs: '1吋 | 2010萬像素', price: 12999, original: 15999, rating: 4.4, reviews: 87 },
+            { id: 8, name: 'Canon SX70 HS', type: '相機', brand: 'Canon', specs: '1/2.3吋 | 2030萬像素', price: 8999, original: 10999, rating: 4.3, reviews: 56 },
+            
+            // Nikon 相機
+            { id: 9, name: 'Nikon Z9', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 149999, original: 169999, rating: 4.9, reviews: 289, badge: '旗艦款' },
+            { id: 10, name: 'Nikon Z6 III', type: '相機', brand: 'Nikon', specs: '全片幅 | 2410萬像素', price: 79999, original: 89999, rating: 4.8, reviews: 201 },
+            { id: 11, name: 'Nikon Z5', type: '相機', brand: 'Nikon', specs: '全片幅 | 2432萬像素', price: 39999, original: 44999, rating: 4.6, reviews: 145 },
+            { id: 12, name: 'Nikon Z8', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 129999, original: 149999, rating: 4.9, reviews: 267 },
+            { id: 13, name: 'Nikon D850', type: '相機', brand: 'Nikon', specs: '全片幅 | 4575萬像素', price: 44999, original: 54999, rating: 4.7, reviews: 178 },
+            { id: 14, name: 'Nikon D500', type: '相機', brand: 'Nikon', specs: 'APS-C | 2088萬像素', price: 34999, original: 39999, rating: 4.6, reviews: 123 },
+            { id: 15, name: 'Nikon Z50 II', type: '相機', brand: 'Nikon', specs: 'APS-C | 2088萬像素', price: 29999, original: 34999, rating: 4.5, reviews: 102 },
+            
+            // Sony 相機
+            { id: 16, name: 'Sony α1 II', type: '相機', brand: 'Sony', specs: '全片幅 | 5000萬像素', price: 169999, original: 189999, rating: 4.9, reviews: 312, badge: '專業首選' },
+            { id: 17, name: 'Sony α7R V', type: '相機', brand: 'Sony', specs: '全片幅 | 6100萬像素', price: 99999, original: 119999, rating: 4.8, reviews: 234 },
+            { id: 18, name: 'Sony α7 IV', type: '相機', brand: 'Sony', specs: '全片幅 | 6100萬像素', price: 79999, original: 89999, rating: 4.7, reviews: 198 },
+            { id: 19, name: 'Sony α6700', type: '相機', brand: 'Sony', specs: 'APS-C | 2600萬像素', price: 49999, original: 59999, rating: 4.7, reviews: 176 },
+            { id: 20, name: 'Sony α6400', type: '相機', brand: 'Sony', specs: 'APS-C | 2420萬像素', price: 34999, original: 39999, rating: 4.6, reviews: 234, badge: '暢銷款' },
+            { id: 21, name: 'Sony α6100', type: '相機', brand: 'Sony', specs: 'APS-C | 2420萬像素', price: 24999, original: 29999, rating: 4.5, reviews: 145 },
+            { id: 22, name: 'Sony RX100 VII', type: '相機', brand: 'Sony', specs: '1吋 | 2010萬像素', price: 14999, original: 18999, rating: 4.6, reviews: 112 },
+            
+            // Fujifilm 相機
+            { id: 23, name: 'Fujifilm X-H2S', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 2610萬像素', price: 54999, original: 64999, rating: 4.7, reviews: 89 },
+            { id: 24, name: 'Fujifilm X-T5', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 4040萬像素', price: 39999, original: 44999, rating: 4.6, reviews: 134 },
+            { id: 25, name: 'Fujifilm X-S20', type: '相機', brand: 'Fujifilm', specs: 'APS-C | 2610萬像素', price: 29999, original: 34999, rating: 4.5, reviews: 78 },
+            
+            // Canon 鏡頭
+            { id: 26, name: 'Canon RF 24-70mm F2.8 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 24-70mm', price: 34999, original: 39999, rating: 4.8, reviews: 156, badge: '標配鏡' },
+            { id: 27, name: 'Canon RF 70-200mm F4 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 70-200mm', price: 24999, original: 29999, rating: 4.7, reviews: 123 },
+            { id: 28, name: 'Canon RF 28-70mm F2L USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 28-70mm', price: 39999, original: 44999, rating: 4.8, reviews: 178 },
+            { id: 29, name: 'Canon RF 16mm F2.8 STM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 8999, original: 10999, rating: 4.5, reviews: 67 },
+            { id: 30, name: 'Canon RF 50mm F1.8 STM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 5999, original: 7999, rating: 4.6, reviews: 234, badge: '平價首選' },
+            { id: 31, name: 'Canon RF 85mm F1.2 L USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 定焦', price: 54999, original: 64999, rating: 4.9, reviews: 189 },
+            { id: 32, name: 'Canon RF 14-24mm F2.8 L IS USM', type: '鏡頭', brand: 'Canon', specs: 'RF卡口 | 超廣角', price: 44999, original: 49999, rating: 4.8, reviews: 145 },
+            { id: 33, name: 'Canon EF 24-70mm F2.8L II USM', type: '鏡頭', brand: 'Canon', specs: 'EF卡口 | 24-70mm', price: 19999, original: 24999, rating: 4.6, reviews: 198 },
+            
+            // Nikon 鏡頭
+            { id: 34, name: 'Nikon Z 24-70mm F2.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 24-70mm', price: 39999, original: 44999, rating: 4.8, reviews: 167, badge: '標配鏡' },
+            { id: 35, name: 'Nikon Z 70-200mm F2.8 VR S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 70-200mm', price: 29999, original: 34999, rating: 4.8, reviews: 134 },
+            { id: 36, name: 'Nikon Z 14-24mm F2.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 超廣角', price: 49999, original: 54999, rating: 4.9, reviews: 189 },
+            { id: 37, name: 'Nikon Z 50mm F1.2 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 34999, original: 39999, rating: 4.8, reviews: 156 },
+            { id: 38, name: 'Nikon Z 35mm F1.8 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 12999, original: 15999, rating: 4.7, reviews: 112 },
+            { id: 39, name: 'Nikon Z 85mm F1.2 S', type: '鏡頭', brand: 'Nikon', specs: 'Z卡口 | 定焦', price: 54999, original: 64999, rating: 4.9, reviews: 201 },
+            { id: 40, name: 'Nikon AF-S 24-70mm F2.8E ED VR', type: '鏡頭', brand: 'Nikon', specs: 'F卡口 | 24-70mm', price: 24999, original: 29999, rating: 4.7, reviews: 145 },
+            
+            // Sony 鏡頭
+            { id: 41, name: 'Sony FE 24-70mm F2.8 GM II', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 24-70mm', price: 34999, original: 39999, rating: 4.9, reviews: 212, badge: '標配鏡' },
+            { id: 42, name: 'Sony FE 70-200mm F4 G OSS', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 70-200mm', price: 19999, original: 24999, rating: 4.7, reviews: 134 },
+            { id: 43, name: 'Sony FE 16-35mm F2.8 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 超廣角', price: 49999, original: 54999, rating: 4.9, reviews: 178 },
+            { id: 44, name: 'Sony FE 85mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 34999, original: 39999, rating: 4.9, reviews: 189 },
+            { id: 45, name: 'Sony FE 50mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 24999, original: 29999, rating: 4.8, reviews: 167 },
+            { id: 46, name: 'Sony FE 35mm F1.4 GM', type: '鏡頭', brand: 'Sony', specs: 'FE卡口 | 定焦', price: 19999, original: 24999, rating: 4.8, reviews: 145 },
+            { id: 47, name: 'Sony E 18-135mm F3.5-5.6 OSS', type: '鏡頭', brand: 'Sony', specs: 'E卡口 | 標準變焦', price: 8999, original: 10999, rating: 4.5, reviews: 98, badge: '平價首選' },
+            
+            // Fujifilm 鏡頭
+            { id: 48, name: 'Fujifilm XF 18-55mm F2.8-4 R LM OIS', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 標準變焦', price: 12999, original: 15999, rating: 4.6, reviews: 89 },
+            { id: 49, name: 'Fujifilm XF 55-200mm F3.5-4.8 R LM OIS', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 望遠變焦', price: 9999, original: 12999, rating: 4.5, reviews: 67 },
+            { id: 50, name: 'Fujifilm XF 35mm F1.4 R', type: '鏡頭', brand: 'Fujifilm', specs: 'X卡口 | 定焦', price: 8999, original: 10999, rating: 4.6, reviews: 112 },
+            
+            // 配件
+            { id: 51, name: 'Peak Design 相機背帶', type: '配件', brand: 'Peak Design', specs: '快速更換系統', price: 2999, original: 3999, rating: 4.8, reviews: 234 },
+            { id: 52, name: 'Manfrotto Befree Carbon 三腳架', type: '配件', brand: 'Manfrotto', specs: '碳纖維 | 5層', price: 8999, original: 10999, rating: 4.7, reviews: 178 },
+            { id: 53, name: 'K&F Concept 偏光鏡 55mm', type: '配件', brand: 'K&F Concept', specs: 'CPL濾鏡', price: 1999, original: 2999, rating: 4.6, reviews: 145, badge: '熱銷款' },
+            { id: 54, name: 'Sandisk Extreme Pro SD卡 256GB', type: '配件', brand: 'Sandisk', specs: '讀寫速度 170/90 MB/s', price: 2999, original: 3999, rating: 4.8, reviews: 267 },
+            { id: 55, name: 'Neewer 50000mAh 行動電源', type: '配件', brand: 'Neewer', specs: '快速充電', price: 1999, original: 2999, rating: 4.5, reviews: 112 },
+            { id: 56, name: 'Think Tank 相機背包', type: '配件', brand: 'Think Tank', specs: '專業級 | 防水', price: 5999, original: 7999, rating: 4.7, reviews: 198 },
+            { id: 57, name: 'Gitzo Systematic Carbon 三腳架', type: '配件', brand: 'Gitzo', specs: '碳纖維 | 專業級', price: 24999, original: 29999, rating: 4.9, reviews: 89 },
+            { id: 58, name: 'Canon 原廠電池 LP-E6NH', type: '配件', brand: 'Canon', specs: '2130mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 345, badge: '原廠認證' },
+            { id: 59, name: 'Nikon 原廠電池 EN-EL15c', type: '配件', brand: 'Nikon', specs: '2250mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 289 },
+            { id: 60, name: 'Sony 原廠電池 NP-FZ100', type: '配件', brand: 'Sony', specs: '2280mAh | 原廠正品', price: 1999, original: 2499, rating: 4.9, reviews: 312 },
+        ];
+
+        // 重複產品到100個
+        while (products.length < 100) {
+            const newProduct = {...products[Math.floor(Math.random() * products.length)]};
+            newProduct.id = products.length + 1;
+            products.push(newProduct);
+        }
+
+        // 評論數據庫
+        const reviews = {
+            1: [
+                { author: '王小明', rating: 5, date: '2月12日', text: '相機品質很好，拍照效果超棒！配送很快，強力推薦！' },
+                { author: '李美玲', rating: 5, date: '2月10日', text: '無論是色彩準確度還是對焦速度都令人印象深刻。是專業人士的好選擇。' },
+                { author: '陳俊傑', rating: 4, date: '2月8日', text: '很好用，但電池消耗有點快。整體來說值得購買。' },
+            ],
+            2: [
+                { author: '黃芷蓁', rating: 5, date: '2月11日', text: '這款相機CP值很高！轉接全片幅鏡頭效果也很不錯。' },
+                { author: '吳昊天', rating: 5, date: '2月9日', text: '錄影功能強大，4K視頻質量很高。專業創作者必備！' },
+            ],
+            3: [
+                { author: '劉詩涵', rating: 5, date: '2月7日', text: '經典款相機，穩定可靠。我用了3年還是好好的！' },
+            ],
+        };
+
+        const qnas = {
+            1: [
+                { q: '這款相機支援哪些卡口類型？', a: '支援RF卡口，與所有Canon RF鏡頭兼容。可用轉接器支援EF/EF-S卡口鏡頭。' },
+                { q: '電池續航能拍多少張？', a: '在標準測試條件下約650張。實際續航取決於使用條件、閃光燈使用頻率等因素。' },
+                { q: '防塵防水等級如何？', a: '機身採用灰塵密封設計，快門簾和反光鏡都經過強化。防塵等級為IP72。' },
+            ],
+            2: [
+                { q: '適合初學者使用嗎？', a: '非常適合！這款擁有簡易操作模式和自動曝光，同時又有充足的手動控制選項。' },
+                { q: '保修期是多久？', a: '享有2年國際保修，並提供一年延伸保修選項。' },
+            ],
+            3: [
+                { q: '與新款R5相比有什麼區別？', a: '分辨率降低（3040萬 vs 4500萬），但動作追蹤性能相似，價格更經濟。' },
+            ],
+        };
+
+        // 為其他產品自動生成評論和QA（簡略版）
+        function getReviewsForProduct(productId) {
+            if (reviews[productId]) return reviews[productId];
+            return [
+                { author: '客戶A', rating: 4 + Math.random() < 0.5 ? 1 : 0, date: '最近', text: '很好用，推薦購買。' },
+                { author: '客戶B', rating: 5, date: '最近', text: '品質不錯，值得入手。' },
+            ];
+        }
+
+        function getQnasForProduct(productId) {
+            if (qnas[productId]) return qnas[productId];
+            return [
+                { q: '這款產品的保修期是多久？', a: '享有2年國際保修，可購買延伸保修。' },
+                { q: '支援哪些付款方式？', a: '支援信用卡、PayPal、銀行轉帳等多種支付方式。' },
+            ];
+        }
+
+        // 推薦系統：常搭配購買
+        function getBundleRecommendations(productId) {
+            const currentProduct = products.find(p => p.id === productId);
+            if (!currentProduct) return [];
+
+            // 相機配套：相機 + 鏡頭 + 配件
+            if (currentProduct.type === '相機') {
+                return products.filter(p => 
+                    p.id !== productId && 
+                    (p.type === '鏡頭' || p.type === '配件') &&
+                    p.brand === currentProduct.brand
+                ).sort(() => Math.random() - 0.5).slice(0, 4);
+            }
+
+            // 鏡頭配套：配件和同品牌相機
+            if (currentProduct.type === '鏡頭') {
+                return products.filter(p =>
+                    p.id !== productId &&
+                    (p.type === '配件' || (p.type === '相機' && p.brand === currentProduct.brand))
+                ).sort(() => Math.random() - 0.5).slice(0, 4);
+            }
+
+            // 配件配套：相同品牌的其他配件或相機
+            return products.filter(p =>
+                p.id !== productId &&
+                p.brand === currentProduct.brand &&
+                (p.type === '配件' || p.type === '相機')
+            ).sort(() => Math.random() - 0.5).slice(0, 4);
+        }
+
+        // 推薦系統：看過的人也看了
+        let viewHistory = JSON.parse(localStorage.getItem('camera-view-history') || '[]');
+
+        function trackProductView(productId) {
+            if (!viewHistory.includes(productId)) {
+                viewHistory.unshift(productId);
+                viewHistory = viewHistory.slice(0, 20);
+                localStorage.setItem('camera-view-history', JSON.stringify(viewHistory));
+            }
+        }
+
+        function getViewedAlsoViewedRecommendations(productId) {
+            const currentProduct = products.find(p => p.id === productId);
+            if (viewHistory.length < 3) return [];
+
+            // 根據瀏覽歷史找相似產品
+            const similarType = products.filter(p => 
+                p.type === currentProduct.type && 
+                p.id !== productId
+            );
+
+            const viewedOthers = products.filter(p => viewHistory.includes(p.id) && p.id !== productId);
+            
+            return [...new Set([...viewedOthers, ...similarType])]
+                .filter(p => p.id !== productId)
+                .slice(0, 4);
+        }
+
+        function renderBundleRecommendation(productId) {
+            const items = getBundleRecommendations(productId);
+            if (items.length === 0) return '';
+
+            return `
+                <div class="recommendation-section">
+                    <h3>🎁 常搭配購買</h3>
+                    <div class="recommendation-products">
+                        ${items.map(p => `
+                            <div class="recommendation-card" onclick="openModal(${p.id})">
+                                <div class="recommendation-image">
+                                    <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
+                                </div>
+                                <div class="recommendation-info">
+                                    <div class="recommendation-name">${p.name}</div>
+                                    <div class="recommendation-price">$${p.price.toLocaleString()}</div>
+                                    <div class="recommendation-action">
+                                        <button class="recommendation-add-btn" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}); event.stopPropagation();">加入</button>
+                                        <button class="recommendation-wishlist-btn ${wishlist.includes(p.id) ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();">
+                                            ${wishlist.includes(p.id) ? '❤️' : '🤍'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderViewedAlsoViewedRecommendation(productId) {
+            const items = getViewedAlsoViewedRecommendations(productId);
+            if (items.length === 0) return '';
+
+            return `
+                <div class="recommendation-section">
+                    <h3>👀 看過的人也看了</h3>
+                    <div class="recommendation-products">
+                        ${items.map(p => `
+                            <div class="recommendation-card" onclick="openModal(${p.id})">
+                                <div class="recommendation-image">
+                                    <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
+                                </div>
+                                <div class="recommendation-info">
+                                    <div class="recommendation-name">${p.name}</div>
+                                    <div class="recommendation-price">$${p.price.toLocaleString()}</div>
+                                    <div class="recommendation-action">
+                                        <button class="recommendation-add-btn" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}); event.stopPropagation();">加入</button>
+                                        <button class="recommendation-wishlist-btn ${wishlist.includes(p.id) ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();">
+                                            ${wishlist.includes(p.id) ? '❤️' : '🤍'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        let filteredProducts = [...products];
+
+        function getProductImage(productId) {
+            return cameraImages[productId % cameraImages.length];
+        }
+
+        function openModal(productId) {
+            trackProductView(productId);
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const isWishlisted = wishlist.includes(productId);
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('productDetailContent');
+            const productReviews = getReviewsForProduct(productId);
+            const productQnas = getQnasForProduct(productId);
+            
+            content.innerHTML = `
+                <div class="product-detail">
+                    <div class="product-detail-image">
+                        <img src="${getProductImage(productId)}" alt="${product.name}">
+                    </div>
+                    <div class="product-detail-info">
+                        <h2>${product.name}</h2>
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        <div class="product-detail-specs">
+                            <strong>規格</strong><br>
+                            ${product.specs}
+                        </div>
+                        <div class="detail-rating">
+                            <span><strong>評分</strong></span>
+                            <span>★ ${product.rating} (${product.reviews} 筆評價)</span>
+                        </div>
+                        <div class="detail-price">$${product.price.toLocaleString()}</div>
+                        ${product.original ? `<p style="color: #999;"><s>$${product.original.toLocaleString()}</s> 省 $${(product.original - product.price).toLocaleString()}</p>` : ''}
+                        <div class="detail-action">
+                            <button class="detail-add-cart" onclick="addToCart(${productId}, '${product.name.replace(/'/g, "\\'")}', ${product.price}); closeModal();">
+                                🛒 加入購物車
+                            </button>
+                            <button class="detail-wishlist" onclick="toggleWishlistItem(${productId});">
+                                ${isWishlisted ? '❤️ 已收藏' : '🤍 收藏'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-reviews-section">
+                    <h3>📝 用戶評論 (${productReviews.length})</h3>
+                    ${productReviews.map(r => `
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="review-author">${r.author}</span>
+                                <span class="review-date">${r.date}</span>
+                            </div>
+                            <div class="review-rating">★ ${r.rating} 分</div>
+                            <div class="review-text">${r.text}</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="detail-reviews-section">
+                    <h3>❓ 常見問題 (${productQnas.length})</h3>
+                    ${productQnas.map((item, idx) => `
+                        <div class="qna-item" onclick="toggleQna(this)">
+                            <div class="qna-question">
+                                <span class="qna-toggle">▶</span>
+                                <span>${item.q}</span>
+                            </div>
+                            <div class="qna-answer">${item.a}</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                ${renderBundleRecommendation(productId)}
+                ${renderViewedAlsoViewedRecommendation(productId)}
+            `;
+            modal.classList.add('show');
+        }
+
+        function toggleQna(element) {
+            element.classList.toggle('expanded');
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('show');
+        }
+
+        function renderProducts(items) {
+            const container = document.getElementById('productContainer');
+            
+            if (items.length === 0) {
+                container.innerHTML = '<div class="loading">未找到符合條件的商品</div>';
+                return;
+            }
+
+            container.innerHTML = items.map((p) => {
+                const isWishlisted = wishlist.includes(p.id);
+                return `
+                <div class="product-card" data-product-id="${p.id}">
+                    <div class="product-image-wrapper loading" onclick="openModal(${p.id})">
+                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                        <button class="wishlist-btn ${isWishlisted ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();" title="加入收藏">
+                            ${isWishlisted ? '❤️' : '🤍'}
+                        </button>
+                        <div class="quick-preview">
+                            <button class="quick-preview-btn quick-view-btn" onclick="openModal(${p.id}); event.stopPropagation();">👁️ 快速預覽</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+                        <div class="product-name" onclick="openModal(${p.id})">${p.name}</div>
+                        <div class="product-specs" data-specs-id="${p.id}">${p.specs}</div>
+                        <span class="product-specs-toggle" onclick="toggleSpecsExpand(${p.id}); event.stopPropagation();">展開規格</span>
+                        <div class="product-rating">
+                            <span class="stars">★${p.rating}</span>
+                            <span class="rating-count">${p.reviews}筆評價</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$${p.price.toLocaleString()}</span>
+                            ${p.original ? `<span class="original-price">$${p.original.toLocaleString()}</span>` : ''}
+                            ${p.original ? `<span class="discount">-${Math.round((1 - p.price/p.original) * 100)}%</span>` : ''}
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price})">加入購物車</button>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function renderRecommended(items) {
+            const container = document.getElementById('recommendedProducts');
+            const section = document.getElementById('recommendedSection');
+            
+            if (items.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            container.innerHTML = items.slice(0, 6).map((p) => {
+                const isWishlisted = wishlist.includes(p.id);
+                return `
+                <div class="product-card" data-product-id="${p.id}">
+                    <div class="product-image-wrapper loading" onclick="openModal(${p.id})">
+                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
+                        <button class="wishlist-btn ${isWishlisted ? 'saved' : ''}" onclick="toggleWishlistItem(${p.id}); event.stopPropagation();">
+                            ${isWishlisted ? '❤️' : '🤍'}
+                        </button>
+                        <div class="quick-preview">
+                            <button class="quick-preview-btn quick-view-btn" onclick="openModal(${p.id}); event.stopPropagation();">👁️ 快速預覽</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+                        <div class="product-name" onclick="openModal(${p.id})">${p.name}</div>
+                        <div class="product-specs" data-specs-id="${p.id}">${p.specs}</div>
+                        <span class="product-specs-toggle" onclick="toggleSpecsExpand(${p.id}); event.stopPropagation();">展開規格</span>
+                        <div class="product-rating">
+                            <span class="stars">★${p.rating}</span>
+                            <span class="rating-count">${p.reviews}筆評價</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">$${p.price.toLocaleString()}</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price})">加入購物車</button>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+
+        function toggleWishlist() {
+            alert(`已收藏 ${wishlist.length} 件商品`);
+        }
+
+        function toggleWishlistItem(productId) {
+            const idx = wishlist.indexOf(productId);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+            } else {
+                wishlist.push(productId);
+            }
+            localStorage.setItem('camera-wishlist', JSON.stringify(wishlist));
+            renderProducts(filteredProducts);
+            renderRecommended(getRecommendedProducts());
+        }
+
+        function addToCart(productId, productName, price) {
+            if (!cart[productId]) {
+                cart[productId] = { name: productName, price, qty: 0 };
+            }
+            cart[productId].qty++;
+            localStorage.setItem('camera-cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+            delete cart[productId];
+            localStorage.setItem('camera-cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateQty(productId, delta) {
+            if (cart[productId]) {
+                cart[productId].qty += delta;
+                if (cart[productId].qty <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    localStorage.setItem('camera-cart', JSON.stringify(cart));
+                }
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const cartContent = document.getElementById('cartContent');
+            const cartBadge = document.getElementById('cartBadge');
+            const cartTotal = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            const cartItems = Object.entries(cart);
+            const totalItems = cartItems.reduce((sum, [_, item]) => sum + item.qty, 0);
+            const totalPrice = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+
+            cartBadge.textContent = totalItems;
+            cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+            cartTotal.textContent = '$' + totalPrice.toLocaleString();
+
+            if (cartItems.length === 0) {
+                cartContent.innerHTML = '<div class="cart-empty">購物車是空的</div>';
+                checkoutBtn.style.display = 'none';
+                const quickCheckoutBtn = document.getElementById('quickCheckoutBtn');
+                if (quickCheckoutBtn) quickCheckoutBtn.style.display = 'none';
+            } else {
+                cartContent.innerHTML = cartItems.map(([productId, item]) => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">$${item.price.toLocaleString()}</div>
+                        </div>
+                        <div class="cart-qty">
+                            <button class="qty-btn" onclick="updateQty(${productId}, -1)">−</button>
+                            <span style="min-width: 20px; text-align: center;">${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQty(${productId}, 1)">+</button>
+                            <span class="cart-remove" onclick="removeFromCart(${productId})">🗑️</span>
+                        </div>
+                    </div>
+                `).join('');
+                checkoutBtn.style.display = 'block';
+                const quickCheckoutBtn = document.getElementById('quickCheckoutBtn');
+                if (quickCheckoutBtn) quickCheckoutBtn.style.display = 'block';
+            }
+        }
+
+        function toggleSpecsExpand(productId) {
+            const element = document.querySelector(`[data-specs-id="${productId}"]`);
+            const toggle = element.nextElementSibling;
+            
+            if (element.classList.contains('expanded')) {
+                element.classList.remove('expanded');
+                toggle.textContent = '展開規格';
+            } else {
+                element.classList.add('expanded');
+                toggle.textContent = '摺疊規格';
+            }
+        }
+
+        function getRecommendedProducts() {
+            const cartProductIds = Object.keys(cart).map(Number);
+            const allIds = [...cartProductIds, ...wishlist];
+            
+            if (allIds.length === 0) {
+                return products.filter(p => p.rating >= 4.7).sort(() => Math.random() - 0.5);
+            }
+
+            return products.filter(p => {
+                const sameBrand = products.find(q => q.id === allIds[0])?.brand === p.brand;
+                const sameType = products.find(q => q.id === allIds[0])?.type === p.type;
+                return (sameBrand || sameType) && !allIds.includes(p.id);
+            });
+        }
+
+        function filterProducts() {
+            const brand = document.getElementById('brandFilter').value;
+            const type = document.getElementById('typeFilter').value;
+            const price = document.getElementById('priceFilter').value;
+
+            filteredProducts = products.filter(p => {
+                let match = true;
+                
+                if (brand && p.brand !== brand) match = false;
+                if (type && p.type !== type) match = false;
+                
+                if (price) {
+                    const [min, max] = price.split('-').map(x => x === '+' ? Infinity : parseInt(x));
+                    if (p.price < min || p.price > max) match = false;
+                }
+                
+                return match;
+            });
+
+            renderProducts(filteredProducts);
+            renderRecommended(getRecommendedProducts());
+        }
+
+        function sortAndRender() {
+            const sortType = document.getElementById('sortFilter').value;
+            let sorted = [...filteredProducts];
+
+            switch(sortType) {
+                case 'price-asc':
+                    sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                    sorted.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'popular':
+                    sorted.sort((a, b) => b.reviews - a.reviews);
+                    break;
+                case 'newest':
+                    sorted.sort((a, b) => b.id - a.id);
+                    break;
+            }
+
+            renderProducts(sorted);
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            filteredProducts = products.filter(p => 
+                p.name.toLowerCase().includes(query) ||
+                p.brand.toLowerCase().includes(query) ||
+                p.specs.toLowerCase().includes(query)
+            );
+            renderProducts(filteredProducts);
+            renderRecommended(getRecommendedProducts());
+        }
+
+        // ========== 首頁優化：Flash Sale 區域 ==========
+        let flashSaleDiscount = 0;
+
+        function getFlashSaleProducts() {
+            // 挑選最熱銷的 8 個商品作為限時優惠
+            return products
+                .filter(p => p.reviews > 100)
+                .sort((a, b) => b.reviews - a.reviews)
+                .slice(0, 8)
+                .map(p => ({...p, originalPrice: p.price, price: Math.floor(p.price * 0.85)}));
+        }
+
+        function renderFlashSale() {
+            const container = document.getElementById('flashSaleProducts');
+            const flashProducts = getFlashSaleProducts();
+
+            container.innerHTML = flashProducts.map(p => `
+                <div class="flash-sale-card" onclick="openModal(${p.id})">
+                    <div class="flash-sale-image">
+                        <img src="${getProductImage(p.id)}" alt="${p.name}" loading="lazy" decoding="async">
+                        <div class="flash-sale-badge">15% OFF</div>
+                    </div>
+                    <div class="flash-sale-info">
+                        <div class="flash-sale-name">${p.name}</div>
+                        <div class="flash-sale-price">
+                            <span class="flash-sale-current">$${p.price.toLocaleString()}</span>
+                            <span class="flash-sale-original">$${p.originalPrice.toLocaleString()}</span>
+                        </div>
+                        <button class="flash-sale-btn" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}); event.stopPropagation();">
+                            快速搶購
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateFlashTimer() {
+            const now = new Date();
+            const hours = String(23 - now.getHours()).padStart(2, '0');
+            const minutes = String(59 - now.getMinutes()).padStart(2, '0');
+            document.getElementById('flashTimer').textContent = `${hours}:${minutes}`;
+        }
+
+        // ========== 支付流程 ==========
+        let currentDiscount = 0;
+        const validCoupons = {
+            'WELCOME10': 0.1,  // 10% off
+            'CAMERA20': 0.2,   // 20% off
+            'NEW15': 0.15,     // 15% off
+        };
+
+        function openCheckout() {
+            if (Object.keys(cart).length === 0) {
+                alert('購物車是空的，請先加入商品');
+                return;
+            }
+            updateCheckoutSummary();
+            document.getElementById('checkoutModal').classList.add('show');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('show');
+        }
+
+        function updateCheckoutSummary() {
+            const cartItems = Object.entries(cart);
+            const subtotal = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+            const shipping = subtotal > 50000 ? 0 : 150; // 满 50000 免运
+            const discount = Math.floor(subtotal * currentDiscount);
+            const total = subtotal + shipping - discount;
+
+            // 商品列表
+            const summaryItems = document.getElementById('summaryItems');
+            summaryItems.innerHTML = cartItems.map(([productId, item]) => `
+                <div class="summary-item">
+                    <div class="summary-item-name">${item.name}</div>
+                    <div class="summary-item-qty">×${item.qty}</div>
+                    <div class="summary-item-price">$${(item.price * item.qty).toLocaleString()}</div>
+                </div>
+            `).join('');
+
+            // 更新摘要
+            document.getElementById('summarySubtotal').textContent = subtotal.toLocaleString();
+            document.getElementById('summaryShipping').textContent = shipping.toLocaleString();
+            document.getElementById('summaryTotal').textContent = total.toLocaleString();
+
+            const discountLine = document.getElementById('discountLine');
+            if (discount > 0) {
+                discountLine.style.display = 'flex';
+                document.getElementById('summaryDiscount').textContent = discount.toLocaleString();
+            } else {
+                discountLine.style.display = 'none';
+            }
+        }
+
+        function applyCoupon() {
+            const couponCode = document.getElementById('couponCode').value.toUpperCase().trim();
+            const messageDiv = document.getElementById('couponMessage');
+
+            if (!couponCode) {
+                messageDiv.textContent = '❌ 請輸入優惠碼';
+                messageDiv.style.color = '#e74c3c';
+                messageDiv.style.display = 'block';
+                return;
+            }
+
+            if (validCoupons[couponCode]) {
+                currentDiscount = validCoupons[couponCode];
+                messageDiv.textContent = `✅ 已套用優惠碼 "${couponCode}"，享 ${Math.round(currentDiscount * 100)}% 折扣！`;
+                messageDiv.style.color = '#f5a623';
+                messageDiv.style.display = 'block';
+                updateCheckoutSummary();
+            } else {
+                messageDiv.textContent = '❌ 無效的優惠碼';
+                messageDiv.style.color = '#e74c3c';
+                messageDiv.style.display = 'block';
+                currentDiscount = 0;
+                updateCheckoutSummary();
+            }
+        }
+
+        function placeOrder() {
+            const receiverName = document.getElementById('receiverName').value;
+            const receiverPhone = document.getElementById('receiverPhone').value;
+            const address = document.getElementById('address').value;
+
+            if (!receiverName || !receiverPhone || !address) {
+                alert('❌ 請填寫完整的收貨地址');
+                return;
+            }
+
+            if (!/^09\d{8}$/.test(receiverPhone)) {
+                alert('❌ 請輸入有效的電話號碼');
+                return;
+            }
+
+            // 生成訂單編號
+            const orderNumber = 'ORD' + new Date().getTime();
+            document.getElementById('orderNumber').textContent = `訂單編號：${orderNumber}`;
+
+            // 顯示成功訊息
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+
+            // 清空購物車
+            setTimeout(() => {
+                cart = {};
+                localStorage.setItem('camera-cart', JSON.stringify(cart));
+                currentDiscount = 0;
+                document.getElementById('couponCode').value = '';
+            }, 1000);
+        }
+
+        function completeCheckout() {
+            closeCheckout();
+            updateCartUI();
+            document.getElementById('checkoutForm').style.display = 'flex';
+            document.getElementById('successMessage').style.display = 'none';
+            toggleCart(); // 自動關閉購物車
+        }
+
+        // ========== 行動菜單控制 ==========
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            
+            mobileNav.classList.toggle('open');
+            mobileMenuToggle.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            
+            mobileNav.classList.remove('open');
+            mobileMenuToggle.classList.remove('active');
+        }
+
+        // 點擊菜單項目時自動關閉菜單
+        document.getElementById('mobileNav')?.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                closeMobileMenu();
+            }
+        });
+
+        // 手機螢幕外點擊時關閉菜單
+        document.addEventListener('click', (e) => {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            
+            if (mobileNav && mobileNav.classList.contains('open') &&
+                !mobileNav.contains(e.target) && 
+                !mobileMenuToggle.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // ========== 動態標題 SEO 優化 ==========
+        function updatePageTitle() {
+            const brand = document.getElementById('brandFilter')?.value;
+            const type = document.getElementById('typeFilter')?.value;
+            const priceRange = document.getElementById('priceFilter')?.value;
+            const searchQuery = document.getElementById('searchInput')?.value;
+            const sortType = document.getElementById('sortFilter')?.value;
+
+            let titleParts = ['相機殿'];
+            let descriptionParts = ['專業相機鏡頭商城 - '];
+
+            if (searchQuery) {
+                titleParts.unshift(searchQuery);
+                descriptionParts.push(`搜尋「${searchQuery}」相關產品 - `);
+            }
+
+            if (type) {
+                titleParts.unshift(type);
+                descriptionParts.push(`${type}專業品牌 - `);
+            }
+
+            if (brand && !searchQuery) {
+                titleParts.unshift(brand);
+                descriptionParts.push(`${brand} 高品質攝影器材 - `);
+            }
+
+            if (priceRange && !searchQuery) {
+                descriptionParts.push(`優惠價格 ${priceRange} - `);
+            }
+
+            if (sortType && sortType !== '') {
+                const sortLabels = {
+                    'price-asc': '價格低到高',
+                    'price-desc': '價格高到低',
+                    'rating': '最高評分',
+                    'popular': '最受歡迎',
+                    'newest': '最新上架'
+                };
+                descriptionParts.push(`${sortLabels[sortType]} - `);
+            }
+
+            descriptionParts.push('Canon、Nikon、Sony、Fujifilm 精選品牌');
+
+            // 更新頁面標題
+            const newTitle = titleParts.join(' - ');
+            document.title = newTitle + ' | 相機殿';
+
+            // 更新 meta description
+            let metaDescription = document.querySelector('meta[name="description"]');
+            if (!metaDescription) {
+                metaDescription = document.createElement('meta');
+                metaDescription.setAttribute('name', 'description');
+                document.head.appendChild(metaDescription);
+            }
+            metaDescription.setAttribute('content', descriptionParts.join('').slice(0, 160));
+
+            // 動態更新 Open Graph 標題
+            let ogTitle = document.querySelector('meta[property="og:title"]');
+            if (!ogTitle) {
+                ogTitle = document.createElement('meta');
+                ogTitle.setAttribute('property', 'og:title');
+                document.head.appendChild(ogTitle);
+            }
+            ogTitle.setAttribute('content', newTitle);
+
+            // 更新 Breadcrumb Schema（動態）
+            updateBreadcrumbSchema(brand, type);
+        }
+
+        function updateBreadcrumbSchema(brand, type) {
+            let schemaScript = document.querySelector('script[type="application/ld+json"]:nth-of-type(3)');
+            
+            const breadcrumbList = {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "首頁",
+                        "item": "https://carloxthebot.github.io/pages/camera-shop.html"
+                    }
+                ]
+            };
+
+            if (type) {
+                breadcrumbList.itemListElement.push({
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": type,
+                    "item": `https://carloxthebot.github.io/pages/camera-shop.html?type=${type}`
+                });
+            }
+
+            if (brand) {
+                breadcrumbList.itemListElement.push({
+                    "@type": "ListItem",
+                    "position": breadcrumbList.itemListElement.length + 1,
+                    "name": brand,
+                    "item": `https://carloxthebot.github.io/pages/camera-shop.html?brand=${brand}`
+                });
+            }
+
+            if (schemaScript) {
+                schemaScript.textContent = JSON.stringify(breadcrumbList);
+            }
+        }
+
+        // 包裝原始的過濾和排序函數，添加標題更新
+        const originalFilterProducts = filterProducts;
+        const originalSortAndRender = sortAndRender;
+        const originalSearchProducts = searchProducts;
+
+        filterProducts = function() {
+            originalFilterProducts.call(this);
+            updatePageTitle();
+        };
+
+        sortAndRender = function() {
+            originalSortAndRender.call(this);
+            updatePageTitle();
+        };
+
+        searchProducts = function() {
+            originalSearchProducts.call(this);
+            updatePageTitle();
+        };
+
+        // ========== A/B 測試框架 ==========
+        let abTestVariants = JSON.parse(localStorage.getItem('camera-ab-variants') || '{}');
+        let abTestMetrics = JSON.parse(localStorage.getItem('camera-ab-metrics') || '{}');
+
+        // A/B 測試配置
+        const abTests = {
+            // 按鈕顏色測試
+            'buttonColor': {
+                name: '購物車按鈕顏色',
+                active: true,
+                variants: {
+                    'control': { color: 'var(--primary)', name: '橙色（原始）' },
+                    'red': { color: '#e74c3c', name: '紅色' },
+                    'green': { color: '#27ae60', name: '綠色' }
+                },
+                weight: 1/3
+            },
+            // 文案變體測試
+            'cta-text': {
+                name: '加入購物車文案',
+                active: true,
+                variants: {
+                    'add-to-cart': { text: '加入購物車', name: '標準文案' },
+                    'quick-buy': { text: '立即購買', name: '立即購買' },
+                    'add-now': { text: '加入 💰', name: '加入 + 表情符號' }
+                },
+                weight: 1/3
+            },
+            // 按鈕位置測試
+            'button-position': {
+                name: '購物車按鈕位置',
+                active: true,
+                variants: {
+                    'bottom': { position: 'flex-end', name: '底部（原始）' },
+                    'top': { position: 'flex-start', name: '頂部' }
+                },
+                weight: 0.5
+            }
+        };
+
+        // 初始化 A/B 測試
+        function initABTest() {
+            // 為每個 A/B 測試分配用戶變體
+            Object.keys(abTests).forEach(testId => {
+                if (!abTestVariants[testId]) {
+                    const test = abTests[testId];
+                    const variants = Object.keys(test.variants);
+                    const randomVariant = variants[Math.floor(Math.random() * variants.length)];
+                    abTestVariants[testId] = randomVariant;
+                    
+                    if (!abTestMetrics[testId]) {
+                        abTestMetrics[testId] = {};
+                    }
+                    if (!abTestMetrics[testId][randomVariant]) {
+                        abTestMetrics[testId][randomVariant] = {
+                            views: 0,
+                            clicks: 0,
+                            conversions: 0,
+                            revenue: 0
+                        };
+                    }
+                }
+            });
+
+            localStorage.setItem('camera-ab-variants', JSON.stringify(abTestVariants));
+            localStorage.setItem('camera-ab-metrics', JSON.stringify(abTestMetrics));
+            applyABTestStyles();
+        }
+
+        // 應用 A/B 測試樣式
+        function applyABTestStyles() {
+            const buttonColorVariant = abTestVariants['buttonColor'];
+            const buttonColor = abTests['buttonColor'].variants[buttonColorVariant];
+            
+            // 動態注入 CSS 變數
+            const style = document.createElement('style');
+            style.textContent = `:root {
+                --ab-button-color: ${buttonColor.color};
+            }`;
+            document.head.appendChild(style);
+
+            // 更新按鈕顏色
+            const addToCartButtons = document.querySelectorAll('.add-to-cart, .flash-sale-btn, .detail-add-cart, .recommendation-add-btn, .checkout-btn');
+            addToCartButtons.forEach(btn => {
+                btn.style.background = buttonColor.color;
+                btn.addEventListener('click', () => trackABMetric('buttonColor', 'click'));
+            });
+        }
+
+        // 追蹤 A/B 測試指標
+        function trackABMetric(testId, metricType) {
+            const variant = abTestVariants[testId];
+            if (!abTestMetrics[testId]) {
+                abTestMetrics[testId] = {};
+            }
+            if (!abTestMetrics[testId][variant]) {
+                abTestMetrics[testId][variant] = {
+                    views: 0,
+                    clicks: 0,
+                    conversions: 0,
+                    revenue: 0
+                };
+            }
+
+            abTestMetrics[testId][variant][metricType]++;
+            localStorage.setItem('camera-ab-metrics', JSON.stringify(abTestMetrics));
+        }
+
+        // 記錄轉換
+        function trackConversion(testId, revenue = 0) {
+            const variant = abTestVariants[testId];
+            if (!abTestMetrics[testId]) abTestMetrics[testId] = {};
+            if (!abTestMetrics[testId][variant]) {
+                abTestMetrics[testId][variant] = { views: 0, clicks: 0, conversions: 0, revenue: 0 };
+            }
+
+            abTestMetrics[testId][variant].conversions++;
+            abTestMetrics[testId][variant].revenue += revenue;
+            localStorage.setItem('camera-ab-metrics', JSON.stringify(abTestMetrics));
+        }
+
+        // 顯示 A/B 測試報告
+        function showABTestReport() {
+            console.log('=== A/B 測試報告 ===');
+            Object.keys(abTestMetrics).forEach(testId => {
+                const test = abTests[testId];
+                console.log(`\n${test.name}:`);
+                Object.entries(abTestMetrics[testId]).forEach(([variant, metrics]) => {
+                    const variantName = test.variants[variant]?.name || variant;
+                    const ctr = metrics.clicks > 0 ? ((metrics.conversions / metrics.clicks) * 100).toFixed(2) : '0';
+                    console.log(`  ${variantName}: ${metrics.views} views | ${metrics.clicks} clicks | ${metrics.conversions} conversions | CTR: ${ctr}%`);
+                });
+            });
+        }
+
+        // 重置 A/B 測試
+        function resetABTests() {
+            localStorage.removeItem('camera-ab-variants');
+            localStorage.removeItem('camera-ab-metrics');
+            location.reload();
+        }
+
+        // 修改原始 addToCart 函數以支持 A/B 測試
+        const originalAddToCart = addToCart;
+        addToCart = function(productId, productName, price) {
+            trackABMetric('cta-text', 'click');
+            trackABMetric('button-position', 'click');
+            
+            // 更新轉換指標（基於最終訂單值）
+            trackConversion('buttonColor', price);
+            trackConversion('cta-text', price);
+            
+            originalAddToCart.call(this, productId, productName, price);
+        };
+
+        // 修改 placeOrder 函數以記錄完整轉換
+        const originalPlaceOrder = placeOrder;
+        placeOrder = function() {
+            const cartItems = Object.entries(cart);
+            const totalRevenue = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+
+            // 所有測試都記錄完整轉換
+            Object.keys(abTestVariants).forEach(testId => {
+                trackConversion(testId, totalRevenue);
+            });
+
+            originalPlaceOrder.call(this);
+        };
+
+        // ========== 初始化 ==========
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchProducts();
+        });
+
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') closeModal();
+        });
+
+        document.getElementById('checkoutModal').addEventListener('click', (e) => {
+            if (e.target.id === 'checkoutModal') closeCheckout();
+        });
+
+        // 監聽過濾器變化以更新動態標題
+        document.getElementById('brandFilter')?.addEventListener('change', updatePageTitle);
+        document.getElementById('typeFilter')?.addEventListener('change', updatePageTitle);
+        document.getElementById('priceFilter')?.addEventListener('change', updatePageTitle);
+        document.getElementById('sortFilter')?.addEventListener('change', updatePageTitle);
+        document.getElementById('searchInput')?.addEventListener('input', () => {
+            // 延遲更新，避免每個字符都觸發
+            clearTimeout(window.titleUpdateTimeout);
+            window.titleUpdateTimeout = setTimeout(updatePageTitle, 500);
+        });
+
+        renderFlashSale();
+        updateFlashTimer();
+        setInterval(updateFlashTimer, 60000); // 每分鐘更新一次倒計時
+
+        renderProducts(products);
+        renderRecommended(getRecommendedProducts());
+        updateCartUI();
+        
+        // 初始化頁面標題
+        updatePageTitle();
+
+        // ========== 用戶帳戶系統 ==========
+        let currentUser = JSON.parse(localStorage.getItem('camera-current-user') || 'null');
+        let users = JSON.parse(localStorage.getItem('camera-users') || '{}');
+        let userOrders = JSON.parse(localStorage.getItem('camera-user-orders') || '{}');
+        let userSavedItems = JSON.parse(localStorage.getItem('camera-user-saved-items') || '{}');
+
+        // 更新頁面顯示用戶狀態
+        function updateUserUI() {
+            const loginLinks = document.querySelector('.header-top-right');
+            const userLink = document.getElementById('userLink');
+            const loginBtn = loginLinks.querySelector('a:nth-child(1)');
+            const registerBtn = loginLinks.querySelector('a:nth-child(2)');
+
+            if (currentUser) {
+                // 用戶已登入
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                userLink.style.display = 'inline';
+                userLink.textContent = `👤 ${currentUser.name}`;
+            } else {
+                // 用戶未登入
+                loginBtn.style.display = 'inline';
+                registerBtn.style.display = 'inline';
+                userLink.style.display = 'none';
+            }
+        }
+
+        // 打開登入/註冊彈窗
+        function openAuthModal(tab = 'login') {
+            document.getElementById('authModal').classList.add('show');
+            switchAuthTab(tab);
+            document.getElementById('authError').classList.remove('show');
+        }
+
+        // 關閉登入/註冊彈窗
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('show');
+            document.getElementById('authError').classList.remove('show');
+        }
+
+        // 切換標籤
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach((t, i) => {
+                t.classList.toggle('active', t.textContent === (tab === 'login' ? '登入' : '註冊'));
+            });
+
+            document.querySelectorAll('.auth-form').forEach((f, i) => {
+                f.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
+            });
+
+            const title = document.getElementById('authTitle');
+            const subtitle = document.getElementById('authSubtitle');
+            if (tab === 'login') {
+                title.textContent = '登入帳戶';
+                subtitle.textContent = '享受更好的購物體驗';
+            } else {
+                title.textContent = '建立新帳戶';
+                subtitle.textContent = '加入相機殿家族';
+            }
+        }
+
+        // 登入功能
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = e.target.elements[0].value;
+            const password = e.target.elements[1].value;
+            const errorDiv = document.getElementById('authError');
+
+            // 驗證用戶
+            if (users[email] && users[email].password === password) {
+                currentUser = {
+                    email: email,
+                    name: users[email].name,
+                    phone: users[email].phone || '',
+                    address: users[email].address || ''
+                };
+                localStorage.setItem('camera-current-user', JSON.stringify(currentUser));
+                closeAuthModal();
+                updateUserUI();
+                alert(`歡迎回來，${currentUser.name}！`);
+                e.target.reset();
+            } else {
+                errorDiv.textContent = '❌ 電子郵件或密碼錯誤';
+                errorDiv.classList.add('show');
+            }
+        }
+
+        // 註冊功能
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = e.target.elements[0].value;
+            const email = e.target.elements[1].value;
+            const password = e.target.elements[2].value;
+            const confirmPassword = e.target.elements[3].value;
+            const errorDiv = document.getElementById('authError');
+
+            // 驗證
+            if (password !== confirmPassword) {
+                errorDiv.textContent = '❌ 密碼不匹配';
+                errorDiv.classList.add('show');
+                return;
+            }
+
+            if (users[email]) {
+                errorDiv.textContent = '❌ 此電子郵件已被註冊';
+                errorDiv.classList.add('show');
+                return;
+            }
+
+            // 建立新用戶
+            users[email] = {
+                name: name,
+                password: password,
+                phone: '',
+                address: ''
+            };
+            userOrders[email] = [];
+            userSavedItems[email] = [];
+
+            localStorage.setItem('camera-users', JSON.stringify(users));
+            localStorage.setItem('camera-user-orders', JSON.stringify(userOrders));
+            localStorage.setItem('camera-user-saved-items', JSON.stringify(userSavedItems));
+
+            // 自動登入
+            currentUser = { email, name, phone: '', address: '' };
+            localStorage.setItem('camera-current-user', JSON.stringify(currentUser));
+
+            closeAuthModal();
+            updateUserUI();
+            alert(`帳戶建立成功！歡迎，${name}！`);
+            e.target.reset();
+        }
+
+        // 打開用戶帳戶面板
+        function openUserAccount() {
+            if (!currentUser) {
+                openAuthModal('login');
+                return;
+            }
+            document.getElementById('accountPanel').classList.add('open');
+            loadUserProfile();
+            loadUserOrders();
+            loadUserSavedItems();
+        }
+
+        // 關閉用戶帳戶面板
+        function closeUserAccount() {
+            document.getElementById('accountPanel').classList.remove('open');
+        }
+
+        // 切換帳戶標籤
+        function switchAccountTab(tab) {
+            document.querySelectorAll('.account-tab').forEach(t => {
+                t.classList.toggle('active', t.textContent.includes(
+                    tab === 'orders' ? '訂單' : 
+                    tab === 'profile' ? '個人' : 
+                    '收藏'
+                ));
+            });
+
+            document.querySelectorAll('.account-section').forEach((s, i) => {
+                const sections = ['orders', 'profile', 'saved'];
+                s.classList.toggle('active', sections[i] === tab);
+            });
+        }
+
+        // 加載用戶資料
+        function loadUserProfile() {
+            document.getElementById('userAvatar').textContent = currentUser.name[0];
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userEmail').textContent = currentUser.email;
+        }
+
+        // 加載訂單歷史
+        function loadUserOrders() {
+            const orders = userOrders[currentUser.email] || [];
+            const ordersList = document.getElementById('ordersList');
+
+            if (orders.length === 0) {
+                ordersList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📦</div>
+                        <p>還沒有訂單</p>
+                        <p style="font-size: 0.8em; color: #ccc;">開始購物，探索我們精選的產品吧！</p>
+                    </div>
+                `;
+                return;
+            }
+
+            ordersList.innerHTML = orders.map(order => `
+                <div class="order-item">
+                    <div class="order-header">
+                        <span class="order-number-label">${order.orderNumber}</span>
+                        <span class="order-status ${order.status}">${
+                            order.status === 'completed' ? '✅ 已送達' :
+                            order.status === 'shipped' ? '🚚 配送中' :
+                            '⏳ 待處理'
+                        }</span>
+                    </div>
+                    <div class="order-detail">📦 ${order.items.length} 件商品</div>
+                    <div class="order-detail">📍 ${order.address}</div>
+                    <div class="order-detail order-date">${order.date}</div>
+                    <div style="text-align: right; margin-top: 10px;">
+                        <span class="order-total">$${order.total.toLocaleString()}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 加載收藏商品
+        function loadUserSavedItems() {
+            const savedIds = userSavedItems[currentUser.email] || [];
+            const savedProducts = products.filter(p => savedIds.includes(p.id));
+            const savedList = document.getElementById('savedItemsList');
+
+            if (savedProducts.length === 0) {
+                savedList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">❤️</div>
+                        <p>沒有收藏的商品</p>
+                        <p style="font-size: 0.8em; color: #ccc;">点擊 ❤️ 保存喜愛的產品。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            savedList.innerHTML = `
+                <div class="products" style="margin-top: 0;">
+                    ${savedProducts.map(p => `
+                        <div class="product-card">
+                            <div class="product-image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=200&h=200&fit=crop" alt="${p.name}" loading="lazy" decoding="async">
+                                <button class="wishlist-btn saved" onclick="removeFromSaved(${p.id}); return false;">❤️</button>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name" onclick="openModal(${p.id})">${p.name}</div>
+                                <div class="product-rating">
+                                    <span class="stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span>
+                                    <span class="rating-count">(${p.reviews})</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price">$${p.price.toLocaleString()}</span>
+                                </div>
+                                <button class="add-to-cart" onclick="addToCart(${p.id}, '${p.name}', ${p.price})">加入購物車</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // 從收藏中移除
+        function removeFromSaved(productId) {
+            if (!currentUser) return;
+            const userEmail = currentUser.email;
+            userSavedItems[userEmail] = (userSavedItems[userEmail] || []).filter(id => id !== productId);
+            localStorage.setItem('camera-user-saved-items', JSON.stringify(userSavedItems));
+            loadUserSavedItems();
+        }
+
+        // 處理登出
+        function handleLogout() {
+            if (confirm('確定要登出嗎？')) {
+                currentUser = null;
+                localStorage.removeItem('camera-current-user');
+                closeUserAccount();
+                updateUserUI();
+                alert('已成功登出。');
+            }
+        }
+
+        // 編輯個人資料（佔位符）
+        function editProfile() {
+            alert('編輯個人資料功能即將推出！');
+        }
+
+        // 變更密碼（佔位符）
+        function changePassword() {
+            alert('變更密碼功能即將推出！');
+        }
+
+        // 管理地址（佔位符）
+        function manageSavedAddresses() {
+            alert('管理地址功能即將推出！');
+        }
+
+        // 重寫收藏系統以支持用戶帳戶
+        const originalToggleWishlist = toggleWishlist;
+        const originalAddWishlist = addWishlist;
+        const originalRemoveWishlist = removeWishlist;
+
+        toggleWishlist = function(productId) {
+            if (!currentUser) {
+                alert('請先登入帳戶才能收藏商品');
+                openAuthModal('login');
+                return;
+            }
+            originalToggleWishlist.call(this, productId);
+        };
+
+        addWishlist = function(productId) {
+            if (currentUser && !userSavedItems[currentUser.email]) {
+                userSavedItems[currentUser.email] = [];
+            }
+            if (currentUser && !userSavedItems[currentUser.email].includes(productId)) {
+                userSavedItems[currentUser.email].push(productId);
+                localStorage.setItem('camera-user-saved-items', JSON.stringify(userSavedItems));
+            }
+            originalAddWishlist.call(this, productId);
+        };
+
+        removeWishlist = function(productId) {
+            if (currentUser && userSavedItems[currentUser.email]) {
+                userSavedItems[currentUser.email] = userSavedItems[currentUser.email].filter(id => id !== productId);
+                localStorage.setItem('camera-user-saved-items', JSON.stringify(userSavedItems));
+            }
+            originalRemoveWishlist.call(this, productId);
+        };
+
+        // 修改 placeOrder 以保存訂單到用戶帳戶
+        const originalPlaceOrderUserSystem = placeOrder;
+        placeOrder = function() {
+            const receiverName = document.getElementById('receiverName').value;
+            const receiverPhone = document.getElementById('receiverPhone').value;
+            const address = document.getElementById('address').value;
+
+            if (!receiverName || !receiverPhone || !address) {
+                alert('❌ 請填寫完整的收貨地址');
+                return;
+            }
+
+            if (!/^09\d{8}$/.test(receiverPhone)) {
+                alert('❌ 請輸入有效的電話號碼');
+                return;
+            }
+
+            // 生成訂單編號
+            const orderNumber = 'ORD' + new Date().getTime();
+            document.getElementById('orderNumber').textContent = `訂單編號：${orderNumber}`;
+
+            // 如果用戶已登入，保存訂單
+            if (currentUser) {
+                const cartItems = Object.entries(cart);
+                const subtotal = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+                const shipping = subtotal > 50000 ? 0 : 150;
+                const discount = Math.floor(subtotal * currentDiscount);
+                const total = subtotal + shipping - discount;
+
+                const order = {
+                    orderNumber: orderNumber,
+                    date: new Date().toLocaleDateString('zh-TW'),
+                    items: cartItems.map(([id, item]) => ({ id, name: item.name, qty: item.qty, price: item.price })),
+                    address: address,
+                    total: total,
+                    status: 'pending'
+                };
+
+                if (!userOrders[currentUser.email]) {
+                    userOrders[currentUser.email] = [];
+                }
+                userOrders[currentUser.email].push(order);
+                localStorage.setItem('camera-user-orders', JSON.stringify(userOrders));
+            }
+
+            // 顯示成功訊息
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+
+            // 清空購物車
+            setTimeout(() => {
+                cart = {};
+                localStorage.setItem('camera-cart', JSON.stringify(cart));
+                currentDiscount = 0;
+                document.getElementById('couponCode').value = '';
+            }, 1000);
+        };
+
+        // ========== 第9回合優化：快速結帳 + 庫存提示 + 訂單追蹤 ==========
+
+        // 快速結帳相關變數
+        let quickSelectedPayment = 'credit';
+
+        // 開啟快速結帳模態
+        function openQuickCheckout() {
+            if (Object.keys(cart).length === 0) {
+                alert('購物車是空的');
+                return;
+            }
+            updateQuickCheckoutSummary();
+            document.getElementById('quickCheckoutModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 關閉快速結帳模態
+        function closeQuickCheckout() {
+            document.getElementById('quickCheckoutModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 更新快速結帳摘要
+        function updateQuickCheckoutSummary() {
+            const cartItems = Object.entries(cart);
+            const subtotal = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+            const shipping = subtotal > 50000 ? 0 : 150;
+            
+            document.getElementById('quickSubtotal').textContent = '$' + subtotal.toLocaleString();
+            document.getElementById('quickShipping').textContent = shipping === 0 ? '免運' : '$' + shipping.toLocaleString();
+            document.getElementById('quickTotal').textContent = '$' + (subtotal + shipping).toLocaleString();
+        }
+
+        // 選擇快速支付方式
+        function selectQuickPayment(element, method) {
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            quickSelectedPayment = method;
+        }
+
+        // 確認快速結帳
+        function confirmQuickCheckout() {
+            const name = document.getElementById('quickName').value.trim();
+            const phone = document.getElementById('quickPhone').value.trim();
+            const address = document.getElementById('quickAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('❌ 請填寫完整的收貨地址');
+                return;
+            }
+
+            if (!/^09\d{8}$/.test(phone)) {
+                alert('❌ 請輸入有效的電話號碼 (09xxxxxxxx)');
+                return;
+            }
+
+            // 生成訂單編號
+            const orderNumber = 'ORD' + new Date().getTime();
+            
+            // 保存訂單
+            if (currentUser) {
+                const cartItems = Object.entries(cart);
+                const subtotal = cartItems.reduce((sum, [_, item]) => sum + item.price * item.qty, 0);
+                const shipping = subtotal > 50000 ? 0 : 150;
+
+                const order = {
+                    orderNumber: orderNumber,
+                    date: new Date().toLocaleDateString('zh-TW'),
+                    items: cartItems.map(([id, item]) => ({ id, name: item.name, qty: item.qty, price: item.price })),
+                    address: address,
+                    total: subtotal + shipping,
+                    status: 'pending',
+                    payment: quickSelectedPayment,
+                    customerName: name,
+                    customerPhone: phone
+                };
+
+                if (!userOrders[currentUser.email]) {
+                    userOrders[currentUser.email] = [];
+                }
+                userOrders[currentUser.email].push(order);
+                localStorage.setItem('camera-user-orders', JSON.stringify(userOrders));
+            }
+
+            // 顯示成功訊息
+            alert('✅ 快速結帳成功！訂單編號：' + orderNumber);
+            
+            // 清空購物車並關閉模態
+            cart = {};
+            localStorage.setItem('camera-cart', JSON.stringify(cart));
+            closeQuickCheckout();
+            updateCart();
+            
+            // 顯示訂單追蹤
+            if (currentUser) {
+                showOrderTracking(orderNumber);
+            }
+        }
+
+        // 顯示訂單追蹤頁面
+        function showOrderTracking(orderNumber) {
+            if (!currentUser) return;
+
+            const userEmail = currentUser.email;
+            const orders = userOrders[userEmail] || [];
+            const order = orders.find(o => o.orderNumber === orderNumber);
+
+            if (!order) return;
+
+            const timelineStages = [
+                {
+                    title: '訂單已成立',
+                    description: '我們已收到您的訂單',
+                    completed: true,
+                    time: '剛剛'
+                },
+                {
+                    title: '準備出貨',
+                    description: '商品正在打包中',
+                    completed: order.status !== 'pending',
+                    time: order.status !== 'pending' ? '1-2 天後' : '待處理'
+                },
+                {
+                    title: '已出貨',
+                    description: '订単已交給配送商',
+                    completed: order.status === 'shipped' || order.status === 'completed',
+                    time: order.status === 'shipped' || order.status === 'completed' ? '1-3 天後' : '待處理'
+                },
+                {
+                    title: '已送達',
+                    description: '商品已成功送達',
+                    completed: order.status === 'completed',
+                    time: order.status === 'completed' ? '今天' : '待處理'
+                }
+            ];
+
+            let timelineHTML = timelineStages.map((stage, idx) => `
+                <div class="timeline-item ${stage.completed ? 'completed' : ''}">
+                    <div class="timeline-dot">${stage.completed ? '✓' : idx + 1}</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">${stage.title}</div>
+                        <div class="timeline-description">${stage.description}</div>
+                        <div class="timeline-time">${stage.time}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            const contentHTML = `
+                <div style="background: var(--light); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div>
+                            <strong>訂單編號</strong>
+                            <div style="font-size: 1.1em; color: var(--secondary);">${order.orderNumber}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>訂購日期</strong>
+                            <div style="font-size: 1em;">${order.date}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px; color: var(--dark);">📍 配送進度</h3>
+                <div class="order-tracking-timeline">
+                    ${timelineHTML}
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: var(--dark);">📦 訂單內容</h3>
+                <div style="background: var(--light); padding: 15px; border-radius: 8px;">
+                    ${order.items.map(item => `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
+                            <div>
+                                <strong>${item.name}</strong>
+                                <div style="font-size: 0.9em; color: #666;">數量：${item.qty}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--secondary); font-weight: 600;">$${(item.price * item.qty).toLocaleString()}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div style="display: flex; justify-content: space-between; margin-top: 15px; font-weight: 700; font-size: 1.1em; color: var(--secondary);">
+                        <span>總金額</span>
+                        <span>$${order.total.toLocaleString()}</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: var(--dark);">📮 收貨地址</h3>
+                <div style="background: var(--light); padding: 15px; border-radius: 8px;">
+                    <div><strong>${order.customerName}</strong></div>
+                    <div>${order.customerPhone}</div>
+                    <div>${order.address}</div>
+                </div>
+            `;
+
+            document.getElementById('orderTrackingContent').innerHTML = contentHTML;
+            document.getElementById('orderTrackingContainer').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 關閉訂單追蹤
+        function closeOrderTracking() {
+            document.getElementById('orderTrackingContainer').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 為產品卡片添加庫存提示
+        function renderStockIndicator(product) {
+            let stock = Math.max(0, 100 - product.id % 50); // 模擬庫存
+            if (stock === 0) {
+                return '<div class="stock-indicator stock-out">❌ 庫存不足</div>';
+            } else if (stock < 10) {
+                return `<div class="stock-indicator stock-low">⚠️ 僅剩 ${stock} 件</div>`;
+            } else {
+                return '<div class="stock-indicator stock-available">✓ 庫存充足</div>';
+            }
+        }
+
+        // 更新商品卡片，添加庫存提示和快速結帳按鈕
+        const originalRenderProducts = renderProducts;
+        renderProducts = function(filteredProducts) {
+            originalRenderProducts.call(this, filteredProducts);
+            // 添加庫存提示到每個卡片
+            filteredProducts.forEach(p => {
+                const cardElement = document.querySelector(`[data-product-id="${p.id}"]`);
+                if (cardElement) {
+                    const stockHTML = renderStockIndicator(p);
+                    // 在價格下方添加庫存提示
+                    const priceElement = cardElement.querySelector('.product-price');
+                    if (priceElement && !cardElement.querySelector('.stock-indicator')) {
+                        priceElement.insertAdjacentHTML('afterend', stockHTML);
+                    }
+                }
+            });
+        };
+
+        // 快速結帳按鈕已在上面的 addToCart 包裝中處理
+
+        // ========== 第10回合優化：購物體驗增強包 ==========
+        
+        // 智慧推薦系統 - 根據季節和趨勢推薦
+        function getTrendingProducts() {
+            // 根據月份的季節性推薦
+            const month = new Date().getMonth();
+            let recommendations = [];
+            
+            if (month >= 2 && month <= 4) { // 春季
+                recommendations = products.filter(p => 
+                    p.name.includes('Fujifilm') || p.name.includes('微單')
+                ).slice(0, 4);
+            } else if (month >= 5 && month <= 7) { // 夏季
+                recommendations = products.filter(p => 
+                    p.name.includes('防水') || p.name.includes('輕便') || p.name.includes('GoPro')
+                ).slice(0, 4);
+            } else if (month >= 8 && month <= 10) { // 秋季
+                recommendations = products.filter(p => 
+                    p.name.includes('Canon') || p.name.includes('Nikon')
+                ).slice(0, 4);
+            } else { // 冬季
+                recommendations = products.filter(p => 
+                    p.price > 30000
+                ).slice(0, 4);
+            }
+            
+            return recommendations.length >= 4 ? recommendations : products.slice(0, 4);
+        }
+
+        // 顯示季節推薦面板
+        function showSeasonalRecommendations() {
+            const trending = getTrendingProducts();
+            const month = new Date().getMonth();
+            const seasons = ['❄️ 冬季', '❄️ 冬季', '🌸 春季', '🌸 春季', '🌸 春季', '☀️ 夏季', '☀️ 夏季', '☀️ 夏季', '🍂 秋季', '🍂 秋季', '🍂 秋季', '❄️ 冬季'];
+            
+            let seasonalHTML = `
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px; border-radius: 8px; margin-bottom: 20px; color: white;">
+                    <div style="font-size: 1.2em; font-weight: 700; margin-bottom: 8px;">${seasons[month]} 季節推薦</div>
+                    <div style="font-size: 0.9em; opacity: 0.95;">根據當前季節為您精選的熱門商品</div>
+                </div>
+                <div class="products" style="margin-top: 0;">
+                    ${trending.map(p => `
+                        <div class="product-card">
+                            <div class="product-image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=200&h=200&fit=crop" alt="${p.name}" loading="lazy" decoding="async">
+                                <button class="wishlist-btn" onclick="toggleWishlist(${p.id}); return false;">🤍</button>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name" onclick="openModal(${p.id})" style="cursor: pointer;">${p.name}</div>
+                                <div class="product-price">
+                                    <span class="price">$${p.price.toLocaleString()}</span>
+                                </div>
+                                <button class="add-to-cart" onclick="addToCart(${p.id}, '${p.name}', ${p.price})">加入購物車</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            document.getElementById('seasonalPanel').innerHTML = seasonalHTML;
+            document.getElementById('seasonalPanel').style.display = 'block';
+        }
+
+        // 庫存預訂系統
+        let reservations = JSON.parse(localStorage.getItem('camera-reservations') || '{}');
+
+        function openReservationModal(productId, productName) {
+            const stock = Math.max(0, 100 - productId % 50);
+            if (stock > 0) {
+                alert('✓ 該商品庫存充足，可直接購買');
+                return;
+            }
+
+            if (!currentUser) {
+                alert('請先登入帳戶才能預訂商品');
+                openAuthModal('login');
+                return;
+            }
+
+            const userEmail = currentUser.email;
+            const isReserved = reservations[userEmail]?.some(r => r.productId === productId);
+            
+            if (isReserved) {
+                alert('您已預訂過此商品，請等待補貨通知');
+                return;
+            }
+
+            const message = `📦 商品: ${productName}\n\n您將在補貨時收到通知，點擊「確認預訂」開始等待。`;
+            if (confirm(message + '\n\n是否確認預訂？')) {
+                if (!reservations[userEmail]) {
+                    reservations[userEmail] = [];
+                }
+                reservations[userEmail].push({
+                    productId: productId,
+                    productName: productName,
+                    reserveDate: new Date().toLocaleDateString('zh-TW'),
+                    status: 'waiting'
+                });
+                localStorage.setItem('camera-reservations', JSON.stringify(reservations));
+                alert('✅ 預訂成功！補貨時我們會通知您。');
+            }
+        }
+
+        // 分享功能 - 分享到社交媒體
+        function shareProduct(productId, productName, productPrice) {
+            const shareURL = `https://carloxthebot.github.io/pages/camera-shop.html?product=${productId}`;
+            const shareText = `📷 ${productName} - $${productPrice.toLocaleString()} | 相機殿精選推薦`;
+            
+            const shareOptions = [
+                { name: '📋 複製連結', action: () => {
+                    navigator.clipboard.writeText(shareURL);
+                    alert('✅ 連結已複製到剪貼板');
+                }},
+                { name: '🔗 分享到 Facebook', action: () => {
+                    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareURL)}`;
+                    window.open(url, '_blank', 'width=600,height=400');
+                }},
+                { name: '🐦 分享到 Twitter', action: () => {
+                    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareURL)}`;
+                    window.open(url, '_blank', 'width=600,height=400');
+                }},
+                { name: '💬 分享到 WhatsApp', action: () => {
+                    const url = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareURL)}`;
+                    window.open(url, '_blank');
+                }}
+            ];
+
+            let optionsHTML = shareOptions.map((opt, idx) => `<button onclick="executeShare(${idx})">${opt.name}</button>`).join('');
+            const modal = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 10000; min-width: 300px;">
+                    <h3 style="margin: 0 0 20px; color: var(--dark);">🔗 分享這件商品</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        ${optionsHTML}
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="width: 100%; margin-top: 15px; padding: 10px; background: #eee; border: none; border-radius: 6px; cursor: pointer;">關閉</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = modal;
+            document.body.appendChild(container);
+            
+            // 儲存分享選項供 executeShare 函數使用
+            window.shareOptionsCache = shareOptions;
+        }
+
+        function executeShare(idx) {
+            if (window.shareOptionsCache && window.shareOptionsCache[idx]) {
+                window.shareOptionsCache[idx].action();
+            }
+        }
+
+        // 禮物包裝和祝賀卡選項
+        let giftOptions = JSON.parse(localStorage.getItem('camera-gift-options') || '{}');
+
+        function openGiftModal(productId, productName, productPrice) {
+            const giftHTML = `
+                <div id="giftModalOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: white; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%;">
+                        <h3 style="margin-top: 0; color: var(--dark);">🎁 禮物包裝選項</h3>
+                        
+                        <div style="margin: 20px 0;">
+                            <label style="display: block; margin-bottom: 15px; cursor: pointer;">
+                                <input type="radio" name="giftWrap" value="none" checked> 
+                                <span style="margin-left: 10px;">➖ 不需要禮物包裝</span>
+                            </label>
+                            <label style="display: block; margin-bottom: 15px; cursor: pointer;">
+                                <input type="radio" name="giftWrap" value="basic"> 
+                                <span style="margin-left: 10px;">📦 基礎包裝 (+$50)</span>
+                            </label>
+                            <label style="display: block; margin-bottom: 15px; cursor: pointer;">
+                                <input type="radio" name="giftWrap" value="deluxe"> 
+                                <span style="margin-left: 10px;">✨ 豪華包裝 (+$150)</span>
+                            </label>
+                            <label style="display: block; margin-bottom: 20px; cursor: pointer;">
+                                <input type="radio" name="giftWrap" value="premium"> 
+                                <span style="margin-left: 10px;">👑 尊享包裝 (+$300)</span>
+                            </label>
+                        </div>
+
+                        <div style="margin: 20px 0;">
+                            <label style="display: block; margin-bottom: 10px;"><strong>🎴 祝賀卡訊息</strong></label>
+                            <textarea id="giftMessage" placeholder="輸入您的祝福語（0-200字）" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; resize: vertical; height: 80px; font-family: inherit;"></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="addGiftToCart(${productId}, '${productName}', ${productPrice})" style="flex: 1; padding: 12px; background: var(--secondary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">確認加購 🎁</button>
+                            <button onclick="document.getElementById('giftModalOverlay').remove()" style="flex: 1; padding: 12px; background: #eee; border: none; border-radius: 6px; cursor: pointer;">取消</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = giftHTML;
+            document.body.appendChild(container);
+        }
+
+        function addGiftToCart(productId, productName, productPrice) {
+            const wrapType = document.querySelector('input[name="giftWrap"]:checked').value;
+            const message = document.getElementById('giftMessage').value;
+            
+            const wrapCosts = { none: 0, basic: 50, deluxe: 150, premium: 300 };
+            const wrapNames = { none: '無', basic: '基礎', deluxe: '豪華', premium: '尊享' };
+            
+            const finalPrice = productPrice + wrapCosts[wrapType];
+            const cartItemName = `${productName} (${wrapNames[wrapType]}包裝)`;
+            
+            addToCart(productId, cartItemName, finalPrice);
+            
+            // 保存禮物選項
+            if (!giftOptions[productId]) {
+                giftOptions[productId] = [];
+            }
+            giftOptions[productId].push({
+                wrapType: wrapType,
+                message: message,
+                addedDate: new Date().toLocaleDateString('zh-TW')
+            });
+            localStorage.setItem('camera-gift-options', JSON.stringify(giftOptions));
+            
+            document.getElementById('giftModalOverlay').remove();
+            alert('✅ 禮物選項已加入購物車！');
+        }
+
+        // 初始化 A/B 測試
+        initABTest();
+
+        // 在控制台打印測試報告指令
+        console.log('📊 A/B 測試已啟動！使用 showABTestReport() 查看報告，resetABTests() 重置測試。');
+
+        // 初始化用戶 UI
+        updateUserUI();
+        
+        // 頁面加載時顯示季節推薦
+        showSeasonalRecommendations();
+
+        // ========== 初始化頁面 ==========
+        renderFlashSale();
+        updateFlashTimer();
+        setInterval(updateFlashTimer, 60000); // 每分鐘更新一次倒計時
+
+        renderProducts(products);
+        renderRecommended(getRecommendedProducts());
+        updateCartUI();
+        updatePageTitle();
+
+        // 搜尋欄 Enter 鍵事件
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchProducts();
+        });
+
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') closeModal();
+        });
+
+        document.getElementById('checkoutModal').addEventListener('click', (e) => {
+            if (e.target.id === 'checkoutModal') closeCheckout();
+        });
+    </script>
+</body>
+</html>
