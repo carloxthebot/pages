@@ -299,7 +299,7 @@
         <header class="header">
             <h1>🚀 Social Trends</h1>
             <p>AI & OpenClaw 熱門話題追蹤 | X.com + Threads</p>
-            <p style="color: #666; font-size: 0.9em; margin-top: 10px;">上次更新：2026-02-17 09:25</p>
+            <p style="color: #666; font-size: 0.9em; margin-top: 10px;">上次更新：<span id="last-updated">載入中...</span></p>
         </header>
 
         <div class="platform-tabs">
@@ -746,6 +746,45 @@
             return num.toString();
         }
 
+        // 動態時間計算函數：將 timeSort 轉換為相對時間
+        function getRelativeTime(timeSort) {
+            // timeSort 格式: YYYYMMDDHHMM (例如 202602171200 = 2026-02-17 12:00)
+            const timeStr = timeSort.toString().padStart(12, '0');
+            const year = parseInt(timeStr.substring(0, 4));
+            const month = parseInt(timeStr.substring(4, 6)) - 1; // 0-indexed
+            const day = parseInt(timeStr.substring(6, 8));
+            const hour = parseInt(timeStr.substring(8, 10));
+            const minute = parseInt(timeStr.substring(10, 12));
+            
+            const postTime = new Date(year, month, day, hour, minute);
+            const now = new Date();
+            
+            const diffMs = now - postTime;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMins / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            if (diffMins < 1) return '剛剛';
+            if (diffMins < 60) return `${diffMins}分鐘前`;
+            if (diffHours < 24) return `${diffHours}小時前`;
+            if (diffDays < 7) return `${diffDays}天前`;
+            return postTime.toLocaleDateString('zh-TW', { month: 'numeric', day: 'numeric' });
+        }
+
+        // 更新「上次更新」為動態時間
+        function updateLastUpdated() {
+            const now = new Date();
+            const formatted = now.toLocaleString('zh-TW', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false 
+            }).replace(',', '');
+            document.getElementById('last-updated').textContent = formatted;
+        }
+
         // 去重函數：基於 ID 和內容雜湊去重
         function deduplicatePosts(posts) {
             const seen = new Set();
@@ -764,6 +803,7 @@
             const platformClass = post.platform === 'x' ? 'x' : 'threads';
             const platformIcon = post.platform === 'x' ? '𝕏' : '🧵';
             const hasOriginal = post.contentEn && post.contentEn !== post.contentZh;
+            const dynamicTime = getRelativeTime(post.timeSort);
             
             return `
                 <div class="post-card" data-post-id="${post.id}">
@@ -774,7 +814,7 @@
                             <div class="author-handle">${post.handle}</div>
                         </div>
                         <div>
-                            <div class="post-time">${post.time}</div>
+                            <div class="post-time">${dynamicTime}</div>
                             <span class="post-platform ${platformClass}">${platformIcon}</span>
                         </div>
                     </div>
@@ -840,6 +880,12 @@
 
         // 初始化
         renderPosts();
+        updateLastUpdated();
+        
+        // 每分鐘更新一次相對時間
+        setInterval(() => {
+            renderPosts();
+        }, 60000);
     </script>
 </body>
 </html>
