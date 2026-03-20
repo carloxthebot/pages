@@ -272,6 +272,111 @@
             transform: translateX(5px);
         }
 
+
+        /* Cases Section */
+        .cases-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .case-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent);
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-left-color: var(--primary);
+        }
+
+        .case-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .case-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .case-type {
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .case-card p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .case-lesson {
+            background: var(--bg-light);
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+        .cases-footer {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        .cases-footer h3 {
+            color: var(--white);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .cases-footer p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .cases-footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .cases-footer ul li {
+            padding: 10px 0;
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        @media (max-width: 768px) {
+            .cases-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
 /* Contact Section */
         .contact-info {
             background: var(--primary);
@@ -500,6 +605,105 @@
                     </div>
                 </div>
             </section>
+
+            <section>
+                <h2>車險理賠糾紛案例分享</h2>
+                <p class="intro-text">以下是台灣常見的車險理賠糾紛案例，提供您參考並了解如何保障自身權益。</p>
+                
+                <div class="cases-container">
+                    <div class="case-card">
+                        <div class="case-number">案例 1</div>
+                        <h3>植物人求償 3,500 萬元</h3>
+                        <p class="case-type">💰 求償金額過高</p>
+                        <p>駕駛未禮讓行人導致婦人腦傷成植物人，家屬求償逾 3,500 萬元，遠超第三人責任險額度。經保險業務員協調，任意險和解 1,100 萬元加強制險 200 萬元，駕駛免自付。</p>
+                        <div class="case-lesson">💡 教訓：投保足額第三人責任險與超額責任險</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 2</div>
+                        <h3>強制險不賠車損 32 萬</h3>
+                        <p class="case-type">🚗 強制險限制</p>
+                        <p>追撞事故中，只投強制險的車主須自付對方車損 32 萬多元。保險公司理賠身體傷害後還代位追償車主。</p>
+                        <div class="case-lesson">💡 教訓：強制險不賠財物損失，需加保第三人責任險</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 3</div>
+                        <h3>Lexus 車燈維修十幾萬</h3>
+                        <p class="case-type">💸 高額車損</p>
+                        <p>撞壞 Lexus 車燈、水箱等零件，維修費用達十幾萬元，強制險無法涵蓋，車主需自行負擔。</p>
+                        <div class="case-lesson">💡 教訓：高級車維修費驚人，建議投保足額車體險</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 4</div>
+                        <h3>二次滑倒骨折被拒賠</h3>
+                        <p class="case-type">⚖️ 因果關係爭議</p>
+                        <p>車禍後二次滑倒導致骨折，保險公司以「非直接交通意外」拒賠住院費。金融消費評議中心介入審議。</p>
+                        <div class="case-lesson">💡 教訓：保留完整醫療證明，釐清因果關係</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 5</div>
+                        <h3>肇事逃逸拒賠車損</h3>
+                        <p class="case-type">🚨 未報警爭議</p>
+                        <p>駕駛依業務員指示「無第三人受傷不須報警」，但保險公司以「未報警且未停留現場」認定為肇事逃逸，拒絕理賠車體損失。</p>
+                        <div class="case-lesson">💡 教訓：車禍一律報警備案，保留證據</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 6</div>
+                        <h3>48 小時未通知被拒賠</h3>
+                        <p class="case-type">⏰ 通知義務</p>
+                        <p>車禍後第三天才報案給保險公司，保險公司依條款「事故發生 48 小時內通知」拒絕理賠。</p>
+                        <div class="case-lesson">💡 教訓：車禍後立即通知保險公司，勿超過時限</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 7</div>
+                        <h3>求償對象錯誤遭拒賠</h3>
+                        <p class="case-type">📋 求償程序</p>
+                        <p>受害人家屬向保險公司求償第三人責任險，保險公司以「被告非被保險人」「未送法院書狀」及「請求時效過」拒賠。</p>
+                        <div class="case-lesson">💡 教訓：了解求償程序，必要時尋求法律協助</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 8</div>
+                        <h3>私了後傷者反悔求償</h3>
+                        <p class="case-type">🤝 私了風險</p>
+                        <p>車主私了小傷後，傷者後續發現骨裂求償，保險公司以「已私了」拒絕理賠，車主需自行負擔。</p>
+                        <div class="case-lesson">💡 教訓：避免草率私了，應透過保險公司處理</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 9</div>
+                        <h3>擦撞求償差額 8 萬元</h3>
+                        <p class="case-type">💵 部分拒賠</p>
+                        <p>汽車擦撞機車，對方求償過高，保險公司僅部分同意理賠，駕駛面臨自付 8 萬元差額或遭提告過失傷害。</p>
+                        <div class="case-lesson">💡 教訓：保額足夠可避免自付差額困擾</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-number">案例 10</div>
+                        <h3>強制險斷保事故理賠</h3>
+                        <p class="case-type">📆 保單失效</p>
+                        <p>強制險到期未續保，車禍後保險公司以「已斷保」拒賠。車主需自行負擔所有賠償責任。</p>
+                        <div class="case-lesson">💡 教訓：定期檢查保單，及時續保避免空窗期</div>
+                    </div>
+                </div>
+
+                <div class="cases-footer">
+                    <h3>💼 專業保險經紀人的價值</h3>
+                    <p>以上案例顯示車險理賠糾紛的複雜性。泛亞保經的專業團隊能協助您：</p>
+                    <ul>
+                        <li>✅ 規劃適當保額，避免保障不足</li>
+                        <li>✅ 理賠諮詢與協調，維護您的權益</li>
+                        <li>✅ 事故處理指導，避免常見錯誤</li>
+                        <li>✅ 多家保險公司比較，選擇最適方案</li>
+                    </ul>
+                </div>
+            </section>
+
 
 
             <section>
