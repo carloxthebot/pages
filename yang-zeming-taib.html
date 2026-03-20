@@ -377,6 +377,109 @@
             }
         }
 
+
+        /* Daily News Section */
+        .daily-news-container {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .daily-news-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .news-date-badge, .auto-update-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .news-date-badge {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+        }
+
+        .auto-update-badge {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .daily-news-list {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .daily-news-item {
+            padding: 25px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .daily-news-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .daily-news-item:first-child {
+            padding-top: 0;
+        }
+
+        .news-time {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .daily-news-item h4 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .daily-news-item p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .daily-news-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .daily-news-item a:hover {
+            color: var(--accent);
+        }
+
+        .news-disclaimer {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+        }
+
+        .news-disclaimer p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.6;
+        }
+
 /* Contact Section */
         .contact-info {
             background: var(--primary);
@@ -703,6 +806,31 @@
                     </ul>
                 </div>
             </section>
+
+            <section>
+                <h2>每日保險新聞</h2>
+                <p class="intro-text">精選每日最新保險產業動態與重要資訊</p>
+                
+                <div class="daily-news-container">
+                    <div class="daily-news-header">
+                        <span class="news-date-badge">📅 每日更新</span>
+                        <span class="auto-update-badge">🔄 自動更新</span>
+                    </div>
+
+                    <div class="daily-news-list" id="dailyNewsList">
+                        <div class="daily-news-item">
+                            <div class="news-time">載入中...</div>
+                            <h4>正在取得最新保險新聞</h4>
+                            <p>系統每日自動更新，請稍候...</p>
+                        </div>
+                    </div>
+
+                    <div class="news-disclaimer">
+                        <p>💡 本區新聞每日自動更新，資料來源為公開新聞平台。如需詳細諮詢，請聯繫我們的專業團隊。</p>
+                    </div>
+                </div>
+            </section>
+
 
 
 
