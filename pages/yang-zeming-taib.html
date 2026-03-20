@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>楊則明 副總經理 - 泛亞保險經紀人</title>
+    <meta name="description" content="泛亞保險經紀人台中行政中心負責人楊則明副總經理，提供專業保險規劃與風險管理服務">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a3a52;
+            --secondary: #2c5f7f;
+            --accent: #d4af37;
+            --text-dark: #2c3e50;
+            --text-light: #5a6c7d;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro TC', 'Segoe UI', 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--white);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 80px 20px 60px;
+            text-align: center;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        .location {
+            font-size: 16px;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .intro-text {
+            font-size: 18px;
+            line-height: 2;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .card p, .card ul {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .card ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--bg-light);
+            padding: 60px 20px;
+            margin: 80px -20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            background: var(--primary);
+            color: var(--white);
+            padding: 50px;
+            border-radius: 8px;
+            margin-top: 60px;
+        }
+
+        .contact-info h2 {
+            color: var(--white);
+            border-bottom-color: var(--accent);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            opacity: 0.8;
+        }
+
+        .contact-details h4 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .contact-details p {
+            font-size: 15px;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Multi-language Content */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .grid, .stats-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lang-selector {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Selector -->
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="switchLang('zh')">中文</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn" onclick="switchLang('ja')">日本語</button>
+    </div>
+
+    <!-- Chinese Content -->
+    <div class="lang-content active" data-lang="zh">
+        <header>
+            <div class="header-content">
+                <div class="logo">PAN-ASIA INSURANCE BROKER</div>
+                <h1>楊則明</h1>
+                <div class="subtitle">泛亞保險經紀人股份有限公司</div>
+                <div class="subtitle">台中行政中心 副總經理</div>
+                <div class="location">📍 台中市北區中清路一段100號11樓之3</div>
+            </div>
+        </header>
+
+        <div class="container">
+            <section>
+                <h2>關於楊則明副總經理</h2>
+                <p class="intro-text">
+                    楊則明副總經理為泛亞保險經紀人台中行政中心負責人，秉持專業誠信與真心服務的理念，帶領台中團隊為大台中地區客戶提供全方位保險規劃與風險管理服務。在其領導下，台中行政中心業績成長迅速、組織不斷擴張，成功升級為百坪辦公空間，為客戶提供更優質的服務環境。
+                </p>
+            </section>
+
+            <section>
+                <h2>泛亞保經企業簡介</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>公司概況</h3>
+                        <p>泛亞保險經紀人股份有限公司成立於2002年，總部位於高雄，是台灣領先的保險經紀公司之一。全台擁有20個營業據點，員工人數約900人，致力於為個人與企業客戶提供專業的保險規劃與風險管理服務。</p>
+                    </div>
+                    <div class="card">
+                        <h3>經營理念</h3>
+                        <p>秉持「卓越經營、專業誠信、真心服務、創造財富」的核心價值，泛亞保經以客戶利益為優先，提供透明公正的服務制度，獲得多家保險公司「優質保經」殊榮。</p>
+                    </div>
+                    <div class="card">
+                        <h3>AI 創新平台</h3>
+                        <p>領先業界導入AI資訊平台，整合30多家產壽險公司商品，為客戶量身規劃最適合的保險方案，提供貨比三家的專業服務。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>核心服務項目</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>個人保險規劃</h3>
+                        <ul>
+                            <li>壽險、醫療險、意外險</li>
+                            <li>投資型保險、年金保險</li>
+                            <li>外幣保單、分紅保險</li>
+                            <li>風險評估與管理諮詢</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>企業保險服務</h3>
+                        <ul>
+                            <li>團體保險規劃</li>
+                            <li>財產保險整合方案</li>
+                            <li>員工福利與權益維護</li>
+                            <li>企業診斷與風險輔導</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>理賠協助與售後</h3>
+                        <ul>
+                            <li>專業理賠申請協助</li>
+                            <li>保單加退保服務</li>
+                            <li>定期保單健診</li>
+                            <li>24/7 客戶諮詢服務</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="stats">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">2002</div>
+                        <div class="stat-label">成立年份</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">營業據點</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">900+</div>
+                        <div class="stat-label">專業團隊</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">合作保險公司</div>
+                    </div>
+                </div>
+            </div>
+
+            <section>
+                <div class="contact-info">
+                    <h2>聯絡資訊</h2>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h4>台中行政中心</h4>
+                                <p>404 台中市北區中清路一段100號<br>11樓之3 (A戶)<br>臺中育成中心</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h4>聯絡電話</h4>
+                                <p>(04) 3707-2393</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <div class="contact-details">
+                                <h4>總公司</h4>
+                                <p>高雄市前鎮區二聖一路290號<br>6樓之1<br>電話：(07) 716-8000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- English Content -->
+    <div class="lang-content" data-lang="en">
+        <header>
+            <div class="header-content">
+                <div class="logo">PAN-ASIA INSURANCE BROKER</div>
+                <h1>Yang Ze-Ming</h1>
+                <div class="subtitle">Pan-Asia Insurance Broker Co., Ltd.</div>
+                <div class="subtitle">Deputy General Manager, Taichung Administrative Center</div>
+                <div class="location">📍 11F-3, No.100, Sec.1, Zhongqing Rd., North Dist., Taichung City</div>
+            </div>
+        </header>
+
+        <div class="container">
+            <section>
+                <h2>About Deputy General Manager Yang</h2>
+                <p class="intro-text">
+                    Deputy General Manager Yang Ze-Ming leads the Pan-Asia Insurance Broker Taichung Administrative Center, upholding the principles of professional integrity and genuine service. Under his leadership, the Taichung team provides comprehensive insurance planning and risk management services to clients in the Greater Taichung area. The center has experienced rapid business growth and organizational expansion, successfully upgrading to a spacious office environment to deliver superior service quality.
+                </p>
+            </section>
+
+            <section>
+                <h2>About Pan-Asia Insurance Broker</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Company Overview</h3>
+                        <p>Founded in 2002 and headquartered in Kaohsiung, Pan-Asia Insurance Broker is one of Taiwan's leading insurance brokerage firms. With 20 business locations nationwide and approximately 900 employees, we are committed to providing professional insurance planning and risk management services for individual and corporate clients.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Business Philosophy</h3>
+                        <p>Adhering to core values of "Excellence in Management, Professional Integrity, Genuine Service, and Wealth Creation," Pan-Asia prioritizes client interests, offering transparent and fair service systems, recognized with "Quality Broker" awards from multiple insurance companies.</p>
+                    </div>
+                    <div class="card">
+                        <h3>AI Innovation Platform</h3>
+                        <p>Leading the industry with our AI information platform, integrating products from over 30 life and property insurance companies to provide customized insurance solutions and professional comparative services for our clients.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Core Services</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Personal Insurance</h3>
+                        <ul>
+                            <li>Life, Medical & Accident Insurance</li>
+                            <li>Investment-Linked & Annuity Plans</li>
+                            <li>Foreign Currency & Participating Policies</li>
+                            <li>Risk Assessment & Management</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Corporate Insurance</h3>
+                        <ul>
+                            <li>Group Insurance Planning</li>
+                            <li>Property Insurance Solutions</li>
+                            <li>Employee Benefits & Rights</li>
+                            <li>Enterprise Risk Consulting</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Claims & After-Sales</h3>
+                        <ul>
+                            <li>Professional Claims Assistance</li>
+                            <li>Policy Amendment Services</li>
+                            <li>Regular Policy Review</li>
+                            <li>24/7 Customer Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="stats">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">2002</div>
+                        <div class="stat-label">Established</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Locations</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">900+</div>
+                        <div class="stat-label">Team Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">Partner Insurers</div>
+                    </div>
+                </div>
+            </div>
+
+            <section>
+                <div class="contact-info">
+                    <h2>Contact Information</h2>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h4>Taichung Administrative Center</h4>
+                                <p>11F-3 (Unit A), No.100, Sec.1,<br>Zhongqing Rd., North Dist.,<br>Taichung City 404, Taiwan</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+886-4-3707-2393</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <div class="contact-details">
+                                <h4>Headquarters</h4>
+                                <p>6F-1, No.290, Ersheng 1st Rd.,<br>Qianzhen Dist., Kaohsiung City<br>Tel: +886-7-716-8000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Japanese Content -->
+    <div class="lang-content" data-lang="ja">
+        <header>
+            <div class="header-content">
+                <div class="logo">PAN-ASIA INSURANCE BROKER</div>
+                <h1>楊則明</h1>
+                <div class="subtitle">泛亞保険ブローカー株式会社</div>
+                <div class="subtitle">台中管理センター 副総経理</div>
+                <div class="location">📍 台中市北区中清路一段100号11階の3</div>
+            </div>
+        </header>
+
+        <div class="container">
+            <section>
+                <h2>楊則明副総経理について</h2>
+                <p class="intro-text">
+                    楊則明副総経理は泛亞保険ブローカー台中管理センターの責任者として、専門性と誠実さ、真心のこもったサービスの理念を掲げ、台中チームを率いて台中地域のお客様に包括的な保険プランニングとリスク管理サービスを提供しています。彼のリーダーシップの下、台中管理センターは急速な業績成長と組織拡大を実現し、広々としたオフィススペースへのアップグレードに成功し、お客様により質の高いサービス環境を提供しています。
+                </p>
+            </section>
+
+            <section>
+                <h2>泛亞保険ブローカー企業概要</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>会社概要</h3>
+                        <p>泛亞保険ブローカー株式会社は2002年に設立され、高雄に本社を置く台湾を代表する保険ブローカー会社の一つです。全国に20の営業拠点を持ち、約900名の従業員を擁し、個人および法人のお客様に専門的な保険プランニングとリスク管理サービスを提供しています。</p>
+                    </div>
+                    <div class="card">
+                        <h3>経営理念</h3>
+                        <p>「卓越した経営、専門的誠実さ、真心のサービス、富の創造」という核心的価値観を掲げ、泛亞保険ブローカーはお客様の利益を最優先し、透明で公正なサービス体制を提供しており、複数の保険会社から「優良ブローカー」として表彰されています。</p>
+                    </div>
+                    <div class="card">
+                        <h3>AI革新プラットフォーム</h3>
+                        <p>業界に先駆けてAI情報プラットフォームを導入し、30社以上の生命保険・損害保険会社の商品を統合して、お客様一人ひとりに最適な保険プランをカスタマイズし、複数社比較の専門的なサービスを提供しています。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>主要サービス項目</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>個人向け保険プランニング</h3>
+                        <ul>
+                            <li>生命保険、医療保険、傷害保険</li>
+                            <li>投資型保険、年金保険</li>
+                            <li>外貨建て保険、配当保険</li>
+                            <li>リスク評価と管理コンサルティング</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>法人向け保険サービス</h3>
+                        <ul>
+                            <li>団体保険プランニング</li>
+                            <li>財物保険統合ソリューション</li>
+                            <li>従業員福利厚生と権利保護</li>
+                            <li>企業診断とリスクコンサルティング</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>保険金請求サポートとアフターサービス</h3>
+                        <ul>
+                            <li>専門的な保険金請求サポート</li>
+                            <li>保険契約の変更サービス</li>
+                            <li>定期的な保険契約診断</li>
+                            <li>24時間カスタマーサポート</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="stats">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">2002</div>
+                        <div class="stat-label">設立年</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">営業拠点</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">900+</div>
+                        <div class="stat-label">専門チーム</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">提携保険会社</div>
+                    </div>
+                </div>
+            </div>
+
+            <section>
+                <div class="contact-info">
+                    <h2>お問い合わせ</h2>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h4>台中管理センター</h4>
+                                <p>404 台中市北区中清路一段100号<br>11階の3 (Aユニット)<br>台中育成センター</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h4>電話番号</h4>
+                                <p>+886-4-3707-2393</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <div class="contact-details">
+                                <h4>本社</h4>
+                                <p>高雄市前鎮区二聖一路290号<br>6階の1<br>電話：+886-7-716-8000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Pan-Asia Insurance Broker Co., Ltd. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function switchLang(lang) {
+            // Hide all content
+            document.querySelectorAll('.lang-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected language content
+            document.querySelector(`.lang-content[data-lang="${lang}"]`).classList.add('active');
+            
+            // Add active class to selected button
+            event.target.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
