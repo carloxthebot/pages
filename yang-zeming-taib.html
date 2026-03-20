@@ -218,7 +218,61 @@
             font-weight: 300;
         }
 
-        /* Contact Section */
+        
+        /* News Cards */
+        .news-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-thumbnail {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+            margin: -35px -35px 20px -35px;
+            background: var(--bg-light);
+        }
+
+        .news-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+        }
+
+        .news-date {
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .news-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+/* Contact Section */
         .contact-info {
             background: var(--primary);
             color: var(--white);
@@ -413,6 +467,40 @@
                     </div>
                 </div>
             </div>
+
+            <section>
+                <h2>最新消息</h2>
+                <div class="grid">
+                    <div class="card news-card">
+                        <div class="news-thumbnail">
+                            <img src="https://img.youtube.com/vi/JJ1orCu4EZM/maxresdefault.jpg" alt="台中行政中心開幕">
+                        </div>
+                        <h3>台中行政中心盛大開幕</h3>
+                        <p class="news-date">📅 2024</p>
+                        <p>楊則明副總經理領導台中團隊，自購百坪辦公室升級，提供大台中地區更優質的服務環境。獲多家壽險與產險公司高層出席肯定。</p>
+                        <a href="https://www.youtube.com/watch?v=JJ1orCu4EZM" target="_blank" class="news-link">閱讀更多 →</a>
+                    </div>
+                    <div class="card news-card">
+                        <div class="news-thumbnail">
+                            <img src="https://img.youtube.com/vi/-7bheY27W60/maxresdefault.jpg" alt="2025年策劃會報">
+                        </div>
+                        <h3>2025年全國事業處策劃會報</h3>
+                        <p class="news-date">📅 2025</p>
+                        <p>於三義西湖度假村舉辦，百位高階主管回顧成績、展望未來。總經理宣布升級E化平台與行政服務，攜手30+保險公司提供客製化規劃。</p>
+                        <a href="https://www.youtube.com/watch?v=-7bheY27W60" target="_blank" class="news-link">閱讀更多 →</a>
+                    </div>
+                    <div class="card news-card">
+                        <div class="news-thumbnail">
+                            <div class="news-placeholder">📰</div>
+                        </div>
+                        <h3>2024年度創歷史新高</h3>
+                        <p class="news-date">📅 2024</p>
+                        <p>新契約保費創歷史新高，榮獲「卓越保險經紀人公司」及千大企業票選「最值得推薦、最專業、服務最好」十大保經公司殊榮。</p>
+                        <a href="https://www.taib.com.tw/News.aspx?ID=103336" target="_blank" class="news-link">閱讀更多 →</a>
+                    </div>
+                </div>
+            </section>
+
 
             <section>
                 <div class="contact-info">
